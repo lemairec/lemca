@@ -7,10 +7,10 @@ import sys
 
 try:
     # for Python2
-    import Tkinter as tk  ## notice capitalized T in Tkinter 
+    from Tkinter import * ## notice capitalized T in Tkinter 
 except ImportError:
     # for Python3
-    import tkinter as tk
+    from tkinter  import *
 
 PATH = os.getcwd()
 
@@ -61,40 +61,40 @@ def clicked_master():
 def clicked_dev():
     call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
    
-window = tk.Tk()
+window = Tk()
 window.title("Lemca app")
 window.geometry('800x600')
 
 
-btn = tk.Button(window, text="GPS", command=clicked_gps, height = 5, width = 20)
+btn = Button(window, text="GPS", command=clicked_gps, height = 5, width = 20)
 btn.grid(column=0, row=0)
 
-btn = tk.Button(window, text="update GPS", command=install_gps, height = 5, width = 20)
+btn = Button(window, text="update GPS", command=install_gps, height = 5, width = 20)
 btn.grid(column=0, row=1)
 
-btn = tk.Button(window, text="clean GPS", command=nettoyage_gps, height = 5, width = 20)
+btn = Button(window, text="clean GPS", command=nettoyage_gps, height = 5, width = 20)
 btn.grid(column=0, row=2)
 
-btn = tk.Button(window, text="Bineuse", command=clicked_bineuse, height = 5, width = 20)
+btn = Button(window, text="Bineuse", command=clicked_bineuse, height = 5, width = 20)
 btn.grid(column=1, row=0)
 
-btn = tk.Button(window, text="update Bineuse", command=install_bineuse, height = 5, width = 20)
+btn = Button(window, text="update Bineuse", command=install_bineuse, height = 5, width = 20)
 btn.grid(column=1, row=1)
 
-btn = tk.Button(window, text="clean Bineuse", command=nettoyage_bineuse, height = 5, width = 20)
+btn = Button(window, text="clean Bineuse", command=nettoyage_bineuse, height = 5, width = 20)
 btn.grid(column=1, row=2)
 
-btn = tk.Button(window, text="checkout Master", command=clicked_master, height = 5, width = 20)
+btn = Button(window, text="checkout Master", command=clicked_master, height = 5, width = 20)
 btn.grid(column=1, row=3)
 
 
-btn = tk.Button(window, text="checkout Dev", command=clicked_dev, height = 5, width = 20)
+btn = Button(window, text="checkout Dev", command=clicked_dev, height = 5, width = 20)
 btn.grid(column=1, row=4)
 
 
 
 
-btn = tk.Button(window, text="update lemca", command=update_setup)
+btn = Button(window, text="update lemca", command=update_setup)
 btn.grid(column=3, row=5)
 
 
