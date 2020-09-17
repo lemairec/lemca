@@ -29,11 +29,7 @@ def clicked_gps():
     call("~/agrigpspi/agrigpspi.py run")
 
 def install_gps():
-    print("~/agrigpspi")
-    if os.path.exists("~/agrigpspi"):
-        call("cd ~/agrigpspi; git reset --hard; git pull")
-    else:
-        call("git clone https://github.com/lemairec/agrigpspi.git ~/agrigpspi; ~/agrigpspi/agrigpspi.py install")
+    call("cd ~/agrigpspi; git reset --hard; git pull")
 
 def nettoyage_gps():
     call("rm -rf ~/agrigpspi/build; mkdir ~/agrigpspi/build")
