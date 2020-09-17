@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=agtf
+Exec=sh -c "~/lemca/lemca.py"
+Terminal=true
+Hidden=false
+X-GNOME-Autostart-enabled=true

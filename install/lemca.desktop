@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=lemca
+Exec=sh -c "~/lemca/lemca.py"
+Terminal=true
