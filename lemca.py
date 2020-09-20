@@ -93,5 +93,6 @@ btn.grid(column=1, row=4)
 btn = Button(window, text="update lemca", command=update_setup)
 btn.grid(column=3, row=5)
 
+print("lemca")
 
 window.mainloop()
