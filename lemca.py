@@ -144,7 +144,7 @@ image9 = PIL.Image.open("gui/refresh.png")
 image9 = image9.resize((size2, size2))
 image9 = PIL.ImageTk.PhotoImage(image9)
 
-btn = Button(window, image=image9, command=clicked_gps, relief=FLAT, highlightthickness=0, bd=0)
+btn = Button(window, image=image9, command=update_setup, relief=FLAT, highlightthickness=0, bd=0)
 btn.place(relx = 0.2, rely = 0.2, anchor = 'center')
 
 
