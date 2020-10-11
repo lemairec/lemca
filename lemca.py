@@ -153,7 +153,7 @@ if config.gps :
 
     clicked_gps()
 else:
-    self.window.attributes('-zoomed', True)  
+    window.attributes('-zoomed', True)  
     clicked_bineuse()
 
 
