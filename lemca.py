@@ -89,7 +89,7 @@ y2 = 0.6
 #btn.grid(column=1, row=0)
 
 
-img = PIL.Image.open("gui/logo.png")
+img = PIL.Image.open("lemca/gui/logo.png")
 img = img.resize((400, 400))
 img = PIL.ImageTk.PhotoImage(img)
 
