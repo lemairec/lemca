@@ -1,4 +1,4 @@
 class Config :
-    gps = False
+    gps = True
 
 

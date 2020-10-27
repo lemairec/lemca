@@ -6,8 +6,9 @@ import argparse
 import sys
 import PIL.Image
 import PIL.ImageTk
-
 from config import Config;
+import requests
+import json
 
 config=Config()
 
@@ -30,6 +31,8 @@ def call(cmdline):
     print('Running: ' + cmdline)
     call_without_print(cmdline)
 
+def gps_prod():
+     call("cd ~/agrigpspi; git reset --hard; git pull")
 
 def clicked_gps():
     call("~/agrigpspi/agrigpspi.py run")
@@ -42,7 +45,7 @@ def teamviewer():
 
 def update_setup():
    call("cd ~/lemca; git pull;")
-   exit();
+   exit()
 
 def clicked_bineuse():
     call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
@@ -66,6 +69,42 @@ def clicked_dev():
 def my_exit():
     exit()
 
+def save_gps():
+    my_dir = "agrigpspi/build/job/"
+    url = "http://localhost:4000/api/job_gps"
+    dirs = os.listdir(my_dir)
+
+    for file_info in dirs:
+        if(file_info.endswith(".info")):
+            file_info = my_dir+file_info
+            file_ubx = file_info.replace(".info", ".ubx")
+            print(file_info)
+            print(file_ubx)
+
+            ok_text = ""
+            with open(file_info) as f:
+                read_data = f.read()
+                mydata = json.loads(read_data)
+                with open(file_ubx) as f_ubx:
+                    mydata_ubx = f_ubx.read()
+
+                    mydata["ubx"]=mydata_ubx
+                    print(mydata)
+
+                    r=requests.post(url,data=mydata)
+                    
+                    ok_text = r.text
+
+            if(ok_text == "\"ok\""):
+                os.remove(file_info)
+                os.remove(file_ubx)
+            else:
+                print("not_ok")
+                print(ok_text)
+        
+
+
+
 window = Tk()
 window.title("Lemca app")
 window.geometry('1400x800')
@@ -75,18 +114,6 @@ y1 = 0.8
 
 size2 = 80
 y2 = 0.6
-
-#btn = Button(window, text="GPS", command=clicked_gps, height = 5, width = 20)
-#btn.grid(column=0, row=0)
-
-#btn = Button(window, text="update GPS", command=install_gps, height = 5, width = 20)
-#btn.grid(column=0, row=1)
-
-#btn = Button(window, text="clean GPS", command=nettoyage_gps, height = 5, width = 20)
-#btn.grid(column=0, row=2)
-
-#btn = Button(window, text="Bineuse", command=clicked_bineuse, height = 5, width = 20)
-#btn.grid(column=1, row=0)
 
 
 img = PIL.Image.open("lemca/gui/logo.png")
@@ -144,6 +171,14 @@ if config.gps :
     btn = Button(window, image=image6, command=install_gps, relief=FLAT, highlightthickness=0, bd=0)
     btn.place(relx = 0.4, rely = y2, anchor = 'center')
 
+    image7 = PIL.Image.open("lemca/gui/save.png")
+    image7 = image7.resize((size2, size2))
+    image7 = PIL.ImageTk.PhotoImage(image7)
+
+    btn = Button(window, image=image7, command=save_gps, relief=FLAT, highlightthickness=0, bd=0)
+    btn.place(relx = 0.6, rely = y2, anchor = 'center')
+
+
     image9 = PIL.Image.open("lemca/gui/refresh.png")
     image9 = image9.resize((size2, size2))
     image9 = PIL.ImageTk.PhotoImage(image9)
@@ -151,8 +186,9 @@ if config.gps :
     btn = Button(window, image=image9, command=update_setup, relief=FLAT, highlightthickness=0, bd=0)
     btn.place(relx = 0.2, rely = 0.2, anchor = 'center')
 
+    #window.attributes('-zoomed', True)  
+
 else:
-    window.attributes('-zoomed', True)  
     window.attributes('-fullscreen', True)  
     clicked_bineuse()
 
@@ -160,3 +196,4 @@ else:
 print("lemca")
 
 window.mainloop()
+
