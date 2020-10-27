@@ -89,6 +89,7 @@ def save_gps():
                     mydata_ubx = f_ubx.read()
 
                     mydata["ubx"]=mydata_ubx
+                    mydata["user_email"]=config.user_email
                     print(mydata)
 
                     r=requests.post(url,data=mydata)
