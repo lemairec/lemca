@@ -71,7 +71,7 @@ def my_exit():
 
 def save_gps():
     my_dir = "agrigpspi/build/job/"
-    url = "http://localhost:4000/api/job_gps"
+    url = "https://maplaine.fr/api/job_gps"
     dirs = os.listdir(my_dir)
 
     for file_info in dirs:
