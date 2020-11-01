@@ -70,25 +70,37 @@ def my_exit():
     exit()
 
 def save_gps():
-    my_dir = "agrigpspi/build/job/"
+    my_dir = "~/agrigpspi/build/job/"
     url = "https://maplaine.fr/api/job_gps"
+    
+    #my_dir = "agrigpspi/build/job/"
+    #url = "http://localhost:4000/api/job_gps"
+    
     dirs = os.listdir(my_dir)
 
     for file_info in dirs:
         if(file_info.endswith(".info")):
             file_info = my_dir+file_info
-            file_ubx = file_info.replace(".info", ".ubx")
+            file_job = file_info.replace(".info", ".job")
+            file_debug = file_info.replace(".info", ".debug")
             print(file_info)
-            print(file_ubx)
+            print(file_job)
+            print(file_debug)
 
+            
             ok_text = ""
+            debug = ""
+            with open(file_debug) as f:
+                debug = f.read()
+
             with open(file_info) as f:
                 read_data = f.read()
                 mydata = json.loads(read_data)
-                with open(file_ubx) as f_ubx:
-                    mydata_ubx = f_ubx.read()
+                with open(file_job) as f_job:
+                    mydata_job = f_job.read()
 
-                    mydata["ubx"]=mydata_ubx
+                    mydata["job"]=mydata_job
+                    mydata["debug"]=debug
                     mydata["user_email"]=config.user_email
                     print(mydata)
 
@@ -98,7 +110,8 @@ def save_gps():
 
             if(ok_text == "\"ok\""):
                 os.remove(file_info)
-                os.remove(file_ubx)
+                os.remove(file_job)
+                os.remove(file_debug)
             else:
                 print("not_ok")
                 print(ok_text)
