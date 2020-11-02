@@ -19,7 +19,8 @@ config.read(['lemca/lemca.cfg'])
 
 gps=config.getboolean('lemca', 'gps')
 user_email=config.get('lemca', 'user_email')
-print("gps "+str(gps))
+print("gps          "+str(gps))
+print("user_email   "+str(user_email))
 
 try:
     # for Python2
