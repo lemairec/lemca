@@ -6,7 +6,6 @@ import argparse
 import sys
 import PIL.Image
 import PIL.ImageTk
-from config import Config;
 import requests
 import json
 
