@@ -79,7 +79,7 @@ def my_exit():
     call("sudo poweroff")
 
 def save_gps():
-    my_dir = "~/agrigpspi/build/job/"
+    my_dir = "agrigpspi/build/job/"
     url = "https://maplaine.fr/api/job_gps"
     
     #my_dir = "agrigpspi/build/job/"
