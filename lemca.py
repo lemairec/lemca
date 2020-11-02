@@ -10,7 +10,16 @@ from config import Config;
 import requests
 import json
 
-config=Config()
+
+import configparser, os
+
+config = configparser.ConfigParser()
+config.readfp(open('lemca/lemca.cfg.example'))
+config.read(['lemca/lemca.cfg'])
+
+gps=config.getboolean('lemca', 'gps')
+user_email=config.get('lemca', 'user_email')
+print("gps "+str(gps))
 
 try:
     # for Python2
@@ -101,7 +110,7 @@ def save_gps():
 
                     mydata["job"]=mydata_job
                     mydata["debug"]=debug
-                    mydata["user_email"]=config.user_email
+                    mydata["user_email"]=user_email
                     print(mydata)
 
                     r=requests.post(url,data=mydata)
@@ -170,7 +179,8 @@ btn = Button(window, image=image4, command=my_exit, relief=FLAT, highlightthickn
 btn.place(relx = 0.8, rely = y1, anchor = 'center')
 
 
-if config.gps : 
+if(gps):
+    print(gps)
     image5 = PIL.Image.open("lemca/gui/gps.png")
     image5 = image5.resize((size2, size2))
     image5 = PIL.ImageTk.PhotoImage(image5)
