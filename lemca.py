@@ -76,7 +76,7 @@ def clicked_dev():
     call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
 
 def my_exit():
-    call("sudo poweroff")
+    call("/sbin/shutdown -h now")
 
 def save_gps():
     my_dir = "agrigpspi/build/job/"
