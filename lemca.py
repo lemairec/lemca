@@ -214,7 +214,7 @@ if(gps):
 
 else:
     window.attributes('-fullscreen', True)  
-    clicked_bineuse()
+    #clicked_bineuse()
 
 
 print("lemca")
