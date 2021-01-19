@@ -1,5 +1,8 @@
-sudo apt-get install python-pip
+sudo apt-get install -y python-pip
 pip install requests
-apt-get install python-tk
-apt-get install python-requests
-apt-get install python-configparser
+sudo apt-get install -y python-tk
+sudo apt-get install -y python-pil
+
+sudo apt-get install -y python-pil.image-tk
+sudo apt-get install -y python-requests
+sudo apt-get install -y python-configparser
