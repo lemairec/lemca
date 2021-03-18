@@ -12,7 +12,6 @@ from kivy.uix.image import Image
 from kivy.clock import Clock 
 
 from mywifi import MyWifiList
-from kivy.config import Config
 
 import os
 import subprocess 
@@ -107,13 +106,16 @@ class ConsolePopUp():
 
     def build(self):
         box_popup2 = FloatLayout(size_hint=(0.9, 0.9))
+        self.popup = Popup(title='Liste des wifis',
+            content=box_popup2,
+            size_hint=(0.9, 0.9))
         box_popup = BoxLayout(orientation='vertical', size_hint=(0.8, 0.7), pos_hint={'center_x': .5, 'center_y': .6})
         
         self.textinput = TextInput(text='', multiline=False)
         box_popup.add_widget(self.textinput)
         textinput2 = TextInput(text='', multiline=False)
         box_popup.add_widget(textinput2)
-        self._keyboard = Window.request_keyboard(self._keyboard_closed, self)
+        self._keyboard = Window.request_keyboard(self._keyboard_closed, self.popup)
 
         
         btn1 = Button(text = 'Cancel'
@@ -126,9 +128,7 @@ class ConsolePopUp():
 
         box_popup2.add_widget(box_popup)
         
-        self.popup = Popup(title='Liste des wifis',
-            content=box_popup2,
-            size_hint=(0.9, 0.9))
+        
         
 
 
@@ -231,8 +231,10 @@ class FreePosApp(App):
         
         return box
 
-Config.set('graphics', 'width', '200') 
-Config.set('graphics', 'height', '150')
+Config.set('graphics', 'fullscreen', 'auto')
+Config.set('graphics', 'window_state', 'maximized')
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
+Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+Config.write()
 
 FreePosApp().run()
