@@ -40,45 +40,45 @@ class LemcaGui:
 
     def call(self, cmdline):
         print('Running: ' + cmdline)
-        call_without_print(cmdline)
+        self.call_without_print(cmdline)
 
     def gps_prod(self):
-        call("cd ~/agrigpspi; git reset --hard; git pull")
+        self.call("cd ~/agrigpspi; git reset --hard; git pull")
 
     def clicked_gps(self):
-        call("~/agrigpspi/agrigpspi.py run")
+        self.call("~/agrigpspi/agrigpspi.py run")
 
     def install_gps(self):
-        call("cd ~/agrigpspi; git reset --hard; git pull")
+        self.call("cd ~/agrigpspi; git reset --hard; git pull")
 
     def teamviewer(self):
-        call("teamviewer")
+        self.call("teamviewer")
 
     def update_setup(self):
-        call("cd ~/lemca; git pull;")
+        self.call("cd ~/lemca; git pull;")
         exit()
 
     def clicked_bineuse(self):
-        call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
+        self.call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
 
     def install_bineuse(self):
         print(PATH + "/bineuse")
         if os.path.exists(PATH + "/bineuse"):
-            call("cd ~/bineuse; git reset --hard; git pull")
+            self.call("cd ~/bineuse; git reset --hard; git pull")
         else:
-            call("git clone git@github.com:lemairec/bineuse.git ~/bineuse; ~/bineuse/bineuse.py install")
+            self.call("git clone git@github.com:lemairec/bineuse.git ~/bineuse; ~/bineuse/bineuse.py install")
 
     def nettoyage_bineuse(self):
-        call("rm -rf ~/bineuse/build; mkdir ~/bineuse/build")
+        self.call("rm -rf ~/bineuse/build; mkdir ~/bineuse/build")
 
     def clicked_master(self):
-        call("cd ~/bineuse; git checkout master; rm -rf ~/bineuse/build;")
+        self.call("cd ~/bineuse; git checkout master; rm -rf ~/bineuse/build;")
 
     def clicked_dev(self):
-        call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
+        self.call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
 
     def my_exit(self):
-        call("/sbin/shutdown -h now")
+        self.call("/sbin/shutdown -h now")
 
     def my_exit2(self):
         exit() 
