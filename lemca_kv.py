@@ -231,8 +231,8 @@ class FreePosApp(App):
         
         return box
 
-Config.set('graphics', 'fullscreen', 'auto')
-Config.set('graphics', 'window_state', 'maximized')
+#Config.set('graphics', 'fullscreen', 'auto')
+#Config.set('graphics', 'window_state', 'maximized')
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 Config.set('kivy', 'keyboard_mode', 'systemandmulti')
 Config.write()
