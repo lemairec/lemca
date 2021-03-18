@@ -12,6 +12,7 @@ from kivy.uix.image import Image
 from kivy.clock import Clock 
 
 from mywifi import MyWifiList
+from kivy.config import Config
 
 import os
 import subprocess 
@@ -100,6 +101,9 @@ class ConsolePopUp():
         print(i3)
         self.textinput.text += i2
 
+    def _keyboard_closed(self):
+            self._keyboard = None
+
 
     def build(self):
         box_popup2 = FloatLayout(size_hint=(0.9, 0.9))
@@ -109,8 +113,8 @@ class ConsolePopUp():
         box_popup.add_widget(self.textinput)
         textinput2 = TextInput(text='', multiline=False)
         box_popup.add_widget(textinput2)
-        box_popup.add_widget(VKeyboard(pos_hint={'center_x': .5, 'center_y': .45}, size=(width_clavier, width_clavier*0.3)
-            , on_key_up = self.my_key_up))
+        self._keyboard = Window.request_keyboard(self._keyboard_closed, self)
+
         
         btn1 = Button(text = 'Cancel'
             , size_hint=(0.2, 0.1), pos_hint={'center_x': .7, 'center_y': .1})
@@ -229,5 +233,6 @@ class FreePosApp(App):
 
 Config.set('graphics', 'width', '200') 
 Config.set('graphics', 'height', '150')
+Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 FreePosApp().run()
