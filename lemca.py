@@ -30,194 +30,219 @@ except ImportError:
 
 PATH = os.getcwd()
 
-def call_without_print(cmdline):
-    ret = subprocess.call(cmdline, shell=True)
-    if ret != 0:
-        print(sys.stderr, 'Running: ' + cmdline + ' failed with exit code ' + str(ret) + '!')
-    return ret
 
-def call(cmdline):
-    print('Running: ' + cmdline)
-    call_without_print(cmdline)
+class LemcaGui:
+    def call_without_print(self, cmdline):
+        ret = subprocess.call(cmdline, shell=True)
+        if ret != 0:
+            print(sys.stderr, 'Running: ' + cmdline + ' failed with exit code ' + str(ret) + '!')
+        return ret
 
-def gps_prod():
-     call("cd ~/agrigpspi; git reset --hard; git pull")
+    def call(self, cmdline):
+        print('Running: ' + cmdline)
+        call_without_print(cmdline)
 
-def clicked_gps():
-    call("~/agrigpspi/agrigpspi.py run")
+    def gps_prod(self):
+        call("cd ~/agrigpspi; git reset --hard; git pull")
 
-def install_gps():
-    call("cd ~/agrigpspi; git reset --hard; git pull")
+    def clicked_gps(self):
+        call("~/agrigpspi/agrigpspi.py run")
 
-def teamviewer():
-    call("teamviewer")
+    def install_gps(self):
+        call("cd ~/agrigpspi; git reset --hard; git pull")
 
-def update_setup():
-   call("cd ~/lemca; git pull;")
-   exit()
+    def teamviewer(self):
+        call("teamviewer")
 
-def clicked_bineuse():
-    call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
+    def update_setup(self):
+        call("cd ~/lemca; git pull;")
+        exit()
 
-def install_bineuse():
-    print(PATH + "/bineuse")
-    if os.path.exists(PATH + "/bineuse"):
-        call("cd ~/bineuse; git reset --hard; git pull")
-    else:
-        call("git clone git@github.com:lemairec/bineuse.git ~/bineuse; ~/bineuse/bineuse.py install")
+    def clicked_bineuse(self):
+        call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
 
-def nettoyage_bineuse():
-    call("rm -rf ~/bineuse/build; mkdir ~/bineuse/build")
+    def install_bineuse(self):
+        print(PATH + "/bineuse")
+        if os.path.exists(PATH + "/bineuse"):
+            call("cd ~/bineuse; git reset --hard; git pull")
+        else:
+            call("git clone git@github.com:lemairec/bineuse.git ~/bineuse; ~/bineuse/bineuse.py install")
 
-def clicked_master():
-    call("cd ~/bineuse; git checkout master; rm -rf ~/bineuse/build;")
+    def nettoyage_bineuse(self):
+        call("rm -rf ~/bineuse/build; mkdir ~/bineuse/build")
 
-def clicked_dev():
-    call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
+    def clicked_master(self):
+        call("cd ~/bineuse; git checkout master; rm -rf ~/bineuse/build;")
 
-def my_exit():
-    call("/sbin/shutdown -h now")
+    def clicked_dev(self):
+        call("cd ~/bineuse; git checkout dev; rm -rf ~/bineuse/build;")
 
-def save_gps():
-    my_dir = "agrigpspi/build/job/"
-    url = "https://maplaine.fr/api/job_gps"
-    
-    #my_dir = "agrigpspi/build/job/"
-    #url = "http://localhost:4000/api/job_gps"
-    
-    dirs = os.listdir(my_dir)
+    def my_exit(self):
+        call("/sbin/shutdown -h now")
 
-    for file_info in dirs:
-        if(file_info.endswith(".info")):
-            file_info = my_dir+file_info
-            file_job = file_info.replace(".info", ".job")
-            file_debug = file_info.replace(".info", ".debug")
-            print(file_info)
-            print(file_job)
-            print(file_debug)
-
-            
-            ok_text = ""
-            debug = ""
-            with open(file_debug) as f:
-                debug = f.read()
-
-            with open(file_info) as f:
-                read_data = f.read()
-                mydata = json.loads(read_data)
-                with open(file_job) as f_job:
-                    mydata_job = f_job.read()
-
-                    mydata["job"]=mydata_job
-                    mydata["debug"]=debug
-                    mydata["user_email"]=user_email
-                    print(mydata)
-
-                    r=requests.post(url,data=mydata)
-                    
-                    ok_text = r.text
-
-            if(ok_text == "\"ok\""):
-                os.remove(file_info)
-                os.remove(file_job)
-                os.remove(file_debug)
-            else:
-                print("not_ok")
-                print(ok_text)
+    def my_exit2(self):
+        exit() 
         
 
+    def save_gps(self):
+        my_dir = "agrigpspi/build/job/"
+        url = "https://maplaine.fr/api/job_gps"
+        
+        #my_dir = "agrigpspi/build/job/"
+        #url = "http://localhost:4000/api/job_gps"
+        
+        dirs = os.listdir(my_dir)
+
+        for file_info in dirs:
+            if(file_info.endswith(".info")):
+                file_info = my_dir+file_info
+                file_job = file_info.replace(".info", ".job")
+                file_debug = file_info.replace(".info", ".debug")
+                print(file_info)
+                print(file_job)
+                print(file_debug)
+
+                
+                ok_text = ""
+                debug = ""
+                with open(file_debug) as f:
+                    debug = f.read()
+
+                with open(file_info) as f:
+                    read_data = f.read()
+                    mydata = json.loads(read_data)
+                    with open(file_job) as f_job:
+                        mydata_job = f_job.read()
+
+                        mydata["job"]=mydata_job
+                        mydata["debug"]=debug
+                        mydata["user_email"]=user_email
+                        print(mydata)
+
+                        r=requests.post(url,data=mydata)
+                        
+                        ok_text = r.text
+
+                if(ok_text == "\"ok\""):
+                    os.remove(file_info)
+                    os.remove(file_job)
+                    os.remove(file_debug)
+                else:
+                    print("not_ok")
+                    print(ok_text)
+
+    def logo(self):
+        self.logo_i += 1
+        if(self.logo_i>5):
+            self.add_advanced_buttons()
+
+    def add_advanced_buttons(self):
+        size2 = 80
+        y2 = 0.6
+        if not self.advanced:
+            print("advanced")
+            self.advanced = True
+            self.image5 = PIL.Image.open("lemca/gui/gps.png")
+            self.image5 = self.image5.resize((size2, size2))
+            self.image5 = PIL.ImageTk.PhotoImage(self.image5)
+
+            btn = Button(window, image=self.image5, command=self.clicked_gps, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.2, rely = y2, anchor = 'center')
+
+            self.image6 = PIL.Image.open("lemca/gui/refresh.png")
+            self.image6 = self.image6.resize((size2, size2))
+            self.image6 = PIL.ImageTk.PhotoImage(self.image6)
+
+            btn = Button(window, image=self.image6, command=self.install_gps, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.4, rely = y2, anchor = 'center')
+
+            self.image7 = PIL.Image.open("lemca/gui/save.png")
+            self.image7 = self.image7.resize((size2, size2))
+            self.image7 = PIL.ImageTk.PhotoImage(self.image7)
+
+            btn = Button(window, image=self.image7, command=self.save_gps, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.6, rely = y2, anchor = 'center')
 
 
-window = Tk()
-window.title("Lemca app")
-window.geometry('1400x800')
+            self.image9 = PIL.Image.open("lemca/gui/refresh.png")
+            self.image9 = self.image9.resize((size2, size2))
+            self.image9 = PIL.ImageTk.PhotoImage(self.image9)
 
-size = 150
-y1 = 0.8
+            btn = Button(window, image=self.image9, command=self.update_setup, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.2, rely = 0.2, anchor = 'center')
 
-size2 = 80
-y2 = 0.6
-
-
-img = PIL.Image.open("lemca/gui/logo.png")
-img = img.resize((400, 400))
-img = PIL.ImageTk.PhotoImage(img)
+            btn = Button(window, text="X", command=self.my_exit2, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.8, rely = 0.2, anchor = 'center')
+            
+        window.attributes('-fullscreen', False)  
 
 
+    def run(self):
+        
+        size = 150
+        y1 = 0.8
 
-btn = Button(window, image=img, relief=FLAT, highlightthickness=0, bd=0)
-btn.place(relx = 0.5, rely = 0.3, anchor = 'center')
+        self.logo_i = 0
 
-
-
-image1 = PIL.Image.open("lemca/gui/bineuse.png")
-image1 = image1.resize((size, size))
-image1 = PIL.ImageTk.PhotoImage(image1)
-
-btn = Button(window, image=image1, command=clicked_bineuse, relief=FLAT, highlightthickness=0, bd=0)
-btn.place(relx = 0.2, rely = y1, anchor = 'center')
-
-image2 = PIL.Image.open("lemca/gui/refresh.png")
-image2 = image2.resize((size, size))
-image2 = PIL.ImageTk.PhotoImage(image2)
-
-btn = Button(window, image=image2, command=install_bineuse, relief=FLAT, highlightthickness=0, bd=0)
-btn.place(relx = 0.4, rely = y1, anchor = 'center')
-
-image3 = PIL.Image.open("lemca/gui/reseau.png")
-image3 = image3.resize((size, size))
-image3 = PIL.ImageTk.PhotoImage(image3)
-
-btn = Button(window, image=image3, command=teamviewer, relief=FLAT, highlightthickness=0, bd=0)
-btn.place(relx = 0.6, rely = y1, anchor = 'center')
-
-image4 = PIL.Image.open("lemca/gui/off.png")
-image4 = image4.resize((size, size))
-image4 = PIL.ImageTk.PhotoImage(image4)
-
-btn = Button(window, image=image4, command=my_exit, relief=FLAT, highlightthickness=0, bd=0)
-btn.place(relx = 0.8, rely = y1, anchor = 'center')
+        self.img = PIL.Image.open("lemca/gui/logo.png")
+        self.img = self.img.resize((400, 400))
+        self.img = PIL.ImageTk.PhotoImage(self.img)
 
 
-if(gps):
-    print(gps)
-    image5 = PIL.Image.open("lemca/gui/gps.png")
-    image5 = image5.resize((size2, size2))
-    image5 = PIL.ImageTk.PhotoImage(image5)
 
-    btn = Button(window, image=image5, command=clicked_gps, relief=FLAT, highlightthickness=0, bd=0)
-    btn.place(relx = 0.2, rely = y2, anchor = 'center')
-
-    image6 = PIL.Image.open("lemca/gui/refresh.png")
-    image6 = image6.resize((size2, size2))
-    image6 = PIL.ImageTk.PhotoImage(image6)
-
-    btn = Button(window, image=image6, command=install_gps, relief=FLAT, highlightthickness=0, bd=0)
-    btn.place(relx = 0.4, rely = y2, anchor = 'center')
-
-    image7 = PIL.Image.open("lemca/gui/save.png")
-    image7 = image7.resize((size2, size2))
-    image7 = PIL.ImageTk.PhotoImage(image7)
-
-    btn = Button(window, image=image7, command=save_gps, relief=FLAT, highlightthickness=0, bd=0)
-    btn.place(relx = 0.6, rely = y2, anchor = 'center')
+        btn = Button(window, image=self.img, command=self.logo, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.5, rely = 0.3, anchor = 'center')
 
 
-    image9 = PIL.Image.open("lemca/gui/refresh.png")
-    image9 = image9.resize((size2, size2))
-    image9 = PIL.ImageTk.PhotoImage(image9)
 
-    btn = Button(window, image=image9, command=update_setup, relief=FLAT, highlightthickness=0, bd=0)
-    btn.place(relx = 0.2, rely = 0.2, anchor = 'center')
+        self.image1 = PIL.Image.open("lemca/gui/bineuse.png")
+        self.image1 = self.image1.resize((size, size))
+        self.image1 = PIL.ImageTk.PhotoImage(self.image1)
 
-    #window.attributes('-zoomed', True)  
+        btn = Button(window, image=self.image1, command=self.clicked_bineuse, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.2, rely = y1, anchor = 'center')
 
-else:
-    window.attributes('-fullscreen', True)  
-    #clicked_bineuse()
+        self.image2 = PIL.Image.open("lemca/gui/refresh.png")
+        self.image2 = self.image2.resize((size, size))
+        self.image2 = PIL.ImageTk.PhotoImage(self.image2)
+
+        btn = Button(window, image=self.image2, command=self.install_bineuse, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.4, rely = y1, anchor = 'center')
+
+        self.image3 = PIL.Image.open("lemca/gui/reseau.png")
+        self.image3 = self.image3.resize((size, size))
+        self.image3 = PIL.ImageTk.PhotoImage(self.image3)
+
+        btn = Button(window, image=self.image3, command=self.teamviewer, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.6, rely = y1, anchor = 'center')
+
+        self.image4 = PIL.Image.open("lemca/gui/off.png")
+        self.image4 = self.image4.resize((size, size))
+        self.image4 = PIL.ImageTk.PhotoImage(self.image4)
+
+        btn = Button(window, image=self.image4, command=self.my_exit, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.8, rely = y1, anchor = 'center')
+        self.advanced = False
+
+        window.attributes('-fullscreen', True)  
+       
+        if(False):
+            print(gps)
+            self.add_advanced_buttons()
+            #window.attributes('-zoomed', True)  
+
+        else:
+            window.attributes('-fullscreen', True)  
+            #clicked_bineuse()
+            
 
 
 print("lemca")
+window = Tk()
+window.title("Lemca app")
+window.geometry('1400x800')
+l = LemcaGui()
+l.run()
 
 window.mainloop()
 
