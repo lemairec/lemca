@@ -156,6 +156,7 @@ class FreePosApp(App):
         self.btn_wifi.background_color = [255, 0, 0, 1]
         
     def my_exit(self, instance):
+        exit()
         call("/sbin/shutdown -h now")
 
     def build(self):
