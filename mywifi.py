@@ -13,4 +13,5 @@ def test_wifi():
     for wifi in wifis:
         print(wifi)
 
-test_wifi()
+if __name__ == "__main__":
+    test_wifi()
