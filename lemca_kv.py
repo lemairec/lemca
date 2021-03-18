@@ -2,14 +2,16 @@ from kivy.app import App
 from kivy.config import Config 
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 from kivy.uix.vkeyboard import VKeyboard 
 from kivy.uix.popup import Popup 
+from kivy.uix.textinput import TextInput 
 from kivy.uix.label import Label 
-from kivy.uix.vkeyboard import VKeyboard 
 from kivy.uix.image import Image 
-from kivy.uix.label import Label
 from kivy.clock import Clock 
+
+from mywifi import MyWifiList
 
 import os
 import subprocess 
@@ -57,6 +59,72 @@ class WifiPopUp():
         self.popup = Popup(title='Wifi',
             content=box_popup,
             size_hint=(0.9, 0.9))
+
+class ListWifiPopUp():
+    def my_cancel(self, instance):
+        self.popup.dismiss()
+
+    def wifi_btn(self, instance):
+        print(instance.text)
+
+    def build(self):
+        wifi = MyWifiList()
+        wifis = wifi.get_list_wifis()
+        box_popup2 = FloatLayout(size_hint=(0.9, 0.9))
+        box_popup = BoxLayout(orientation='vertical', size_hint=(0.8, 0.7), pos_hint={'center_x': .5, 'center_y': .6})
+        
+        for wifi in wifis:
+            btn1 = Button(text = wifi)
+            btn1.bind(on_press = self.wifi_btn)
+            box_popup.add_widget(btn1)
+        btn1 = Button(text = 'Cancel'
+            , size_hint=(0.2, 0.1), pos_hint={'center_x': .7, 'center_y': .1})
+        btn1.bind(on_press = self.my_cancel)
+        box_popup2.add_widget(btn1)
+
+        box_popup2.add_widget(box_popup)
+        
+        self.popup = Popup(title='Liste des wifis',
+            content=box_popup2,
+            size_hint=(0.9, 0.9))
+        
+
+class ConsolePopUp():
+    def my_cancel(self, instance):
+        self.popup.dismiss()
+
+    def my_key_up(self, i0, i1, i2, i3):
+        print(i0)
+        print(i1)
+        print(i2)
+        print(i3)
+        self.textinput.text += i2
+
+
+    def build(self):
+        box_popup2 = FloatLayout(size_hint=(0.9, 0.9))
+        box_popup = BoxLayout(orientation='vertical', size_hint=(0.8, 0.7), pos_hint={'center_x': .5, 'center_y': .6})
+        
+        self.textinput = TextInput(text='', multiline=False)
+        box_popup.add_widget(self.textinput)
+        textinput2 = TextInput(text='', multiline=False)
+        box_popup.add_widget(textinput2)
+        box_popup.add_widget(VKeyboard(pos_hint={'center_x': .5, 'center_y': .45}, size=(width_clavier, width_clavier*0.3)
+            , on_key_up = self.my_key_up))
+        
+        btn1 = Button(text = 'Cancel'
+            , size_hint=(0.2, 0.1), pos_hint={'center_x': .7, 'center_y': .1})
+        btn1.bind(on_press = self.my_cancel)
+        btn1 = Button(text = 'Ok'
+            , size_hint=(0.2, 0.1), pos_hint={'center_x': .3, 'center_y': .1})
+        btn1.bind(on_press = self.my_cancel)
+        box_popup2.add_widget(btn1)
+
+        box_popup2.add_widget(box_popup)
+        
+        self.popup = Popup(title='Liste des wifis',
+            content=box_popup2,
+            size_hint=(0.9, 0.9))
         
 
 
@@ -76,7 +144,7 @@ class FreePosApp(App):
         print("verify")
 
     def open_wifi(self, instance):
-        self.wifiPopUp.popup.open()
+        self.consolePopUp.popup.open()
 
 
     def say_hello(self, instance):
@@ -88,8 +156,12 @@ class FreePosApp(App):
 
     def build(self):
         self.title = 'Free Positioning'
-        self.wifiPopUp = WifiPopUp()
+        self.wifiPopUp = ListWifiPopUp()
         self.wifiPopUp.build()
+
+        self.consolePopUp = ConsolePopUp()
+        self.consolePopUp.build()
+
         box = FloatLayout()
 
         logo = Image(source='gui/logo.png', size_hint=(0.4, 0.7), allow_stretch=True, pos_hint={'center_x': .5, 'center_y': .7})
