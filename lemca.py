@@ -59,17 +59,17 @@ class LemcaGui:
         exit()
 
     def clicked_bineuse(self):
-        self.call(" mkdir -p ~/bineuse/build; ~/bineuse/bineuse.py run")
+        self.call(" mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
 
     def install_bineuse(self):
-        print(PATH + "/bineuse")
-        if os.path.exists(PATH + "/bineuse"):
-            self.call("cd ~/bineuse; git reset --hard; git pull")
+        print(PATH + "/bineuse_src")
+        if os.path.exists(PATH + "/bineuse_src"):
+            self.call("cd ~/bineuse_src; git reset --hard; git pull")
         else:
             self.call("git clone git@github.com:lemairec/bineuse.git ~/bineuse; ~/bineuse/bineuse.py install")
 
     def nettoyage_bineuse(self):
-        self.call("rm -rf ~/bineuse/build; mkdir ~/bineuse/build")
+        self.call("rm -rf ~/bineuse_src/build;")
 
     def clicked_master(self):
         self.call("cd ~/bineuse; git checkout master; rm -rf ~/bineuse/build;")

@@ -19,3 +19,19 @@ lsusb
 firmware-misc-nonfree
 
 
+PlatformIO Core has been successfully installed into an isolated environment `/Users/lemairec/.platformio/penv`!
+
+The full path to `platformio.exe` is `/Users/lemairec/.platformio/penv/bin/platformio`
+
+If you need an access to `platformio.exe` from other applications, please install Shell Commands
+(add PlatformIO Core binary directory `/Users/lemairec/.platformio/penv/bin` to the system environment PATH variable):
+
+See https://docs.platformio.org/page/installation.html#install-shell-commands
+
+
+platformio run -t upload
+
+## gdb
+
+ulimit -c unlimited
+cat /proc/6309/limits 
