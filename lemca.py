@@ -60,9 +60,11 @@ class LemcaGui:
 
     def clicked_bineuse(self):
         self.call("~/bineuse/bineuse")
+        #self.call(" mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
 
     def install_bineuse(self):
         self.call("rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz")
+        #self.call("cd ~/bineuse_src; git reset --hard; git pull")
 
     def my_exit(self):
         self.call("/sbin/shutdown -h now")
