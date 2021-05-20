@@ -52,7 +52,7 @@ class LemcaGui:
         self.call("cd ~/agrigpspi; git reset --hard; git pull; rm -rf ~/agrigpspi")
 
     def teamviewer(self):
-        self.call("teamviewer")
+        self.call("teamviewer &")
 
     def update_setup(self):
         self.call("cd ~/lemca; git pull;")
