@@ -66,6 +66,9 @@ class LemcaGui:
         self.call("rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz")
         #self.call("cd ~/bineuse_src; git reset --hard; git pull")
 
+    def wifi(self):
+        self.call("nm-connection-editor & onboard &")
+
     def my_exit(self):
         self.call("/sbin/shutdown -h now")
 
@@ -159,9 +162,6 @@ class LemcaGui:
 
             btn = Button(window, image=self.image9, command=self.update_setup, relief=FLAT, highlightthickness=0, bd=0)
             btn.place(relx = 0.2, rely = 0.2, anchor = 'center')
-
-            btn = Button(window, text="X", command=self.my_exit2, relief=FLAT, highlightthickness=0, bd=0)
-            btn.place(relx = 0.8, rely = 0.2, anchor = 'center')
             
         window.attributes('-fullscreen', False)  
 
@@ -212,6 +212,13 @@ class LemcaGui:
         btn = Button(window, image=self.image4, command=self.my_exit, relief=FLAT, highlightthickness=0, bd=0)
         btn.place(relx = 0.8, rely = y1, anchor = 'center')
         self.advanced = False
+
+        self.image10 = PIL.Image.open("lemca/gui/wifi.png")
+        self.image10 = self.image10.resize((size, size))
+        self.image10 = PIL.ImageTk.PhotoImage(self.image10)
+
+        btn = Button(window, image=self.image10, command=self.wifi, relief=FLAT, highlightthickness=0, bd=0)
+        btn.place(relx = 0.8, rely = 0.2, anchor = 'center')
 
         window.attributes('-fullscreen', True)  
        
