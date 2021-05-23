@@ -67,6 +67,11 @@ class LemcaGui:
             self.call("mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
         else:
             self.call("~/bineuse/bineuse")
+
+    def make_archive(self):
+        if(self.bineuse_code_source):
+            self.call("cd ~/bineuse_src; sh make_archive.sh")
+        
         
 
     def install_bineuse(self):
@@ -178,6 +183,7 @@ class LemcaGui:
     def run(self):
         
         size = 150
+        size2 = 70
         y1 = 0.8
 
         self.logo_i = 0
@@ -215,6 +221,15 @@ class LemcaGui:
 
         btn = Button(window, image=self.image2, command=self.install_bineuse, relief=FLAT, highlightthickness=0, bd=0)
         btn.place(relx = 0.4, rely = y1, anchor = 'center')
+
+        if(self.bineuse_code_source):
+            self.image2bis = PIL.Image.open("lemca/gui/refresh.png")
+            self.image2bis = self.image2bis.resize((size2, size2))
+            self.image2bis = PIL.ImageTk.PhotoImage(self.image2bis)
+
+            btn = Button(window, image=self.image2bis, command=self.make_archive, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.5, rely = y1, anchor = 'center')
+
 
         self.image3 = PIL.Image.open("lemca/gui/reseau.png")
         self.image3 = self.image3.resize((size, size))
