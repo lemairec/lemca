@@ -18,7 +18,7 @@ config.read(['lemca/lemca.cfg'])
 
 cfg_advanced=config.getboolean('lemca', 'advanced')
 user_email=config.get('lemca', 'user_email')
-cfg_bineuse_code_source=config.get('lemca', 'bineuse_code_source')
+cfg_bineuse_code_source=config.getboolean('lemca', 'bineuse_code_source')
 
 print("config------")
 print("advanced          "+str(cfg_advanced))
@@ -140,8 +140,8 @@ class LemcaGui:
     def add_advanced_buttons(self):
         size2 = 80
         y2 = 0.6
-        if not self.advanced:
-            print("advanced")
+        if self.advanced:
+            print("advanced2")
             self.advanced = True
             self.image5 = PIL.Image.open("lemca/gui/gps.png")
             self.image5 = self.image5.resize((size2, size2))
@@ -181,8 +181,15 @@ class LemcaGui:
         y1 = 0.8
 
         self.logo_i = 0
-        self.code_source = cfg_bineuse_code_source
+        self.bineuse_code_source = cfg_bineuse_code_source
         self.advanced = cfg_advanced
+
+        print("--config------")
+        if(self.advanced):
+            print("-----advanced")
+        if(self.bineuse_code_source):
+            print("-----bineuse_code_source")
+
 
         self.img = PIL.Image.open("lemca/gui/logo.png")
         self.img = self.img.resize((400, 400))
@@ -230,10 +237,8 @@ class LemcaGui:
         btn = Button(window, image=self.image10, command=self.wifi, relief=FLAT, highlightthickness=0, bd=0)
         btn.place(relx = 0.8, rely = 0.2, anchor = 'center')
 
-        window.attributes('-fullscreen', True)  
-       
-        if(False):
-            print(gps)
+        if(self.advanced):
+            print("advanced1")
             self.add_advanced_buttons()
             #window.attributes('-zoomed', True)  
 
