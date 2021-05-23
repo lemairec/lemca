@@ -64,7 +64,7 @@ class LemcaGui:
 
     def clicked_bineuse(self):
         if(self.bineuse_code_source):
-            self.call("mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
+            self.call("mkdir -p ~/bineuse_src/build; cd ~/bineuse_src/build && cmake .. && make -j4 && ./bineuse")
         else:
             self.call("~/bineuse/bineuse")
 
