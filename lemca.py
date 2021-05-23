@@ -16,10 +16,14 @@ config = configparser.ConfigParser()
 config.readfp(open('lemca/lemca.cfg.example'))
 config.read(['lemca/lemca.cfg'])
 
-gps=config.getboolean('lemca', 'gps')
+cfg_advanced=config.getboolean('lemca', 'advanced')
 user_email=config.get('lemca', 'user_email')
-print("gps          "+str(gps))
+cfg_bineuse_code_source=config.get('lemca', 'bineuse_code_source')
+
+print("config------")
+print("advanced          "+str(cfg_advanced))
 print("user_email   "+str(user_email))
+print("code source          "+str(cfg_bineuse_code_source))
 
 try:
     # for Python2
@@ -59,12 +63,17 @@ class LemcaGui:
         exit()
 
     def clicked_bineuse(self):
-        self.call("~/bineuse/bineuse")
-        #self.call(" mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
+        if(self.bineuse_code_source):
+            self.call("mkdir -p ~/bineuse_src/build; ~/bineuse_src/bineuse.py run")
+        else:
+            self.call("~/bineuse/bineuse")
+        
 
     def install_bineuse(self):
-        self.call("rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz")
-        #self.call("cd ~/bineuse_src; git reset --hard; git pull")
+        if(self.bineuse_code_source):
+            self.call("cd ~/bineuse_src; git reset --hard; git pull")
+        else:
+            self.call("rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz")
 
     def wifi(self):
         self.call("nm-connection-editor & onboard &")
@@ -172,6 +181,8 @@ class LemcaGui:
         y1 = 0.8
 
         self.logo_i = 0
+        self.code_source = cfg_bineuse_code_source
+        self.advanced = cfg_advanced
 
         self.img = PIL.Image.open("lemca/gui/logo.png")
         self.img = self.img.resize((400, 400))
@@ -211,8 +222,7 @@ class LemcaGui:
 
         btn = Button(window, image=self.image4, command=self.my_exit, relief=FLAT, highlightthickness=0, bd=0)
         btn.place(relx = 0.8, rely = y1, anchor = 'center')
-        self.advanced = False
-
+        
         self.image10 = PIL.Image.open("lemca/gui/wifi.png")
         self.image10 = self.image10.resize((size, size))
         self.image10 = PIL.ImageTk.PhotoImage(self.image10)

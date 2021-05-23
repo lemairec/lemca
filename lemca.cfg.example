@@ -1,3 +1,4 @@
 [lemca]
-gps = false
+advanced = false
 user_email = test@lemca.fr
+bineuse_code_source = false
