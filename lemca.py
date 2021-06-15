@@ -53,7 +53,7 @@ class LemcaGui:
         self.call("~/agrigpspi/agrigpspi.py run")
 
     def install_gps(self):
-        self.call("cd ~/agrigpspi; git reset --hard; git pull; rm -rf ~/agrigpspi")
+        self.call("cd ~/agrigpspi; git reset --hard; git pull")
 
     def teamviewer(self):
         self.call("teamviewer &")
