@@ -49,6 +49,12 @@ class LemcaGui:
     def gps_prod(self):
         self.call("cd ~/agrigpspi; git reset --hard; git pull")
 
+    def clicked_serie(self):
+        self.call("mkdir -p ~/serie/build; cd ~/serie/build && cmake .. && make -j4 && ./serie")
+
+    def install_serie(self):
+        self.call("cd ~/serie; git reset --hard; git pull")
+
     def clicked_gps(self):
         self.call("~/agrigpspi/agrigpspi.py run")
 
@@ -148,6 +154,21 @@ class LemcaGui:
         if self.advanced:
             print("advanced2")
             self.advanced = True
+
+            self.image51 = PIL.Image.open("lemca/gui/gps.png")
+            self.image51 = self.image51.resize((size2, size2))
+            self.image51 = PIL.ImageTk.PhotoImage(self.image51)
+
+            btn = Button(window, image=self.image51, command=self.clicked_serie, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.1, rely = 0.4, anchor = 'center')
+
+            self.image61 = PIL.Image.open("lemca/gui/refresh.png")
+            self.image61 = self.image61.resize((size2, size2))
+            self.image61 = PIL.ImageTk.PhotoImage(self.image61)
+
+            btn = Button(window, image=self.image61, command=self.install_serie, relief=FLAT, highlightthickness=0, bd=0)
+            btn.place(relx = 0.3, rely = 0.4, anchor = 'center')
+
             self.image5 = PIL.Image.open("lemca/gui/gps.png")
             self.image5 = self.image5.resize((size2, size2))
             self.image5 = PIL.ImageTk.PhotoImage(self.image5)
