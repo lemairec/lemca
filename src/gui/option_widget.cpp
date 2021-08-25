@@ -172,8 +172,10 @@ void OptionWidget::drawPage1(){
 
 void OptionWidget::onMousePage1(int x, int y){
     if(m_update_bineuse.isActive(x, y)){
-        call("xterm -e \"cd /home/lemca/bineuse_src && git pull && cd build && cmake .. && make\"");
-        
+        call("xterm -e \"cd /home/lemca/bineuse_src && git pull && cd build && cmake .. && make && read\"");
+    }
+    if(m_update_gps.isActive(x, y)){
+        call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
     }
 }
 
