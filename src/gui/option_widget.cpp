@@ -10,7 +10,7 @@
 
 OptionWidget::OptionWidget(){
     
-    m_imgClose = loadImage("/images/ok.png");
+    m_imgClose = loadImage("/gui/ok.png");
     m_imgPlus = loadImage("/images/plus.png");
     m_imgMinus = loadImage("/images/minus.png");
     m_imgSatBlanc = loadImage("/images/sat_blanc.png");
