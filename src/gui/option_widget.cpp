@@ -171,7 +171,10 @@ void OptionWidget::drawPage1(){
 }
 
 void OptionWidget::onMousePage1(int x, int y){
-    
+    if(m_update_bineuse.isActive(x, y)){
+        call("xterm -e \"cd /home/lemca/bineuse_src && git pull\"");
+        
+    }
 }
 
 
@@ -370,4 +373,9 @@ void OptionWidget::open(){
 void OptionWidget::addSerials(){
     Framework & f = Framework::Instance();
     
+}
+
+void OptionWidget::call(const std::string & s){
+    INFO("call " << s);
+    system(s.c_str());
 }

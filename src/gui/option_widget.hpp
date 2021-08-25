@@ -119,6 +119,7 @@ public:
     void drawPage6();
     
     void open();
+    void call(const std::string & s);
     
 };
 
