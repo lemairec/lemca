@@ -74,12 +74,11 @@ void MainWindow::setupUi(){
     
     Framework & f = Framework::Instance();
     if(f.m_config.m_fullscreen){
-        showFullScreen();
+        //showFullScreen();
     }
     
     
     //showMaximized();
-    //showFullScreen();
     DEBUG("end");
 }
 

@@ -179,10 +179,8 @@ void MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;
-    } else if(m_buttonSendMessage.isActive(x, y)){
-        m_key_board_widget.m_close = false;
-        
-        
+    } else if(m_buttonExit.isActive(x, y)){
+        call("/sbin/shutdown -h now");
     } else if(!m_key_board_widget.m_close){
         m_key_board_widget.onMouse(x, y);
         if(m_key_board_widget.m_close){
