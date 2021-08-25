@@ -169,13 +169,13 @@ void MainWidget::onMouse(int x, int y){
     
     if(m_buttonBineuse.isActive(x, y)){
         if(m_code_source){
-            call("mkdir -p ~/bineuse_src/build; cd ~/bineuse_src/build && cmake .. && make -j4 && ./bineuse");
+            call("/home/lemca/bineuse_src/build/bineuse");
         } else {
             call("~/bineuse/bineuse");
         }
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
-            call("couco");
+            call("/home/lemca/agrigpspi/build/agrigpspi");
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;
