@@ -194,12 +194,16 @@ void MainWidget::onMouse(int x, int y){
 
 void MainWidget::call(const std::string & s){
     if(!m_is_f_call){
+        INFO("call " << s);
         m_is_f_call = true;
-            (s.c_str());
+        system(s.c_str());
         m_is_f_call = false;
         
         //(100);
         //m_is_f_call = false;
+        
+    } else {
+        INFO("not call! " << s);
         
     }
 }
