@@ -28,9 +28,6 @@ public:
     
     bool m_is_f_call = false;
     
-    bool m_code_source = true;
-    bool m_gps = false;
-
     QPixmap * m_logoImg;
     QPixmap * m_imgBineuse;
     QPixmap * m_imgGPS;

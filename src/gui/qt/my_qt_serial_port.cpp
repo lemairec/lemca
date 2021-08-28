@@ -20,25 +20,7 @@ MyQTSerialPorts::MyQTSerialPorts(){
 }
 void MyQTSerialPorts::initOrLoad(Config & config){
     DEBUG("begin");
-    INFO(m_serial << " " << config.m_serial);
-    //m_pilot_langage = config.m_pilot_langage;
-    
-    if(config.m_serial != "none" && config.m_serial != "file"){
-        if(m_serial == config.m_serial && m_serialPort.isOpen()){
-            INFO("gps port already open");
-        } else {
-            if(m_serialPort.isOpen()){
-                m_serialPort.close();
-            }
-            m_serial = config.m_serial;
-            m_serialPort.setPortName(QString::fromStdString(m_serial));
-            m_serialPort.setBaudRate(config.m_baudrate);
-            if (!m_serialPort.open(QIODevice::ReadWrite)) {
-                std::ostringstream oss;
-                oss << "Failed to open gps port " << m_serial << ", error:" << m_serialPort.errorString().toUtf8().constData();
-            }
-        }
-    }
+
     
     /*m_timerPilot.stop();
     m_timerPilot.start(1000/config.m_pilot_frequence);*/

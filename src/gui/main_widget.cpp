@@ -110,7 +110,8 @@ void MainWidget::draw_force(){
     if(m_is_f_call){
         drawText("called", 0.5*m_width, 0.7*m_height);
     }
-    if(m_code_source){
+    Framework & f = Framework::Instance();
+    if(f.m_config.m_code_source){
         drawText("code source", 0.1*m_width, 0.4*m_height);
     }
     
@@ -168,7 +169,7 @@ void MainWidget::onMouse(int x, int y){
     }
     
     if(m_buttonBineuse.isActive(x, y)){
-        if(m_code_source){
+        if(f.m_config.m_code_source){
             call("/home/lemca/bineuse_src/build/bineuse");
         } else {
             call("~/bineuse/bineuse");

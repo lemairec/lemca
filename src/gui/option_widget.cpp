@@ -258,37 +258,45 @@ void OptionWidget::onMousePage2(int x, int y){
  */
 
 void OptionWidget::resizePage3(){
-    int inter = m_width*0.08;
-    int y = m_height*0.5;
+    int inter = m_width*0.06;
+    int y = m_height*0.3;
     m_button_code_source.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_full_screen.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_gps.setResize(m_width*0.3, y, m_gros_button);
+    y+= inter;
+    y+= inter;
+    m_button_exit.setResize(m_width*0.3, y, m_gros_button);
     
 };
 
 void OptionWidget::drawPage3(){
-    if(Framework::Instance().m_config.m_code_source){
+    Framework & f = Framework::Instance();
+    
+    if(f.m_config.m_code_source){
         drawButton(m_button_code_source, COLOR_CHECK);
     } else {
         drawButton(m_button_code_source);
     }
     drawText("code source", m_width*0.4, m_button_code_source.m_y);
     
-    if(Framework::Instance().m_config.m_fullscreen){
+    if(f.m_config.m_fullscreen){
         drawButton(m_button_full_screen, COLOR_CHECK);
     } else {
         drawButton(m_button_full_screen);
     }
     drawText("full screen", m_width*0.4, m_button_full_screen.m_y);
     
-    if(Framework::Instance().m_config.m_gps){
+    if(f.m_config.m_gps){
         drawButton(m_button_gps, COLOR_CHECK);
     } else {
         drawButton(m_button_gps);
     }
     drawText("gps", m_width*0.4, m_button_gps.m_y);
+    
+    drawButton(m_button_exit);
+    drawText("quitter", m_width*0.4, m_button_exit.m_y);
     
 }
 
@@ -296,12 +304,18 @@ void OptionWidget::onMousePage3(int x, int y){
     Framework & f = Framework::Instance();
     if(m_button_code_source.isActive(x, y)){
         f.m_config.m_code_source = !f.m_config.m_code_source;
+        f.initOrLoadConfig();
     }
     if(m_button_full_screen.isActive(x, y)){
         f.m_config.m_fullscreen = !f.m_config.m_fullscreen;
+        f.initOrLoadConfig();
     }
     if(m_button_gps.isActive(x, y)){
         f.m_config.m_gps = !f.m_config.m_gps;
+        f.initOrLoadConfig();
+    }
+    if(m_button_exit.isActive(x, y)){
+        exit(0);
     }
 }
 

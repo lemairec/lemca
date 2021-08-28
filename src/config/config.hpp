@@ -24,8 +24,6 @@ enum LissageImuMode{
 
 class Config  {
 public:
-    std::string m_serial;
-    int m_baudrate = 115200;
     bool m_fullscreen = false;
     bool m_technicien = false;
     bool m_code_source = false;

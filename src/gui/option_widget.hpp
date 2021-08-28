@@ -71,6 +71,7 @@ public:
     ButtonGui m_button_code_source;
     ButtonGui m_button_full_screen;
     ButtonGui m_button_gps;
+    ButtonGui m_button_exit;
     
     
     void resizePage3();
