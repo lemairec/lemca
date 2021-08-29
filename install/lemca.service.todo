@@ -1,0 +1,7 @@
+// Service Lemca//
+
+cd /etc/systemd/system
+nano lemca.service
+
+In the file
+

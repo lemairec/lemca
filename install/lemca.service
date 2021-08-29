@@ -1,0 +1,17 @@
+[Unit]
+Description=Lemca Start
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/root/.Xauthority
+ExecStart=/home/lemca/build/lemca
+
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target
+
+//Start Service
+systemctl daemon-reload
+systemctl start lemca.service
+systemctl enable lemca.service
