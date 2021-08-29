@@ -6,8 +6,6 @@
 #include "menu_widget.hpp"
 #include "keyboard_widget.hpp"
 #include "harxon_widget.hpp"
-#include <QThread.h>
-#include <QWaitCondition.h>
 
 class MainWidget : public BaseWidget {
     MainWidget();
