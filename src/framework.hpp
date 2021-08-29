@@ -9,6 +9,8 @@
 #include <math.h>
 #include "logging.hpp"
 #include "util/stat.hpp"
+#include <QWaitCondition>
+#include <QMutex>
 
 class IGpsObserver {
 public:
@@ -35,14 +37,32 @@ public:
     std::string m_messages_errors;
     void addError(std::string s);
 
-    
-    void sendMessages(const std::string & m);
-    
     Config m_config;
     
     MyQTSerialPorts m_serial_port;
+    
+    QMutex mutex;
+    std::string m_command_to_execute;
+    QWaitCondition bufferNotEmpty;
+    bool m_is_f_call = false;
+    
 private:
     void readFile();
 };
+
+class Consumer : public QThread
+{
+    Q_OBJECT
+public:
+    Consumer(QObject *parent = NULL) : QThread(parent)
+    {
+    }
+
+    void run() override;
+
+signals:
+    void stringConsumed(const QString &text);
+};
+
 
 #endif // GPS_FRAMEWORK_H

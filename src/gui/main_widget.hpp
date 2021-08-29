@@ -6,6 +6,8 @@
 #include "menu_widget.hpp"
 #include "keyboard_widget.hpp"
 #include "harxon_widget.hpp"
+#include <QThread.h>
+#include <QWaitCondition.h>
 
 class MainWidget : public BaseWidget {
     MainWidget();
@@ -26,7 +28,6 @@ public:
     int m_widthMax;
     int m_heightMax;
     
-    bool m_is_f_call = false;
     
     QPixmap * m_logoImg;
     QPixmap * m_imgBineuse;
@@ -42,6 +43,7 @@ public:
     ButtonGui m_buttonSendMessage;
     
     bool m_debug = false;
+    bool m_is_bineuse_call = false;
     
     void setPainter(QPainter * s);
     
@@ -58,5 +60,6 @@ public:
     
     void onMouse(int x, int y);
 };
+
 
 #endif // GPS_WIDGET_H

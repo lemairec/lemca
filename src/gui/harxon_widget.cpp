@@ -31,12 +31,6 @@ void BaseWidgetSerie::onMouse(int x, int y){
     if(m_button_close.isActive(x,y)){
         m_close = true;
     }
-    for(auto c : m_buttons){
-        if(c->m_button.isActive(x, y)){
-            Framework::Instance().sendMessages(c->m_command);
-        }
-        //drawText(c->m_label,c->m_x*m_width +50, c->m_y*m_height);
-    }
     
 };
 

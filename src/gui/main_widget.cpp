@@ -90,10 +90,8 @@ void MainWidget::draw_force(){
     drawMain();
     drawButtons();
     
-    if(m_is_f_call){
-        drawText("called", 0.5*m_width, 0.7*m_height);
-    }
     Framework & f = Framework::Instance();
+    
     if(f.m_config.m_code_source){
         drawText("code source", 0.1*m_width, 0.4*m_height);
     }
@@ -102,6 +100,12 @@ void MainWidget::draw_force(){
         if(!p->m_close){
             p->draw();
         }
+    }
+    
+    
+    if(f.m_is_f_call){
+        m_painter->drawRect(0.2*m_width, 0.2*m_height,0.6*m_width, 0.6*m_height);
+        drawText("loading", 0.5*m_width, 0.5*m_height);
     }
     
     if(!m_key_board_widget.m_close){
@@ -116,9 +120,13 @@ void MainWidget::drawMain(){
 }
 
 void MainWidget::drawButtons(){
+    Framework & f = Framework::Instance();
+    
+    
     drawButtonImage(m_buttonBineuse, m_imgBineuse);
+
     drawText("Bineuse", m_buttonBineuse.m_x, m_buttonBineuse.m_y+40, sizeText_medium,  true);
-    if(Framework::Instance().m_config.m_gps){
+    if(f.m_config.m_gps){
         drawButtonImage(m_buttonGps, m_imgGPS);
         drawText("GPS", m_buttonGps.m_x, m_buttonGps.m_y+40, sizeText_medium,  true);
     }
@@ -152,7 +160,7 @@ void MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
-            
+            //draw_force();
             call("/Users/lemairec/workspace/agrigpspi/build/Debug/agri_gps_pi;");
             //call("cd /home/lemca/agrigpspi/build && ./agri_gps_pi");
         }
@@ -160,24 +168,18 @@ void MainWidget::onMouse(int x, int y){
         m_option_widget.m_close = false;
     } else if(m_buttonExit.isActive(x, y)){
         call("/sbin/shutdown -h now");
-    } else if(!m_key_board_widget.m_close){
-        m_key_board_widget.onMouse(x, y);
-        if(m_key_board_widget.m_close){
-            QString s2 = m_key_board_widget.m_res;
-            s2 += "\r\n";
-            std::string s = s2.toUtf8().constData();
-            f.sendMessages(s);
-        }
     }
 }
 
 void MainWidget::call(const std::string & s){
-    if(!m_is_f_call){
+    Framework & f = Framework::Instance();
+    if(!f.m_is_f_call){
         INFO("call " << s);
-        m_is_f_call = true;
-        system(s.c_str());
-        m_is_f_call = false;
-        
+        f.mutex.lock();
+        f.m_is_f_call = true;
+        f.m_command_to_execute = s;
+        f.mutex.unlock();
+        f.bufferNotEmpty.wakeAll();
         //(100);
         //m_is_f_call = false;
         

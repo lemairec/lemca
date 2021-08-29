@@ -56,3 +56,30 @@ void Framework::initOrLoadConfig(){
     
     m_serial_port.initOrLoad(m_config);
 }
+
+
+void Consumer::run(){
+    while(true){
+        Framework & f = Framework::Instance();
+        if(f.m_command_to_execute.size()>0){
+                
+            f.mutex.lock();
+            std::string s = f.m_command_to_execute;
+            f.mutex.unlock();
+            system(s.c_str());
+            
+            f.mutex.lock();
+            f.m_is_f_call = false;
+            f.m_command_to_execute.clear();
+            f.mutex.unlock();
+        } else {
+            INFO("wait");
+            f.mutex.lock();
+            f.bufferNotEmpty.wait(&f.mutex);
+            f.mutex.unlock();
+            INFO("wait end");
+            
+        }
+    }
+}
+
