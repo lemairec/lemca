@@ -39,9 +39,7 @@ void MyQTSerialPorts::handleReadyReadGps(){
     DEBUG("begin");
     QByteArray a = m_serialPort.readAll();
     Framework & f = Framework::Instance();
-    for(int i = 0; i < (int)a.size(); ++i){
-        f.addSerialChar((char)(a.data()[i]));
-    }
+    
     //INFO(s);
     
     DEBUG("end");

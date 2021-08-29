@@ -55,23 +55,6 @@ void MainWidget::setSize(int width, int height){
     //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
     m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_petit_button);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, m_gros_button);
-    
-    int y = m_height-180;
-    int y2 = y+20;
-    int inter = 16;
-    int i = 0;
-    
-    m_categories.clear();
-    for(auto c : Framework::Instance().m_categories){
-        ButtonGui * b = new ButtonGui();
-        b->setResize(20, y2, 8);
-        b->m_labelInt = i;
-        
-        ++i;
-        y2+= inter;
-        m_categories.push_back(b);
-        
-    }
 }
 
 MainWidget * MainWidget::instance(){
@@ -161,13 +144,6 @@ void MainWidget::onMouse(int x, int y){
         }
     }
     
-    for(auto b : m_categories){
-        if(b->isActive(x, y)){
-            auto c = f.m_categories[b->m_labelInt];
-            c->m_enable = !c->m_enable;
-        };
-    }
-    
     if(m_buttonBineuse.isActive(x, y)){
         if(f.m_config.m_code_source){
             call("/home/lemca/bineuse_src/build/bineuse");
@@ -176,7 +152,9 @@ void MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
-            call("cd /home/lemca/agrigpspi/build && ./agri_gps_pi");
+            
+            call("/Users/lemairec/workspace/agrigpspi/build/Debug/agri_gps_pi;");
+            //call("cd /home/lemca/agrigpspi/build && ./agri_gps_pi");
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;
