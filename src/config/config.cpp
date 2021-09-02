@@ -21,8 +21,8 @@ void Config::save(){
     settings.setValue("m_gps", m_gps);
     settings.setValue("m_fullscreen", m_fullscreen);
     
-    settings.setValue("m_bineuse_src_run", m_fullscreen);
-    settings.setValue("m_bineuse_src_update", m_fullscreen);
+    settings.setValue("m_bineuse_src_run", QString::fromStdString(m_bineuse_src_run));
+    settings.setValue("m_bineuse_src_update", QString::fromStdString(m_bineuse_src_update));
 }
 
 void Config::load(){
