@@ -154,7 +154,7 @@ void MainWidget::onMouse(int x, int y){
     
     if(m_buttonBineuse.isActive(x, y)){
         if(f.m_config.m_code_source){
-            call("/home/lemca/bineuse_src/build/bineuse");
+            call(f.m_config.m_bineuse_src_run);
         } else {
             call("~/bineuse/bineuse");
         }

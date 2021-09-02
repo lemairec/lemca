@@ -171,8 +171,9 @@ void OptionWidget::drawPage1(){
 }
 
 void OptionWidget::onMousePage1(int x, int y){
+    Framework & f = Framework::Instance();
     if(m_update_bineuse.isActive(x, y)){
-        call("xterm -e \"cd /home/lemca/bineuse_src && git pull && cd build && cmake .. && make && read\"");
+        std::string s = "xterm -e \"" + f.m_config.m_bineuse_src_update + "\"";
     }
     if(m_update_gps.isActive(x, y)){
         call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
