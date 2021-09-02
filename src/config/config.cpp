@@ -18,6 +18,9 @@ void Config::save(){
     settings.setValue("code_source", m_code_source);
     settings.setValue("m_gps", m_gps);
     settings.setValue("m_fullscreen", m_fullscreen);
+    
+    settings.setValue("m_bineuse_src_run", m_fullscreen);
+    settings.setValue("m_bineuse_src_update", m_fullscreen);
 }
 
 void Config::load(){
@@ -34,5 +37,12 @@ void Config::load(){
     }
     if(settings.contains("m_fullscreen")){
         m_fullscreen = settings.value("m_fullscreen").toBool();
+    }
+    if(settings.contains("m_bineuse_src_run")){
+        m_bineuse_src_run = settings.value("m_bineuse_src_run").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_bineuse_src_update")){
+        m_bineuse_src_update = settings.value("m_bineuse_src_update").toString().toUtf8().constData();
     }
 }
