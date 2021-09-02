@@ -30,8 +30,8 @@ public:
     bool m_gps = false;
     
     
-    std::string m_bineuse_src_run = "/home/lemca/bineuse_src/build/bineuse";
-    std::string m_bineuse_src_update = "cd /home/lemca/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make && read";
+    std::string m_bineuse_src_run;
+    std::string m_bineuse_src_update;
 
     Config();
     

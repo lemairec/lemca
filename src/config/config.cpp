@@ -6,6 +6,8 @@
 #include "../util/directory_manager.hpp"
 
 Config::Config(){
+    std::string m_bineuse_src_run = "~/bineuse_src/build/bineuse";
+    std::string m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make && read";
 }
 
 void Config::save(){
