@@ -170,7 +170,7 @@ void OptionWidget::drawPage1(){
         drawButton(m_update_gps);
         drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
         drawButton(m_serial);
-        drawText("Serial", 0.4*m_width, m_update_gps.m_y);
+        drawText("Serial", 0.4*m_width, m_serial.m_y);
     }
         
 }
@@ -190,7 +190,7 @@ void OptionWidget::onMousePage1(int x, int y){
             call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
         }
         if(m_serial.isActive(x, y)){
-            call("~/serial/build/serial");
+            call("~/serie/build/serie");
         }
     }
 }
