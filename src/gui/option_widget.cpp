@@ -403,7 +403,7 @@ void OptionWidget::open(){
 }
 
 void OptionWidget::addSerials(){
-    Framework & f = Framework::Instance();
+    //Framework & f = Framework::Instance();
     
 }
 
