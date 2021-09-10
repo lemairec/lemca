@@ -45,6 +45,7 @@ public:
     
     ButtonGui m_update_bineuse;
     ButtonGui m_update_gps;
+    ButtonGui m_serial;
     
     void resizePage1();
     void onMousePage1(int x, int y);

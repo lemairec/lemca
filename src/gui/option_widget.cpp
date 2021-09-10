@@ -156,7 +156,8 @@ void OptionWidget::resizePage1(){
     m_update_bineuse.setResize(x, y, m_petit_button);
     y+= inter;
     m_update_gps.setResize(x, y, m_petit_button);
-   
+    y+= inter;
+    m_serial.setResize(x, y, m_petit_button);
 };
 
 void OptionWidget::drawPage1(){
@@ -165,8 +166,12 @@ void OptionWidget::drawPage1(){
     
     drawButton(m_update_bineuse);
     drawText("Update Bineuse", 0.4*m_width, m_update_bineuse.m_y);
-    drawButton(m_update_gps);
-    drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
+    if(f.m_config.m_gps){
+        drawButton(m_update_gps);
+        drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
+        drawButton(m_serial);
+        drawText("Serial", 0.4*m_width, m_update_gps.m_y);
+    }
         
 }
 
@@ -180,8 +185,13 @@ void OptionWidget::onMousePage1(int x, int y){
         std::string s = "xterm -e \"" + s1 + "\"";
         call(s);
     }
-    if(m_update_gps.isActive(x, y)){
-        call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
+    if(f.m_config.m_gps){
+        if(m_update_gps.isActive(x, y)){
+            call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
+        }
+        if(m_serial.isActive(x, y)){
+            call("~/serial/build/serial");
+        }
     }
 }
 
