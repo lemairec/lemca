@@ -6,6 +6,8 @@
 #include "../util/directory_manager.hpp"
 
 Config::Config(){
+    m_bineuse_run = "~/bineuse/bineuse";
+    m_bineuse_update = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz";
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make && read";
 }
@@ -23,6 +25,8 @@ void Config::save(){
     
     settings.setValue("m_bineuse_src_run", QString::fromStdString(m_bineuse_src_run));
     settings.setValue("m_bineuse_src_update", QString::fromStdString(m_bineuse_src_update));
+    settings.setValue("m_bineuse_run", QString::fromStdString(m_bineuse_run));
+    settings.setValue("m_bineuse_update", QString::fromStdString(m_bineuse_update));
 }
 
 void Config::load(){
@@ -46,5 +50,13 @@ void Config::load(){
     
     if(settings.contains("m_bineuse_src_update")){
         m_bineuse_src_update = settings.value("m_bineuse_src_update").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_bineuse_run")){
+        m_bineuse_run = settings.value("m_bineuse_run").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_bineuse_update")){
+        m_bineuse_update = settings.value("m_bineuse_update").toString().toUtf8().constData();
     }
 }

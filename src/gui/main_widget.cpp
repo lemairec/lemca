@@ -156,7 +156,7 @@ void MainWidget::onMouse(int x, int y){
         if(f.m_config.m_code_source){
             call(f.m_config.m_bineuse_src_run);
         } else {
-            call("~/bineuse/bineuse");
+            call(f.m_config.m_bineuse_run);
         }
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){

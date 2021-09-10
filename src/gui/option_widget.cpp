@@ -173,7 +173,11 @@ void OptionWidget::drawPage1(){
 void OptionWidget::onMousePage1(int x, int y){
     Framework & f = Framework::Instance();
     if(m_update_bineuse.isActive(x, y)){
-        std::string s = "xterm -e \"" + f.m_config.m_bineuse_src_update + "\"";
+        std::string s1 = f.m_config.m_bineuse_update;
+        if(f.m_config.m_code_source){
+            s1 = f.m_config.m_bineuse_src_update;
+        }
+        std::string s = "xterm -e \"" + s1 + "\"";
         call(s);
     }
     if(m_update_gps.isActive(x, y)){
