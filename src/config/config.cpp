@@ -10,6 +10,9 @@ Config::Config(){
     m_bineuse_update = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz";
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make && read";
+    m_gps_run = "~/agrigpspi/build/agri_gps_pi";
+    m_gps_update = "~/agrigpspi/build/agri_gps_pi";
+    m_serie_run = "~/serie/build/serie";
 }
 
 void Config::save(){
@@ -27,6 +30,9 @@ void Config::save(){
     settings.setValue("m_bineuse_src_update", QString::fromStdString(m_bineuse_src_update));
     settings.setValue("m_bineuse_run", QString::fromStdString(m_bineuse_run));
     settings.setValue("m_bineuse_update", QString::fromStdString(m_bineuse_update));
+    settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
+    settings.setValue("m_gps_update", QString::fromStdString(m_gps_update));
+    settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
 }
 
 void Config::load(){
@@ -58,5 +64,17 @@ void Config::load(){
     
     if(settings.contains("m_bineuse_update")){
         m_bineuse_update = settings.value("m_bineuse_update").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_gps_run")){
+        m_gps_run = settings.value("m_gps_run").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_gps_update")){
+        m_gps_update = settings.value("m_gps_update").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_serie_run")){
+        m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
     }
 }

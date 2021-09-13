@@ -187,10 +187,12 @@ void OptionWidget::onMousePage1(int x, int y){
     }
     if(f.m_config.m_gps){
         if(m_update_gps.isActive(x, y)){
-            call("xterm -e \"cd /home/lemca/agrigpspi && git pull && cd build && cmake .. && make && read\"");
+            std::string s1 = f.m_config.m_gps_update;
+            std::string s = "xterm -e \"" + s1 + "\"";
+            call(s);
         }
         if(m_serial.isActive(x, y)){
-            call("~/serie/build/serie");
+            call(f.m_config.m_serie_run);
         }
     }
 }

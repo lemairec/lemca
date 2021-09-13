@@ -160,9 +160,7 @@ void MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
-            //draw_force();
-            call("~/agrigpspi/build/agri_gps_pi");
-            //call("cd /home/lemca/agrigpspi/build && ./agri_gps_pi");
+            call(f.m_config.m_gps_run);
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;
