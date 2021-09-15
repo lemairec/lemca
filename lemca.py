@@ -46,11 +46,8 @@ class LemcaGui:
         print('Running: ' + cmdline)
         self.call_without_print(cmdline)
 
-    def gps_prod(self):
-        self.call("cd ~/agrigpspi; git reset --hard; git pull")
-
     def clicked_serie(self):
-        self.call("mkdir -p ~/serie/build; cd ~/serie/build && cmake .. && make -j4 && ./serie")
+        self.call("mkdir -p ~/serie/build; cd ~/serie/build && cmake .. && make && ./serie")
 
     def install_serie(self):
         self.call("cd ~/serie; git reset --hard; git pull")

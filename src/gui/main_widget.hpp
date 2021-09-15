@@ -36,6 +36,7 @@ public:
     
     ButtonGui m_buttonBineuse;
     ButtonGui m_buttonGps;
+    ButtonGui m_buttonRobot;
     ButtonGui m_buttonExit;
     ButtonGui m_buttonOption;
     ButtonGui m_buttonSendMessage;

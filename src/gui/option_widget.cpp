@@ -158,6 +158,8 @@ void OptionWidget::resizePage1(){
     m_update_gps.setResize(x, y, m_petit_button);
     y+= inter;
     m_serial.setResize(x, y, m_petit_button);
+    y+= inter;
+    m_update_robot.setResize(x, y, m_petit_button);
 };
 
 void OptionWidget::drawPage1(){
@@ -171,6 +173,10 @@ void OptionWidget::drawPage1(){
         drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
         drawButton(m_serial);
         drawText("Serial", 0.4*m_width, m_serial.m_y);
+    }
+    if(f.m_config.m_robot){
+        drawButton(m_update_robot);
+        drawText("Update Robot", 0.4*m_width, m_update_robot.m_y);
     }
         
 }
@@ -193,6 +199,13 @@ void OptionWidget::onMousePage1(int x, int y){
         }
         if(m_serial.isActive(x, y)){
             call(f.m_config.m_serie_run);
+        }
+    }
+    if(f.m_config.m_robot){
+        if(m_update_robot.isActive(x, y)){
+            std::string s1 = f.m_config.m_robot_update;
+            std::string s = "xterm -e \"" + s1 + "\"";
+            call(s);
         }
     }
 }
@@ -277,12 +290,14 @@ void OptionWidget::onMousePage2(int x, int y){
 
 void OptionWidget::resizePage3(){
     int inter = m_width*0.06;
-    int y = m_height*0.3;
+    int y = m_height*0.25;
     m_button_code_source.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_full_screen.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_gps.setResize(m_width*0.3, y, m_gros_button);
+    y+= inter;
+    m_button_robot.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     y+= inter;
     m_button_exit.setResize(m_width*0.3, y, m_gros_button);
@@ -313,6 +328,13 @@ void OptionWidget::drawPage3(){
     }
     drawText("gps", m_width*0.4, m_button_gps.m_y);
     
+    if(f.m_config.m_robot){
+        drawButton(m_button_robot, COLOR_CHECK);
+    } else {
+        drawButton(m_button_robot);
+    }
+    drawText("robot", m_width*0.4, m_button_robot.m_y);
+   
     drawButton(m_button_exit);
     drawText("quitter", m_width*0.4, m_button_exit.m_y);
     
@@ -330,6 +352,10 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_button_gps.isActive(x, y)){
         f.m_config.m_gps = !f.m_config.m_gps;
+        f.initOrLoadConfig();
+    }
+    if(m_button_robot.isActive(x, y)){
+        f.m_config.m_robot = !f.m_config.m_robot;
         f.initOrLoadConfig();
     }
     if(m_button_exit.isActive(x, y)){

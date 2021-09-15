@@ -28,6 +28,7 @@ public:
     bool m_technicien = false;
     bool m_code_source = false;
     bool m_gps = false;
+    bool m_robot = false;
     
     
     std::string m_bineuse_src_run;
@@ -36,6 +37,8 @@ public:
     std::string m_bineuse_update;
     std::string m_gps_run;
     std::string m_gps_update;
+    std::string m_robot_run;
+    std::string m_robot_update;
     std::string m_serie_run;
 
     Config();

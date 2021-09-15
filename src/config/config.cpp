@@ -11,8 +11,12 @@ Config::Config(){
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make && read";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
-    m_gps_update = "~/agrigpspi/build/agri_gps_pi";
+    m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make && read";
     m_serie_run = "~/serie/build/serie";
+    m_robot_run = "~/robot/build/robot";
+    m_robot_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make && read";
+    
+    
 }
 
 void Config::save(){
@@ -25,6 +29,7 @@ void Config::save(){
     settings.setValue("code_source", m_code_source);
     settings.setValue("m_gps", m_gps);
     settings.setValue("m_fullscreen", m_fullscreen);
+    settings.setValue("m_robot", m_robot);
     
     settings.setValue("m_bineuse_src_run", QString::fromStdString(m_bineuse_src_run));
     settings.setValue("m_bineuse_src_update", QString::fromStdString(m_bineuse_src_update));
@@ -33,6 +38,8 @@ void Config::save(){
     settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
     settings.setValue("m_gps_update", QString::fromStdString(m_gps_update));
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
+    settings.setValue("m_robot_run", QString::fromStdString(m_robot_run));
+    settings.setValue("m_robot_update", QString::fromStdString(m_robot_update));
 }
 
 void Config::load(){
@@ -49,6 +56,9 @@ void Config::load(){
     }
     if(settings.contains("m_fullscreen")){
         m_fullscreen = settings.value("m_fullscreen").toBool();
+    }
+    if(settings.contains("m_robot")){
+        m_robot = settings.value("m_robot").toBool();
     }
     if(settings.contains("m_bineuse_src_run")){
         m_bineuse_src_run = settings.value("m_bineuse_src_run").toString().toUtf8().constData();
@@ -76,5 +86,13 @@ void Config::load(){
     
     if(settings.contains("m_serie_run")){
         m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_robot_run")){
+        m_robot_run = settings.value("m_robot_run").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_robot_update")){
+        m_robot_update = settings.value("m_robot_update").toString().toUtf8().constData();
     }
 }
