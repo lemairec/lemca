@@ -24,7 +24,7 @@ enum LissageImuMode{
 
 class Config  {
 public:
-    bool m_fullscreen = false;
+    bool m_fullscreen = true;
     bool m_technicien = false;
     bool m_code_source = false;
     bool m_gps = false;
