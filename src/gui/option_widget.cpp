@@ -370,7 +370,7 @@ void OptionWidget::onMousePage3(int x, int y){
         exit(0);
     }
     if(m_make_archive.isActive(x, y)){
-        std::string s1 = f.m_config.m_gps_update;
+        std::string s1 = f.m_config.m_make_archive;
         std::string s = "xterm -e \"" + s1 + "\"";
         call(s);
     }
