@@ -5,7 +5,7 @@
 #include "option_widget.hpp"
 #include "menu_widget.hpp"
 #include "keyboard_widget.hpp"
-#include "harxon_widget.hpp"
+#include "wifi_widget.hpp"
 
 class MainWidget : public BaseWidget {
     MainWidget();
@@ -14,7 +14,7 @@ public:
     
     MenuWidget m_menuWidget;
     OptionWidget m_option_widget;
-    MotorWidget m_motor_widget;
+    WifiWidget m_wifi_widget;
     
     std::vector<BaseWidget *> m_widgets;
     
@@ -32,12 +32,14 @@ public:
     QPixmap * m_imgGPS;
     QPixmap * m_imgExit;
     QPixmap * m_imgOption;
+    QPixmap * m_imgWifi;
     
     
     ButtonGui m_buttonBineuse;
     ButtonGui m_buttonGps;
     ButtonGui m_buttonRobot;
     ButtonGui m_buttonExit;
+    ButtonGui m_buttonWifi;
     ButtonGui m_buttonOption;
     ButtonGui m_buttonSendMessage;
     

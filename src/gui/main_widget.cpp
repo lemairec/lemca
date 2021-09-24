@@ -28,12 +28,13 @@ MainWidget::MainWidget()
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
     m_imgOption = loadImage("/gui/option_gris_gros.png");
+    m_imgWifi = loadImage("/gui/wifi.png");
 
     //m_widgets.push_back(&m_satWidget);
     m_widgets.push_back(&m_menuWidget);
     m_widgets.push_back(&m_key_pad_widget);
     m_widgets.push_back(&m_option_widget);
-    m_widgets.push_back(&m_motor_widget);
+    m_widgets.push_back(&m_wifi_widget);
 }
 
 void MainWidget::setSize(int width, int height){
@@ -53,6 +54,7 @@ void MainWidget::setSize(int width, int height){
     m_buttonGps.setResize(m_width*0.4, m_height*0.8, m_gros_gros_button);
     m_buttonRobot.setResize(m_width*0.6, m_height*0.8, m_gros_gros_button);
     m_buttonExit.setResize(m_width*0.8, m_height*0.8, m_gros_gros_button);
+    m_buttonWifi.setResize(m_width*0.8, m_height*0.2, m_gros_gros_button);
     //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
     m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_petit_button);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, m_gros_button);
@@ -135,6 +137,7 @@ void MainWidget::drawButtons(){
         drawButtonImage(m_buttonRobot, m_imgGPS);
         drawText("Robot", m_buttonRobot.m_x, m_buttonRobot.m_y+40, sizeText_medium,  true);
     }
+    drawButtonImage(m_buttonWifi, m_imgWifi);
     drawButtonImage(m_buttonExit, m_imgExit);
     drawButtonImage(m_buttonOption, m_imgOption);
     /*drawButtonImage(m_buttonMenu, m_imgMenu);
@@ -157,6 +160,7 @@ void MainWidget::onMouse(int x, int y){
         }
     }
     
+    
     if(m_buttonBineuse.isActive(x, y)){
         if(f.m_config.m_code_source){
             call(f.m_config.m_bineuse_src_run);
@@ -173,6 +177,8 @@ void MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;
+    } if(m_buttonWifi.isActive(x, y)){
+        m_wifi_widget.open();
     } else if(m_buttonExit.isActive(x, y)){
         call("/sbin/shutdown -h now");
     }

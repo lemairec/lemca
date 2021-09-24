@@ -1,5 +1,6 @@
 #include "util.hpp"
 #include "../logging.hpp"
+#include "directory_manager.hpp"
 
 #include <math.h>
 
@@ -37,3 +38,19 @@ bool isNotEqualDoubles2 (double a, double b, double epsilon)
    INFO(diff << " " << epsilon);
    return (diff > epsilon) || (diff < -epsilon);
 }
+
+#include <string>       // std::string
+#include <iostream>     // std::cout
+#include <sstream>      // std::stringstream
+
+
+std::string execute2(std::string cmd){
+    std::string file = DirectoryManager::Instance().getBinDirectory() + "/tmp_cmd";
+    std::string cmd2 = cmd + " > " + file;
+    system(cmd2.c_str());
+    std::ifstream infile(file);
+    std::stringstream strStream;
+    strStream << infile.rdbuf();//read the file
+    std::string res = strStream.str();
+    return res;
+};
