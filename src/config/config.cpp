@@ -15,7 +15,7 @@ Config::Config(){
     m_serie_run = "~/serie/build/serie";
     m_robot_run = "~/robot/build/robot";
     m_robot_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4 && read";
-    m_make_archive = "cd ~/bineuse_src; sh make_archive.sh";
+    m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh";
 }
 
 void Config::save(){
