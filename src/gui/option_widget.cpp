@@ -298,9 +298,12 @@ void OptionWidget::resizePage3(){
     m_button_gps.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_robot.setResize(m_width*0.3, y, m_gros_button);
+    y = m_height*0.25;
+    m_make_archive.setResize(m_width*0.6, y, m_gros_button);
     y+= inter;
     y+= inter;
-    m_button_exit.setResize(m_width*0.3, y, m_gros_button);
+    
+    m_button_exit.setResize(m_width*0.6, y, m_gros_button);
     
 };
 
@@ -312,31 +315,36 @@ void OptionWidget::drawPage3(){
     } else {
         drawButton(m_button_code_source);
     }
-    drawText("code source", m_width*0.4, m_button_code_source.m_y);
+    drawText("code source", m_width*0.35, m_button_code_source.m_y);
     
     if(f.m_config.m_fullscreen){
         drawButton(m_button_full_screen, COLOR_CHECK);
     } else {
         drawButton(m_button_full_screen);
     }
-    drawText("full screen", m_width*0.4, m_button_full_screen.m_y);
+    drawText("full screen", m_width*0.35, m_button_full_screen.m_y);
     
     if(f.m_config.m_gps){
         drawButton(m_button_gps, COLOR_CHECK);
     } else {
         drawButton(m_button_gps);
     }
-    drawText("gps", m_width*0.4, m_button_gps.m_y);
+    drawText("gps", m_width*0.35, m_button_gps.m_y);
     
     if(f.m_config.m_robot){
         drawButton(m_button_robot, COLOR_CHECK);
     } else {
         drawButton(m_button_robot);
     }
-    drawText("robot", m_width*0.4, m_button_robot.m_y);
+    drawText("robot", m_width*0.35, m_button_robot.m_y);
+   
+    if(f.m_config.m_code_source){
+        drawButton(m_make_archive);
+    }
+    drawText("make archive", m_width*0.65, m_make_archive.m_y);
    
     drawButton(m_button_exit);
-    drawText("quitter", m_width*0.4, m_button_exit.m_y);
+    drawText("quitter", m_width*0.65, m_button_exit.m_y);
     
 }
 
@@ -360,6 +368,11 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_button_exit.isActive(x, y)){
         exit(0);
+    }
+    if(m_make_archive.isActive(x, y)){
+        std::string s1 = f.m_config.m_gps_update;
+        std::string s = "xterm -e \"" + s1 + "\"";
+        call(s);
     }
 }
 

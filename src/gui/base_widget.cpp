@@ -101,9 +101,9 @@ void SelectButtonGui::addValue(std::string s){
     }
 }
 
-void SelectButtonGui::addValueInt(std::string s, int i){
+void SelectButtonGui::addValueInt(std::string s, int i_value){
     m_values.push_back(s);
-    m_values_int.push_back(i);
+    m_values_int.push_back(i_value);
     m_buttons.clear();
     for(size_t i = 0; i < m_values.size(); ++i){
         m_buttons.push_back(new ButtonGui(m_x+m_rayon, m_y+m_rayon*2*(i+1), m_rayon*0.8, 0));

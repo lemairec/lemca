@@ -37,6 +37,7 @@ public:
     std::string m_bineuse_update;
     std::string m_gps_run;
     std::string m_gps_update;
+    std::string m_make_archive;
     std::string m_robot_run;
     std::string m_robot_update;
     std::string m_serie_run;

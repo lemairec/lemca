@@ -15,8 +15,7 @@ Config::Config(){
     m_serie_run = "~/serie/build/serie";
     m_robot_run = "~/robot/build/robot";
     m_robot_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4 && read";
-    
-    
+    m_make_archive = "cd ~/bineuse_src; sh make_archive.sh";
 }
 
 void Config::save(){
@@ -40,6 +39,7 @@ void Config::save(){
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
     settings.setValue("m_robot_run", QString::fromStdString(m_robot_run));
     settings.setValue("m_robot_update", QString::fromStdString(m_robot_update));
+    settings.setValue("m_make_archive", QString::fromStdString(m_make_archive));
 }
 
 void Config::load(){
@@ -94,5 +94,9 @@ void Config::load(){
     
     if(settings.contains("m_robot_update")){
         m_robot_update = settings.value("m_robot_update").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_make_archive")){
+        m_make_archive = settings.value("m_make_archive").toString().toUtf8().constData();
     }
 }
