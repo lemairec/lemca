@@ -75,6 +75,7 @@ public:
     ButtonGui m_button_gps;
     ButtonGui m_button_robot;
     ButtonGui m_make_archive;
+    ButtonGui m_update_lemca;
     ButtonGui m_button_exit;
     
     

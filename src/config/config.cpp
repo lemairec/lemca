@@ -16,6 +16,8 @@ Config::Config(){
     m_robot_run = "~/robot/build/robot";
     m_robot_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4 && read";
     m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh && read";
+    m_update_lemca = "cd ~/lemca; git pull; rm -rf build_old; mv build build_old; mkdir build; cd build && cmake .. && make -j4; read";
+    
 }
 
 void Config::save(){
@@ -40,6 +42,7 @@ void Config::save(){
     settings.setValue("m_robot_run", QString::fromStdString(m_robot_run));
     settings.setValue("m_robot_update", QString::fromStdString(m_robot_update));
     settings.setValue("m_make_archive", QString::fromStdString(m_make_archive));
+    settings.setValue("m_update_lemca", QString::fromStdString(m_update_lemca));
 }
 
 void Config::load(){
@@ -98,5 +101,9 @@ void Config::load(){
     
     if(settings.contains("m_make_archive")){
         m_make_archive = settings.value("m_make_archive").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_update_lemca")){
+        m_update_lemca = settings.value("m_update_lemca").toString().toUtf8().constData();
     }
 }

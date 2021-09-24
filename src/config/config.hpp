@@ -41,7 +41,8 @@ public:
     std::string m_robot_run;
     std::string m_robot_update;
     std::string m_serie_run;
-
+    std::string m_update_lemca;
+    
     Config();
     
     void save();

@@ -302,7 +302,8 @@ void OptionWidget::resizePage3(){
     m_make_archive.setResize(m_width*0.6, y, m_gros_button);
     y+= inter;
     y+= inter;
-    
+    m_update_lemca.setResize(m_width*0.6, y, m_gros_button);
+    y+= inter;
     m_button_exit.setResize(m_width*0.6, y, m_gros_button);
     
 };
@@ -340,9 +341,13 @@ void OptionWidget::drawPage3(){
    
     if(f.m_config.m_code_source){
         drawButton(m_make_archive);
+        drawText("make archive", m_width*0.65, m_make_archive.m_y);
+       
     }
-    drawText("make archive", m_width*0.65, m_make_archive.m_y);
-   
+    
+    drawButton(m_update_lemca);
+    drawText("update lemca", m_width*0.65, m_update_lemca.m_y);
+    
     drawButton(m_button_exit);
     drawText("quitter", m_width*0.65, m_button_exit.m_y);
     
@@ -366,6 +371,7 @@ void OptionWidget::onMousePage3(int x, int y){
         f.m_config.m_robot = !f.m_config.m_robot;
         f.initOrLoadConfig();
     }
+    
     if(m_button_exit.isActive(x, y)){
         exit(0);
     }
@@ -373,6 +379,12 @@ void OptionWidget::onMousePage3(int x, int y){
         std::string s1 = f.m_config.m_make_archive;
         std::string s = "xterm -e \"" + s1 + "\"";
         call(s);
+    }
+    if(m_update_lemca.isActive(x, y)){
+        std::string s1 = f.m_config.m_update_lemca;
+        std::string s = "xterm -e \"" + s1 + "\"";
+        call(s);
+        call("/sbin/shutdown -h now");
     }
 }
 
