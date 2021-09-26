@@ -44,6 +44,8 @@ public:
     virtual void onMouse(int x, int y);
     
     SelectButtonGui m_select_wifi;
+    ValueGuiKeyBoard m_password;
+    ButtonGui m_connect;
     
     void resizePage1();
     void onMousePage1(int x, int y);

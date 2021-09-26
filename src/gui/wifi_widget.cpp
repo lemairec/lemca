@@ -33,375 +33,76 @@ WifiWidget::WifiWidget(){
 void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
+    m_connect.setResize(0.25*m_width, 0.83*m_height, m_gros_button);
+    m_connect.m_label = "connect";
     
-    m_button_p1.setResize(0.1*m_width, 0.20*m_height, m_gros_button);
-    m_button_p2.setResize(0.1*m_width, 0.30*m_height, m_gros_button);
-    m_button_p3.setResize(0.1*m_width, 0.40*m_height, m_gros_button);
-    m_button_p4.setResize(0.1*m_width, 0.50*m_height, m_gros_button);
-    m_button_p5.setResize(0.1*m_width, 0.60*m_height, m_gros_button);
-    m_button_p6.setResize(0.1*m_width, 0.70*m_height, m_gros_button);
-    
-    resizePage1();
-    resizePage2();
-    resizePage3();
-    resizePage4();
-    resizePage5();
-    resizePage6();
-    
-}
-
-void WifiWidget::draw(){
-    m_painter->setPen(m_penBlack);
-    m_painter->setBrush(m_brushWhiteAlpha);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
-    m_painter->setBrush(m_brushDarkGray);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.1, m_height*0.8);
-    
-    drawButtonImage(m_button_close, m_imgClose);
-    
-    if(m_page == 1){
-        drawButtonImage(m_button_p1, m_imgOptionBlanc);
-        drawPage1();
-    } else {
-        drawButtonImage(m_button_p1, m_imgOptionGris);
-    }
-    
-    if(m_page == 2){
-        drawButtonImage(m_button_p2, m_imgOptionBlanc);
-        drawPage2();
-    } else {
-        drawButtonImage(m_button_p2, m_imgOptionGris);
-        
-    }
-    
-    if(Framework::Instance().m_config.m_technicien){
-        if(m_page == 3){
-            drawButtonImage(m_button_p3, m_imgOptionBlanc);
-            drawPage3();
-        } else {
-            drawButtonImage(m_button_p3, m_imgOptionGris);
-            
-        }
-        
-        if(m_page == 4){
-            drawButtonImage(m_button_p4, m_imgVolantBlanc);
-            drawPage4();
-        } else {
-            drawButtonImage(m_button_p4, m_imgVolantGris);
-        }
-        
-        //GpsFramework & f = GpsFramework::Instance();
-        
-        if(m_page == 5){
-            drawButtonImage(m_button_p5, m_imgVolantBlanc);
-            drawPage5();
-        } else {
-            drawButtonImage(m_button_p5, m_imgVolantGris);
-        }
-        
-        if(m_page == 6){
-            drawButtonImage(m_button_p6, m_imgVolantBlanc);
-            drawPage6();
-        } else {
-            drawButtonImage(m_button_p6, m_imgVolantGris);
-        }
-    }
-}
-
-void WifiWidget::onMouse(int x, int y){
-    
-    if(m_button_close.isActive(x,y)){
-        m_close = true;
-    } else if(m_button_p1.isActive(x,y)){
-        m_page = 1;
-    } else if(m_button_p2.isActive(x,y)){
-        m_page = 2;
-    } else if(m_button_p3.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
-            m_page = 3;
-        }
-    } else if(m_button_p4.isActive(x,y)){
-        m_page = 4;
-    } else if(m_button_p5.isActive(x,y)){
-        m_page = 5;
-    } else if(m_button_p6.isActive(x,y)){
-        m_page = 6;
-    } else {
-        if(m_page == 1){
-            onMousePage1(x, y);
-        } else if(m_page == 2){
-            onMousePage2(x, y);
-        } else if(m_page == 3){
-            onMousePage3(x, y);
-        } else if(m_page == 4){
-            onMousePage4(x, y);
-        } else if(m_page == 5){
-            onMousePage5(x, y);
-        } else if(m_page == 6){
-            onMousePage6(x, y);
-        }
-    }
-}
-
-
-/**
- PAGE 1
- */
-
-void WifiWidget::resizePage1(){
     //m_select_serial
-    int x = 0.3*m_width;
+    int x = 0.5*m_width;
     int y = 0.4*m_height;
     int inter = 0.1*m_height;
     
     m_select_wifi.setResize(x, y, m_petit_button);
+    y+=inter;
+    m_password.setResize(x+60, y);
+
 };
 
-void WifiWidget::drawPage1(){
-    Framework & f = Framework::Instance();
-    drawText("Update", 0.5*m_width, 0.3*m_height);
+void WifiWidget::draw(){
+    m_painter->setPen(m_penBlack);
+    m_painter->setBrush(m_brushWhite);
+    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
+    
+    drawButtonImage(m_button_close, m_imgClose);
+    drawButtonLabel(m_connect);
+
+    //Framework & f = Framework::Instance();
+    drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
     
     drawSelectButtonGuiClose(m_select_wifi);
+    
+    drawValueGuiKeyBoard(m_password);
+    
     drawSelectButtonGuiOpen(m_select_wifi);
         
 }
 
-void WifiWidget::onMousePage1(int x, int y){
-    Framework & f = Framework::Instance();
-    if(onMouseSelectButton(m_select_wifi, x, y)){
-        //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
-        //loadConfig();
+void WifiWidget::onMouse(int x, int y){
+    KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
+    //Framework & f = Framework::Instance();
+    if(!key_board_widget.m_close){
+        key_board_widget.onMouse(x, y);
+        m_password.m_text = key_board_widget.m_res.toUtf8().constData();
+        if(key_board_widget.m_close){
+            /*QString s2 = key_board_widget.m_res;
+            s2 += "\r\n";
+            std::string s = s2.toUtf8().constData();*/
+            //f.sendMessages(s);
+        }
+    } else {
+        if(isActiveValueGuiKeyBoard(m_password, x, y)){
+            key_board_widget.m_close = false;
+        }
+        if(isActiveValueGuiKeyBoard(m_password, x, y)){
+            key_board_widget.m_close = false;
+        }
+        if(m_connect.isActive(x, y)){
+            //key_board_widget.m_close = false;
+        }
+        if(m_button_close.isActive(x, y)){
+            m_close = false;
+        }
+        if(onMouseSelectButton(m_select_wifi, x, y)){
+            //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
+            //loadConfig();
+        }
         
     }
-}
-
-
-/**
- PAGE 2
- */
-
-void WifiWidget::resizePage2(){
-    int inter = m_width*0.08;
-    int x = m_width*0.5;
-    int rayon = m_gros_button;
-    ///usr/bin/python /home/lemca/lemca/lemca.py
-    int y = m_height*0.5- inter;
-    m_button7.setResize(x-inter, y, rayon);
-    m_button8.setResize(x, y, rayon);
-    m_button9.setResize(x+inter, y, rayon);
-    
-    y = m_height*0.5;
-    m_button4.setResize(x-inter, y, rayon);
-    m_button5.setResize(x, y, rayon);
-    m_button6.setResize(x+inter, y, rayon);
-    
-    y = m_height*0.5 + inter;
-    m_button1.setResize(x-inter, y, rayon);
-    m_button2.setResize(x, y, rayon);
-    m_button3.setResize(x+inter, y, rayon);
-    
-    y = m_height*0.5 + 2*inter;
-    m_button_technicien.setResize(m_width*0.3, y, rayon);
     
     
 }
 
-void WifiWidget::myDrawButton(ButtonGui * b, QString s){
-    drawButton(*b);
-    drawQText(s, b->m_x, b->m_y, sizeText_medium, true);
-}
-
-void WifiWidget::drawPage2(){
-    myDrawButton(&m_button1, "1");
-    myDrawButton(&m_button2, "2");
-    myDrawButton(&m_button3, "3");
-    myDrawButton(&m_button4, "4");
-    myDrawButton(&m_button5, "5");
-    myDrawButton(&m_button6, "6");
-    myDrawButton(&m_button7, "7");
-    myDrawButton(&m_button8, "8");
-    myDrawButton(&m_button9, "9");
-    
-    if(Framework::Instance().m_config.m_technicien){
-        drawButton(m_button_technicien, COLOR_CHECK);
-    } else {
-        drawButton(m_button_technicien);
-    }
-    drawText("technicien", m_width*0.4, m_button_technicien.m_y);
-}
-
-void WifiWidget::onMousePage2(int x, int y){
-
-}
 
 
-
-/**
- PAGE 4
- */
-
-void WifiWidget::resizePage3(){
-    int inter = m_width*0.06;
-    int y = m_height*0.25;
-    m_button_code_source.setResize(m_width*0.3, y, m_gros_button);
-    y+= inter;
-    m_button_full_screen.setResize(m_width*0.3, y, m_gros_button);
-    y+= inter;
-    m_button_gps.setResize(m_width*0.3, y, m_gros_button);
-    y+= inter;
-    m_button_robot.setResize(m_width*0.3, y, m_gros_button);
-    y = m_height*0.25;
-    m_make_archive.setResize(m_width*0.6, y, m_gros_button);
-    y+= inter;
-    y+= inter;
-    m_update_lemca.setResize(m_width*0.6, y, m_gros_button);
-    y+= inter;
-    m_button_exit.setResize(m_width*0.6, y, m_gros_button);
-    
-};
-
-void WifiWidget::drawPage3(){
-    Framework & f = Framework::Instance();
-    
-    if(f.m_config.m_code_source){
-        drawButton(m_button_code_source, COLOR_CHECK);
-    } else {
-        drawButton(m_button_code_source);
-    }
-    drawText("code source", m_width*0.35, m_button_code_source.m_y);
-    
-    if(f.m_config.m_fullscreen){
-        drawButton(m_button_full_screen, COLOR_CHECK);
-    } else {
-        drawButton(m_button_full_screen);
-    }
-    drawText("full screen", m_width*0.35, m_button_full_screen.m_y);
-    
-    if(f.m_config.m_gps){
-        drawButton(m_button_gps, COLOR_CHECK);
-    } else {
-        drawButton(m_button_gps);
-    }
-    drawText("gps", m_width*0.35, m_button_gps.m_y);
-    
-    if(f.m_config.m_robot){
-        drawButton(m_button_robot, COLOR_CHECK);
-    } else {
-        drawButton(m_button_robot);
-    }
-    drawText("robot", m_width*0.35, m_button_robot.m_y);
-   
-    if(f.m_config.m_code_source){
-        drawButton(m_make_archive);
-        drawText("make archive", m_width*0.65, m_make_archive.m_y);
-       
-    }
-    
-    drawButton(m_update_lemca);
-    drawText("update lemca", m_width*0.65, m_update_lemca.m_y);
-    
-    drawButton(m_button_exit);
-    drawText("quitter", m_width*0.65, m_button_exit.m_y);
-    
-}
-
-void WifiWidget::onMousePage3(int x, int y){
-    Framework & f = Framework::Instance();
-    if(m_button_code_source.isActive(x, y)){
-        f.m_config.m_code_source = !f.m_config.m_code_source;
-        f.initOrLoadConfig();
-    }
-    if(m_button_full_screen.isActive(x, y)){
-        f.m_config.m_fullscreen = !f.m_config.m_fullscreen;
-        f.initOrLoadConfig();
-    }
-    if(m_button_gps.isActive(x, y)){
-        f.m_config.m_gps = !f.m_config.m_gps;
-        f.initOrLoadConfig();
-    }
-    if(m_button_robot.isActive(x, y)){
-        f.m_config.m_robot = !f.m_config.m_robot;
-        f.initOrLoadConfig();
-    }
-    
-    if(m_button_exit.isActive(x, y)){
-        exit(0);
-    }
-    if(m_make_archive.isActive(x, y)){
-        std::string s1 = f.m_config.m_make_archive;
-        std::string s = "xterm -e \"" + s1 + "\"";
-        call(s);
-    }
-    if(m_update_lemca.isActive(x, y)){
-        std::string s1 = f.m_config.m_update_lemca;
-        std::string s = "xterm -e \"" + s1 + "\"";
-        call(s);
-        call("/sbin/shutdown -h now");
-    }
-}
-
-
-/**
- PAGE 5
- */
-
-void WifiWidget::resizePage5(){
-    m_button_motor_inverse.setResize(0.35*m_width, 0.20*m_height, m_petit_button);
-    m_button_encoder_inverse.setResize(0.6*m_width, 0.20*m_height, m_petit_button);
-    
-    m_motor_vitesse_agressivite.setResize(0.35*m_width, 0.3*m_height, m_petit_button, "moteur agressivite ");
-    m_motor_vitesse_max.setResize(0.35*m_width, 0.35*m_height, m_petit_button, "moteur vitesse max ");
-    m_volant_pas_by_tour.setResize(0.35*m_width, 0.45*m_height, m_petit_button, "encoder pas par tour ");
-    m_volant_angle_by_tour.setResize(0.35*m_width, 0.5*m_height, m_petit_button, "roue angle par tour de volant ");
-    m_volant_derive.setResize(0.35*m_width, 0.55*m_height, m_petit_button, "rattrapage de derive ");
-    
-    m_volant_frequence.setResize(0.35*m_width, 0.65*m_height, m_petit_button, "frequence ");
-    m_virtual_point.setResize(0.35*m_width, 0.7*m_height, m_petit_button, "virtual point ");
-    
-    m_button_auto_deactive.setResize(0.35*m_width, 0.8*m_height, m_petit_button, "auto deactive ");
-    m_button_auto_active.setResize(0.35*m_width, 0.85*m_height, m_petit_button, "auto active ");
-};
-
-void WifiWidget::drawPage5(){
-    
-}
-
-void WifiWidget::onMousePage5(int x, int y){
-    
-}
-
-
-/**
- PAGE 6
- */
-
-void WifiWidget::resizePage6(){
-};
-
-void WifiWidget::drawPage6(){
-    }
-
-void WifiWidget::onMousePage6(int x, int y){
-   
-}
-
-
-/**
- PAGE 4
- */
-
-void WifiWidget::resizePage4(){
-}
-
-
-
-void WifiWidget::drawPage4(){
-   
-}
-
-void WifiWidget::onMousePage4(int x, int y){
-    
-}
 
 void WifiWidget::open(){
     addWifis();
@@ -425,14 +126,17 @@ void WifiWidget::addWifis(){
     {
         std::string res = execute2("nmcli -f SSID dev wifi");
         std::vector<std::string> strs;
-        
+        m_select_wifi.addValue("non");
+        m_select_wifi.addValue("wif");
         std::stringstream ss(res);
         std::string item;
         std::vector<std::string> elems;
         while (std::getline(ss, item, '\n')) {
         if(!item.empty()){
             INFO(item);
-            m_select_wifi.addValue(item);
+            if(item != "SSID"){
+                m_select_wifi.addValue(item);
+            }
         }
         // elems.push_back(std::move(item)); // if C++11 (based on comment from @mchiasson)
         }

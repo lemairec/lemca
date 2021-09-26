@@ -289,7 +289,7 @@ void OptionWidget::onMousePage2(int x, int y){
  */
 
 void OptionWidget::resizePage3(){
-    int inter = m_width*0.06;
+    int inter = m_width*0.07;
     int y = m_height*0.25;
     m_button_code_source.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
