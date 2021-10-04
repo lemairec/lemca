@@ -171,8 +171,10 @@ void OptionWidget::drawPage1(){
     if(f.m_config.m_gps){
         drawButton(m_update_gps);
         drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
+    }
+    if(f.m_config.m_serial){
         drawButton(m_serial);
-        drawText("Serial", 0.4*m_width, m_serial.m_y);
+        drawText("Update Serial", 0.4*m_width, m_serial.m_y);
     }
     if(f.m_config.m_robot){
         drawButton(m_update_robot);
@@ -197,8 +199,10 @@ void OptionWidget::onMousePage1(int x, int y){
             std::string s = "xterm -e \"" + s1 + "\"";
             call(s);
         }
+    }
+    if(f.m_config.m_serial){
         if(m_serial.isActive(x, y)){
-            call(f.m_config.m_serie_run);
+            call(f.m_config.m_serie_update);
         }
     }
     if(f.m_config.m_robot){
@@ -298,6 +302,8 @@ void OptionWidget::resizePage3(){
     m_button_gps.setResize(m_width*0.3, y, m_gros_button);
     y+= inter;
     m_button_robot.setResize(m_width*0.3, y, m_gros_button);
+    y+= inter;
+    m_button_serial.setResize(m_width*0.3, y, m_gros_button);
     y = m_height*0.25;
     m_make_archive.setResize(m_width*0.6, y, m_gros_button);
     y+= inter;
@@ -311,11 +317,7 @@ void OptionWidget::resizePage3(){
 void OptionWidget::drawPage3(){
     Framework & f = Framework::Instance();
     
-    if(f.m_config.m_code_source){
-        drawButton(m_button_code_source, COLOR_CHECK);
-    } else {
-        drawButton(m_button_code_source);
-    }
+    drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
     drawText("code source", m_width*0.35, m_button_code_source.m_y);
     
     if(f.m_config.m_fullscreen){
@@ -339,6 +341,9 @@ void OptionWidget::drawPage3(){
     }
     drawText("robot", m_width*0.35, m_button_robot.m_y);
    
+    drawButtonCheck(m_button_serial, f.m_config.m_serial);
+    drawText("serial", m_width*0.35, m_button_serial.m_y);
+    
     if(f.m_config.m_code_source){
         drawButton(m_make_archive);
         drawText("make archive", m_width*0.65, m_make_archive.m_y);
@@ -369,6 +374,10 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_button_robot.isActive(x, y)){
         f.m_config.m_robot = !f.m_config.m_robot;
+        f.initOrLoadConfig();
+    }
+    if(m_button_serial.isActive(x, y)){
+        f.m_config.m_serial = !f.m_config.m_serial;
         f.initOrLoadConfig();
     }
     

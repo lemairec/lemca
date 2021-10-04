@@ -246,6 +246,13 @@ void BaseWidget::drawMyImage(QPixmap & pixmap, int x, int y, double scale, bool 
     m_painter->drawPixmap(x-w/2, y-h/2, w, h, pixmap);
 }
 
+void BaseWidget::drawButtonCheck(ButtonGui & button, bool check){
+    if(check){
+        drawButton(button, COLOR_CHECK);
+    } else {
+        drawButton(button, COLOR_OTHER);
+    }
+}
 
 void BaseWidget::drawButton(ButtonGui & button, int color){
     int x = button.m_x-button.m_rayon;

@@ -176,6 +176,7 @@ public:
     virtual void setSize(int width, int height);
     
     void drawButton(ButtonGui & button, int color = 0);
+    void drawButtonCheck(ButtonGui & button, bool check);
     void drawButtonLabel(ButtonGui & button, int color = 0);
     void drawButtonImage(ButtonGui & button, QPixmap * pixmap, double scale=1.0);
 

@@ -55,8 +55,9 @@ void MainWidget::setSize(int width, int height){
     m_buttonRobot.setResize(m_width*0.6, m_height*0.8, m_gros_gros_button);
     m_buttonExit.setResize(m_width*0.8, m_height*0.8, m_gros_gros_button);
     m_buttonWifi.setResize(m_width*0.8, m_height*0.2, m_gros_gros_button);
+    m_buttonSerial.setResize(m_width*0.8, m_height*0.5, m_gros_gros_button);
     //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
-    m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_petit_button);
+    m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_gros_gros_button);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, m_gros_button);
 }
 
@@ -137,6 +138,12 @@ void MainWidget::drawButtons(){
         drawButtonImage(m_buttonRobot, m_imgGPS);
         drawText("Robot", m_buttonRobot.m_x, m_buttonRobot.m_y+40, sizeText_medium,  true);
     }
+    if(f.m_config.m_serial){
+        drawButtonImage(m_buttonSerial, m_imgGPS);
+        drawText("Serial", m_buttonSerial.m_x, m_buttonSerial.m_y+40, sizeText_medium,  true);
+    }
+    
+    
     drawButtonImage(m_buttonWifi, m_imgWifi);
     drawButtonImage(m_buttonExit, m_imgExit);
     drawButtonImage(m_buttonOption, m_imgOption);
@@ -174,6 +181,10 @@ void MainWidget::onMouse(int x, int y){
     } else if(m_buttonRobot.isActive(x, y)){
         if(Framework::Instance().m_config.m_robot){
             call(f.m_config.m_robot_run);
+        }
+    } else if(m_buttonSerial.isActive(x, y)){
+        if(Framework::Instance().m_config.m_serial){
+            call(f.m_config.m_serie_run);
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.m_close = false;

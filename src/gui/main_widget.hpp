@@ -40,6 +40,7 @@ public:
     ButtonGui m_buttonRobot;
     ButtonGui m_buttonExit;
     ButtonGui m_buttonWifi;
+    ButtonGui m_buttonSerial;
     ButtonGui m_buttonOption;
     ButtonGui m_buttonSendMessage;
     
