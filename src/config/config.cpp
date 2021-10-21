@@ -14,8 +14,10 @@ Config::Config(){
     m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
     m_serie_run = "~/serie/build/serie";
     m_serie_update = "cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
-    m_robot_run = "~/robot/build/robot";
-    m_robot_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_robot_gps_run = "~/robot/build/robot";
+    m_robot_gps_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_robot_inrows_run = "~/inrows/build/inrows";
+    m_robot_inrows_update = "cd ~/inrows && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
     m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh && read";
     m_update_lemca = "cd ~/lemca && git pull && rm -rf build_old && mv build build_old && mkdir build && cd build && cmake .. && make -j4; read";
     
@@ -44,8 +46,10 @@ void Config::save(){
     settings.setValue("m_gps_update", QString::fromStdString(m_gps_update));
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
     settings.setValue("m_serie_update", QString::fromStdString(m_serie_update));
-    settings.setValue("m_robot_run", QString::fromStdString(m_robot_run));
-    settings.setValue("m_robot_update", QString::fromStdString(m_robot_update));
+    settings.setValue("m_robot_gps_run", QString::fromStdString(m_robot_gps_run));
+    settings.setValue("m_robot_gps_update", QString::fromStdString(m_robot_gps_update));
+    settings.setValue("m_robot_inrows_run", QString::fromStdString(m_robot_inrows_run));
+    settings.setValue("m_robot_inrows_update", QString::fromStdString(m_robot_inrows_update));
     settings.setValue("m_make_archive", QString::fromStdString(m_make_archive));
     settings.setValue("m_update_lemca", QString::fromStdString(m_update_lemca));
 }
@@ -66,7 +70,7 @@ void Config::load(){
         m_fullscreen = settings.value("m_fullscreen").toBool();
     }
     if(settings.contains("m_robot")){
-        m_robot = settings.value("m_robot").toBool();
+        m_robot = settings.value("m_robot").toInt();
     }
     if(settings.contains("m_serial")){
         m_serial = settings.value("m_serial").toBool();
@@ -106,12 +110,19 @@ void Config::load(){
         m_serie_update = settings.value("m_serie_update").toString().toUtf8().constData();
     }
     
-    if(settings.contains("m_robot_run")){
-        m_robot_run = settings.value("m_robot_run").toString().toUtf8().constData();
+    if(settings.contains("m_robot_gps_run")){
+        m_robot_gps_run = settings.value("m_robot_gps_run").toString().toUtf8().constData();
     }
     
-    if(settings.contains("m_robot_update")){
-        m_robot_update = settings.value("m_robot_update").toString().toUtf8().constData();
+    if(settings.contains("m_robot_gps_update")){
+        m_robot_gps_update = settings.value("m_robot_gps_update").toString().toUtf8().constData();
+    }
+    if(settings.contains("m_robot_inrows_update")){
+        m_robot_inrows_update = settings.value("m_robot_inrows_update").toString().toUtf8().constData();
+    }
+    
+    if(settings.contains("m_robot_inrows_run")){
+        m_robot_inrows_run = settings.value("m_robot_inrows_run").toString().toUtf8().constData();
     }
     
     if(settings.contains("m_make_archive")){

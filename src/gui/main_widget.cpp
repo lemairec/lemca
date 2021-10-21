@@ -179,8 +179,11 @@ void MainWidget::onMouse(int x, int y){
             call(f.m_config.m_gps_run);
         }
     } else if(m_buttonRobot.isActive(x, y)){
-        if(Framework::Instance().m_config.m_robot){
-            call(f.m_config.m_robot_run);
+        if(Framework::Instance().m_config.m_robot == 1){
+            call(f.m_config.m_robot_gps_run);
+        }
+        if(Framework::Instance().m_config.m_robot == 2){
+            call(f.m_config.m_robot_inrows_run);
         }
     } else if(m_buttonSerial.isActive(x, y)){
         if(Framework::Instance().m_config.m_serial){

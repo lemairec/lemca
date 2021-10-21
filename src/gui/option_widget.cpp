@@ -205,9 +205,16 @@ void OptionWidget::onMousePage1(int x, int y){
             call(f.m_config.m_serie_update);
         }
     }
-    if(f.m_config.m_robot){
+    if(f.m_config.m_robot == 1){
         if(m_update_robot.isActive(x, y)){
-            std::string s1 = f.m_config.m_robot_update;
+            std::string s1 = f.m_config.m_robot_gps_update;
+            std::string s = "xterm -e \"" + s1 + "\"";
+            call(s);
+        }
+    }
+    if(f.m_config.m_robot == 2){
+        if(m_update_robot.isActive(x, y)){
+            std::string s1 = f.m_config.m_robot_inrows_update;
             std::string s = "xterm -e \"" + s1 + "\"";
             call(s);
         }
@@ -339,7 +346,14 @@ void OptionWidget::drawPage3(){
     } else {
         drawButton(m_button_robot);
     }
-    drawText("robot", m_width*0.35, m_button_robot.m_y);
+    if(f.m_config.m_robot == 1){
+        drawText("robot gps", m_width*0.35, m_button_robot.m_y);
+    } else if(f.m_config.m_robot == 2){
+        drawText("robot inrows", m_width*0.35, m_button_robot.m_y);
+    } else {
+        drawText("robot "+ std::to_string(f.m_config.m_robot), m_width*0.35, m_button_robot.m_y);
+    }
+    
    
     drawButtonCheck(m_button_serial, f.m_config.m_serial);
     drawText("serial", m_width*0.35, m_button_serial.m_y);
@@ -373,7 +387,8 @@ void OptionWidget::onMousePage3(int x, int y){
         f.initOrLoadConfig();
     }
     if(m_button_robot.isActive(x, y)){
-        f.m_config.m_robot = !f.m_config.m_robot;
+        f.m_config.m_robot += 1;
+        f.m_config.m_robot = f.m_config.m_robot%3;
         f.initOrLoadConfig();
     }
     if(m_button_serial.isActive(x, y)){

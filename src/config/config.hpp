@@ -28,7 +28,7 @@ public:
     bool m_technicien = false;
     bool m_code_source = false;
     bool m_gps = false;
-    bool m_robot = false;
+    int m_robot = 0; //1GPS //2INROWS
     bool m_serial = false;
     
     
@@ -39,8 +39,10 @@ public:
     std::string m_gps_run;
     std::string m_gps_update;
     std::string m_make_archive;
-    std::string m_robot_run;
-    std::string m_robot_update;
+    std::string m_robot_gps_run;
+    std::string m_robot_gps_update;
+    std::string m_robot_inrows_run;
+    std::string m_robot_inrows_update;
     std::string m_serie_run;
     std::string m_serie_update;
     std::string m_update_lemca;
