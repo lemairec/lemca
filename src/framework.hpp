@@ -43,20 +43,30 @@ public:
     
     QMutex mutex;
     std::string m_command_to_execute;
+    std::string m_command_result;
+    std::string m_command_to_execute2;
+    std::string m_command_result2;
+    bool m_command_to_execute2_end;
     QWaitCondition bufferNotEmpty;
     bool m_is_f_call = false;
     
+    std::vector<std::string> m_cmd_buffer;
+    bool m_cmd_end = false;
 private:
     void readFile();
 };
 
 class Consumer : public QThread
 {
+    bool m_stop = false;
     Q_OBJECT
-public:
+
     Consumer(QObject *parent = NULL) : QThread(parent)
     {
     }
+public:
+    static Consumer & instance();
+    ~Consumer();
 
     void run() override;
 

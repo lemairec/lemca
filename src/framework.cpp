@@ -47,9 +47,27 @@ void Framework::initOrLoadConfig(){
     m_serial_port.initOrLoad(m_config);
 }
 
+Consumer & Consumer::instance(){
+    static Consumer gf;
+    return gf;
+}
+
+Consumer::~Consumer()
+{
+    m_stop = true;
+    INFO("destructor Consumer");
+}
+
+
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
 
 void Consumer::run(){
-    while(true){
+    while(!m_stop){
         Framework & f = Framework::Instance();
         if(f.m_command_to_execute.size()>0){
                 
@@ -62,7 +80,34 @@ void Consumer::run(){
             f.m_is_f_call = false;
             f.m_command_to_execute.clear();
             f.mutex.unlock();
-        } else {
+        } else if(f.m_command_to_execute2.size()>0){
+            std::array<char, 128> buffer;
+            f.mutex.lock();
+            f.m_command_result2 = "";
+            std::string cmd = f.m_command_to_execute2;
+            INFO("exec " << cmd);
+            f.mutex.unlock();
+            std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+            if (!pipe) {
+                throw std::runtime_error("popen() failed!");
+            }
+            INFO("read");
+            f.m_cmd_buffer.clear();
+            f.m_cmd_end = false;
+            while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+                INFO("result " <<buffer.data());
+                f.mutex.lock();
+                f.m_command_result2 += buffer.data();
+                
+                f.m_cmd_buffer.push_back(buffer.data());
+                f.mutex.unlock();
+            }
+            f.m_cmd_end = true;
+            INFO("end read");
+            f.m_command_to_execute2 = "";
+            
+        }
+        {
             INFO("wait");
             f.mutex.lock();
             f.bufferNotEmpty.wait(&f.mutex);
@@ -71,5 +116,6 @@ void Consumer::run(){
             
         }
     }
+    INFO("stop");
 }
 

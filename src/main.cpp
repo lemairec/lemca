@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Consumer consumer;
+    Consumer & consumer = Consumer::instance();
     consumer.start();
     //consumer.wait();
     Framework & framework = Framework::Instance();

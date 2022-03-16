@@ -34,3 +34,34 @@ sudo apt-get install libsdl2-image-dev
 
 nmcli dev wifi
                connect lemaire pzssword toto
+
+x11vnc -ssh root@139.162.182.189:5901 -forever
+
+
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
+std::string exec(const char* cmd) {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+        result += buffer.data();
+    }
+    return result;
+}
+
+14pin Tyco Ampseal
+
+
+//imu
+http://ave.dee.isep.ipp.pt/~lbf/PINSFUSION/CaDuPoVa06.pdf
+
+https://github.com/chennuo0125-HIT/imu_gps_fusion/blob/main/include/imu_gps_fusion.h

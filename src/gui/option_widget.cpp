@@ -24,6 +24,8 @@ OptionWidget::OptionWidget(){
     m_imgImuBlanc = loadImage("/images/imu_blanc.png");
     m_imgImuGris = loadImage("/images/imu_gris.png");
     
+    m_img_check_on = loadImage("/gui/check_on.png");
+    m_img_check_off = loadImage("/gui/check_off.png");
     //m_close=false;
     //m_page =5;
     //addSerials();
@@ -191,14 +193,12 @@ void OptionWidget::onMousePage1(int x, int y){
         if(f.m_config.m_code_source){
             s1 = f.m_config.m_bineuse_src_update;
         }
-        std::string s = "xterm -e \"" + s1 + "\"";
-        call(s);
+        call(s1);
     }
     if(f.m_config.m_gps){
         if(m_update_gps.isActive(x, y)){
             std::string s1 = f.m_config.m_gps_update;
-            std::string s = "xterm -e \"" + s1 + "\"";
-            call(s);
+            call(s1);
         }
     }
     if(f.m_config.m_serial){
@@ -209,15 +209,13 @@ void OptionWidget::onMousePage1(int x, int y){
     if(f.m_config.m_robot == 1){
         if(m_update_robot.isActive(x, y)){
             std::string s1 = f.m_config.m_robot_gps_update;
-            std::string s = "xterm -e \"" + s1 + "\"";
-            call(s);
+            call(s1);
         }
     }
     if(f.m_config.m_robot == 2){
         if(m_update_robot.isActive(x, y)){
             std::string s1 = f.m_config.m_robot_inrows_update;
-            std::string s = "xterm -e \"" + s1 + "\"";
-            call(s);
+            call(s1);
         }
     }
 }
@@ -402,13 +400,11 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_make_archive.isActive(x, y)){
         std::string s1 = f.m_config.m_make_archive;
-        std::string s = "xterm -e \"" + s1 + "\"";
-        call(s);
+        call(s1);
     }
     if(m_update_lemca.isActive(x, y)){
         std::string s1 = f.m_config.m_update_lemca;
-        std::string s = "xterm -e \"" + s1 + "\"";
-        call(s);
+        call(s1);
         call("/sbin/shutdown -h now");
     }
 }
@@ -485,7 +481,25 @@ void OptionWidget::addSerials(){
     
 }
 
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
+std::string execute4(std::string cmd) {
+    
+    return "";
+}
+
 void OptionWidget::call(const std::string & s){
-    INFO("call " << s);
-    system(s.c_str());
+    Framework & f = Framework::Instance();
+    f.mutex.lock();
+    f.m_command_to_execute2 = s;
+    f.bufferNotEmpty.wakeAll();
+    f.mutex.unlock();
+    
+    m_close = true;
+    MainWidget::instance()->m_cmd_widget.open();
 }

@@ -6,6 +6,7 @@
 #include "menu_widget.hpp"
 #include "base/keyboard_widget.hpp"
 #include "wifi_widget.hpp"
+#include "cmd_widget.hpp"
 
 class MainWidget : public BaseWidget {
     MainWidget();
@@ -15,6 +16,7 @@ public:
     MenuWidget m_menuWidget;
     OptionWidget m_option_widget;
     WifiWidget m_wifi_widget;
+    CmdWidget m_cmd_widget;
     
     std::vector<BaseWidget *> m_widgets;
     

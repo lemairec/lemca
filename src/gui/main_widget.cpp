@@ -35,6 +35,7 @@ MainWidget::MainWidget()
     m_widgets.push_back(&m_key_pad_widget);
     m_widgets.push_back(&m_option_widget);
     m_widgets.push_back(&m_wifi_widget);
+    m_widgets.push_back(&m_cmd_widget);
 }
 
 void MainWidget::setSize(int width, int height){
