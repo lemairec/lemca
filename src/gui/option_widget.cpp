@@ -140,6 +140,7 @@ int OptionWidget::onMouse(int x, int y){
             onMousePage6(x, y);
         }
     }
+    return 0;
 }
 
 

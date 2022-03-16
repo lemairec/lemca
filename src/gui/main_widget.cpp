@@ -163,7 +163,7 @@ int MainWidget::onMouse(int x, int y){
         auto p = m_widgets[n-i-1];
         if(!p->m_close){
             p->onMouse(x, y);
-            return;
+            return 0;
         }
     }
     
@@ -196,6 +196,7 @@ int MainWidget::onMouse(int x, int y){
     } else if(m_buttonExit.isActive(x, y)){
         call("/sbin/shutdown -h now");
     }
+    return 0;
 }
 
 void MainWidget::call(const std::string & s){

@@ -97,7 +97,7 @@ int WifiWidget::onMouse(int x, int y){
         //}
         
     }
-    
+    return 0;
     
 }
 
