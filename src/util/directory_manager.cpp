@@ -38,6 +38,7 @@ DirectoryManager::DirectoryManager(){
         ofstream myfile ("path.txt");
         if (myfile.is_open())
         {
+            std::cout << "write" << std::endl;
             myfile << ProjectBinDir2;
             myfile << std::endl;
             myfile << ProjectSourceDir2;
