@@ -2,7 +2,7 @@
 #include <QString>
 #include <QSettings>
 #include "environnement.hpp"
-#include "../logging.hpp"
+#include "../util/log.hpp"
 #include "../util/directory_manager.hpp"
 
 Config::Config(){

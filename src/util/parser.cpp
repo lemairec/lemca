@@ -1,5 +1,5 @@
 #include "parser.hpp"
-#include "../logging.hpp"
+#include "../util/log.hpp"
 #include "environnement.hpp"
 
 
@@ -102,6 +102,18 @@ void Parser::readUntilCommat(){
     }
     error();
 }
+
+char Parser::readNextCharAndCommat(){
+    if(m_tempInd+2 < m_bufferIndLast){
+        char c = m_buffer[m_tempInd];
+        m_tempInd += 2;
+        return c;
+    } else {
+        error();
+        return '*';
+    }
+}
+
 
 int Parser::getOneInt(){
     char c = m_buffer[m_tempInd];

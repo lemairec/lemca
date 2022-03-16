@@ -107,7 +107,7 @@ void OptionWidget::draw(){
     }
 }
 
-void OptionWidget::onMouse(int x, int y){
+int OptionWidget::onMouse(int x, int y){
     
     if(m_button_close.isActive(x,y)){
         m_close = true;

@@ -15,6 +15,7 @@ void DirectoryManager::readFile(){
     string line;
     ifstream myfile ("path.txt");
     int i =0;
+    std::cout << "readFile" << std::endl;
     if (myfile.is_open())
     {
       while ( getline (myfile,line) )
@@ -37,13 +38,23 @@ DirectoryManager::DirectoryManager(){
         ofstream myfile ("path.txt");
         if (myfile.is_open())
         {
-            myfile << ProjectSourceBin2;
+            myfile << ProjectBinDir2;
             myfile << std::endl;
             myfile << ProjectSourceDir2;
             myfile.close();
+            myfile.close();
+        } else {
+            m_bin_dir = ProjectBinDir2;
+            m_source_dir = ProjectSourceDir2;
+            std::cout << "not open :(" << std::endl;
+            
         }
         readFile();
     }
+    m_log_file = m_bin_dir+"/log.txt";
+    std::cout << "m_source_dir " << m_source_dir << std::endl;
+    std::cout << "m_bin_dir " << m_bin_dir << std::endl;
+    std::cout << "m_reload_dir " << m_reload_dir << std::endl;
 }
 
 const std::string & DirectoryManager::getBinDirectory(){
@@ -53,7 +64,6 @@ const std::string & DirectoryManager::getBinDirectory(){
 const std::string & DirectoryManager::getSourceDirectory(){
     return m_source_dir;
 }
-
 
 DirectoryManager::~DirectoryManager(){
     

@@ -23,14 +23,14 @@ class KeyPadWidget : public BaseWidget {
     
     void myDrawButton(ButtonGui *, QString s);
     
-    ValueGuiKeyPad * m_value = NULL;
+    ValueGui * m_value = NULL;
 public:
     void setSize(int width, int height);
     
     void draw();
-    void onMouse(int x, int y);
+    int onMouse(int x, int y);
     
-    void setValueGuiKeyPad(ValueGuiKeyPad * value){
+    void setValueGuiKeyPad(ValueGui * value){
         m_value = value;
         m_res = QString();
     }
@@ -46,6 +46,7 @@ class KeyBoardWidget : public BaseWidget {
     ButtonGui m_button_virgule;
     ButtonGui m_button_dollard;
     ButtonGui m_button_space_2;
+    ButtonGui m_button_slash;
     ButtonGui m_buttonA;
     ButtonGui m_buttonB;
     ButtonGui m_buttonC;
@@ -99,7 +100,7 @@ public:
     void setSize(int width, int height);
     
     void draw();
-    void onMouse(int x, int y);
+    int onMouse(int x, int y);
     
     void setValueGuiKeyBoard(ValueGuiKeyBoard * value){
         m_value = value;

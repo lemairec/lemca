@@ -53,20 +53,20 @@ void WifiWidget::draw(){
     m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
     
     drawButtonImage(m_button_close, m_imgClose);
-    drawButtonLabel(m_connect);
+    drawButtonLabel2(m_connect);
 
     //Framework & f = Framework::Instance();
     drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
     
-    drawSelectButtonGuiClose(m_select_wifi);
+    //drawSelectButtonGuiClose(m_select_wifi);
     
     drawValueGuiKeyBoard(m_password);
     
-    drawSelectButtonGuiOpen(m_select_wifi);
+    //drawSelectButtonGuiOpen(m_select_wifi);
         
 }
 
-void WifiWidget::onMouse(int x, int y){
+int WifiWidget::onMouse(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
@@ -91,10 +91,10 @@ void WifiWidget::onMouse(int x, int y){
         if(m_button_close.isActive(x, y)){
             m_close = false;
         }
-        if(onMouseSelectButton(m_select_wifi, x, y)){
+        //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
             //loadConfig();
-        }
+        //}
         
     }
     

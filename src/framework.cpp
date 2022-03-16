@@ -1,5 +1,4 @@
 #include "framework.hpp"
-#include "logging.hpp"
 #include "config/config.hpp"
 #include "environnement.hpp"
 #include "util/util.hpp"
@@ -17,15 +16,6 @@ std::string file_info;
 std::ofstream file_job_stream;
 std::ofstream file_debug_stream;
 std::string date_str;
-
-void makedir(std::string dir2){
-    std::string dir = DirectoryManager::Instance().getBinDirectory() + dir2;
-    std::string s2 = "mkdir -p "+ dir + ";";
-    INFO(s2);
-    if(system( s2.c_str() )){
-        WARN("can not execute : " << s2);
-    };
-}
 
 Framework::Framework(){
     QDateTime date = QDateTime::currentDateTime();

@@ -7,7 +7,7 @@
 #include <QThread>
 #include <time.h>
 #include <math.h>
-#include "logging.hpp"
+#include "util/log.hpp"
 #include "util/stat.hpp"
 #include <QWaitCondition>
 #include <QMutex>

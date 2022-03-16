@@ -1,5 +1,6 @@
 #include "include_qt.hpp"
 #include "../main_widget.hpp"
+#include "../../util/log.hpp"
 
 class MyWidget : public QWidget
 {
