@@ -7,7 +7,7 @@
 #include <chrono>
 #include <iomanip>
 
-#include "../logging.hpp"
+#include "../util/log.hpp"
 #include "environnement.hpp"
 #include "../framework.hpp"
 
@@ -155,7 +155,7 @@ void MainWidget::drawButtons(){
 }
 
 
-void MainWidget::onMouse(int x, int y){
+int MainWidget::onMouse(int x, int y){
     Framework & f = Framework::Instance();
     
     size_t n = m_widgets.size();
