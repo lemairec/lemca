@@ -89,7 +89,7 @@ int WifiWidget::onMouse(int x, int y){
             //key_board_widget.m_close = false;
         }
         if(m_button_close.isActive(x, y)){
-            m_close = false;
+            m_close = true;
         }
         //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));

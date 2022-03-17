@@ -48,11 +48,19 @@ protected:
     void creerMenu();
 
     void keyPressEvent(QKeyEvent *event){
-        if(event->key() == Qt::Key_Backspace){
-            m_my_widget->m_main_widget->m_key_board_widget.removeLetter();
-        } else{
-            INFO("tata " << event->key());
-            m_my_widget->m_main_widget->m_key_board_widget.addLetter(event->text());
+        if(!m_my_widget->m_main_widget->m_key_board_widget.m_close){
+            if(event->key() == Qt::Key_Backspace){
+                m_my_widget->m_main_widget->m_key_board_widget.removeLetter();
+            } else{
+                INFO("tata " << event->key());
+                m_my_widget->m_main_widget->m_key_board_widget.addLetter(event->text());
+            }
+        } else {
+            if(event->key() == Qt::Key_Escape){
+                exit(1);
+            } else if(event->key() == Qt::Key_Q){
+                exit(1);
+            }
         }
         
     }
