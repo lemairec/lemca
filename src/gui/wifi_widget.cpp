@@ -33,8 +33,7 @@ WifiWidget::WifiWidget(){
 void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
-    m_connect.setResize(0.25*m_width, 0.83*m_height, m_gros_button);
-    m_connect.m_label = "connect";
+    m_connect.setResizeStd(0.25*m_width, 0.83*m_height, "connect");
     
     //m_select_serial
     int x = 0.5*m_width;
