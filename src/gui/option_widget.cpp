@@ -35,12 +35,12 @@ void OptionWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
-    m_button_p1.setResize(0.1*m_width, 0.20*m_height, m_gros_button);
-    m_button_p2.setResize(0.1*m_width, 0.30*m_height, m_gros_button);
-    m_button_p3.setResize(0.1*m_width, 0.40*m_height, m_gros_button);
-    m_button_p4.setResize(0.1*m_width, 0.50*m_height, m_gros_button);
-    m_button_p5.setResize(0.1*m_width, 0.60*m_height, m_gros_button);
-    m_button_p6.setResize(0.1*m_width, 0.70*m_height, m_gros_button);
+    m_button_p1.setResize(0.95*m_width, 0.20*m_height, m_gros_button);
+    m_button_p2.setResize(0.95*m_width, 0.30*m_height, m_gros_button);
+    m_button_p3.setResize(0.95*m_width, 0.40*m_height, m_gros_button);
+    m_button_p4.setResize(0.95*m_width, 0.50*m_height, m_gros_button);
+    m_button_p5.setResize(0.95*m_width, 0.60*m_height, m_gros_button);
+    m_button_p6.setResize(0.95*m_width, 0.70*m_height, m_gros_button);
     
     resizePage1();
     resizePage2();
@@ -53,10 +53,10 @@ void OptionWidget::setSize(int width, int height){
 
 void OptionWidget::draw(){
     m_painter->setPen(m_penBlack);
-    m_painter->setBrush(m_brushWhiteAlpha);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
+    m_painter->setBrush(m_brushWhite);
+    m_painter->drawRect(0, 0, m_width, m_height);
     m_painter->setBrush(m_brushDarkGray);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.1, m_height*0.8);
+    m_painter->drawRect(m_width*0.9, 0, m_width*0.1, m_height);
     
     drawButtonImage(m_button_close, m_imgClose);
     
@@ -267,11 +267,7 @@ void OptionWidget::drawPage2(){
     myDrawButton(&m_button8, "8");
     myDrawButton(&m_button9, "9");
     
-    if(Framework::Instance().m_config.m_technicien){
-        drawButton(m_button_technicien, COLOR_CHECK);
-    } else {
-        drawButton(m_button_technicien);
-    }
+    drawButtonCheck(m_button_technicien, Framework::Instance().m_config.m_technicien);
     drawText("technicien", m_width*0.4, m_button_technicien.m_y);
 }
 
@@ -326,18 +322,10 @@ void OptionWidget::drawPage3(){
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
     drawText("code source", m_width*0.35, m_button_code_source.m_y);
     
-    if(f.m_config.m_fullscreen){
-        drawButton(m_button_full_screen, COLOR_CHECK);
-    } else {
-        drawButton(m_button_full_screen);
-    }
+    drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen);
     drawText("full screen", m_width*0.35, m_button_full_screen.m_y);
     
-    if(f.m_config.m_gps){
-        drawButton(m_button_gps, COLOR_CHECK);
-    } else {
-        drawButton(m_button_gps);
-    }
+    drawButtonCheck(m_button_gps, f.m_config.m_gps);
     drawText("gps", m_width*0.35, m_button_gps.m_y);
     
     if(f.m_config.m_robot){
