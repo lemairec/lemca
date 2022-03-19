@@ -52,6 +52,8 @@ public:
     
     std::vector<std::string> m_cmd_buffer;
     bool m_cmd_end = false;
+    
+    int m_cmd_return = 0;
 private:
     void readFile();
 };

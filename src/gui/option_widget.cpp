@@ -484,7 +484,7 @@ std::string execute4(std::string cmd) {
 void OptionWidget::call(const std::string & s){
     Framework & f = Framework::Instance();
     f.mutex.lock();
-    f.m_command_to_execute2 = s;
+    f.m_command_to_execute2 = s+" 2>&1";
     f.bufferNotEmpty.wakeAll();
     f.mutex.unlock();
     

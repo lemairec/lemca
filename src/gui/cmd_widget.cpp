@@ -36,7 +36,11 @@ void CmdWidget::draw(){
         }
     }
     if(f.m_cmd_end){
-        drawButtonLabel2(m_button_close, COLOR_VALIDATE);
+        if(f.m_cmd_return == 0){
+            drawButtonLabel2(m_button_close, COLOR_VALIDATE);
+        } else {
+            drawButtonLabel2(m_button_close, COLOR_RED);
+        }
     }
     /*
     drawButtonLabel2(m_connect);

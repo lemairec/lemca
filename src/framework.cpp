@@ -87,14 +87,14 @@ void Consumer::run(){
             std::string cmd = f.m_command_to_execute2;
             INFO("exec " << cmd);
             f.mutex.unlock();
-            std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+            FILE* pipe(popen(cmd.c_str(), "r"));
             if (!pipe) {
                 throw std::runtime_error("popen() failed!");
             }
             INFO("read");
             f.m_cmd_buffer.clear();
             f.m_cmd_end = false;
-            while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+            while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
                 INFO("result " <<buffer.data());
                 f.mutex.lock();
                 f.m_command_result2 += buffer.data();
@@ -102,6 +102,9 @@ void Consumer::run(){
                 f.m_cmd_buffer.push_back(buffer.data());
                 f.mutex.unlock();
             }
+            f.m_cmd_return = pclose(pipe);
+            INFO("returnCode " << f.m_cmd_return);
+            
             f.m_cmd_end = true;
             INFO("end read");
             f.m_command_to_execute2 = "";
