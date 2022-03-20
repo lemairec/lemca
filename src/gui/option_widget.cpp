@@ -394,7 +394,7 @@ void OptionWidget::onMousePage3(int x, int y){
     if(m_update_lemca.isActive(x, y)){
         std::string s1 = f.m_config.m_update_lemca;
         call2(s1);
-        call2("/sbin/shutdown -h now");
+        //call2("/sbin/shutdown -h now");
     }
 }
 
