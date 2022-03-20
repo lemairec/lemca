@@ -127,6 +127,7 @@ public:
     
     void open();
     void call(const std::string & s);
+    void call2(const std::string & s);
     
 };
 

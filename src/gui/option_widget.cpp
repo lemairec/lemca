@@ -392,8 +392,8 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_update_lemca.isActive(x, y)){
         std::string s1 = f.m_config.m_update_lemca;
-        call(s1);
-        //call("/sbin/shutdown -h now");
+        call2(s1);
+        call2("/sbin/shutdown -h now");
     }
 }
 
@@ -491,3 +491,11 @@ void OptionWidget::call(const std::string & s){
     m_close = true;
     MainWidget::instance()->m_cmd_widget.open();
 }
+
+
+void OptionWidget::call2(const std::string & s){
+    std::string s2 = "xterm -e \"" + s + "\"";
+    INFO("call " << s2);
+    system(s2.c_str());
+}
+
