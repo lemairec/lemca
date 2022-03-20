@@ -9,16 +9,16 @@ Config::Config(){
     m_bineuse_run = "~/bineuse/bineuse";
     m_bineuse_update = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz";
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
-    m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make -j4s";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
-    m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_serie_run = "~/serie/build/serie";
-    m_serie_update = "cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_serie_update = "cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_robot_gps_run = "~/robot/build/robot";
-    m_robot_gps_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
+    m_robot_gps_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_robot_inrows_run = "~/inrows/build/inrows";
-    m_robot_inrows_update = "cd ~/inrows && mkdir -p build && git pull && cd build && cmake .. && make -j4; read";
-    m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh && read";
+    m_robot_inrows_update = "cd ~/inrows && mkdir -p build && git pull && cd build && cmake .. && make -j4";
+    m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh";
     m_update_lemca = "cd ~/lemca && git pull && rm -rf build_new && rm -rf build_old && mkdir build_new && cd build_new && cmake .. && make -j4 && cd ~/lemca && mv build build_old && mv build_new build && echo 5 && sleep 1 && echo 4 && sleep 1 && echo 3 && sleep 1&& echo 2 && sleep 1 && echo 1 && sleep 1 && /sbin/shutdown -h now";
     
 }
