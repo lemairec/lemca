@@ -16,7 +16,7 @@ const std::string  ProjectVersion = "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MI
 const std::string  ProjectCompleteName = "@CMAKE_PROJECT_NAME@ @PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH";
 
 const std::string  ProjectSourceDir2 = "@PROJECT_SOURCE_DIR@";
-const std::string  ProjectBinDir2 = "@PROJECT_BINARY_DIR@";
+const std::string  ProjectBinDir2 = "@PROJECT_SOURCE_DIR@/build";
 
 #define CONFIG_FILE "@PROJECT_BINARY_DIR@/lemca.ini"
 #define LOG_FILE "@PROJECT_BINARY_DIR@/log.txt"
