@@ -168,6 +168,7 @@ void OptionWidget::resizePage1(){
 void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
     drawText("Update", 0.5*m_width, 0.3*m_height);
+    drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
     
     drawButton(m_update_bineuse);
     drawText("Update Bineuse", 0.4*m_width, m_update_bineuse.m_y);
