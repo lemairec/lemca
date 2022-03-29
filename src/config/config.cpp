@@ -13,7 +13,7 @@ Config::Config(){
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
     m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_serie_run = "~/serie/build/serie";
-    m_serie_update = "cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4";
+    m_serie_update = "[ ! -d ~/serie ] && git clone git@github.com:lemairec/serie.git; cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_robot_gps_run = "~/robot/build/robot";
     m_robot_gps_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_robot_inrows_run = "~/inrows/build/inrows";
