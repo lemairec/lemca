@@ -159,8 +159,8 @@ void OptionWidget::resizePage1(){
     int y = 0.3*m_height;
     int inter = 0.15*m_height;
     
-    m_update_bineuse.setResizeStd(x, y, "Update Bineuse", false, 220);
-    m_update_bineuse_usb.setResizeStd(x2, y, "Update Robot USB", false, 220);
+    m_update_bineuse.setResizeStd(x, y, "Update Bineuse Wifi", false, 220);
+    m_update_bineuse_usb.setResizeStd(x2, y, "Update Bineuse USB", false, 220);
     y+= inter;
     m_update_gps.setResizeStd(x, y, "Update GPS", false, 220);
     y+= inter;
