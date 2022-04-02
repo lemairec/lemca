@@ -6,6 +6,8 @@
 
 #include "../framework.hpp"
 
+#include <QFileDialog>
+
 #define PETIT_RAYON2 0.025
 
 OptionWidget::OptionWidget(){
@@ -152,22 +154,26 @@ int OptionWidget::onMouse(int x, int y){
 
 void OptionWidget::resizePage1(){
     //m_select_serial
-    int x = 0.3*m_width;
+    int x = 0.15*m_width;
+    int x2 = 0.55*m_width;
     int y = 0.3*m_height;
     int inter = 0.15*m_height;
     
     m_update_bineuse.setResizeStd(x, y, "Update Bineuse", false, 220);
+    m_update_bineuse_usb.setResizeStd(x2, y, "Update Robot USB", false, 220);
     y+= inter;
     m_update_gps.setResizeStd(x, y, "Update GPS", false, 220);
     y+= inter;
     m_serial.setResizeStd(x, y, "Update Serial", false, 220);
     y+= inter;
     m_update_robot.setResizeStd(x, y, "Update Robot", false, 220);
+    y+= inter;
+    
 };
 
 void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
-    drawText("Update", 0.5*m_width, 0.15*m_height);
+    drawText("Update Wifi", 0.5*m_width, 0.15*m_height);
     drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
     
     drawButtonLabel2(m_update_bineuse);
@@ -180,7 +186,8 @@ void OptionWidget::drawPage1(){
     if(f.m_config.m_robot){
         drawButtonLabel2(m_update_robot);
     }
-        
+    drawButtonLabel2(m_update_bineuse_usb);
+    
 }
 
 void OptionWidget::onMousePage1(int x, int y){
@@ -214,6 +221,17 @@ void OptionWidget::onMousePage1(int x, int y){
             std::string s1 = f.m_config.m_robot_inrows_update;
             call(s1);
         }
+    }
+    
+    if(m_update_bineuse_usb.isActive(x, y)){
+        QString fileName = QFileDialog::getOpenFileName(MainWindow::Instance_ptr(),
+            "Open Address Book", QString("/images"),
+            "Images (*.png *.jpg)");
+        
+        //RobotFrameworkV2 & framework = RobotFrameworkV2::instance();
+        //Config & config = framework.m_config;
+        //config.m_image_path = fileName.toUtf8().constData();
+        //config.save();
     }
 }
 

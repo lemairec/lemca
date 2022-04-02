@@ -43,6 +43,7 @@ public:
     virtual void draw();
     virtual int onMouse(int x, int y);
     
+    ButtonGui m_update_bineuse_usb;
     ButtonGui m_update_bineuse;
     ButtonGui m_update_gps;
     ButtonGui m_update_robot;
