@@ -93,6 +93,7 @@ void Consumer::run(){
             }
             INFO("read");
             f.m_cmd_buffer.clear();
+            f.m_cmd_buffer.push_back(cmd);
             f.m_cmd_end = false;
             while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
                 INFO("result " <<buffer.data());

@@ -43,6 +43,7 @@ void Config::save(){
     settings.setValue("m_bineuse_src_update", QString::fromStdString(m_bineuse_src_update));
     settings.setValue("m_bineuse_run", QString::fromStdString(m_bineuse_run));
     settings.setValue("m_bineuse_update", QString::fromStdString(m_bineuse_update));
+    settings.setValue("m_bineuse_update_wifi", QString::fromStdString(m_bineuse_update_wifi));
     settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
     settings.setValue("m_gps_update", QString::fromStdString(m_gps_update));
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));

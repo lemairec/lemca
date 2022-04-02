@@ -2,6 +2,7 @@
 #define OPTION_WIDGET_H
 
 #include "base/base_widget.hpp"
+#include "file_widget.hpp"
 
 class OptionWidget : public BaseWidget {
     QPixmap * m_imgClose;
@@ -18,6 +19,7 @@ class OptionWidget : public BaseWidget {
     QPixmap * m_imgOptionGris;
     QPixmap * m_imgImuBlanc;
     QPixmap * m_imgImuGris;
+    
     
     ButtonGui m_button_close;
     
@@ -36,6 +38,8 @@ class OptionWidget : public BaseWidget {
     void drawPart1(double y, double h, std::string title);
 
 public:
+    FileWidget m_file_widget;
+    
     OptionWidget();
     
     void setSize(int width, int height);

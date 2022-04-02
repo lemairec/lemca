@@ -35,6 +35,7 @@ OptionWidget::OptionWidget(){
 
 void OptionWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
+    m_file_widget.setSize(width, height);
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
     m_button_p1.setResize(0.95*m_width, 0.20*m_height, m_gros_button);
@@ -62,12 +63,7 @@ void OptionWidget::draw(){
     
     drawButtonImage(m_button_close, m_imgClose);
     
-    if(m_page == 1){
-        drawButtonImage(m_button_p1, m_imgOptionBlanc);
-        drawPage1();
-    } else {
-        drawButtonImage(m_button_p1, m_imgOptionGris);
-    }
+   
     
     if(m_page == 2){
         drawButtonImage(m_button_p2, m_imgOptionBlanc);
@@ -108,6 +104,13 @@ void OptionWidget::draw(){
         } else {
             drawButtonImage(m_button_p6, m_imgVolantGris);
         }
+    }
+    
+    if(m_page == 1){
+        drawButtonImage(m_button_p1, m_imgOptionBlanc);
+        drawPage1();
+    } else {
+        drawButtonImage(m_button_p1, m_imgOptionGris);
     }
 }
 
@@ -169,6 +172,7 @@ void OptionWidget::resizePage1(){
     m_update_robot.setResizeStd(x, y, "Update Robot", false, 220);
     y+= inter;
     
+    
 };
 
 void OptionWidget::drawPage1(){
@@ -188,6 +192,9 @@ void OptionWidget::drawPage1(){
     }
     drawButtonLabel2(m_update_bineuse_usb);
     
+    if(!m_file_widget.m_close){
+        m_file_widget.draw();
+    }
 }
 
 void OptionWidget::onMousePage1(int x, int y){
@@ -223,8 +230,18 @@ void OptionWidget::onMousePage1(int x, int y){
         }
     }
     
+    if(!m_file_widget.m_close){
+        if(m_file_widget.onMouse(x, y)){
+            std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
+            call("cp "+s+" ~/bineuse.tar.gz && "+f.m_config.m_bineuse_update);
+        } else {
+            call("echo fail; exit 1;");
+        }
+    }
+    
     if(m_update_bineuse_usb.isActive(x, y)){
-        QString fileName = QFileDialog::getOpenFileName(MainWindow::Instance_ptr(),
+        m_file_widget.open();
+        /*QString fileName = QFileDialog::getOpenFileName(MainWindow::Instance_ptr(),
             "Select a archive", QString(""),
             "");
         std::string s = fileName.toUtf8().constData();
@@ -232,7 +249,7 @@ void OptionWidget::onMousePage1(int x, int y){
             call("cp "+s+" ~/bineuse.tar.gz;"+f.m_config.m_bineuse_update);
         } else {
             call("echo fail; echo "+s+"; exit 1;");
-        }
+        }*/
         
         //RobotFrameworkV2 & framework = RobotFrameworkV2::instance();
         //Config & config = framework.m_config;
@@ -516,7 +533,7 @@ std::string execute4(std::string cmd) {
 void OptionWidget::call(const std::string & s){
     Framework & f = Framework::Instance();
     f.mutex.lock();
-    f.m_command_to_execute2 = s+" 2>&1";
+    f.m_command_to_execute2 = "'" +s+" ' 2>&1";
     f.bufferNotEmpty.wakeAll();
     f.mutex.unlock();
     
