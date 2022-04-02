@@ -36,6 +36,7 @@ public:
     std::string m_bineuse_src_update;
     std::string m_bineuse_run;
     std::string m_bineuse_update;
+    std::string m_bineuse_update_wifi;
     std::string m_gps_run;
     std::string m_gps_update;
     std::string m_make_archive;

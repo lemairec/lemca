@@ -193,7 +193,7 @@ void OptionWidget::drawPage1(){
 void OptionWidget::onMousePage1(int x, int y){
     Framework & f = Framework::Instance();
     if(m_update_bineuse.isActive(x, y)){
-        std::string s1 = f.m_config.m_bineuse_update;
+        std::string s1 = f.m_config.m_bineuse_update_wifi;
         if(f.m_config.m_code_source){
             s1 = f.m_config.m_bineuse_src_update;
         }
@@ -225,8 +225,14 @@ void OptionWidget::onMousePage1(int x, int y){
     
     if(m_update_bineuse_usb.isActive(x, y)){
         QString fileName = QFileDialog::getOpenFileName(MainWindow::Instance_ptr(),
-            "Open Address Book", QString("/images"),
-            "Images (*.png *.jpg)");
+            "Select a archive", QString(""),
+            "");
+        std::string s = fileName.toUtf8().constData();
+        if(fileName.contains("bineuse.tar.gz")) {
+            call("cp "+s+" ~/bineuse.tar.gz;"+f.m_config.m_bineuse_update);
+        } else {
+            call("echo fail; echo "+s+"; exit 1;");
+        }
         
         //RobotFrameworkV2 & framework = RobotFrameworkV2::instance();
         //Config & config = framework.m_config;

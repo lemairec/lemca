@@ -7,7 +7,8 @@
 
 Config::Config(){
     m_bineuse_run = "~/bineuse/bineuse";
-    m_bineuse_update = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && rm -rf bineuse && tar -xzvf bineuse.tar.gz";
+    m_bineuse_update = "rm -rf bineuse && tar -xzvf bineuse.tar.gz";
+    m_bineuse_update_wifi = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && "+m_bineuse_update;
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make -j4s";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
