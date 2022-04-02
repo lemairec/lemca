@@ -65,3 +65,19 @@ std::string exec(const char* cmd) {
 http://ave.dee.isep.ipp.pt/~lbf/PINSFUSION/CaDuPoVa06.pdf
 
 https://github.com/chennuo0125-HIT/imu_gps_fusion/blob/main/include/imu_gps_fusion.h
+
+export PATH=$PATH:/usr/sbin
+
+
+//autologin
+/etc/lightdm/lightdm.conf
+[Seat:*]
+autologin-user=$USER
+autologin-user-timeout=0
+
+parametre=> gestionnaire d'allim
+
+plymouth-set-default-theme
+
+
+GRUB_BACKGROUND=/home/lemca/deb10-master/logo.jpg

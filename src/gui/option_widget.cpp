@@ -153,36 +153,32 @@ int OptionWidget::onMouse(int x, int y){
 void OptionWidget::resizePage1(){
     //m_select_serial
     int x = 0.3*m_width;
-    int y = 0.4*m_height;
-    int inter = 0.1*m_height;
+    int y = 0.3*m_height;
+    int inter = 0.15*m_height;
     
-    m_update_bineuse.setResize(x, y, m_petit_button);
+    m_update_bineuse.setResizeStd(x, y, "Update Bineuse", false, 220);
     y+= inter;
-    m_update_gps.setResize(x, y, m_petit_button);
+    m_update_gps.setResizeStd(x, y, "Update GPS", false, 220);
     y+= inter;
-    m_serial.setResize(x, y, m_petit_button);
+    m_serial.setResizeStd(x, y, "Update Serial", false, 220);
     y+= inter;
-    m_update_robot.setResize(x, y, m_petit_button);
+    m_update_robot.setResizeStd(x, y, "Update Robot", false, 220);
 };
 
 void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
-    drawText("Update", 0.5*m_width, 0.3*m_height);
+    drawText("Update", 0.5*m_width, 0.15*m_height);
     drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
     
-    drawButton(m_update_bineuse);
-    drawText("Update Bineuse", 0.4*m_width, m_update_bineuse.m_y);
+    drawButtonLabel2(m_update_bineuse);
     if(f.m_config.m_gps){
-        drawButton(m_update_gps);
-        drawText("Update Gps", 0.4*m_width, m_update_gps.m_y);
+        drawButtonLabel2(m_update_gps);
     }
     if(f.m_config.m_serial){
-        drawButton(m_serial);
-        drawText("Update Serial", 0.4*m_width, m_serial.m_y);
+        drawButtonLabel2(m_serial);
     }
     if(f.m_config.m_robot){
-        drawButton(m_update_robot);
-        drawText("Update Robot", 0.4*m_width, m_update_robot.m_y);
+        drawButtonLabel2(m_update_robot);
     }
         
 }
@@ -298,22 +294,26 @@ void OptionWidget::onMousePage2(int x, int y){
 void OptionWidget::resizePage3(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
-    m_button_code_source.setResize(m_width*0.3, y, m_gros_button);
+    int x = m_width*0.2;
+    m_button_code_source.setResize(x, y, m_gros_button);
     y+= inter;
-    m_button_full_screen.setResize(m_width*0.3, y, m_gros_button);
+    m_button_full_screen.setResize(x, y, m_gros_button);
     y+= inter;
-    m_button_gps.setResize(m_width*0.3, y, m_gros_button);
+    m_button_gps.setResize(x, y, m_gros_button);
     y+= inter;
-    m_button_robot.setResize(m_width*0.3, y, m_gros_button);
+    m_button_robot.setResize(x, y, m_gros_button);
     y+= inter;
-    m_button_serial.setResize(m_width*0.3, y, m_gros_button);
+    m_button_serial.setResize(x, y, m_gros_button);
     y = m_height*0.25;
-    m_make_archive.setResize(m_width*0.6, y, m_gros_button);
+    x = m_width*0.55;
+    m_run_cmd.setResizeStd(x, y, "Run cmd", false, 220);
+    y+= inter*1.5;
+    m_make_archive.setResizeStd(x, y, "Make archive", false, 220);
     y+= inter;
+    m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
     y+= inter;
-    m_update_lemca.setResize(m_width*0.6, y, m_gros_button);
-    y+= inter;
-    m_button_exit.setResize(m_width*0.6, y, m_gros_button);
+    m_button_exit.setResizeStd(x, y, "Quitter", false, 220);
+    
     
 };
 
@@ -321,46 +321,51 @@ void OptionWidget::drawPage3(){
     Framework & f = Framework::Instance();
     
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
-    drawText("code source", m_width*0.35, m_button_code_source.m_y);
+    int x = m_width*0.25;
+    drawText("code source", x, m_button_code_source.m_y);
     
     drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen);
-    drawText("full screen", m_width*0.35, m_button_full_screen.m_y);
+    drawText("full screen", x, m_button_full_screen.m_y);
     
     drawButtonCheck(m_button_gps, f.m_config.m_gps);
-    drawText("gps", m_width*0.35, m_button_gps.m_y);
+    drawText("gps", x, m_button_gps.m_y);
     
-    if(f.m_config.m_robot){
-        drawButton(m_button_robot, COLOR_CHECK);
-    } else {
-        drawButton(m_button_robot);
-    }
+    drawButtonCheck(m_button_robot, f.m_config.m_robot);
     if(f.m_config.m_robot == 1){
-        drawText("robot gps", m_width*0.35, m_button_robot.m_y);
+        drawText("robot gps",x, m_button_robot.m_y);
     } else if(f.m_config.m_robot == 2){
-        drawText("robot inrows", m_width*0.35, m_button_robot.m_y);
+        drawText("robot inrows", x, m_button_robot.m_y);
     } else {
-        drawText("robot "+ std::to_string(f.m_config.m_robot), m_width*0.35, m_button_robot.m_y);
+        drawText("robot "+ std::to_string(f.m_config.m_robot), x, m_button_robot.m_y);
     }
     
    
     drawButtonCheck(m_button_serial, f.m_config.m_serial);
-    drawText("serial", m_width*0.35, m_button_serial.m_y);
+    drawText("serial", x, m_button_serial.m_y);
     
     if(f.m_config.m_code_source){
-        drawButton(m_make_archive);
-        drawText("make archive", m_width*0.65, m_make_archive.m_y);
-       
+        drawButtonLabel2(m_make_archive);
     }
     
-    drawButton(m_update_lemca);
-    drawText("update lemca", m_width*0.65, m_update_lemca.m_y);
-    
-    drawButton(m_button_exit);
-    drawText("quitter", m_width*0.65, m_button_exit.m_y);
+    drawButtonLabel2(m_run_cmd);
+    drawButtonLabel2(m_update_lemca);
+    drawButtonLabel2(m_button_exit);
     
 }
 
 void OptionWidget::onMousePage3(int x, int y){
+    KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
+    //Framework & f = Framework::Instance();
+    if(!key_board_widget.m_close){
+        if(key_board_widget.onMouse(x, y)){
+            std::string s1 = key_board_widget.m_res.toUtf8().constData();
+            call(s1);
+            m_close = false;
+            key_board_widget.m_res.clear();
+        };
+        return;
+    }
+    
     Framework & f = Framework::Instance();
     if(m_button_code_source.isActive(x, y)){
         f.m_config.m_code_source = !f.m_config.m_code_source;
@@ -384,6 +389,9 @@ void OptionWidget::onMousePage3(int x, int y){
         f.initOrLoadConfig();
     }
     
+    if(m_run_cmd.isActive(x, y)){
+        key_board_widget.m_close = false;
+    }
     if(m_button_exit.isActive(x, y)){
         exit(0);
     }

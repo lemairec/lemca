@@ -76,6 +76,7 @@ public:
     ButtonGui m_button_robot;
     ButtonGui m_button_serial;
     ButtonGui m_make_archive;
+    ButtonGui m_run_cmd;
     ButtonGui m_update_lemca;
     ButtonGui m_button_exit;
     
