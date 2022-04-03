@@ -4,7 +4,7 @@ project(lemca)
 # The version number.
 set (PROJECT_VERSION_MAJOR 22)
 set (PROJECT_VERSION_MINOR 04)
-set (PROJECT_VERSION_PATCH 05)
+set (PROJECT_VERSION_PATCH 04)
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/src/environnement.hpp.in"
@@ -34,8 +34,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 
 FILE(GLOB_RECURSE src_hpp src/*.hpp)
 FILE(GLOB_RECURSE src_cpp src/*.cpp)
+FILE(GLOB_RECURSE src_sh src/*.sh)
 
-set(sources ${src_hpp} ${src_cpp} ${PROJECT_BINARY_DIR}/environnement.hpp src/environnement.hpp.in README.md)
+set(sources ${src_hpp} ${src_cpp} ${src_sh} ${PROJECT_BINARY_DIR}/environnement.hpp src/environnement.hpp.in README.md)
 
 FIND_PACKAGE(Qt5Core)
 add_executable(lemca ${sources})

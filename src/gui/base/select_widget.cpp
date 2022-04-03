@@ -2,6 +2,7 @@
 //#include "../../config/langage.hpp"
 
 void SelectWidget::setSize(int width, int height){
+    BaseWidget::setSize(width, height);
     m_width = width;
     m_height = height;
     //m_close = false;
@@ -9,6 +10,7 @@ void SelectWidget::setSize(int width, int height){
 }
 
 void SelectWidget::setSizePart(int x, int y, int width, int height, int width_tot, int height_tot){
+    BaseWidget::setSize(width, height);
     m_width = width_tot;
     m_height = height_tot;
     m_width2 = width;
@@ -16,8 +18,8 @@ void SelectWidget::setSizePart(int x, int y, int width, int height, int width_to
     m_x = x;
     m_y = y;
     //m_close = false;
-    m_page_down.setResize(m_x+m_width2*0.4, m_height*0.7, m_petit_button);
-    m_page_up.setResize(m_x+m_width2*0.6, m_height*0.7, m_petit_button);
+    m_page_down.setResize(m_x+m_width2*0.35, m_height*0.7, m_petit_button);
+    m_page_up.setResize(m_x+m_width2*0.65, m_height*0.7, m_petit_button);
     m_ok.setResizeStd(m_x+m_width2*0.25, m_height*0.8, "OK", true);
     m_cancel.setResizeStd(m_x+m_width2*0.75, m_height*0.8, ("CANCEL"), true);
 }
@@ -73,13 +75,14 @@ bool SelectWidget::onMouseSelect(int x, int y){
     }
     if(m_pages_total>1){
         if(m_page_up.isActive(x,y)){
-            m_page++;
+            if(m_page+1 < m_pages_total){
+                m_page++;
+            }
         }
         if(m_page_down.isActive(x,y)){
-            m_page--;
-        }
-        if(m_page < 0){
-            m_page = 0;
+            if(m_page > 0){
+                m_page--;
+            }
         }
         
     }

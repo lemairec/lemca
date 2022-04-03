@@ -27,7 +27,7 @@ void CmdWidget::draw(){
     int x = m_width*0.08;
     int y = m_height*0.8-inter;
     Framework & f = Framework::Instance();
-    for(int i = 0; i < f.m_cmd_buffer.size(); ++i){
+    for(size_t i = 0; i < f.m_cmd_buffer.size(); ++i){
         std::string s = f.m_cmd_buffer[f.m_cmd_buffer.size()-i-1];
         drawText(s, x, y);
         y-= inter;
