@@ -12,16 +12,9 @@ Config::Config(){
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_bineuse_src_update = "cd ~/bineuse_src && mkdir -p build && git pull && cd build && cmake .. && make -j4s";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
-    m_gps_update = "cd ~/agrigpspi && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_serie_run = "~/serie/build/serie";
-    m_serie_update = "[ ! -d ~/serie ] && git clone https://github.com/lemairec/serie.git; cd ~/serie && mkdir -p build && git pull && cd build && cmake .. && make -j4";
-    m_robot_gps_run = "~/robot/build/robot";
-    m_robot_gps_update = "cd ~/robot && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_robot_inrows_run = "~/inrows/build/inrows";
-    m_robot_inrows_update = "cd ~/inrows && mkdir -p build && git pull && cd build && cmake .. && make -j4";
     m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh";
-    m_update_lemca = "cd ~/lemca && git pull && rm -rf build_new && rm -rf build_old && mkdir build_new && cd build_new && cmake .. && make -j4 && cd ~/lemca && mv build build_old && mv build_new build && echo 5 && sleep 1 && echo 4 && sleep 1 && echo 3 && sleep 1&& echo 2 && sleep 1 && echo 1 && sleep 1 && /sbin/shutdown -h now";
-    
 }
 
 void Config::save(){
@@ -45,15 +38,9 @@ void Config::save(){
     settings.setValue("m_bineuse_update", QString::fromStdString(m_bineuse_update));
     settings.setValue("m_bineuse_update_wifi", QString::fromStdString(m_bineuse_update_wifi));
     settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
-    settings.setValue("m_gps_update", QString::fromStdString(m_gps_update));
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
-    settings.setValue("m_serie_update", QString::fromStdString(m_serie_update));
-    settings.setValue("m_robot_gps_run", QString::fromStdString(m_robot_gps_run));
-    settings.setValue("m_robot_gps_update", QString::fromStdString(m_robot_gps_update));
     settings.setValue("m_robot_inrows_run", QString::fromStdString(m_robot_inrows_run));
-    settings.setValue("m_robot_inrows_update", QString::fromStdString(m_robot_inrows_update));
     settings.setValue("m_make_archive", QString::fromStdString(m_make_archive));
-    settings.setValue("m_update_lemca", QString::fromStdString(m_update_lemca));
 }
 
 void Config::load(){
@@ -98,29 +85,12 @@ void Config::load(){
         m_gps_run = settings.value("m_gps_run").toString().toUtf8().constData();
     }
     
-    if(settings.contains("m_gps_update")){
-        m_gps_update = settings.value("m_gps_update").toString().toUtf8().constData();
-    }
     
     if(settings.contains("m_serie_run")){
         m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
     }
     if(settings.contains("m_serie_run")){
         m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
-    }
-    if(settings.contains("m_serie_update")){
-        m_serie_update = settings.value("m_serie_update").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_robot_gps_run")){
-        m_robot_gps_run = settings.value("m_robot_gps_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_robot_gps_update")){
-        m_robot_gps_update = settings.value("m_robot_gps_update").toString().toUtf8().constData();
-    }
-    if(settings.contains("m_robot_inrows_update")){
-        m_robot_inrows_update = settings.value("m_robot_inrows_update").toString().toUtf8().constData();
     }
     
     if(settings.contains("m_robot_inrows_run")){
@@ -129,9 +99,5 @@ void Config::load(){
     
     if(settings.contains("m_make_archive")){
         m_make_archive = settings.value("m_make_archive").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_update_lemca")){
-        m_update_lemca = settings.value("m_update_lemca").toString().toUtf8().constData();
     }
 }

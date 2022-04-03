@@ -183,9 +183,6 @@ int MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonRobot.isActive(x, y)){
         if(Framework::Instance().m_config.m_robot == 1){
-            call(f.m_config.m_robot_gps_run);
-        }
-        if(Framework::Instance().m_config.m_robot == 2){
             call(f.m_config.m_robot_inrows_run);
         }
     } else if(m_buttonSerial.isActive(x, y)){
@@ -193,7 +190,7 @@ int MainWidget::onMouse(int x, int y){
             call(f.m_config.m_serie_run);
         }
     } else if(m_buttonOption.isActive(x, y)){
-        m_option_widget.m_close = false;
+        m_option_widget.open();
     } if(m_buttonWifi.isActive(x, y)){
         m_wifi_widget.open();
     } else if(m_buttonExit.isActive(x, y)){

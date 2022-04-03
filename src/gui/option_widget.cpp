@@ -3,7 +3,7 @@
 #include "main_widget.hpp"
 #include "environnement.hpp"
 #include "qt/main_window.hpp"
-
+#include "../util/directory_manager.hpp"
 #include "../framework.hpp"
 
 #include <QFileDialog>
@@ -208,32 +208,24 @@ void OptionWidget::onMousePage1(int x, int y){
     }
     if(f.m_config.m_gps){
         if(m_update_gps.isActive(x, y)){
-            std::string s1 = f.m_config.m_gps_update;
-            call(s1);
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/agrigpspi_update_wifi.sh");
         }
     }
     if(f.m_config.m_serial){
         if(m_serial.isActive(x, y)){
-            call(f.m_config.m_serie_update);
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
         }
     }
     if(f.m_config.m_robot == 1){
         if(m_update_robot.isActive(x, y)){
-            std::string s1 = f.m_config.m_robot_gps_update;
-            call(s1);
-        }
-    }
-    if(f.m_config.m_robot == 2){
-        if(m_update_robot.isActive(x, y)){
-            std::string s1 = f.m_config.m_robot_inrows_update;
-            call(s1);
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
         }
     }
     
     if(!m_file_widget.m_close){
         if(m_file_widget.onMouse(x, y)){
             std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
-            call("cp "+s+" ~/bineuse.tar.gz && "+f.m_config.m_bineuse_update);
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_usb.sh " + s);
         } else {
             call("echo fail; exit 1;");
         }
@@ -372,14 +364,7 @@ void OptionWidget::drawPage3(){
     drawText("gps", x, m_button_gps.m_y);
     
     drawButtonCheck(m_button_robot, f.m_config.m_robot);
-    if(f.m_config.m_robot == 1){
-        drawText("robot gps",x, m_button_robot.m_y);
-    } else if(f.m_config.m_robot == 2){
-        drawText("robot inrows", x, m_button_robot.m_y);
-    } else {
-        drawText("robot "+ std::to_string(f.m_config.m_robot), x, m_button_robot.m_y);
-    }
-    
+    drawText("robot inrows",x, m_button_robot.m_y);
    
     drawButtonCheck(m_button_serial, f.m_config.m_serial);
     drawText("serial", x, m_button_serial.m_y);
@@ -422,7 +407,7 @@ void OptionWidget::onMousePage3(int x, int y){
     }
     if(m_button_robot.isActive(x, y)){
         f.m_config.m_robot += 1;
-        f.m_config.m_robot = f.m_config.m_robot%3;
+        f.m_config.m_robot = f.m_config.m_robot%2;
         f.initOrLoadConfig();
     }
     if(m_button_serial.isActive(x, y)){
@@ -436,13 +421,14 @@ void OptionWidget::onMousePage3(int x, int y){
     if(m_button_exit.isActive(x, y)){
         exit(0);
     }
-    if(m_make_archive.isActive(x, y)){
-        std::string s1 = f.m_config.m_make_archive;
-        call(s1);
+    if(f.m_config.m_code_source){
+        if(m_make_archive.isActive(x, y)){
+            std::string s1 = f.m_config.m_make_archive;
+            call(s1);
+        }
     }
     if(m_update_lemca.isActive(x, y)){
-        std::string s1 = f.m_config.m_update_lemca;
-        call(s1);
+        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
 }
 
@@ -510,12 +496,8 @@ void OptionWidget::onMousePage4(int x, int y){
 }
 
 void OptionWidget::open(){
-    addSerials();
-}
-
-void OptionWidget::addSerials(){
-    //Framework & f = Framework::Instance();
-    
+    m_close = false;
+    m_file_widget.m_close = true;
 }
 
 #include <cstdio>

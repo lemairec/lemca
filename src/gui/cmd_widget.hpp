@@ -4,7 +4,6 @@
 #include "base/base_widget.hpp"
 
 class CmdWidget : public BaseWidget {
-    QPixmap * m_imgClose;
     ButtonGui m_button_close;
     
 public:

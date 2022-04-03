@@ -32,8 +32,6 @@ class OptionWidget : public BaseWidget {
     
     int m_page = 1;
     
-    void addSerials();
-    
     void drawPart2(double y, double h, std::string title);
     void drawPart1(double y, double h, std::string title);
 
