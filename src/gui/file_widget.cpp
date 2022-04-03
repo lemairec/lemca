@@ -48,7 +48,6 @@ int FileWidget::onMouse(int x, int y){
 
 void FileWidget::open(){
     m_close = false;
-    m_select_widget.setValueGuiKeyPad(&m_select_files);
     std::string res = execute2("ls /media/lemca/");
     std::vector<std::string> strs;
     boost::split(strs, res, boost::is_any_of("\n"));
@@ -59,4 +58,6 @@ void FileWidget::open(){
             m_select_files.addValue(s);
         }
     }
+    m_select_widget.setValueGuiKeyPad(&m_select_files);
+    
 }
