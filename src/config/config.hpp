@@ -27,6 +27,7 @@ public:
     bool m_fullscreen = true;
     bool m_technicien = false;
     bool m_code_source = false;
+    bool m_wifi = false;
     bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
@@ -34,8 +35,6 @@ public:
     
     std::string m_bineuse_src_run;
     std::string m_bineuse_run;
-    std::string m_bineuse_update;
-    std::string m_bineuse_update_wifi;
     std::string m_gps_run;
     std::string m_make_archive;
     std::string m_robot_inrows_run;

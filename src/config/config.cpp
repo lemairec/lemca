@@ -7,8 +7,6 @@
 
 Config::Config(){
     m_bineuse_run = "~/bineuse/bineuse";
-    m_bineuse_update = "rm -rf bineuse && tar -xzvf bineuse.tar.gz";
-    m_bineuse_update_wifi = "rm -rf ~/bineuse.tar.gz && wget -c https://maplaine.fr/lemca/bineuse.tar.gz && "+m_bineuse_update;
     m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
     m_serie_run = "~/serie/build/serie";
@@ -24,6 +22,7 @@ void Config::save(){
      
     
     settings.setValue("code_source", m_code_source);
+    settings.setValue("wifi", m_wifi);
     settings.setValue("m_gps", m_gps);
     settings.setValue("m_fullscreen", m_fullscreen);
     settings.setValue("m_robot", m_robot);
@@ -33,8 +32,6 @@ void Config::save(){
     
     settings.setValue("m_bineuse_src_run", QString::fromStdString(m_bineuse_src_run));
     settings.setValue("m_bineuse_run", QString::fromStdString(m_bineuse_run));
-    settings.setValue("m_bineuse_update", QString::fromStdString(m_bineuse_update));
-    settings.setValue("m_bineuse_update_wifi", QString::fromStdString(m_bineuse_update_wifi));
     settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
     settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
     settings.setValue("m_robot_inrows_run", QString::fromStdString(m_robot_inrows_run));
@@ -50,6 +47,10 @@ void Config::load(){
         m_code_source = settings.value("code_source").toBool();
         //m_code_source = settings.value("code_source").toString().toUtf8().constData();
     }
+    if(settings.contains("wifi")){
+        m_wifi = settings.value("wifi").toBool();
+    }
+    
     if(settings.contains("m_gps")){
         m_gps = settings.value("m_gps").toBool();
     }
@@ -69,10 +70,6 @@ void Config::load(){
     
     if(settings.contains("m_bineuse_run")){
         m_bineuse_run = settings.value("m_bineuse_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_bineuse_update")){
-        m_bineuse_update = settings.value("m_bineuse_update").toString().toUtf8().constData();
     }
     
     if(settings.contains("m_gps_run")){

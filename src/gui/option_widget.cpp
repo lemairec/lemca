@@ -200,11 +200,11 @@ void OptionWidget::drawPage1(){
 void OptionWidget::onMousePage1(int x, int y){
     Framework & f = Framework::Instance();
     if(m_update_bineuse.isActive(x, y)){
-        std::string s1 = f.m_config.m_bineuse_update_wifi;
         if(f.m_config.m_code_source){
             call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
+        } else {
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh");
         }
-        call(s1);
     }
     if(f.m_config.m_gps){
         if(m_update_gps.isActive(x, y)){
