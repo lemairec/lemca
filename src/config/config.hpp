@@ -2,32 +2,16 @@
 #define CONFIG_H
 
 #include <string>
-
-#define PILOT_LANGAGE_ARDUINO 0
-#define PILOT_LANGAGE_HADRIEN 1
-
-enum LissageGpsMode{
-    LissageGpsMode_None = 0,
-    LissageGpsMode_Ekf = 1
-};
-
-enum CapMode{
-    CapMode_Custom = 0,
-    CapMode_Ekf = 1,
-    CapMode_Rmc = 2
-};
-
-enum LissageImuMode{
-    LissageImuMode_None = 0,
-    LissageImuMode_Ekf = 1
-};
+#include <QString>
+#include <QSettings>
 
 class Config  {
 public:
     bool m_fullscreen = true;
     bool m_technicien = false;
     bool m_code_source = false;
-    bool m_wifi = false;
+    bool m_wifi = true;
+    bool m_usb = false;
     bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
@@ -42,8 +26,17 @@ public:
     
     Config();
     
+    void work(QSettings & settings, bool save);
+    void validate();
+    
     void save();
     void load();
+    
+    void saveLoadBool(QSettings & settings, const QString & name, bool & ref, bool save);
+    void saveLoadDouble(QSettings & settings, const QString & name, double & ref, bool save);
+    void saveLoadInt(QSettings & settings, const QString & name, int & ref, bool save);
+    void saveLoadString(QSettings & settings, const QString & name, std::string & ref, bool save);
+    template<typename T> void saveLoadEnum(QSettings & settings, const QString & name, T & ref, bool save);
 };
 
 //-500 =>

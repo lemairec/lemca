@@ -234,7 +234,7 @@ void MyQTSerialPorts::handlePilot(){
     DEBUG("begin");
     //INFO("coucou je suis ici");
     
-    if(m_pilot_langage == PILOT_LANGAGE_HADRIEN){
+    if(m_pilot_langage == 0){
         //TODOGpsFramework::Instance().m_pilotModule.handleHadrien();
         //GpsFramework::Instance().m_pilotModule.update();
     } else {

@@ -146,8 +146,9 @@ void MainWidget::drawButtons(){
         drawText("Serial", m_buttonSerial.m_x, m_buttonSerial.m_y+40, sizeText_medium,  true);
     }
     
-    
-    drawButtonImage(m_buttonWifi, m_imgWifi);
+    if(f.m_config.m_wifi){
+        drawButtonImage(m_buttonWifi, m_imgWifi);
+    }
     drawButtonImage(m_buttonExit, m_imgExit);
     drawButtonImage(m_buttonOption, m_imgOption);
     /*drawButtonImage(m_buttonMenu, m_imgMenu);
@@ -191,9 +192,15 @@ int MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.open();
-    } if(m_buttonWifi.isActive(x, y)){
-        m_wifi_widget.open();
-    } else if(m_buttonExit.isActive(x, y)){
+    }
+    
+    //Framework & f = Framework::Instance();
+    if(f.m_config.m_wifi){
+        if(m_buttonWifi.isActive(x, y)){
+            m_wifi_widget.open();
+        }
+    }
+    if(m_buttonExit.isActive(x, y)){
         call("/sbin/shutdown -h now");
     }
     return 0;

@@ -14,81 +14,97 @@ Config::Config(){
     m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh";
 }
 
+
+void Config::work(QSettings & settings, bool save){
+    saveLoadBool(settings, "code_source", m_code_source, save);
+    saveLoadBool(settings, "wifi", m_wifi, save);
+    saveLoadBool(settings, "m_gps", m_gps, save);
+    saveLoadBool(settings, "m_fullscreen", m_fullscreen, save);
+    saveLoadInt(settings, "m_robot", m_robot, save);
+    saveLoadBool(settings, "m_serial", m_serial, save);
+    
+    
+    
+    saveLoadString(settings, "m_bineuse_src_run", m_bineuse_src_run, save);
+    saveLoadString(settings, "m_bineuse_run", m_bineuse_run, save);
+    saveLoadString(settings, "m_gps_run", m_gps_run, save);
+    saveLoadString(settings, "m_serie_run", m_serie_run, save);
+    saveLoadString(settings, "m_robot_inrows_run", m_robot_inrows_run, save);
+    saveLoadString(settings, "m_make_archive", m_make_archive, save);
+}
+
+void Config::validate(){
+}
+
+/**
+ COMMON
+ */
+
 void Config::save(){
-    std::string s = CONFIG_FILE;
+    std::string s = DirectoryManager::Instance().getBinDirectory() + "/weedvision.ini";
     QString path = QString::fromStdString(s);
     QSettings settings(path, QSettings::IniFormat);
-    
-     
-    
-    settings.setValue("code_source", m_code_source);
-    settings.setValue("wifi", m_wifi);
-    settings.setValue("m_gps", m_gps);
-    settings.setValue("m_fullscreen", m_fullscreen);
-    settings.setValue("m_robot", m_robot);
-    settings.setValue("m_serial", m_serial);
-    
-    
-    
-    settings.setValue("m_bineuse_src_run", QString::fromStdString(m_bineuse_src_run));
-    settings.setValue("m_bineuse_run", QString::fromStdString(m_bineuse_run));
-    settings.setValue("m_gps_run", QString::fromStdString(m_gps_run));
-    settings.setValue("m_serie_run", QString::fromStdString(m_serie_run));
-    settings.setValue("m_robot_inrows_run", QString::fromStdString(m_robot_inrows_run));
-    settings.setValue("m_make_archive", QString::fromStdString(m_make_archive));
+
+    work(settings, true);
 }
 
 void Config::load(){
-    std::string s = CONFIG_FILE;
+    std::string s = DirectoryManager::Instance().getBinDirectory() + "/weedvision.ini";
     QString qpath = QString::fromStdString(s);
     QSettings settings(qpath, QSettings::IniFormat);
     
-    if(settings.contains("code_source")){
-        m_code_source = settings.value("code_source").toBool();
-        //m_code_source = settings.value("code_source").toString().toUtf8().constData();
-    }
-    if(settings.contains("wifi")){
-        m_wifi = settings.value("wifi").toBool();
-    }
-    
-    if(settings.contains("m_gps")){
-        m_gps = settings.value("m_gps").toBool();
-    }
-    if(settings.contains("m_fullscreen")){
-        m_fullscreen = settings.value("m_fullscreen").toBool();
-    }
-    if(settings.contains("m_robot")){
-        m_robot = settings.value("m_robot").toInt();
-    }
-    if(settings.contains("m_serial")){
-        m_serial = settings.value("m_serial").toBool();
-    }
-    
-    if(settings.contains("m_bineuse_src_run")){
-        m_bineuse_src_run = settings.value("m_bineuse_src_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_bineuse_run")){
-        m_bineuse_run = settings.value("m_bineuse_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_gps_run")){
-        m_gps_run = settings.value("m_gps_run").toString().toUtf8().constData();
-    }
-    
-    
-    if(settings.contains("m_serie_run")){
-        m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
-    }
-    if(settings.contains("m_serie_run")){
-        m_serie_run = settings.value("m_serie_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_robot_inrows_run")){
-        m_robot_inrows_run = settings.value("m_robot_inrows_run").toString().toUtf8().constData();
-    }
-    
-    if(settings.contains("m_make_archive")){
-        m_make_archive = settings.value("m_make_archive").toString().toUtf8().constData();
+    work(settings, false);
+}
+
+
+void Config::saveLoadDouble(QSettings & settings, const QString & name, double & ref, bool save){
+    if(save){
+        settings.setValue(name, ref);
+    } else {
+        if(settings.contains(name)){
+            ref = settings.value(name).toDouble();
+        }
     }
 }
+
+void Config::saveLoadInt(QSettings & settings, const QString & name, int & ref, bool save){
+    if(save){
+        settings.setValue(name, ref);
+    } else {
+        if(settings.contains(name)){
+            ref = settings.value(name).toInt();
+        }
+    }
+}
+
+void Config::saveLoadBool(QSettings & settings, const QString & name, bool & ref, bool save){
+    if(save){
+        settings.setValue(name, ref);
+    } else {
+        if(settings.contains(name)){
+            ref = settings.value(name).toBool();
+        }
+    }
+}
+
+void Config::saveLoadString(QSettings &settings, const QString &name, std::string &ref, bool save){
+    if(save){
+        QString ref2 = QString::fromStdString(ref);
+        settings.setValue(name, ref2);
+    } else {
+        if(settings.contains(name)){
+            ref = settings.value(name).toString().toUtf8().constData();
+        }
+    }
+}
+
+template<typename T> void Config::saveLoadEnum(QSettings &settings, const QString &name, T &ref, bool save){
+    if(save){
+        settings.setValue(name, ref);
+    } else {
+        if(settings.contains(name)){
+            ref = (T)settings.value(name).toInt();
+        }
+    }
+}
+
