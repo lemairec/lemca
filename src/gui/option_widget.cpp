@@ -202,7 +202,7 @@ void OptionWidget::onMousePage1(int x, int y){
     if(m_update_bineuse.isActive(x, y)){
         std::string s1 = f.m_config.m_bineuse_update_wifi;
         if(f.m_config.m_code_source){
-            s1 = f.m_config.m_bineuse_src_update;
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
         }
         call(s1);
     }
