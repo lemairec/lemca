@@ -177,20 +177,25 @@ void OptionWidget::resizePage1(){
 
 void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
-    drawText("Update Wifi", 0.5*m_width, 0.15*m_height);
     drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
     
-    drawButtonLabel2(m_update_bineuse);
-    if(f.m_config.m_gps){
-        drawButtonLabel2(m_update_gps);
+    if(f.m_config.m_wifi){
+        drawText("Update Wifi", 0.25*m_width, 0.15*m_height, sizeText_medium, true);
+        drawButtonLabel2(m_update_bineuse);
+        if(f.m_config.m_gps){
+            drawButtonLabel2(m_update_gps);
+        }
+        if(f.m_config.m_serial){
+            drawButtonLabel2(m_serial);
+        }
+        if(f.m_config.m_robot){
+            drawButtonLabel2(m_update_robot);
+        }
     }
-    if(f.m_config.m_serial){
-        drawButtonLabel2(m_serial);
+    if(f.m_config.m_usb){
+        drawText("Update USB", 0.75*m_width, 0.15*m_height, sizeText_medium, true);
+        drawButtonLabel2(m_update_bineuse_usb);
     }
-    if(f.m_config.m_robot){
-        drawButtonLabel2(m_update_robot);
-    }
-    drawButtonLabel2(m_update_bineuse_usb);
     
     if(!m_file_widget.m_close){
         m_file_widget.draw();
@@ -199,54 +204,44 @@ void OptionWidget::drawPage1(){
 
 void OptionWidget::onMousePage1(int x, int y){
     Framework & f = Framework::Instance();
-    if(m_update_bineuse.isActive(x, y)){
-        if(f.m_config.m_code_source){
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
-        } else {
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh");
+    if(f.m_config.m_wifi){
+        if(m_update_bineuse.isActive(x, y)){
+            if(f.m_config.m_code_source){
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
+            } else {
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh");
+            }
         }
-    }
-    if(f.m_config.m_gps){
-        if(m_update_gps.isActive(x, y)){
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/agrigpspi_update_wifi.sh");
+        if(f.m_config.m_gps){
+            if(m_update_gps.isActive(x, y)){
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/agrigpspi_update_wifi.sh");
+            }
         }
-    }
-    if(f.m_config.m_serial){
-        if(m_serial.isActive(x, y)){
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+        if(f.m_config.m_serial){
+            if(m_serial.isActive(x, y)){
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+            }
         }
-    }
-    if(f.m_config.m_robot == 1){
-        if(m_update_robot.isActive(x, y)){
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
-        }
-    }
-    
-    if(!m_file_widget.m_close){
-        if(m_file_widget.onMouse(x, y)){
-            std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_usb.sh " + s);
-        } else {
-            call("echo fail; exit 1;");
+        if(f.m_config.m_robot == 1){
+            if(m_update_robot.isActive(x, y)){
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
+            }
         }
     }
     
-    if(m_update_bineuse_usb.isActive(x, y)){
-        m_file_widget.open();
-        /*QString fileName = QFileDialog::getOpenFileName(MainWindow::Instance_ptr(),
-            "Select a archive", QString(""),
-            "");
-        std::string s = fileName.toUtf8().constData();
-        if(fileName.contains("bineuse.tar.gz")) {
-            call("cp "+s+" ~/bineuse.tar.gz;"+f.m_config.m_bineuse_update);
-        } else {
-            call("echo fail; echo "+s+"; exit 1;");
-        }*/
-        
-        //RobotFrameworkV2 & framework = RobotFrameworkV2::instance();
-        //Config & config = framework.m_config;
-        //config.m_image_path = fileName.toUtf8().constData();
-        //config.save();
+    
+    if(f.m_config.m_usb){
+        if(!m_file_widget.m_close){
+            if(m_file_widget.onMouse(x, y)){
+                std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
+                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_usb.sh " + s);
+            } else {
+                call("echo fail; exit 1;");
+            }
+        }
+        if(m_update_bineuse_usb.isActive(x, y)){
+            m_file_widget.open();
+        }
     }
 }
 
@@ -321,10 +316,82 @@ void OptionWidget::onMousePage2(int x, int y){
 
 
 /**
+ PAGE 3
+ */
+
+ButtonGui m_button_gps;
+ButtonGui m_button_robot;
+ButtonGui m_button_serial;
+ButtonGui m_update_lemca;
+
+
+
+void OptionWidget::resizePage3(){
+    int inter = m_width*0.07;
+    int y = m_height*0.25;
+    int x = m_width*0.2;
+    m_button_gps.setResize(x, y, m_gros_button);
+    y+= inter;
+    m_button_robot.setResize(x, y, m_gros_button);
+    y+= inter;
+    m_button_serial.setResize(x, y, m_gros_button);
+    y+= inter;
+    y+= inter;
+    m_button_wifi.setResize(x, y, m_gros_button);
+    y+= inter;
+    m_button_usb.setResize(x, y, m_gros_button);
+    y = m_height*0.25;
+    x = m_width*0.55;
+    m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
+};
+
+void OptionWidget::drawPage3(){
+    Framework & f = Framework::Instance();
+    int x = m_width*0.2;
+    
+    drawButtonCheck(m_button_gps, f.m_config.m_gps, "gps");
+    drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot inrows");
+    drawButtonCheck(m_button_serial, f.m_config.m_serial, "serial");
+    
+    drawButtonCheck(m_button_wifi, f.m_config.m_wifi, "wifi");
+    drawButtonCheck(m_button_usb, f.m_config.m_usb, "usb");
+    
+    
+    
+}
+
+void OptionWidget::onMousePage3(int x, int y){
+    
+    
+    Framework & f = Framework::Instance();
+    if(m_button_gps.isActive(x, y)){
+        f.m_config.m_gps = !f.m_config.m_gps;
+        f.initOrLoadConfig();
+    }
+    if(m_button_robot.isActive(x, y)){
+        f.m_config.m_robot += 1;
+        f.m_config.m_robot = f.m_config.m_robot%2;
+        f.initOrLoadConfig();
+    }
+    if(m_button_serial.isActive(x, y)){
+        f.m_config.m_serial = !f.m_config.m_serial;
+        f.initOrLoadConfig();
+    }
+    if(m_button_wifi.isActive(x, y)){
+        f.m_config.m_wifi = !f.m_config.m_wifi;
+        f.initOrLoadConfig();
+    }
+    if(m_button_usb.isActive(x, y)){
+        f.m_config.m_usb = !f.m_config.m_usb;
+        f.initOrLoadConfig();
+    }
+}
+
+/**
  PAGE 4
  */
 
-void OptionWidget::resizePage3(){
+void OptionWidget::resizePage4(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
     int x = m_width*0.2;
@@ -332,11 +399,7 @@ void OptionWidget::resizePage3(){
     y+= inter;
     m_button_full_screen.setResize(x, y, m_gros_button);
     y+= inter;
-    m_button_gps.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_robot.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_serial.setResize(x, y, m_gros_button);
+    
     y = m_height*0.25;
     x = m_width*0.55;
     m_run_cmd.setResizeStd(x, y, "Run cmd", false, 220);
@@ -346,28 +409,18 @@ void OptionWidget::resizePage3(){
     m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
     y+= inter;
     m_button_exit.setResizeStd(x, y, "Quitter", false, 220);
-    
-    
-};
+}
 
-void OptionWidget::drawPage3(){
+
+
+void OptionWidget::drawPage4(){
     Framework & f = Framework::Instance();
-    
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
     int x = m_width*0.25;
     drawText("code source", x, m_button_code_source.m_y);
     
     drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen);
     drawText("full screen", x, m_button_full_screen.m_y);
-    
-    drawButtonCheck(m_button_gps, f.m_config.m_gps);
-    drawText("gps", x, m_button_gps.m_y);
-    
-    drawButtonCheck(m_button_robot, f.m_config.m_robot);
-    drawText("robot inrows",x, m_button_robot.m_y);
-   
-    drawButtonCheck(m_button_serial, f.m_config.m_serial);
-    drawText("serial", x, m_button_serial.m_y);
     
     if(f.m_config.m_code_source){
         drawButtonLabel2(m_make_archive);
@@ -376,10 +429,9 @@ void OptionWidget::drawPage3(){
     drawButtonLabel2(m_run_cmd);
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_button_exit);
-    
 }
 
-void OptionWidget::onMousePage3(int x, int y){
+void OptionWidget::onMousePage4(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
@@ -401,34 +453,21 @@ void OptionWidget::onMousePage3(int x, int y){
         f.m_config.m_fullscreen = !f.m_config.m_fullscreen;
         f.initOrLoadConfig();
     }
-    if(m_button_gps.isActive(x, y)){
-        f.m_config.m_gps = !f.m_config.m_gps;
-        f.initOrLoadConfig();
-    }
-    if(m_button_robot.isActive(x, y)){
-        f.m_config.m_robot += 1;
-        f.m_config.m_robot = f.m_config.m_robot%2;
-        f.initOrLoadConfig();
-    }
-    if(m_button_serial.isActive(x, y)){
-        f.m_config.m_serial = !f.m_config.m_serial;
-        f.initOrLoadConfig();
-    }
-    
-    if(m_run_cmd.isActive(x, y)){
-        key_board_widget.m_close = false;
-    }
-    if(m_button_exit.isActive(x, y)){
-        exit(0);
-    }
     if(f.m_config.m_code_source){
         if(m_make_archive.isActive(x, y)){
             std::string s1 = f.m_config.m_make_archive;
             call(s1);
         }
     }
+    
+    if(m_run_cmd.isActive(x, y)){
+        key_board_widget.m_close = false;
+    }
     if(m_update_lemca.isActive(x, y)){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
+    }
+    if(m_button_exit.isActive(x, y)){
+        exit(0);
     }
 }
 
@@ -438,20 +477,6 @@ void OptionWidget::onMousePage3(int x, int y){
  */
 
 void OptionWidget::resizePage5(){
-    m_button_motor_inverse.setResize(0.35*m_width, 0.20*m_height, m_petit_button);
-    m_button_encoder_inverse.setResize(0.6*m_width, 0.20*m_height, m_petit_button);
-    
-    m_motor_vitesse_agressivite.setResize(0.35*m_width, 0.3*m_height, m_petit_button, "moteur agressivite ");
-    m_motor_vitesse_max.setResize(0.35*m_width, 0.35*m_height, m_petit_button, "moteur vitesse max ");
-    m_volant_pas_by_tour.setResize(0.35*m_width, 0.45*m_height, m_petit_button, "encoder pas par tour ");
-    m_volant_angle_by_tour.setResize(0.35*m_width, 0.5*m_height, m_petit_button, "roue angle par tour de volant ");
-    m_volant_derive.setResize(0.35*m_width, 0.55*m_height, m_petit_button, "rattrapage de derive ");
-    
-    m_volant_frequence.setResize(0.35*m_width, 0.65*m_height, m_petit_button, "frequence ");
-    m_virtual_point.setResize(0.35*m_width, 0.7*m_height, m_petit_button, "virtual point ");
-    
-    m_button_auto_deactive.setResize(0.35*m_width, 0.8*m_height, m_petit_button, "auto deactive ");
-    m_button_auto_active.setResize(0.35*m_width, 0.85*m_height, m_petit_button, "auto active ");
 };
 
 void OptionWidget::drawPage5(){
@@ -478,22 +503,7 @@ void OptionWidget::onMousePage6(int x, int y){
 }
 
 
-/**
- PAGE 4
- */
 
-void OptionWidget::resizePage4(){
-}
-
-
-
-void OptionWidget::drawPage4(){
-   
-}
-
-void OptionWidget::onMousePage4(int x, int y){
-    
-}
 
 void OptionWidget::open(){
     m_close = false;
@@ -507,10 +517,6 @@ void OptionWidget::open(){
 #include <string>
 #include <array>
 
-std::string execute4(std::string cmd) {
-    
-    return "";
-}
 
 void OptionWidget::call(const std::string & s){
     Framework & f = Framework::Instance();

@@ -10,28 +10,13 @@
 #define PETIT_RAYON2 0.025
 
 WifiWidget::WifiWidget(){
-    
     m_imgClose = loadImage("/gui/ok.png");
-    m_imgPlus = loadImage("/images/plus.png");
-    m_imgMinus = loadImage("/images/minus.png");
-    m_imgSatBlanc = loadImage("/images/sat_blanc.png");
-    m_imgSatGris = loadImage("/images/sat_gris.png");
-    m_imgVolantBlanc = loadImage("/images/volant_blanc.png");
-    m_imgVolantGris = loadImage("/images/volant_gris.png");
-    m_imgOutilBlanc = loadImage("/images/outil_blanc.png");
-    m_imgOutilGris = loadImage("/images/outil_gris.png");
-    m_imgOptionBlanc = loadImage("/gui/option_blanc.png");
-    m_imgOptionGris = loadImage("/gui/option_gris.png");
-    m_imgImuBlanc = loadImage("/images/imu_blanc.png");
-    m_imgImuGris = loadImage("/images/imu_gris.png");
-    
-    //m_close=false;
-    //m_page =5;
-    //addSerials();
 }
 
 void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
+    m_select_widget.setSize(width, height);
+    
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     m_connect.setResizeStd(0.25*m_width, 0.83*m_height, "connect");
     
@@ -40,16 +25,24 @@ void WifiWidget::setSize(int width, int height){
     int y = 0.4*m_height;
     int inter = 0.1*m_height;
     
-    m_select_wifi.setResize(x, y, m_petit_button);
+    m_select_wifi.setResize(x, y, "Wifi", true, width/4);
     y+=inter;
-    m_password.setResize(x+60, y);
+    m_password.setResize(x, y);
 
 };
 
+std::string m_reseau;
+
 void WifiWidget::draw(){
+    
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
+    
+    if(!m_select_widget.m_close){
+        m_select_widget.draw();
+        return;
+    }
     
     drawButtonImage(m_button_close, m_imgClose);
     drawButtonLabel2(m_connect);
@@ -57,11 +50,15 @@ void WifiWidget::draw(){
     //Framework & f = Framework::Instance();
     drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
     
-    //drawSelectButtonGuiClose(m_select_wifi);
+    drawText("Reseau", 0.25*m_width, m_select_wifi.m_y, sizeText_big);
+    drawButtonLabel2(m_select_wifi.m_buttonOpen);
     
+    if(m_select_widget.m_close){
+        m_select_wifi.setValueString(m_reseau);
+    }
+    
+    drawText("Password", 0.25*m_width, m_password.m_y, sizeText_big);
     drawValueGuiKeyBoard(m_password);
-    
-    //drawSelectButtonGuiOpen(m_select_wifi);
         
 }
 
@@ -96,6 +93,19 @@ int WifiWidget::onMouse(int x, int y){
         //}
         
     }
+    
+    if(!m_select_widget.m_close){
+        if(m_select_widget.onMouseSelect(x, y)){
+            m_reseau = m_select_widget.m_selectButton->getValueString();
+        }
+       
+        return;
+    }
+    
+    if(m_select_wifi.m_buttonOpen.isActive(x, y)){
+        m_select_widget.open();
+        m_select_widget.setValueGuiKeyPad(&m_select_wifi);
+    }
     return 0;
     
 }
@@ -107,12 +117,6 @@ void WifiWidget::open(){
     addWifis();
     m_close = false;
 }
-
-void WifiWidget::addSerials(){
-    //Framework & f = Framework::Instance();
-    
-}
-
 void WifiWidget::call(const std::string & s){
     INFO("call " << s);
     system(s.c_str());

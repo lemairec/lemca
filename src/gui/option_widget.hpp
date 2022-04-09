@@ -73,15 +73,13 @@ public:
     void drawPage2();
     
     //page3
-    ButtonGui m_button_code_source;
-    ButtonGui m_button_full_screen;
     ButtonGui m_button_gps;
     ButtonGui m_button_robot;
     ButtonGui m_button_serial;
-    ButtonGui m_make_archive;
-    ButtonGui m_run_cmd;
+    ButtonGui m_button_wifi;
+    ButtonGui m_button_usb;
+    
     ButtonGui m_update_lemca;
-    ButtonGui m_button_exit;
     
     
     void resizePage3();
@@ -89,41 +87,20 @@ public:
     void drawPage3();
     
     //page4
-    ButtonGui m_button_sens;
-    ButtonGui m_button_debug;
-    ButtonGui m_button_auto;
-    ButtonGui m_button_debug_file;
-    ButtonGui m_button_menu_vertical;
+    ButtonGui m_button_full_screen;
+     
+    ButtonGui m_make_archive;
+    ButtonGui m_button_code_source;
+    ButtonGui m_button_exit;
+    ButtonGui m_run_cmd;
     
     void resizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();
     
-    //page5
-    ButtonGui m_button_encoder_inverse;
-    ButtonGui m_button_motor_inverse;
-     
-    ValueGui m_motor_vitesse_agressivite;
-    ValueGui m_motor_vitesse_max;
-    
-    ValueGui m_volant_pas_by_tour;
-    ValueGui m_volant_angle_by_tour;
-    ValueGui m_volant_derive;
-    
-    ValueGui m_volant_frequence;
-    ValueGui m_virtual_point;
-    
-    ValueGui m_button_auto_deactive;
-    ValueGui m_button_auto_active;
-       
-    
     void resizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();
-    
-    
-    
-    //page_imu
     
     void resizePage6();
     void onMousePage6(int x, int y);

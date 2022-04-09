@@ -72,6 +72,7 @@ void MainWidget::setPainter(QPainter * p){
     m_option_widget.setPainter(p);
     m_option_widget.m_file_widget.setPainter(p);
     m_option_widget.m_file_widget.m_select_widget.setPainter(p);
+    m_wifi_widget.m_select_widget.setPainter(p);
     for(auto p2 : m_widgets){
         p2->setPainter(p);
     }
