@@ -82,6 +82,8 @@ int WifiWidget::onMouse(int x, int y){
             key_board_widget.m_close = false;
         }
         if(m_connect.isActive(x, y)){
+            call2("mcli dev wifi connect "+ m_reseau + " password " + m_password.m_text);
+            //nmcli dev wifi connect <mySSID> password <myPassword>
             //key_board_widget.m_close = false;
         }
         if(m_button_close.isActive(x, y)){
@@ -110,7 +112,16 @@ int WifiWidget::onMouse(int x, int y){
     
 }
 
-
+void WifiWidget::call2(const std::string & s){
+    Framework & f = Framework::Instance();
+    f.mutex.lock();
+    f.m_command_to_execute2 = s+" 2>&1";
+    f.bufferNotEmpty.wakeAll();
+    f.mutex.unlock();
+    
+    m_close = true;
+    MainWidget::instance()->m_cmd_widget.open();
+}
 
 
 void WifiWidget::open(){
@@ -129,19 +140,16 @@ void WifiWidget::addWifis(){
     {
         std::string res = execute2("nmcli -f SSID dev wifi");
         std::vector<std::string> strs;
-        m_select_wifi.addValue("non");
-        m_select_wifi.addValue("wif");
         std::stringstream ss(res);
         std::string item;
         std::vector<std::string> elems;
         while (std::getline(ss, item, '\n')) {
-        if(!item.empty()){
-            INFO(item);
-            if(item != "SSID"){
-                m_select_wifi.addValue(item);
+            if(!item.empty()){
+                INFO(item);
+                if(item.find("SSID") == std::string::npos){
+                    m_select_wifi.addValue(item);
+                }
             }
-        }
-        // elems.push_back(std::move(item)); // if C++11 (based on comment from @mchiasson)
         }
         
     }

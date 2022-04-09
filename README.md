@@ -69,15 +69,22 @@ https://github.com/chennuo0125-HIT/imu_gps_fusion/blob/main/include/imu_gps_fusi
 export PATH=$PATH:/usr/sbin
 
 
-//autologin
+## autologin
+
+`````
 /etc/lightdm/lightdm.conf
 [Seat:*]
 autologin-user=$USER
 autologin-user-timeout=0
+`````
 
-parametre=> gestionnaire d'allim
+## veille
+
+parametre=>gestionnaire d'allim
+
+`````
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+`````
 
 plymouth-set-default-theme
-
-
 GRUB_BACKGROUND=/home/lemca/deb10-master/logo.jpg
