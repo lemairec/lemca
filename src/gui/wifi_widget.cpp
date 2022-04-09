@@ -40,7 +40,7 @@ void WifiWidget::draw(){
     
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9);
+    m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
     
     if(!m_select_widget.m_close){
         m_select_widget.draw();

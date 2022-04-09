@@ -16,16 +16,14 @@ class MyQTNetwork : public QObject{
     Q_OBJECT
     
     QString m_host_url;
-    QString m_company;
 public:
+    bool m_is_connected = false;
     MyQTNetwork();
     
     void initOrLoad(Config & config);
     void closeAll();
     
-    void getParcelles();
-    void getParcelle(const std::string & name);
-    void saveParcelle(const std::string & name, const std::string & json);
+    void test();
 private slots:
     void handleNetwork(QNetworkReply *reply);
     void handleErrorGps(QSerialPort::SerialPortError error);

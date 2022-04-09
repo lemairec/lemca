@@ -63,7 +63,12 @@ void OptionWidget::draw(){
     
     drawButtonImage(m_button_close, m_imgClose);
     
-   
+    if(m_page == 1){
+        drawButtonImage(m_button_p1, m_imgOptionBlanc);
+        drawPage1();
+    } else {
+        drawButtonImage(m_button_p1, m_imgOptionGris);
+    }
     
     if(m_page == 2){
         drawButtonImage(m_button_p2, m_imgOptionBlanc);
@@ -83,15 +88,15 @@ void OptionWidget::draw(){
         }
         
         if(m_page == 4){
-            drawButtonImage(m_button_p4, m_imgVolantBlanc);
+            drawButtonImage(m_button_p4, m_imgOptionBlanc);
             drawPage4();
         } else {
-            drawButtonImage(m_button_p4, m_imgVolantGris);
+            drawButtonImage(m_button_p4, m_imgOptionGris);
         }
         
         //GpsFramework & f = GpsFramework::Instance();
         
-        if(m_page == 5){
+        /*if(m_page == 5){
             drawButtonImage(m_button_p5, m_imgVolantBlanc);
             drawPage5();
         } else {
@@ -103,14 +108,7 @@ void OptionWidget::draw(){
             drawPage6();
         } else {
             drawButtonImage(m_button_p6, m_imgVolantGris);
-        }
-    }
-    
-    if(m_page == 1){
-        drawButtonImage(m_button_p1, m_imgOptionBlanc);
-        drawPage1();
-    } else {
-        drawButtonImage(m_button_p1, m_imgOptionGris);
+        }*/
     }
 }
 
@@ -347,7 +345,6 @@ void OptionWidget::resizePage3(){
 
 void OptionWidget::drawPage3(){
     Framework & f = Framework::Instance();
-    int x = m_width*0.2;
     
     drawButtonCheck(m_button_gps, f.m_config.m_gps, "gps");
     drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot inrows");

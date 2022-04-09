@@ -5,7 +5,6 @@
 #include "base/select_widget.hpp"
 
 class FileWidget : public BaseWidget {
-    QPixmap * m_imgClose;
     ButtonGui m_button_close;
 public:
     SelectWidget m_select_widget;
