@@ -99,7 +99,7 @@ int WifiWidget::onMouse(int x, int y){
             m_reseau = m_select_widget.m_selectButton->getValueString();
         }
        
-        return;
+        return 0;
     }
     
     if(m_select_wifi.m_buttonOpen.isActive(x, y)){
