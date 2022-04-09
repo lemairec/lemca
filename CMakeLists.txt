@@ -4,7 +4,7 @@ project(lemca)
 # The version number.
 set (PROJECT_VERSION_MAJOR 22)
 set (PROJECT_VERSION_MINOR 04)
-set (PROJECT_VERSION_PATCH 04)
+set (PROJECT_VERSION_PATCH 05)
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/src/environnement.hpp.in"
@@ -40,7 +40,7 @@ set(sources ${src_hpp} ${src_cpp} ${src_sh} ${PROJECT_BINARY_DIR}/environnement.
 
 FIND_PACKAGE(Qt5Core)
 add_executable(lemca ${sources})
-qt5_use_modules(lemca Widgets SerialPort)
+qt5_use_modules(lemca Widgets SerialPort Network)
 
 target_link_libraries(lemca ${Boost_LIBRARIES})
 

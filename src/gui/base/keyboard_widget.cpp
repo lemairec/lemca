@@ -43,10 +43,9 @@ void KeyPadWidget::draw(){
     m_painter->setBrush(m_brushWhiteAlpha);
     m_painter->drawRoundedRect(m_x, m_height*0.1, m_width*0.3, m_height*0.8, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    QString s = "KeyPad";
-    drawQText(s, m_x+m_lg/2, 0.15*m_height, sizeText_big, true);
+    drawQText(m_title, m_x+m_lg/2, 0.15*m_height, sizeText_big, true);
     
-    s = m_res;
+    QString s = m_res;
     drawQText(s, m_x+m_lg/2, 0.25*m_height, sizeText_big, true);
 
     drawButtonLabel2(m_button1, COLOR_WHITE);

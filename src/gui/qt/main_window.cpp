@@ -16,10 +16,12 @@
 #include "environnement.hpp"
 
 void MyWidget::mouseReleaseEvent ( QMouseEvent * event ){
-    int x = event->x()-5;
-    int y = event->y()-5;
-    
-    m_main_widget->onMouse(x, y);
+    if(m_main_widget){
+        int x = event->x();
+        int y = event->y();
+        
+        m_main_widget->onMouse(x, y);
+    }
 }
 
 

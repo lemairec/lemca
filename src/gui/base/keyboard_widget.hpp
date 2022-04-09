@@ -6,6 +6,7 @@
 class KeyPadWidget : public BaseWidget {
     int m_x = 0;
     QString m_res;
+    QString m_title;
     double m_lg;
     
     ButtonGui m_button0;
@@ -40,6 +41,8 @@ public:
 
 
 class KeyBoardWidget : public BaseWidget {
+    QString m_res;
+    
     int m_x = 0;
     double m_lg;
     
@@ -93,8 +96,6 @@ class KeyBoardWidget : public BaseWidget {
     ValueGuiKeyBoard * m_value = NULL;
     bool m_maj = true;
 public:
-    QString m_res;
-    
     KeyBoardWidget();
     
     void setSize(int width, int height);
@@ -110,6 +111,14 @@ public:
     void addLetter(QString se);
     void addLetter2(QString se1, QString se2);
     void removeLetter();
+    
+    void clear(){
+        m_res.clear();
+    }
+    
+    QString getText(){
+        return m_res;
+    }
 };
 
 

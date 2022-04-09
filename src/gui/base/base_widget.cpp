@@ -70,6 +70,14 @@ void BaseWidget::setSize(int width, int height){
     m_height = height;
 }
 
+void BaseWidget::open(){
+    m_close = false;
+}
+
+bool BaseWidget::isOpen(){
+    return !m_close;
+}
+
 void BaseWidget::drawButtonImage(ButtonGui & button, QPixmap * pixmap, double scale){
     double scale2 = 0.4*scale;
     int w = pixmap->size().width()*scale2;
@@ -160,8 +168,6 @@ void BaseWidget::drawButtonLabel2(ButtonGui & button, int color){
         m_painter->setBrush(m_brushGreenButton);
     } else if(color == COLOR_FAIL){
         m_painter->setBrush(m_brushDarkGray);
-    } else if(color == COLOR_RED){
-        m_painter->setBrush(m_brushRed);
     } else if(color == COLOR_CHECK){
         m_painter->setBrush(m_brushDarkGray);
     } else if(color == COLOR_WHITE){

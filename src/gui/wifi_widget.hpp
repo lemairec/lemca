@@ -3,6 +3,7 @@
 
 #include "base/base_widget.hpp"
 #include "base/select_widget.hpp"
+#include "qt/my_qt_network.hpp"
 
 class WifiWidget : public BaseWidget {
     QPixmap * m_imgClose;
@@ -15,11 +16,14 @@ public:
     
     SelectWidget m_select_widget;
     
+    MyQTNetwork m_qt_network;
+    
     void setSize(int width, int height);
     
     virtual void draw();
     virtual int onMouse(int x, int y);
     
+    ButtonGui m_refresh;
     SelectButtonGui m_select_wifi;
     ValueGuiKeyBoard m_password;
     ButtonGui m_connect;

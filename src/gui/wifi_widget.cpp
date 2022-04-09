@@ -17,18 +17,21 @@ void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     m_select_widget.setSize(width, height);
     
-    m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
-    m_connect.setResizeStd(0.25*m_width, 0.83*m_height, "connect");
     
     //m_select_serial
-    int x = 0.5*m_width;
-    int y = 0.4*m_height;
+    int x = 0.55*m_width;
+    int y = 0.35*m_height;
     int inter = 0.1*m_height;
-    
+    m_refresh.setResizeStd(0.25*m_width, y, "refresh");
+    y+=1.5*inter;
     m_select_wifi.setResize(x, y, "Wifi", true, width/4);
     y+=inter;
     m_password.setResize(x, y);
-
+    y+=1.5*inter;
+    m_connect.setResizeStd(0.25*m_width, y, "connect");
+    y+=inter;
+    m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
+    
 };
 
 std::string m_reseau;
@@ -37,7 +40,7 @@ void WifiWidget::draw(){
     
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.8);
+    m_painter->drawRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9);
     
     if(!m_select_widget.m_close){
         m_select_widget.draw();
@@ -46,7 +49,16 @@ void WifiWidget::draw(){
     
     drawButtonImage(m_button_close, m_imgClose);
     drawButtonLabel2(m_connect);
+    drawButtonLabel2(m_refresh);
+    if(m_qt_network.m_is_connected){
+        m_painter->setPen(Qt::darkGreen);
+        drawText("Connected", 0.55*m_width, m_refresh.m_y, sizeText_big);
+    } else {
+        m_painter->setPen(Qt::red);
+        drawText("Not connected", 0.55*m_width, m_refresh.m_y, sizeText_big);
+    }
 
+    m_painter->setPen(m_penBlack);
     //Framework & f = Framework::Instance();
     drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
     
@@ -67,7 +79,8 @@ int WifiWidget::onMouse(int x, int y){
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
         key_board_widget.onMouse(x, y);
-        m_password.m_text = key_board_widget.m_res.toUtf8().constData();
+        std::string password = key_board_widget.getText().toUtf8().constData();
+        m_password.m_text = password;
         if(key_board_widget.m_close){
             /*QString s2 = key_board_widget.m_res;
             s2 += "\r\n";
@@ -102,6 +115,9 @@ int WifiWidget::onMouse(int x, int y){
             m_select_widget.open();
             m_select_widget.setValueGuiKeyPad(&m_select_wifi);
         }
+        if(m_refresh.isActive(x, y)){
+            m_qt_network.test();
+        }
         //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
             //loadConfig();
@@ -127,6 +143,7 @@ void WifiWidget::call2(const std::string & s){
 
 
 void WifiWidget::open(){
+    m_qt_network.test();
     addWifis();
     m_close = false;
 }

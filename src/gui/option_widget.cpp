@@ -436,10 +436,10 @@ void OptionWidget::onMousePage4(int x, int y){
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
         if(key_board_widget.onMouse(x, y)){
-            std::string s1 = key_board_widget.m_res.toUtf8().constData();
+            std::string s1 = key_board_widget.getText().toUtf8().constData();
             call(s1);
             m_close = false;
-            key_board_widget.m_res.clear();
+            key_board_widget.clear();
         };
         return;
     }
