@@ -3,6 +3,7 @@
 
 #include "base/base_widget.hpp"
 #include "file_widget.hpp"
+#include "qt/my_qt_network.hpp"
 
 class OptionWidget : public BaseWidget {
     QPixmap * m_imgClose;
@@ -98,6 +99,8 @@ public:
     void onMousePage4(int x, int y);
     void drawPage4();
     
+    MyQTNetwork * m_qt_network;
+    ButtonGui m_refresh;
     void resizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();

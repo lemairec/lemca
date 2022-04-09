@@ -12,19 +12,33 @@
 
 QT_USE_NAMESPACE
 
+
 class MyQTNetwork : public QObject{
     Q_OBJECT
     
     QString m_host_url;
-public:
-    bool m_is_connected = false;
+    
     MyQTNetwork();
+   
+    
+public:
+    static MyQTNetwork * Instance_ptr();
+    
+    bool m_is_connected = false;
     
     void initOrLoad(Config & config);
     void closeAll();
     
     void test();
+    void test_camera();
+    
+    QString m_camera_30_url;
+    bool m_camera_30_connected = false;
+    QString m_camera_31_url;
+    bool m_camera_31_connected = false;
+    
 private slots:
+    
     void handleNetwork(QNetworkReply *reply);
     void handleErrorGps(QSerialPort::SerialPortError error);
 };

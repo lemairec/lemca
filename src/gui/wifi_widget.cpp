@@ -9,7 +9,9 @@
 
 #define PETIT_RAYON2 0.025
 
-WifiWidget::WifiWidget(){
+WifiWidget::WifiWidget()
+:m_qt_network(MyQTNetwork::Instance_ptr())
+{
     m_imgClose = loadImage("/gui/ok.png");
 }
 
@@ -50,7 +52,7 @@ void WifiWidget::draw(){
     drawButtonImage(m_button_close, m_imgClose);
     drawButtonLabel2(m_connect);
     drawButtonLabel2(m_refresh);
-    if(m_qt_network.m_is_connected){
+    if(m_qt_network->m_is_connected){
         m_painter->setPen(Qt::darkGreen);
         drawText("Connected", 0.55*m_width, m_refresh.m_y, sizeText_big);
     } else {
@@ -116,7 +118,7 @@ int WifiWidget::onMouse(int x, int y){
             m_select_widget.setValueGuiKeyPad(&m_select_wifi);
         }
         if(m_refresh.isActive(x, y)){
-            m_qt_network.test();
+            m_qt_network->test();
         }
         //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
@@ -143,7 +145,7 @@ void WifiWidget::call2(const std::string & s){
 
 
 void WifiWidget::open(){
-    m_qt_network.test();
+    m_qt_network->test();
     addWifis();
     m_close = false;
 }

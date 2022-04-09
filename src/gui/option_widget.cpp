@@ -10,7 +10,9 @@
 
 #define PETIT_RAYON2 0.025
 
-OptionWidget::OptionWidget(){
+OptionWidget::OptionWidget()
+:m_qt_network(MyQTNetwork::Instance_ptr())
+{
     
     m_imgClose = loadImage("/gui/ok.png");
     m_imgPlus = loadImage("/images/plus.png");
@@ -96,14 +98,14 @@ void OptionWidget::draw(){
         
         //GpsFramework & f = GpsFramework::Instance();
         
-        /*if(m_page == 5){
-            drawButtonImage(m_button_p5, m_imgVolantBlanc);
+        if(m_page == 5){
+            drawButtonImage(m_button_p5, m_imgOptionBlanc);
             drawPage5();
         } else {
-            drawButtonImage(m_button_p5, m_imgVolantGris);
+            drawButtonImage(m_button_p5, m_imgOptionGris);
         }
         
-        if(m_page == 6){
+        /*if(m_page == 6){
             drawButtonImage(m_button_p6, m_imgVolantBlanc);
             drawPage6();
         } else {
@@ -474,14 +476,37 @@ void OptionWidget::onMousePage4(int x, int y){
  */
 
 void OptionWidget::resizePage5(){
+    int x = m_width*0.3;
+    int y = m_height*0.2;
+    m_refresh.setResizeStd(x, y, "Refresh", false, 220);
+    
+    
 };
 
 void OptionWidget::drawPage5(){
+    drawButtonLabel2(m_refresh);
     
+    int x = m_width*0.3;
+    if(m_qt_network->m_camera_30_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("192.168.1.30", x, m_height*0.3, sizeText_big);
+    
+    if(m_qt_network->m_camera_31_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("192.168.1.31", x, m_height*0.4, sizeText_big);
+    m_painter->setPen(m_penBlack);
 }
 
 void OptionWidget::onMousePage5(int x, int y){
-    
+    if(m_refresh.isActive(x, y)){
+        m_qt_network->test_camera();;
+    }
 }
 
 

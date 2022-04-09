@@ -16,7 +16,7 @@ public:
     
     SelectWidget m_select_widget;
     
-    MyQTNetwork m_qt_network;
+    MyQTNetwork * m_qt_network;
     
     void setSize(int width, int height);
     
