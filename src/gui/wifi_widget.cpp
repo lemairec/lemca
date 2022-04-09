@@ -82,12 +82,25 @@ int WifiWidget::onMouse(int x, int y){
             key_board_widget.m_close = false;
         }
         if(m_connect.isActive(x, y)){
-            call2("mcli dev wifi connect "+ m_reseau + " password " + m_password.m_text);
+            call2("nmcli dev wifi connect "+ m_reseau + " password " + m_password.m_text);
             //nmcli dev wifi connect <mySSID> password <myPassword>
             //key_board_widget.m_close = false;
         }
         if(m_button_close.isActive(x, y)){
             m_close = true;
+        }
+        
+        if(!m_select_widget.m_close){
+            if(m_select_widget.onMouseSelect(x, y)){
+                m_reseau = m_select_widget.m_selectButton->getValueString();
+            }
+           
+            return 0;
+        }
+        
+        if(m_select_wifi.m_buttonOpen.isActive(x, y)){
+            m_select_widget.open();
+            m_select_widget.setValueGuiKeyPad(&m_select_wifi);
         }
         //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
@@ -96,19 +109,8 @@ int WifiWidget::onMouse(int x, int y){
         
     }
     
-    if(!m_select_widget.m_close){
-        if(m_select_widget.onMouseSelect(x, y)){
-            m_reseau = m_select_widget.m_selectButton->getValueString();
-        }
-       
-        return 0;
-    }
-    
-    if(m_select_wifi.m_buttonOpen.isActive(x, y)){
-        m_select_widget.open();
-        m_select_widget.setValueGuiKeyPad(&m_select_wifi);
-    }
     return 0;
+    
     
 }
 
