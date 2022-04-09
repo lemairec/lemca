@@ -252,33 +252,33 @@ void OptionWidget::onMousePage1(int x, int y){
 
 void OptionWidget::resizePage2(){
     int inter = m_width*0.08;
-    int x = m_width*0.5;
+    int x =  m_width*0.5;
     int rayon = m_gros_button;
-    ///usr/bin/python /home/lemca/lemca/lemca.py
-    int y = m_height*0.5- inter;
-    m_button7.setResize(x-inter, y, rayon);
-    m_button8.setResize(x, y, rayon);
-    m_button9.setResize(x+inter, y, rayon);
+    int y_begin = m_height*0.4;
     
-    y = m_height*0.5;
-    m_button4.setResize(x-inter, y, rayon);
-    m_button5.setResize(x, y, rayon);
-    m_button6.setResize(x+inter, y, rayon);
+    int y = y_begin - inter;
+    m_button7.setResizeStd(x-inter, y, "7", true, 2*rayon, 2*rayon);
+    m_button8.setResizeStd(x, y, "8", true, 2*rayon, 2*rayon);
+    m_button9.setResizeStd(x+inter, y, "9", true, 2*rayon, 2*rayon);
     
-    y = m_height*0.5 + inter;
-    m_button1.setResize(x-inter, y, rayon);
-    m_button2.setResize(x, y, rayon);
-    m_button3.setResize(x+inter, y, rayon);
+    y = y_begin;
+    m_button4.setResizeStd(x-inter, y, "4", true, 2*rayon, 2*rayon);
+    m_button5.setResizeStd(x, y, "5", true, 2*rayon, 2*rayon);
+    m_button6.setResizeStd(x+inter, y, "6", true, 2*rayon, 2*rayon);
     
-    y = m_height*0.5 + 2*inter;
+    y = y_begin + inter;
+    m_button1.setResizeStd(x-inter, y, "1", true, 2*rayon, 2*rayon);
+    m_button2.setResizeStd(x, y, "2", true, 2*rayon, 2*rayon);
+    m_button3.setResizeStd(x+inter, y, "3", true, 2*rayon, 2*rayon);
+    
+    y = y_begin + 3*inter;
     m_button_technicien.setResize(m_width*0.3, y, rayon);
     
     
 }
 
 void OptionWidget::myDrawButton(ButtonGui * b, QString s){
-    drawButton(*b);
-    drawQText(s, b->m_x, b->m_y, sizeText_medium, true);
+    drawButtonLabel2(*b, COLOR_WHITE);
 }
 
 void OptionWidget::drawPage2(){
