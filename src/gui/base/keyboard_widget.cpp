@@ -179,7 +179,7 @@ void KeyBoardWidget::setSize(int width, int height){
 }
 
 KeyBoardWidget::KeyBoardWidget(){
-    m_close = false;
+    //m_close = false;
 }
 
 
