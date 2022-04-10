@@ -46,10 +46,6 @@ class KeyBoardWidget : public BaseWidget {
     int m_x = 0;
     double m_lg;
     
-    ButtonGui m_button_virgule;
-    ButtonGui m_button_dollard;
-    ButtonGui m_button_space_2;
-    ButtonGui m_button_slash;
     ButtonGui m_buttonA;
     ButtonGui m_buttonB;
     ButtonGui m_buttonC;
@@ -77,19 +73,20 @@ class KeyBoardWidget : public BaseWidget {
     ButtonGui m_buttonY;
     ButtonGui m_buttonZ;
     ButtonGui m_button0;
-    ButtonGui m_button1;
-    ButtonGui m_button2;
-    ButtonGui m_button3;
-    ButtonGui m_button4;
-    ButtonGui m_button5;
-    ButtonGui m_button6;
-    ButtonGui m_button7;
-    ButtonGui m_button8;
-    ButtonGui m_button9;
+    ButtonGui m_button1_et;
+    ButtonGui m_button2_home;
+    ButtonGui m_button3_virgule;
+    ButtonGui m_button4_dollard;
+    ButtonGui m_button5_slash;
+    ButtonGui m_button6_tiret;
+    ButtonGui m_button7_point_virgule;
+    ButtonGui m_button8_tiret_bas;
+    ButtonGui m_button9_tiret_bas;
     ButtonGui m_buttonSpace;
     ButtonGui m_button_ok;
     ButtonGui m_button_cancel;
     ButtonGui m_button_maj;
+    ButtonGui m_button_remove;
     
     void myDrawButton(ButtonGui *, QString s);
     
