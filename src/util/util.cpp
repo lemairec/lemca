@@ -3,7 +3,7 @@
 #include <math.h>
 
 std::string execute2(std::string cmd){
-    std::string file = DirectoryManager::Instance().getBinDirectory() + "/tmp_cmd";
+    std::string file = DirectoryManager::Instance().getDataDirectory() + "/tmp_cmd";
     std::string cmd2 = cmd + " > " + file;
     system(cmd2.c_str());
     std::ifstream infile(file);
@@ -12,14 +12,7 @@ std::string execute2(std::string cmd){
     std::string res = strStream.str();
     return res;
 };
-void makedir(std::string dir2){
-    std::string dir = DirectoryManager::Instance().getBinDirectory() + dir2;
-    std::string s2 = "mkdir -p "+ dir + ";";
-    INFO(s2);
-    if(system( s2.c_str() )){
-        WARN("can not execute : " << s2);
-    };
-}
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -87,16 +80,6 @@ double angleBetweenPI2(double a){
     }
     return angle;
 }
-
-void removedir(std::string dir2){
-    std::string dir = DirectoryManager::Instance().getBinDirectory() + dir2;
-    std::string s2 = "rm -rf "+ dir + ";";
-    INFO(s2);
-    if(system( s2.c_str() )){
-        WARN("can not execute : " << s2);
-    };
-}
-
 
 #include <codecvt>
 #include <string>

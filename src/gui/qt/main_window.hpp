@@ -34,7 +34,7 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = 0);
     
 public:
-    static MainWindow * Instance_ptr();
+    static MainWindow * instance();
     MyWidget * m_my_widget;
 
     ~MainWindow();
@@ -77,5 +77,6 @@ public slots:
     void onTimerSlot();
     
     void openFile();
-
+    void quitFullScreen();
+    
 };

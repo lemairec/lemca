@@ -397,7 +397,9 @@ void OptionWidget::resizePage4(){
     m_button_code_source.setResize(x, y, m_gros_button);
     y+= inter;
     m_button_full_screen.setResize(x, y, m_gros_button);
-    y+= inter;
+    y+= inter*1.5;
+    m_clear_data.setResizeStd(m_width*0.15, y, "Clear Data", false, 220);
+   
     
     y = m_height*0.25;
     x = m_width*0.55;
@@ -407,7 +409,7 @@ void OptionWidget::resizePage4(){
     y+= inter;
     m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
     y+= inter;
-    m_button_exit.setResizeStd(x, y, "Quitter", false, 220);
+    m_quit_full_screen.setResizeStd(x, y, "Quit FullScreen", false, 220);
 }
 
 
@@ -427,7 +429,8 @@ void OptionWidget::drawPage4(){
     
     drawButtonLabel2(m_run_cmd);
     drawButtonLabel2(m_update_lemca);
-    drawButtonLabel2(m_button_exit);
+    drawButtonLabel2(m_clear_data);
+    drawButtonLabel2(m_quit_full_screen);
 }
 
 void OptionWidget::onMousePage4(int x, int y){
@@ -465,8 +468,11 @@ void OptionWidget::onMousePage4(int x, int y){
     if(m_update_lemca.isActive(x, y)){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
-    if(m_button_exit.isActive(x, y)){
-        exit(0);
+    if(m_quit_full_screen.isActive(x, y)){
+        MainWindow::instance()->quitFullScreen();
+    }
+    if(m_clear_data.isActive(x, y)){
+        DirectoryManager::Instance().clearAll();
     }
 }
 

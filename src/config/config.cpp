@@ -41,7 +41,7 @@ void Config::validate(){
  */
 
 void Config::save(){
-    std::string s = DirectoryManager::Instance().getBinDirectory() + "/lemca.ini";
+    std::string s = DirectoryManager::Instance().m_config_file;
     QString path = QString::fromStdString(s);
     QSettings settings(path, QSettings::IniFormat);
 
@@ -49,7 +49,7 @@ void Config::save(){
 }
 
 void Config::load(){
-    std::string s = DirectoryManager::Instance().getBinDirectory() + "/lemca.ini";
+    std::string s = DirectoryManager::Instance().m_config_file;
     QString qpath = QString::fromStdString(s);
     QSettings settings(qpath, QSettings::IniFormat);
     

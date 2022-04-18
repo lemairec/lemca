@@ -3,13 +3,16 @@
 #include "environnement.hpp"
 #include "directory_manager.hpp"
 #include <iostream>
+#include <cerrno>
 
 LogFile::LogFile(std::string path, Level levelMin)
    :ILogger(levelMin)
-   ,m_logFile(path, std::ios::out | std::ios::trunc)
 {
+    m_logFile.open(path);
    if(m_logFile.fail()){
-      LOG(Warning, "File fail " << path);
+       std::cerr << "open failure as expected: " << strerror(errno) << std::endl;
+       std::cerr << "Warning File fail " << path << std::endl;
+       exit(1);
    }
 }
 

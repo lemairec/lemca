@@ -75,6 +75,7 @@ public:
     virtual bool isOpen();
     
     void drawButton(ButtonGui & button, int color = 0);
+    void drawButtonCarre(ButtonGui & button, int color = 0);
     void drawButtonCheck(ButtonGui & button, bool check, const std::string & s);
     void drawButtonCheck(ButtonGui & button, bool check);
     void drawButtonLabel2(ButtonGui & button, int color = 0);

@@ -183,8 +183,8 @@ KeyBoardWidget::KeyBoardWidget(){
 }
 
 
-void KeyBoardWidget::myDrawButton(ButtonGui * b, QString s){
-    drawButton(*b);
+void KeyBoardWidget::myDrawButton(ButtonGui * b, QString s, int color){
+    drawButtonCarre(*b, color);
     drawQText(s, b->m_x, b->m_y, sizeText_medium, true);
 }
 
@@ -283,8 +283,8 @@ void KeyBoardWidget::draw(){
     }
 
     
-    myDrawButton(&m_button_ok, "ok");
-    myDrawButton(&m_button_cancel, "cancel");
+    myDrawButton(&m_button_ok, "ok", COLOR_VALIDATE);
+    myDrawButton(&m_button_cancel, "cancel", COLOR_CANCEL);
 }
 
 void KeyBoardWidget::addLetter(QString se){

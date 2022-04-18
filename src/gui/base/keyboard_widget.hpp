@@ -88,7 +88,7 @@ class KeyBoardWidget : public BaseWidget {
     ButtonGui m_button_maj;
     ButtonGui m_button_remove;
     
-    void myDrawButton(ButtonGui *, QString s);
+    void myDrawButton(ButtonGui *, QString s, int color = COLOR_OTHER);
     
     ValueGuiKeyBoard * m_value = NULL;
     bool m_maj = true;

@@ -160,6 +160,24 @@ void BaseWidget::drawButton(ButtonGui & button, int color){
 #endif
 }
 
+void BaseWidget::drawButtonCarre(ButtonGui & button, int color){
+    m_painter->setPen(m_penBlack);
+    if(color == COLOR_RED){
+        m_painter->setBrush(QBrush(QColor(255, 0, 0)));
+    } else if(color == COLOR_VALIDATE){
+        m_painter->setBrush(m_brushGreenButton);
+    } else if(color == COLOR_CANCEL){
+        m_painter->setBrush(m_brushDarkGray);
+    }
+    m_painter->drawRoundedRect(button.m_x-button.m_rayon , button.m_y-button.m_rayon, button.m_rayon*2, button.m_rayon*2, 5, 5);
+    
+    
+#ifdef DEBUG_GUI
+    m_painter->drawEllipse(button.m_x-10, button.m_y-10, 20, 20);
+    m_painter->drawEllipse(button.m_x, button.m_y, 1, 1);
+#endif
+}
+
 void BaseWidget::drawButtonLabel2(ButtonGui & button, int color){
     m_painter->setPen(m_penBlack);
     if(color == COLOR_CANCEL){

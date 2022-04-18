@@ -28,7 +28,7 @@ void MyWidget::mouseReleaseEvent ( QMouseEvent * event ){
 
 
 
-MainWindow * MainWindow::Instance_ptr(){
+MainWindow * MainWindow::instance(){
     static MainWindow gf;
     return &gf;
 }
@@ -82,6 +82,10 @@ void MainWindow::setupUi(){
     
     //showMaximized();
     DEBUG("end");
+}
+
+void MainWindow::quitFullScreen(){
+    showNormal();
 }
 
 //debug

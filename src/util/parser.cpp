@@ -106,12 +106,17 @@ void Parser::readUntilCommat(){
 char Parser::readNextCharAndCommat(){
     if(m_tempInd+2 < m_bufferIndLast){
         char c = m_buffer[m_tempInd];
-        m_tempInd += 2;
-        return c;
-    } else {
-        error();
-        return '*';
+        m_tempInd++;
+        char c2 = m_buffer[m_tempInd];
+        m_tempInd++;
+        if(c2 == ','){
+            return c;
+        } else {
+            WARN("'" << c2 << "'");
+        }
     }
+    error();
+    return '*';
 }
 
 

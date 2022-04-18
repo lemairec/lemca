@@ -7,17 +7,26 @@ class DirectoryManager {
     DirectoryManager();
     void readFile();
     
-    std::string m_bin_dir;
+    void init();
+    
+    std::string m_home;
+    std::string m_file_path;
+    std::string m_data_dir;
     std::string m_source_dir;
-    std::string m_reload_dir;
 public:
     static DirectoryManager & Instance();
     ~DirectoryManager();
     
     std::string m_log_file;
+    std::string m_config_file;
     
-    const std::string & getBinDirectory();
+    const std::string & getDataDirectory();
     const std::string & getSourceDirectory();
+    
+    
+    void makeRelativeDir(std::string dir2);
+    void removeRelativeDir(std::string dir2);
+    void clearAll();
 };
 
 #endif //UTIL_H
