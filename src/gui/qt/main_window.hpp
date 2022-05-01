@@ -36,8 +36,7 @@ class MainWindow : public QMainWindow
 public:
     static MainWindow * instance();
     MyWidget * m_my_widget;
-    QWebEngineView * m_view;
-    
+
     ~MainWindow();
     
     void test();
@@ -80,5 +79,4 @@ public slots:
     void openFile();
     void quitFullScreen();
     
-    void openNav(QString url);
 };

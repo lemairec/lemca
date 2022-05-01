@@ -9,4 +9,3 @@
 #include <QGraphicsTextItem>
 #include <QMouseEvent>
 #include <QGraphicsPixmapItem>
-#include <QWebEngineView.h>
