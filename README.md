@@ -82,6 +82,12 @@ autologin-user-timeout=0
 
 florence
 
+## run cmd
+
+``````
+echo <password> | sudo -S <command>
+``````
+
 ## veille
 
 parametre=>gestionnaire d'allim
