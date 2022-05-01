@@ -518,10 +518,10 @@ void OptionWidget::onMousePage5(int x, int y){
         m_qt_network->test_camera();;
     }
     if(m_camera30.isActive(x, y)){
-        call("firefox http://192.168.1.30 && florence &&");
+        call("florence & firefox http://192.168.1.30");
     }
     if(m_camera31.isActive(x, y)){
-        call("firefox http://192.168.1.31 && florence &&");
+        call("florence & firefox http://192.168.1.31");
     }
 }
 
