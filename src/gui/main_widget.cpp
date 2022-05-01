@@ -10,6 +10,7 @@
 #include "../util/log.hpp"
 #include "environnement.hpp"
 #include "../framework.hpp"
+#include "qt/main_window.hpp"
 
 
 #define MY_WIDTH 800
@@ -192,6 +193,7 @@ int MainWidget::onMouse(int x, int y){
             call(f.m_config.m_serie_run);
         }
     } else if(m_buttonOption.isActive(x, y)){
+        MainWindow::instance()->openNav("http://www.google.com");
         m_option_widget.open();
     }
     

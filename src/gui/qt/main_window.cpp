@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_timer = new QTimer(this);
     m_timer->start(200);
     
-
+    m_view = new QWebEngineView();
     
     
     connect(m_timer, SIGNAL(timeout()), this, SLOT(onTimerSlot()));
@@ -139,3 +139,9 @@ void MainWindow::openFile(){
     DEBUG("end");*/
 }
 
+void MainWindow::openNav(QString url){
+    QUrl url2("http://www.google.com");
+    m_view->load(url);
+    
+    m_view->show();
+}
