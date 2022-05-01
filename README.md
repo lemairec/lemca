@@ -78,6 +78,10 @@ autologin-user=$USER
 autologin-user-timeout=0
 `````
 
+## clavier
+
+florence
+
 ## veille
 
 parametre=>gestionnaire d'allim
@@ -88,3 +92,5 @@ systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 plymouth-set-default-theme
 GRUB_BACKGROUND=/home/lemca/deb10-master/logo.jpg
+
+

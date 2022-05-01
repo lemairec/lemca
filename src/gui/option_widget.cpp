@@ -485,7 +485,9 @@ void OptionWidget::resizePage5(){
     int x = m_width*0.3;
     int y = m_height*0.2;
     m_refresh.setResizeStd(x, y, "Refresh", false, 220);
-    
+    x = m_width*0.2;
+    m_camera30.setResize(x, m_height*0.4, "Refresh", m_gros_button);
+    m_camera31.setResize(x, m_height*0.5, "Refresh", m_gros_button);
     
 };
 
@@ -498,20 +500,28 @@ void OptionWidget::drawPage5(){
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("192.168.1.30", x, m_height*0.3, sizeText_big);
+    drawText("192.168.1.30", x, m_height*0.4, sizeText_big);
+    drawButtonImage(m_camera30, m_imgOptionGris);
     
     if(m_qt_network->m_camera_31_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("192.168.1.31", x, m_height*0.4, sizeText_big);
+    drawText("192.168.1.31", x, m_height*0.5, sizeText_big);
+    drawButtonImage(m_camera31, m_imgOptionGris);
     m_painter->setPen(m_penBlack);
 }
 
 void OptionWidget::onMousePage5(int x, int y){
     if(m_refresh.isActive(x, y)){
         m_qt_network->test_camera();;
+    }
+    if(m_camera30.isActive(x, y)){
+        call("firefox http://192.168.1.30 && florence &&");
+    }
+    if(m_camera31.isActive(x, y)){
+        call("firefox http://192.168.1.31 && florence &&");
     }
 }
 

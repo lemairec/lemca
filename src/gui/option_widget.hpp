@@ -102,6 +102,11 @@ public:
     
     MyQTNetwork * m_qt_network;
     ButtonGui m_refresh;
+    
+    
+    ButtonGui m_camera30;
+    ButtonGui m_camera31;
+    
     void resizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();
