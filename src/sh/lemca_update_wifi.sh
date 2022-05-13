@@ -2,6 +2,7 @@
 set -e
 
 cd ~/lemca
+git reset --hard
 git pull
 rm -rf build_new
 rm -rf build_old
