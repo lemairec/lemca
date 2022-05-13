@@ -12,3 +12,4 @@ apt-get install -y curl
 apt-get install -y vim
 apt-get install -y florence
 apt-get install -y qtmultimedia5-dev
+apt-get install -y libqt5multimedia5-plugins
