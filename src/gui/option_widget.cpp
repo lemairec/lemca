@@ -466,7 +466,7 @@ void OptionWidget::onMousePage4(int x, int y){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
     if(m_update_deps.isActive(x, y)){
-        call("echo lemca | sudo -S sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh");
+        call("echo lemca | su -S sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh");
     }
     if(m_quit_full_screen.isActive(x, y)){
         MainWindow::instance()->quitFullScreen();
