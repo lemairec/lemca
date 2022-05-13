@@ -319,11 +319,6 @@ void OptionWidget::onMousePage2(int x, int y){
  PAGE 3
  */
 
-ButtonGui m_button_gps;
-ButtonGui m_button_robot;
-ButtonGui m_button_serial;
-ButtonGui m_update_lemca;
-
 
 
 void OptionWidget::resizePage3(){
@@ -342,7 +337,6 @@ void OptionWidget::resizePage3(){
     m_button_usb.setResize(x, y, m_gros_button);
     y = m_height*0.25;
     x = m_width*0.55;
-    m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
 };
 
 void OptionWidget::drawPage3(){
@@ -400,6 +394,8 @@ void OptionWidget::resizePage4(){
     y+= inter*1.5;
     m_clear_data.setResizeStd(m_width*0.15, y, "Clear Data", false, 220);
    
+    y+= inter;
+    m_update_deps.setResizeStd(m_width*0.15, y, "Install dep", false, 220);
     
     y = m_height*0.25;
     x = m_width*0.55;
@@ -429,6 +425,7 @@ void OptionWidget::drawPage4(){
     
     drawButtonLabel2(m_run_cmd);
     drawButtonLabel2(m_update_lemca);
+    drawButtonLabel2(m_update_deps);
     drawButtonLabel2(m_clear_data);
     drawButtonLabel2(m_quit_full_screen);
 }
@@ -467,6 +464,9 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_update_lemca.isActive(x, y)){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
+    }
+    if(m_update_deps.isActive(x, y)){
+        call("echo lmca | sudo -S sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
     if(m_quit_full_screen.isActive(x, y)){
         MainWindow::instance()->quitFullScreen();

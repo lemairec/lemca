@@ -81,6 +81,7 @@ public:
     ButtonGui m_button_usb;
     
     ButtonGui m_update_lemca;
+    ButtonGui m_update_deps;
     
     
     void resizePage3();
