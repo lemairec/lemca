@@ -7,5 +7,5 @@ wget -c https://maplaine.fr/lemca/bineuse.tar.gz -O ~/bineuse.tar.gz
 
 echo  "**** telechargement ok"
 rm -rf bineuse
-tar -xzvf bineuse.tar.g
+tar -xzvf bineuse.tar.gz
 
