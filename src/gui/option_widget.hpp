@@ -107,6 +107,7 @@ public:
     
     ButtonGui m_camera30;
     ButtonGui m_camera31;
+    ButtonGui m_reseau;
     
     void resizePage5();
     void onMousePage5(int x, int y);

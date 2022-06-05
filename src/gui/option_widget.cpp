@@ -484,11 +484,11 @@ void OptionWidget::onMousePage4(int x, int y){
 void OptionWidget::resizePage5(){
     int x = m_width*0.3;
     int y = m_height*0.2;
-    m_refresh.setResizeStd(x, y, "Refresh", false, 220);
+    m_refresh.setResizeStd(x, y, "Refresh", false);
     x = m_width*0.2;
     m_camera30.setResize(x, m_height*0.4, "Refresh", m_gros_button);
     m_camera31.setResize(x, m_height*0.5, "Refresh", m_gros_button);
-    
+    m_reseau.setResizeStd(m_width*0.3, m_height*0.7, "Reseau");
 };
 
 void OptionWidget::drawPage5(){
@@ -510,7 +510,8 @@ void OptionWidget::drawPage5(){
     }
     drawText("192.168.1.31", x, m_height*0.5, sizeText_big);
     drawButtonImage(m_camera31, m_imgOptionGris);
-    m_painter->setPen(m_penBlack);
+    
+    drawButtonLabel2(m_reseau);
 }
 
 void OptionWidget::onMousePage5(int x, int y){
@@ -522,6 +523,9 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_camera31.isActive(x, y)){
         call("florence & firefox http://192.168.1.31");
+    }
+    if(m_reseau.isActive(x, y)){
+        call("nmap 192.168.1.0/24");
     }
 }
 
