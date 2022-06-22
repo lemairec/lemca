@@ -121,6 +121,8 @@ FILE * popen2(std::string command, std::string type, int & pid)
     return fdopen(fd[WRITE], "w");
 }
 
+#include <sys/wait.h>
+
 int pclose2(FILE * fp, pid_t pid)
 {
     int stat;
