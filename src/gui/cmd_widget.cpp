@@ -11,9 +11,11 @@ CmdWidget::CmdWidget(){
 
 void CmdWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
-    m_button_close.setResizeStd(0.5*m_width, 0.9*m_height, "OK", true);
-
+    m_button_close.setResizeStd(0.6*m_width, 0.9*m_height, "OK", true);
+    m_button_interrupt.setResizeStd(0.4*m_width, 0.9*m_height, "CANCEL", true);
 };
+
+
 
 void CmdWidget::draw(){
     m_painter->setPen(m_penBlack);
@@ -42,26 +44,27 @@ void CmdWidget::draw(){
             drawButtonLabel2(m_button_close, COLOR_RED);
         }
     }
-    /*
-    drawButtonLabel2(m_connect);
-
-    //
-    drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
-    
-    //drawSelectButtonGuiClose(m_select_wifi);
-    
-    drawValueGuiKeyBoard(m_password);
-    
-    //drawSelectButtonGuiOpen(m_select_wifi);*/
-        
+    drawButtonLabel2(m_button_interrupt, COLOR_OTHER);
 }
 
 int CmdWidget::onMouse(int x, int y){
-    if(m_button_close.isActive(x, y)){
-        Framework & f = Framework::Instance();
-        if(f.m_cmd_end){
-            m_close = true;
+    Framework & f = Framework::Instance();
+    INFO("onmouse");
+    if(f.m_cmd_end){
+        if(m_button_close.isActive(x, y)){
+            Framework & f = Framework::Instance();
+            if(f.m_cmd_end){
+                m_close = true;
+            }
         }
+    }
+    if(m_button_interrupt.isActive(x, y)){
+        std::string s = "kill " + std::to_string(f.m_cmd_pid);
+        f.m_cmd_buffer.push_back("****");
+        f.m_cmd_buffer.push_back(s);
+        f.m_cmd_buffer.push_back("****");
+        system(s.c_str());
+        //kill(f.m_cmd_process);
     }
     return 0;
     

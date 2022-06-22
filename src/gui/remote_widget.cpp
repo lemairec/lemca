@@ -73,7 +73,8 @@ int RemoteWidget::onMouse(int x, int y){
         int i = rand() % 9 + 1;
         //x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:5901
         std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(i);
-        call2("echo toto; sleep 10; echo toto");
+        //call2("echo toto; sleep 5; echo 1; sleep 5; echo 2; sleep 5; echo 3");
+        call2(s);
     }
     
     return 0;

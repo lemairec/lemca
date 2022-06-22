@@ -5,7 +5,7 @@
 
 class CmdWidget : public BaseWidget {
     ButtonGui m_button_close;
-    
+    ButtonGui m_button_interrupt;
 public:
     bool m_button_ok = false;
     
