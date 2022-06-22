@@ -36,7 +36,7 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
-    m_button_interrupt.setResizeStd(0.5*m_width, y, "Ouvrir la connection", true, width/4);
+    m_button_interrupt.setResizeStd(0.5*m_width, y, "Fermer la connection", true, width/4);
     
 };
 
@@ -52,7 +52,6 @@ void RemoteWidget::draw(){
         //Framework & f = Framework::Instance();
         drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-        drawButtonImage(m_button_close, m_imgClose);
         if(m_qt_network->m_is_connected){
             m_painter->setPen(Qt::darkGreen);
             drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
@@ -65,14 +64,15 @@ void RemoteWidget::draw(){
 
         drawButtonLabel2(m_button_open_connection);
     } else {
-        drawText("Connectée", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        drawText("Connecté", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
         drawText("numero de session : ", 0.5*m_width, 0.4*m_height, sizeText_big, true);
-        drawText("lemca_"+std::to_string(m_session), 0.5*m_width, 0.5*m_height, sizeText_big, true);
+        drawText(f.m_session_str, 0.5*m_width, 0.5*m_height, sizeText_big, true);
         
         drawButtonLabel2(m_button_interrupt, COLOR_OTHER);
+
     }
-        
+    drawButtonImage(m_button_close, m_imgClose);
 }
 
 int RemoteWidget::onMouse(int x, int y){
@@ -87,22 +87,32 @@ int RemoteWidget::onMouse(int x, int y){
         
             
         if(m_button_open_connection.isActive(x, y)){
-            m_session = rand() % 9 + 1;
-            INFO(m_session);
+            if(f.m_session == 0){
+                f.m_session = rand() % 4 + 1;
+                INFO(f.m_session);
+                f.m_session_str = "lemca_"+std::to_string(f.m_session);
+            }
             //x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:5901
-            std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(m_session);
+            std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(f.m_session);
             call2(s);
             m_page = 2;
         }
     } else {
         if(m_button_interrupt.isActive(x, y)){
             std::string s = "kill " + std::to_string(f.m_cmd_pid);
+            INFO("kill");
+            INFO(s);
+            Framework & f = Framework::Instance();
             f.m_cmd_buffer.push_back("****");
             f.m_cmd_buffer.push_back(s);
             f.m_cmd_buffer.push_back("****");
             kill(f.m_cmd_pid, SIGTERM);
             //kill(f.m_cmd_process);
         }
+    }
+    
+    if(m_button_close.isActive(x, y)){
+        m_close = true;
     }
     
     return 0;
@@ -112,6 +122,7 @@ int RemoteWidget::onMouse(int x, int y){
 
 void RemoteWidget::call2(const std::string & s){
     Framework & f = Framework::Instance();
+    
     f.mutex.lock();
     f.m_command_to_execute2 = s;
     f.bufferNotEmpty.wakeAll();

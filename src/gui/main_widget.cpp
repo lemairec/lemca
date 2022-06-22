@@ -107,6 +107,10 @@ void MainWidget::draw_force(){
         drawText("code source", 0.1*m_width, 0.4*m_height);
     }
     
+    if(f.m_session){
+        drawText("session : "+f.m_session_str, 0.15*m_width, 0.4*m_height);
+    }
+    
     for(auto p : m_widgets){
         if(!p->m_close){
             p->draw();

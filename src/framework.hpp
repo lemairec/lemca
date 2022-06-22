@@ -41,6 +41,9 @@ public:
     
     MyQTSerialPorts m_serial_port;
     
+    int m_session;
+    std::string m_session_str;
+    
     QMutex mutex;
     std::string m_command_to_execute;
     std::string m_command_result;

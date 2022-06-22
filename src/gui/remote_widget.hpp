@@ -31,7 +31,6 @@ public:
     ButtonGui m_control_panel;
     
     int m_page = 1;
-    int m_session = 0;
     void resizePage1();
     void onMousePage1(int x, int y);
     void drawPage1();

@@ -183,10 +183,14 @@ void Consumer::run(){
                 memset(&command_out, 0, sizeof(command_out));
             }
 
+            INFO("end");
             
             f.m_cmd_return = pclose2(fp, pid);
+            INFO("end2");
             f.m_cmd_end = true;
             f.m_cmd_pid = 0;
+            f.m_session = 0;
+            f.m_session_str = "";
         }
         {
             INFO("wait");
