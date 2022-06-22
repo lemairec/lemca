@@ -48,7 +48,7 @@ void RemoteWidget::draw(){
     
     Framework & f = Framework::Instance();
     
-    if(f.m_cmd_pid == 0){
+    if(f.m_session == 0){
         //Framework & f = Framework::Instance();
         drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
@@ -84,7 +84,7 @@ int RemoteWidget::onMouse(int x, int y){
     //Framework & f = Framework::Instance();
     
     Framework & f = Framework::Instance();
-    if(f.m_cmd_pid == 0){
+    if(f.m_session == 0){
         if(m_control_panel.isActive(x, y)){
             m_control_b = !m_control_b;
         }

@@ -209,8 +209,6 @@ void Consumer::run(){
             INFO("end2");
             f.m_cmd_end = true;
             f.m_cmd_pid = 0;
-            f.m_session = 0;
-            f.m_session_str = "";
         }
         {
             INFO("wait");
