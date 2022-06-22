@@ -36,8 +36,6 @@ void WifiWidget::setSize(int width, int height){
     
 };
 
-std::string m_reseau;
-
 void WifiWidget::draw(){
     
     m_painter->setPen(m_penBlack);

@@ -29,8 +29,10 @@ MainWidget::MainWidget()
     m_imgExit = loadImage("/gui/off.png");
     m_imgOption = loadImage("/gui/option_gris_gros.png");
     m_imgWifi = loadImage("/gui/wifi.png");
+    m_img_remote = loadImage("/gui/reseau.png");
 
     //m_widgets.push_back(&m_satWidget);
+    m_widgets.push_back(&m_remote_widget);
     m_widgets.push_back(&m_menuWidget);
     m_widgets.push_back(&m_key_pad_widget);
     m_widgets.push_back(&m_option_widget);
@@ -56,6 +58,7 @@ void MainWidget::setSize(int width, int height){
     m_buttonRobot.setResize(m_width*0.6, m_height*0.8, m_gros_gros_button);
     m_buttonExit.setResize(m_width*0.8, m_height*0.8, m_gros_gros_button);
     m_buttonWifi.setResize(m_width*0.8, m_height*0.2, m_gros_gros_button);
+    m_button_remote.setResize(m_width*0.6, m_height*0.2, m_gros_gros_button);
     m_buttonSerial.setResize(m_width*0.8, m_height*0.5, m_gros_gros_button);
     //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
     m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_gros_gros_button);
@@ -149,6 +152,7 @@ void MainWidget::drawButtons(){
     
     if(f.m_config.m_wifi){
         drawButtonImage(m_buttonWifi, m_imgWifi);
+        drawButtonImage(m_button_remote, m_img_remote);
     }
     drawButtonImage(m_buttonExit, m_imgExit);
     drawButtonImage(m_buttonOption, m_imgOption);
@@ -193,12 +197,15 @@ int MainWidget::onMouse(int x, int y){
         }
     } else if(m_buttonOption.isActive(x, y)){
         m_option_widget.open();
-    }
+    } 
     
     //Framework & f = Framework::Instance();
     if(f.m_config.m_wifi){
         if(m_buttonWifi.isActive(x, y)){
             m_wifi_widget.open();
+        }
+        if(m_button_remote.isActive(x, y)){
+            m_remote_widget.open();
         }
     }
     if(m_buttonExit.isActive(x, y)){

@@ -3,6 +3,7 @@
 
 #include "base/base_widget.hpp"
 #include "option_widget.hpp"
+#include "remote_widget.hpp"
 #include "menu_widget.hpp"
 #include "base/keyboard_widget.hpp"
 #include "wifi_widget.hpp"
@@ -16,6 +17,7 @@ public:
     MenuWidget m_menuWidget;
     OptionWidget m_option_widget;
     WifiWidget m_wifi_widget;
+    RemoteWidget m_remote_widget;
     CmdWidget m_cmd_widget;
     
     std::vector<BaseWidget *> m_widgets;
@@ -35,6 +37,7 @@ public:
     QPixmap * m_imgExit;
     QPixmap * m_imgOption;
     QPixmap * m_imgWifi;
+    QPixmap * m_img_remote;
     
     
     ButtonGui m_buttonBineuse;
@@ -42,6 +45,7 @@ public:
     ButtonGui m_buttonRobot;
     ButtonGui m_buttonExit;
     ButtonGui m_buttonWifi;
+    ButtonGui m_button_remote;
     ButtonGui m_buttonSerial;
     ButtonGui m_buttonOption;
     ButtonGui m_buttonSendMessage;
