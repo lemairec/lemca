@@ -76,11 +76,15 @@ void RemoteConsumer::run(){
     if(f.m_session){
         f.m_session_str = "lemca_"+std::to_string(f.m_session);
         std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(f.m_session);
+        INFO("session");
+        INFO(s);
         //s = "ping google.com";
         system(s.c_str());
     } else if(f.m_config.m_port_remote){
         f.m_session_str = "port_"+std::to_string(f.m_config.m_port_remote);
-        std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:"+std::to_string(f.m_config.m_port_remote);
+        std::string s = "x11vnc -forever -ssh debian@remote.lemcavision.com:"+std::to_string(f.m_config.m_port_remote);
+        INFO("port");
+        INFO(s);
         //s = "ping google.com";
         system(s.c_str());
     }
