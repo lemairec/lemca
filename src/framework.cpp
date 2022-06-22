@@ -3,6 +3,7 @@
 #include "environnement.hpp"
 #include "util/util.hpp"
 #include "util/directory_manager.hpp"
+#include "gui/qt/my_qt_network.hpp"
 
 #include <QDateTime>
 #include <math.h>
@@ -74,6 +75,12 @@ RemoteConsumer::~RemoteConsumer()
 void RemoteConsumer::run(){
     Framework & f = Framework::Instance();
     while(true){
+        MyQTNetwork *q = MyQTNetwork::Instance_ptr();
+        q->test();
+        if(!q->m_is_connected){
+            mySleep(2000);
+            continue;
+        }
         if(f.m_session){
             f.m_session_str = "lemca_"+std::to_string(f.m_session);
             std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(f.m_session);
