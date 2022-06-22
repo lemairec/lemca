@@ -59,6 +59,26 @@ Consumer::~Consumer()
     }
 
 
+RemoteConsumer & RemoteConsumer::instance(){
+    static RemoteConsumer gf;
+    return gf;
+}
+
+RemoteConsumer::~RemoteConsumer()
+{
+    m_stop = true;
+    INFO("destructor Consumer");
+}
+
+
+void RemoteConsumer::run(){
+    Framework & f = Framework::Instance();
+    std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(f.m_session);
+    system(s.c_str());
+}
+
+
+
 #include <cstdio>
 #include <iostream>
 #include <memory>

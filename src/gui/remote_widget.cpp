@@ -75,6 +75,10 @@ void RemoteWidget::draw(){
     drawButtonImage(m_button_close, m_imgClose);
 }
 
+
+
+
+
 int RemoteWidget::onMouse(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
     //Framework & f = Framework::Instance();
@@ -92,9 +96,9 @@ int RemoteWidget::onMouse(int x, int y){
                 INFO(f.m_session);
                 f.m_session_str = "lemca_"+std::to_string(f.m_session);
             }
-            //x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:5901
-            std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(f.m_session);
-            call2(s);
+            RemoteConsumer & consumer = RemoteConsumer::instance();
+            consumer.start();
+            
             m_page = 2;
         }
     } else {

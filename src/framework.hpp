@@ -82,5 +82,19 @@ signals:
     void stringConsumed(const QString &text);
 };
 
+class RemoteConsumer : public QThread
+{
+    bool m_stop = false;
+    Q_OBJECT
+
+    RemoteConsumer(QObject *parent = NULL) : QThread(parent)
+    {
+    }
+public:
+    static RemoteConsumer & instance();
+    ~RemoteConsumer();
+
+    void run() override;
+};
 
 #endif // GPS_FRAMEWORK_H
