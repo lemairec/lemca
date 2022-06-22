@@ -25,7 +25,7 @@ void RemoteWidget::setSize(int width, int height){
     
     
     //m_select_serial
-    int x = 0.55*m_width;
+    //int x = 0.55*m_width;
     int y = 0.35*m_height;
     int inter = 0.1*m_height;
     y+=1.5*inter;
@@ -80,7 +80,7 @@ void RemoteWidget::draw(){
 
 
 int RemoteWidget::onMouse(int x, int y){
-    KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
+    //KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     
     Framework & f = Framework::Instance();

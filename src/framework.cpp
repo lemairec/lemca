@@ -82,7 +82,7 @@ void RemoteConsumer::run(){
         system(s.c_str());
     } else if(f.m_config.m_port_remote){
         f.m_session_str = "port_"+std::to_string(f.m_config.m_port_remote);
-        std::string s = "x11vnc -forever -ssh debian@remote.lemcavision.com:"+std::to_string(f.m_config.m_port_remote);
+        std::string s = "x11vnc -forever -ssh debian@51.38.190.75:"+std::to_string(f.m_config.m_port_remote);
         INFO("port");
         INFO(s);
         //s = "ping google.com";
