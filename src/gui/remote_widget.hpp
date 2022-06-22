@@ -22,18 +22,20 @@ public:
     
     virtual void draw();
     virtual int onMouse(int x, int y);
+    virtual void open();
     
     ButtonGui m_button_open_connection;
+    ButtonGui m_button_interrupt;
     
     bool m_control_b = false;
     ButtonGui m_control_panel;
     
-    
+    int m_page = 1;
+    int m_session = 0;
     void resizePage1();
     void onMousePage1(int x, int y);
     void drawPage1();
     
-    void open();
     void call(const std::string & s);
     void call2(const std::string & s);
 };

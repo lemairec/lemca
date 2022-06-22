@@ -7,6 +7,8 @@
 #include "../framework.hpp"
 #include "../util/util.hpp"
 
+#include <signal.h>
+
 #define PETIT_RAYON2 0.025
 
 RemoteWidget::RemoteWidget()
@@ -34,6 +36,8 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
+    m_button_interrupt.setResizeStd(0.5*m_width, y, "Ouvrir la connection", true, width/4);
+    
 };
 
 void RemoteWidget::draw(){
@@ -42,21 +46,32 @@ void RemoteWidget::draw(){
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    //Framework & f = Framework::Instance();
-    drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+    Framework & f = Framework::Instance();
     
-    drawButtonImage(m_button_close, m_imgClose);
-    if(m_qt_network->m_is_connected){
-        m_painter->setPen(Qt::darkGreen);
-        drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
-    } else {
-        m_painter->setPen(Qt::red);
-        drawText("Non connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
-    }
-    m_painter->setPen(m_penBlack);
-    drawButtonCheck(m_control_panel, m_control_b, "autoriser le controle du panel");
+    if(f.m_cmd_pid == 0){
+        //Framework & f = Framework::Instance();
+        drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        
+        drawButtonImage(m_button_close, m_imgClose);
+        if(m_qt_network->m_is_connected){
+            m_painter->setPen(Qt::darkGreen);
+            drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+        } else {
+            m_painter->setPen(Qt::red);
+            drawText("Non connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+        }
+        m_painter->setPen(m_penBlack);
+        drawButtonCheck(m_control_panel, m_control_b, "autoriser le controle du panel");
 
-    drawButtonLabel2(m_button_open_connection);
+        drawButtonLabel2(m_button_open_connection);
+    } else {
+        drawText("Connectée", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        
+        drawText("numero de session : ", 0.5*m_width, 0.4*m_height, sizeText_big, true);
+        drawText("lemca_"+std::to_string(m_session), 0.5*m_width, 0.5*m_height, sizeText_big, true);
+        
+        drawButtonLabel2(m_button_interrupt, COLOR_OTHER);
+    }
         
 }
 
@@ -64,17 +79,30 @@ int RemoteWidget::onMouse(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     
-    if(m_control_panel.isActive(x, y)){
-        m_control_b = !m_control_b;
-    }
-    
+    Framework & f = Framework::Instance();
+    if(f.m_cmd_pid == 0){
+        if(m_control_panel.isActive(x, y)){
+            m_control_b = !m_control_b;
+        }
         
-    if(m_button_open_connection.isActive(x, y)){
-        int i = rand() % 9 + 1;
-        //x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:5901
-        std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(i);
-        //call2("echo toto; sleep 5; echo 1; sleep 5; echo 2; sleep 5; echo 3");
-        call2(s);
+            
+        if(m_button_open_connection.isActive(x, y)){
+            m_session = rand() % 9 + 1;
+            INFO(m_session);
+            //x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:5901
+            std::string s = "x11vnc -viewonly -forever -ssh debian@remote.lemcavision.com:590"+std::to_string(m_session);
+            call2(s);
+            m_page = 2;
+        }
+    } else {
+        if(m_button_interrupt.isActive(x, y)){
+            std::string s = "kill " + std::to_string(f.m_cmd_pid);
+            f.m_cmd_buffer.push_back("****");
+            f.m_cmd_buffer.push_back(s);
+            f.m_cmd_buffer.push_back("****");
+            kill(f.m_cmd_pid, SIGTERM);
+            //kill(f.m_cmd_process);
+        }
     }
     
     return 0;
@@ -89,14 +117,14 @@ void RemoteWidget::call2(const std::string & s){
     f.bufferNotEmpty.wakeAll();
     f.mutex.unlock();
     
-    m_close = true;
-    MainWidget::instance()->m_cmd_widget.open();
+    m_page = 2;
 }
 
 
 void RemoteWidget::open(){
     m_qt_network->test();
     m_close = false;
+    m_page = 1;
 }
 void RemoteWidget::call(const std::string & s){
     INFO("call " << s);
