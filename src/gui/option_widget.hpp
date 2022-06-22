@@ -113,6 +113,7 @@ public:
     void onMousePage5(int x, int y);
     void drawPage5();
     
+    ValueGui m_port;
     void resizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();

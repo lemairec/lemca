@@ -105,12 +105,12 @@ void OptionWidget::draw(){
             drawButtonImage(m_button_p5, m_imgOptionGris);
         }
         
-        /*if(m_page == 6){
+        if(m_page == 6){
             drawButtonImage(m_button_p6, m_imgVolantBlanc);
             drawPage6();
         } else {
             drawButtonImage(m_button_p6, m_imgVolantGris);
-        }*/
+        }
     }
 }
 
@@ -535,13 +535,29 @@ void OptionWidget::onMousePage5(int x, int y){
  */
 
 void OptionWidget::resizePage6(){
+    
+    int inter = m_width*0.07;
+    int y = m_height*0.25;
+    int x = m_width*0.2;
+    y+= inter;
+    INFO(x << " " << y);
+    m_port.setResizeLabel(x, y, "port label");
+    m_port.setResize(x, y, m_gros_button);
 };
 
 void OptionWidget::drawPage6(){
-    }
+    drawText("robot", m_width*0.5, m_height*0.1, sizeText_big, true);
+    
+    Framework & f = Framework::Instance();
+    drawValueGuiAndLabel(m_port, f.m_config.m_port_remote);
+}
 
 void OptionWidget::onMousePage6(int x, int y){
-   
+    Framework & f = Framework::Instance();
+    if(onMouseKeyPad2(m_port, x, y, 1)){
+        f.m_config.m_port_remote = m_port.m_value;
+        f.initOrLoadConfig();
+    }
 }
 
 

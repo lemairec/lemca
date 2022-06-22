@@ -93,7 +93,7 @@ void MainWidget::draw(){
     DEBUG("END");
 }
 
-
+bool init = false;
 void MainWidget::draw_force(){
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushDarkGray);
@@ -107,7 +107,7 @@ void MainWidget::draw_force(){
         drawText("code source", 0.1*m_width, 0.4*m_height);
     }
     
-    if(f.m_session){
+    if(!f.m_session_str.empty()){
         drawText("session : "+f.m_session_str, 0.1*m_width, 0.45*m_height);
     }
     
@@ -125,6 +125,14 @@ void MainWidget::draw_force(){
     
     if(!m_key_board_widget.m_close){
         m_key_board_widget.draw();
+    }
+    
+    if(!init){
+        init = true;
+        if(f.m_config.m_port_remote != 0){
+            RemoteConsumer & consumer = RemoteConsumer::instance();
+            consumer.start();
+        }
     }
 }
 

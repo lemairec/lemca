@@ -31,6 +31,8 @@ void Config::work(QSettings & settings, bool save){
     saveLoadString(settings, "m_serie_run", m_serie_run, save);
     saveLoadString(settings, "m_robot_inrows_run", m_robot_inrows_run, save);
     saveLoadString(settings, "m_make_archive", m_make_archive, save);
+    
+    saveLoadInt(settings, "m_port_remote", m_port_remote, save);
 }
 
 void Config::validate(){

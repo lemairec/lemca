@@ -93,8 +93,6 @@ int RemoteWidget::onMouse(int x, int y){
         if(m_button_open_connection.isActive(x, y)){
             if(f.m_session == 0){
                 f.m_session = rand() % 4 + 1;
-                INFO(f.m_session);
-                f.m_session_str = "lemca_"+std::to_string(f.m_session);
             }
             RemoteConsumer & consumer = RemoteConsumer::instance();
             consumer.start();

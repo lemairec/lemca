@@ -24,6 +24,8 @@ public:
     std::string m_robot_inrows_run;
     std::string m_serie_run;
     
+    int m_port_remote = 0;
+    
     Config();
     
     void work(QSettings & settings, bool save);
