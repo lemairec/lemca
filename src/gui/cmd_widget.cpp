@@ -1,4 +1,6 @@
 #include "cmd_widget.hpp"
+#include <signal.h>
+
 
 #include "../framework.hpp"
 #include "../util/util.hpp"
@@ -63,7 +65,7 @@ int CmdWidget::onMouse(int x, int y){
         f.m_cmd_buffer.push_back("****");
         f.m_cmd_buffer.push_back(s);
         f.m_cmd_buffer.push_back("****");
-        system(s.c_str());
+        kill(f.m_cmd_pid, SIGTERM);
         //kill(f.m_cmd_process);
     }
     return 0;

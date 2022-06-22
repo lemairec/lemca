@@ -85,7 +85,7 @@ int RemoteWidget::onMouse(int x, int y){
 void RemoteWidget::call2(const std::string & s){
     Framework & f = Framework::Instance();
     f.mutex.lock();
-    f.m_command_to_execute2 = s+" 2>&1";
+    f.m_command_to_execute2 = s;
     f.bufferNotEmpty.wakeAll();
     f.mutex.unlock();
     

@@ -1,2 +1,2 @@
-cp ~/lemca/install/lightdm.conf /etc/lightdm/lightdm.conf
+cp /home/lemca/lemca/install/lightdm.conf /etc/lightdm
 # autologin

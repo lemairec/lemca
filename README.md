@@ -100,3 +100,62 @@ plymouth-set-default-theme
 GRUB_BACKGROUND=/home/lemca/deb10-master/logo.jpg
 
 
+## reseau
+
+``````
+nmap 192.168.1.0/24
+ping -b 192.168.1.255
+/sbin/arp -a
+``````
+
+## robert
+
+serveur et client guacamol
+linode
+
+vpn
+connection wifi/ ethernet => map
+
+
+## guacamole
+
+x11vnc -ssh root@139.162.182.189:5901 -forever
+
+https://www.linode.com/docs/guides/installing-apache-guacamole-on-ubuntu-and-debian/
+
+sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+## debian
+=> 11 amd64 (multiarch pour n702)
+=> https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
+=> del to boot
+=> nano /etc/default/grub
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
+    sudo update-grub
+    reboot
+=> balenaetcher => faire le boot
+
+# droit usb
+
+`````
+/usr/sbin/usermod
+usermod -a -G dialout Nom_Utilisateur
+usermod -a -G tty Nom_Utilisateur
+`````
+
+
+## point hadrien
+
+- guacamole
+    => 
+- debian (i386 amd64) 
+   
+- guillaume debar
+- yocto project / buildroot
+
+sudo apt install build-essential libcairo2-dev libjpeg62-turbo-dev \
+    libpng-dev libtool-bin libossp-uuid-dev libvncserver-dev \
+    freerdp2-dev libssh2-1-dev libtelnet-dev libwebsockets-dev \
+    libpulse-dev libvorbis-dev libwebp-dev libssl-dev \
+    libpango1.0-dev libswscale-dev libavcodec-dev libavutil-dev \
+    libavformat-dev
