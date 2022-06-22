@@ -18,6 +18,7 @@ MyQTNetwork::MyQTNetwork(){
     manager = new QNetworkAccessManager();
     
     QObject::connect(manager, &QNetworkAccessManager::finished, this,&MyQTNetwork::handleNetwork);
+    connect(this, SIGNAL(testSignal()), this, SLOT(testSlot()));
     
     m_host_url = "https://maplaine.fr/lemca/ping";
     
@@ -75,6 +76,10 @@ void MyQTNetwork::handleErrorGps(QSerialPort::SerialPortError error){
 }
 
 void MyQTNetwork::test(){
+    emit testSignal();
+}
+
+void MyQTNetwork::testSlot(){
     QNetworkRequest request;
 
     QString url = m_host_url;
