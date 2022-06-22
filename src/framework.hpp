@@ -54,8 +54,6 @@ public:
     bool m_is_f_call = false;
     
     bool m_cmd_interrupt = false;
-    pid_t m_cmd_pid = 0;
-    FILE* m_cmd_process;
     std::vector<std::string> m_cmd_buffer;
     bool m_cmd_end = false;
     

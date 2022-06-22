@@ -10,8 +10,6 @@ class WifiWidget : public BaseWidget {
     
     ButtonGui m_button_close;
     
-    std::string m_reseau;
-
     
 public:
     WifiWidget();

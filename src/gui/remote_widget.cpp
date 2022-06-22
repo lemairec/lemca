@@ -103,15 +103,11 @@ int RemoteWidget::onMouse(int x, int y){
         }
     } else {
         if(m_button_interrupt.isActive(x, y)){
-            std::string s = "kill " + std::to_string(f.m_cmd_pid);
-            INFO("kill");
-            INFO(s);
-            Framework & f = Framework::Instance();
-            f.m_cmd_buffer.push_back("****");
-            f.m_cmd_buffer.push_back(s);
-            f.m_cmd_buffer.push_back("****");
-            kill(f.m_cmd_pid, SIGTERM);
-            //kill(f.m_cmd_process);
+            RemoteConsumer & consumer = RemoteConsumer::instance();
+            consumer.quit();
+            consumer.exit();
+            consumer.terminate();
+            //f.m_session = 0;
         }
     }
     
