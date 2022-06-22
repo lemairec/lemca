@@ -108,7 +108,7 @@ void MainWidget::draw_force(){
     }
     
     if(f.m_session){
-        drawText("session : "+f.m_session_str, 0.15*m_width, 0.4*m_height);
+        drawText("session : "+f.m_session_str, 0.1*m_width, 0.45*m_height);
     }
     
     for(auto p : m_widgets){
