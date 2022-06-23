@@ -543,6 +543,8 @@ void OptionWidget::resizePage6(){
     INFO(x << " " << y);
     m_port.setResizeLabel(x, y, "port label");
     m_port.setResize(x, y, m_gros_button);
+    y+= inter;
+    m_auto_launch.setResizeStd(x, y, "none");
 };
 
 void OptionWidget::drawPage6(){
@@ -550,12 +552,25 @@ void OptionWidget::drawPage6(){
     
     Framework & f = Framework::Instance();
     drawValueGuiAndLabel(m_port, f.m_config.m_port_remote);
+    
+    if(f.m_config.m_auto_launch == AutoLaunch_Robot){
+        m_auto_launch.m_label = "auto launch robot";
+    } else {
+        m_auto_launch.m_label = "none";
+    }
+    drawButtonLabel2(m_auto_launch);
 }
 
 void OptionWidget::onMousePage6(int x, int y){
     Framework & f = Framework::Instance();
     if(onMouseKeyPad2(m_port, x, y, 1)){
         f.m_config.m_port_remote = m_port.m_value;
+        f.initOrLoadConfig();
+    }
+    if(m_auto_launch.isActive(x, y)){
+        int i = (int)f.m_config.m_auto_launch;
+        i = (i+1)%2;
+        f.m_config.m_auto_launch = (AutoLaunch)i;
         f.initOrLoadConfig();
     }
 }

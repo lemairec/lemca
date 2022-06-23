@@ -5,6 +5,11 @@
 #include <QString>
 #include <QSettings>
 
+enum AutoLaunch {
+    AutoLaunch_None = 0,
+    AutoLaunch_Robot = 1
+};
+
 class Config  {
 public:
     bool m_fullscreen = true;
@@ -25,6 +30,7 @@ public:
     std::string m_serie_run;
     
     int m_port_remote = 0;
+    AutoLaunch m_auto_launch = AutoLaunch_None;
     
     Config();
     

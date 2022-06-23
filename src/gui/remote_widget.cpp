@@ -84,6 +84,7 @@ int RemoteWidget::onMouse(int x, int y){
     //Framework & f = Framework::Instance();
     
     Framework & f = Framework::Instance();
+    
     if(f.m_session == 0){
         if(m_control_panel.isActive(x, y)){
             m_control_b = !m_control_b;

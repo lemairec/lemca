@@ -114,6 +114,7 @@ public:
     void drawPage5();
     
     ValueGui m_port;
+    ButtonGui m_auto_launch;
     void resizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();

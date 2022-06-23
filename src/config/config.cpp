@@ -33,6 +33,8 @@ void Config::work(QSettings & settings, bool save){
     saveLoadString(settings, "m_make_archive", m_make_archive, save);
     
     saveLoadInt(settings, "m_port_remote", m_port_remote, save);
+    saveLoadEnum(settings, "m_auto_launch", m_auto_launch, save);
+    
 }
 
 void Config::validate(){

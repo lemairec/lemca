@@ -133,6 +133,11 @@ void MainWidget::draw_force(){
             RemoteConsumer & consumer = RemoteConsumer::instance();
             consumer.start();
         }
+        if(f.m_config.m_auto_launch == AutoLaunch_Robot){
+            if(f.m_config.m_robot == 1){
+                call(f.m_config.m_robot_inrows_run);
+            }
+        }
     }
 }
 
