@@ -125,6 +125,8 @@ https://www.linode.com/docs/guides/installing-apache-guacamole-on-ubuntu-and-deb
 
 sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
+ssh-copy-id remote@remote.lemcavision.com
+
 ## debian
 => 11 amd64 (multiarch pour n702)
 => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
