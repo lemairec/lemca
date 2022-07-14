@@ -82,6 +82,9 @@ void RemoteConsumer::run(){
             continue;
         }
         if(f.m_session){
+            std::string s2 = "expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect \"password:\"; send \"test\\r\"; interact'"
+            INFO(s2);
+            system(s2.c_str());
             f.m_session_str = "lemca_"+std::to_string(f.m_session);
             std::string s = "x11vnc -viewonly -forever -ssh remote@remote.lemcavision.com:590"+std::to_string(f.m_session);
             INFO("session");
