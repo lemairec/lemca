@@ -300,9 +300,9 @@ int i5 = 0;
 void OptionWidget::onMousePage2(int x, int y){
     if(i5 == 0 && m_button6.isActive(x, y)){
         i5 = 1;
-    } else if(i5 == 1 && m_button2.isActive(x, y)){
+    } else if(i5 == 1 && m_button1.isActive(x, y)){
         i5 = 2;
-    } else if(i5 == 2 && m_button1.isActive(x, y)){
+    } else if(i5 == 2 && m_button5.isActive(x, y)){
         i5 = 3;
     } else if(i5 == 3 && m_button5.isActive(x, y)){
         Framework::Instance().m_config.m_technicien = true;
