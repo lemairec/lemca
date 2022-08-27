@@ -81,8 +81,6 @@ void RemoteConsumer::run(){
             mySleep(2000);
             continue;
         }
-        std::string s2 = "expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect \"password:\"; send \"test\\r\"; interact'";
-        system(s2.c_str());
         if(f.m_session){
             std::string s2 = "rm ~/.ssh/known_hosts; expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect \"password:\"; send \"test\\r\"; interact'";
             INFO(s2);
