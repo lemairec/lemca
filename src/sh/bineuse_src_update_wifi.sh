@@ -14,3 +14,4 @@ mkdir ~/bineuse
 cp ~/bineuse_src/build/bineuse ~/bineuse
 cp -r ~/bineuse_src/gui ~/bineuse
 cp -r ~/bineuse_src/sound ~/bineuse
+cp -r ~/bineuse_src/images ~/bineuse
