@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-git clone https://github.com/lemairec/bineuse.git ~/bineuse_src
+git clone git@github.com:lemairec/bineuse.git ~/bineuse_src
 
 cd ~/bineuse_src
 mkdir -p build
