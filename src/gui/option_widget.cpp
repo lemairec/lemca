@@ -454,8 +454,7 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(f.m_config.m_code_source){
         if(m_make_archive.isActive(x, y)){
-            std::string s1 = f.m_config.m_make_archive;
-            call(s1);
+            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/make_archive.sh");;
         }
     }
     
