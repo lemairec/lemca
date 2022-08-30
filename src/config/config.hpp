@@ -12,6 +12,8 @@ enum AutoLaunch {
 
 class Config  {
 public:
+    std::string m_langage = "EN";
+    
     bool m_fullscreen = true;
     bool m_technicien = false;
     bool m_code_source = false;
@@ -21,11 +23,9 @@ public:
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
     
-    
-    std::string m_bineuse_src_run;
+
     std::string m_bineuse_run;
     std::string m_gps_run;
-    std::string m_make_archive;
     std::string m_robot_inrows_run;
     std::string m_serie_run;
     

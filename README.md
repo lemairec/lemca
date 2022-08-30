@@ -122,10 +122,26 @@ connection wifi/ ethernet => map
 x11vnc -ssh root@139.162.182.189:5901 -forever
 
 https://www.linode.com/docs/guides/installing-apache-guacamole-on-ubuntu-and-debian/
+ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@51.38.190.75
+
+``````
+sudo apt-get update
+sudo apt install build-essential libcairo2-dev libjpeg62-turbo-dev \
+    libpng-dev libtool-bin libossp-uuid-dev libvncserver-dev \
+    freerdp2-dev libssh2-1-dev libtelnet-dev libwebsockets-dev \
+    libpulse-dev libvorbis-dev libwebp-dev libssl-dev \
+    libpango1.0-dev libswscale-dev libavcodec-dev libavutil-dev \
+    libavformat-dev
+``````
+
 
 sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
-ssh-copy-id remote@remote.lemcavision.com
+rm ~/.ssh/known_hosts; echo 4bspC3JXwgTm | ssh-copy-id  -o StrictHostKeyChecking=no debian@remote.lemcavision.com
+
+expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect "password:"; send "test\r"; interact'
+
+
 
 ## debian
 => 11 amd64 (multiarch pour n702)
@@ -145,6 +161,14 @@ usermod -a -G dialout Nom_Utilisateur
 usermod -a -G tty Nom_Utilisateur
 `````
 
+## wifi
+Attention dns
+
+`````
+nano /etc/resolv.conf
+
+nameserver 8.8.8.8
+`````
 
 ## point hadrien
 

@@ -195,11 +195,10 @@ int MainWidget::onMouse(int x, int y){
     
     
     if(m_buttonBineuse.isActive(x, y)){
-        if(f.m_config.m_code_source){
-            call(f.m_config.m_bineuse_src_run);
-        } else {
-            call(f.m_config.m_bineuse_run);
-        }
+        std::string cmd = f.m_config.m_bineuse_run;
+        //Framework & f = Framework::Instance();
+        //cmd = cmd + " -l "+f.m_config.m_langage;
+        call(cmd);
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
             call(f.m_config.m_gps_run);

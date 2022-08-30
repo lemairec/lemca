@@ -7,11 +7,9 @@
 
 Config::Config(){
     m_bineuse_run = "~/bineuse/bineuse";
-    m_bineuse_src_run = "~/bineuse_src/build/bineuse";
     m_gps_run = "~/agrigpspi/build/agri_gps_pi";
     m_serie_run = "~/serie/build/serie";
     m_robot_inrows_run = "~/inrows/build/inrows";
-    m_make_archive = "cd ~/bineuse_src; git pull; sh make_archive.sh";
 }
 
 
@@ -25,12 +23,10 @@ void Config::work(QSettings & settings, bool save){
     
     
     
-    saveLoadString(settings, "m_bineuse_src_run", m_bineuse_src_run, save);
     saveLoadString(settings, "m_bineuse_run", m_bineuse_run, save);
     saveLoadString(settings, "m_gps_run", m_gps_run, save);
     saveLoadString(settings, "m_serie_run", m_serie_run, save);
     saveLoadString(settings, "m_robot_inrows_run", m_robot_inrows_run, save);
-    saveLoadString(settings, "m_make_archive", m_make_archive, save);
     
     saveLoadInt(settings, "m_port_remote", m_port_remote, save);
     saveLoadEnum(settings, "m_auto_launch", m_auto_launch, save);
