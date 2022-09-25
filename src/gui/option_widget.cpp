@@ -159,7 +159,7 @@ void OptionWidget::resizePage1(){
     //m_select_serial
     int x = 0.15*m_width;
     int x2 = 0.55*m_width;
-    int y = 0.3*m_height;
+    int y = 0.35*m_height;
     int inter = 0.15*m_height;
     
     m_update_bineuse.setResizeStd(x, y, "Update Bineuse Wifi", false, 220);
@@ -179,8 +179,9 @@ void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
     drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
     
+    drawText("Menu Machine", 0.5*m_width, 0.1*m_height, sizeText_medium, true);
     if(f.m_config.m_wifi){
-        drawText("Update Wifi", 0.25*m_width, 0.15*m_height, sizeText_medium, true);
+        drawText("Update Wifi", 0.25*m_width, 0.2*m_height, sizeText_medium, true);
         drawButtonLabel2(m_update_bineuse);
         if(f.m_config.m_gps){
             drawButtonLabel2(m_update_gps);
@@ -193,7 +194,7 @@ void OptionWidget::drawPage1(){
         }
     }
     if(f.m_config.m_usb){
-        drawText("Update USB", 0.75*m_width, 0.15*m_height, sizeText_medium, true);
+        drawText("Update USB", 0.75*m_width, 0.2*m_height, sizeText_medium, true);
         drawButtonLabel2(m_update_bineuse_usb);
     }
     

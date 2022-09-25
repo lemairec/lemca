@@ -2,3 +2,4 @@
 *.DS_Store
 lemca.cfg
 build/*
+build_old/*
