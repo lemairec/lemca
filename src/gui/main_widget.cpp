@@ -10,7 +10,7 @@
 #include "../util/log.hpp"
 #include "environnement.hpp"
 #include "../framework.hpp"
-
+#include "../config/langage.hpp"
 
 #define MY_WIDTH 800
 #define MY_HEIGHT 400
@@ -27,7 +27,7 @@ MainWidget::MainWidget()
     m_imgBineuse = loadImage("/gui/bineuse.png");
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
-    m_imgOption = loadImage("/gui/option_gris_gros.png");
+    m_imgOption = loadImage("/gui/option_gros.png");
     m_imgWifi = loadImage("/gui/wifi.png");
     m_img_remote = loadImage("/gui/reseau.png");
 
@@ -50,6 +50,7 @@ void MainWidget::setSize(int width, int height){
     for(auto p : m_widgets){
         p->setSize(m_width, m_height);
     }
+    m_select_widget.setSize(m_width, m_height);
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
@@ -57,12 +58,19 @@ void MainWidget::setSize(int width, int height){
     m_buttonGps.setResize(m_width*0.4, m_height*0.8, m_gros_gros_button);
     m_buttonRobot.setResize(m_width*0.6, m_height*0.8, m_gros_gros_button);
     m_buttonExit.setResize(m_width*0.8, m_height*0.8, m_gros_gros_button);
-    m_buttonWifi.setResize(m_width*0.8, m_height*0.2, m_gros_gros_button);
-    m_button_remote.setResize(m_width*0.6, m_height*0.2, m_gros_gros_button);
+    m_buttonWifi.setResize(m_width*0.6, m_height*0.2, m_gros_gros_button);
+    m_button_remote.setResize(m_width*0.4, m_height*0.2, m_gros_gros_button);
     m_buttonSerial.setResize(m_width*0.8, m_height*0.5, m_gros_gros_button);
     //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
     m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_gros_gros_button);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, m_gros_button);
+    
+    
+    m_button_langage.setResize(m_width*0.8, m_height*0.2, "", true, m_width*0.2);
+    m_button_langage.clear();
+    m_button_langage.addValue(("FR"));
+    m_button_langage.addValue(("EN"));
+    m_button_langage.addValue(("DE"));
 }
 
 MainWidget * MainWidget::instance(){
@@ -79,6 +87,7 @@ void MainWidget::setPainter(QPainter * p){
     for(auto p2 : m_widgets){
         p2->setPainter(p);
     }
+    m_select_widget.setPainter(p);
     m_key_board_widget.setPainter(p);
 }
 
@@ -95,13 +104,18 @@ void MainWidget::draw(){
 
 bool init = false;
 void MainWidget::draw_force(){
+    Framework & f = Framework::Instance();
+    
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushDarkGray);
 
     drawMain();
     drawButtons();
     
-    Framework & f = Framework::Instance();
+    if(m_select_widget.m_close){
+        m_button_langage.setValueString(f.m_config.m_langage);//Langage::getKey(config.m_langage.getStdValue())
+    }
+    drawButtonLabel2(m_button_langage.m_buttonOpen);
     
     if(f.m_config.m_code_source){
         drawText("code source", 0.1*m_width, 0.4*m_height);
@@ -115,6 +129,9 @@ void MainWidget::draw_force(){
         if(!p->m_close){
             p->draw();
         }
+    }
+    if(!m_select_widget.m_close){
+        m_select_widget.draw();
     }
     
     
@@ -153,10 +170,10 @@ void MainWidget::drawButtons(){
     
     drawButtonImage(m_buttonBineuse, m_imgBineuse);
 
-    drawText("Bineuse", m_buttonBineuse.m_x, m_buttonBineuse.m_y+40, sizeText_medium,  true);
+    drawText(Langage::getKey("HOME_BINEUSE"), m_buttonBineuse.m_x, m_buttonBineuse.m_y+40, sizeText_medium,  true);
     if(f.m_config.m_gps){
         drawButtonImage(m_buttonGps, m_imgGPS);
-        drawText("GPS", m_buttonGps.m_x, m_buttonGps.m_y+40, sizeText_medium,  true);
+        drawText(Langage::getKey("HOME_GPS"), m_buttonGps.m_x, m_buttonGps.m_y+40, sizeText_medium,  true);
     }
     if(f.m_config.m_robot){
         drawButtonImage(m_buttonRobot, m_imgGPS);
@@ -183,6 +200,7 @@ void MainWidget::drawButtons(){
 
 int MainWidget::onMouse(int x, int y){
     Framework & f = Framework::Instance();
+    Config & config = f.m_config;
     
     size_t n = m_widgets.size();
     for(size_t i = 0; i < n; ++i){
@@ -191,6 +209,26 @@ int MainWidget::onMouse(int x, int y){
             p->onMouse(x, y);
             return 0;
         }
+    }
+    
+    if(!m_select_widget.m_close){
+        if(m_select_widget.onMouseSelect(x, y)){
+            std::string s = m_select_widget.m_selectButton->getValueString();
+            if(s == ("FR")){
+                config.m_langage = "FR";
+            } else if(s == ("EN")){
+                config.m_langage = "EN";
+            } else if(s == ("DE")){
+                config.m_langage = "DE";
+            }
+            //loadConfig();
+        }
+       
+        return 0;
+    }
+    if(m_button_langage.m_buttonOpen.isActive(x, y)){
+        m_select_widget.open();
+        m_select_widget.setValueGuiKeyPad(&m_button_langage);
     }
     
     
