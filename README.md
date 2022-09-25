@@ -20,8 +20,6 @@ brew install python-tk
 
 # linux
 
-sudo apt-get install python-imaging-tk
-
 
 `````
 apt-get install wireless-tools
@@ -69,15 +67,6 @@ https://github.com/chennuo0125-HIT/imu_gps_fusion/blob/main/include/imu_gps_fusi
 export PATH=$PATH:/usr/sbin
 
 
-## autologin
-
-`````
-/etc/lightdm/lightdm.conf
-[Seat:*]
-autologin-user=$USER
-autologin-user-timeout=0
-`````
-
 ## clavier
 
 florence
@@ -108,15 +97,6 @@ ping -b 192.168.1.255
 /sbin/arp -a
 ``````
 
-## robert
-
-serveur et client guacamol
-linode
-
-vpn
-connection wifi/ ethernet => map
-
-
 ## guacamole
 
 x11vnc -ssh root@139.162.182.189:5901 -forever
@@ -143,17 +123,26 @@ expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.
 
 
 
-## debian
+# install debian - xcfe
+
+## 1. image
+
 => 11 amd64 (multiarch pour n702)
+
 => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
+
 => del to boot
+
+
+
 => nano /etc/default/grub
-    GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
-    sudo update-grub
-    reboot
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
+sudo update-grub
+reboot
+
 => balenaetcher => faire le boot
 
-## droit usb
+## 2. droit usb
 
 `````
 /usr/sbin/usermod
@@ -161,7 +150,17 @@ usermod -a -G dialout Nom_Utilisateur
 usermod -a -G tty Nom_Utilisateur
 `````
 
+## 3. autologin
+
+`````
+/etc/lightdm/lightdm.conf
+[Seat:*]
+autologin-user=$USER
+autologin-user-timeout=0
+`````
+
 ## wifi
+
 Attention dns
 
 `````
@@ -170,7 +169,23 @@ nano /etc/resolv.conf
 nameserver 8.8.8.8
 `````
 
+## xfce
+
+terminal => ctrl+alt+f3
+
+### panel
+
+..config/xfce4/xfconf/xfce-perchannel-xml/
+
 ## point hadrien
 
 Settings Manager -> Session and Startup
 Disable "Automatically save session on logout"
+
+## robert
+
+serveur et client guacamol
+linode
+
+vpn
+connection wifi/ ethernet => map
