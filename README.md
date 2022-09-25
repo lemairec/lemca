@@ -69,7 +69,8 @@ export PATH=$PATH:/usr/sbin
 
 ## clavier
 
-florence
+onboard
+(old florence)
 
 ## run cmd
 

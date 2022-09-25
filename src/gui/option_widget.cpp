@@ -519,10 +519,10 @@ void OptionWidget::onMousePage5(int x, int y){
         m_qt_network->test_camera();;
     }
     if(m_camera30.isActive(x, y)){
-        call("florence & firefox http://192.168.1.30");
+        call("onboard & firefox http://192.168.1.30");
     }
     if(m_camera31.isActive(x, y)){
-        call("florence & firefox http://192.168.1.31");
+        call("onboard & firefox http://192.168.1.31");
     }
     if(m_reseau.isActive(x, y)){
         call("nmap 192.168.1.0/24");
