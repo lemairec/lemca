@@ -131,16 +131,26 @@ expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.
 
 => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
 
+=> balenaetcher => faire le boot
+
 => del to boot
 
+## 2. automatisation
 
+`````
+git clone https://github.com/lemairec/lemca.git
+cd lemca;
+sh first.sh
+`````
 
-=> nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
-sudo update-grub
-reboot
+### 2.1. autologin
 
-=> balenaetcher => faire le boot
+`````
+/etc/lightdm/lightdm.conf
+[Seat:*]
+autologin-user=$USER
+autologin-user-timeout=0
+`````
 
 ## 2. droit usb
 
@@ -150,14 +160,13 @@ usermod -a -G dialout Nom_Utilisateur
 usermod -a -G tty Nom_Utilisateur
 `````
 
-## 3. autologin
 
-`````
-/etc/lightdm/lightdm.conf
-[Seat:*]
-autologin-user=$USER
-autologin-user-timeout=0
-`````
+## 4. grub
+
+=> nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
+sudo update-grub
+reboot
 
 ## wifi
 
