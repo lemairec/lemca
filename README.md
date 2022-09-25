@@ -138,6 +138,15 @@ expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.
 ## 2. automatisation
 
 `````
+su
+
+vi /etc/apt/sources.list
+#remove dvd
+apt-get update
+
+apt-get install git
+----
+
 git clone https://github.com/lemairec/lemca.git
 cd lemca;
 sh first.sh
