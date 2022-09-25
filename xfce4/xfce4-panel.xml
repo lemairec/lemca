@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=640;y=8"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="size" type="uint" value="16"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="position-locked" type="bool" value="false"/>
+      <property name="background-alpha" type="uint" value="0"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty"/>
+</channel>
