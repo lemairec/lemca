@@ -39,7 +39,7 @@ void MyWidget::paintEvent(QPaintEvent* e)
 
 
 
-MainWindow * MainWindow::instance(){
+MainWindow * MainWindow::instancePtr(){
     static MainWindow gf;
     return &gf;
 }
@@ -77,7 +77,7 @@ void MainWindow::setupUi(){
     this->resize(1400, 800);
     
     m_my_widget = new MyWidget();
-    m_main_widget = MainWidget::instance();
+    m_main_widget = MainWidget::instancePtr();
     m_my_widget->m_main_widget = m_main_widget;
     m_my_widget->m_main_widget->setSize(800, 480);
     

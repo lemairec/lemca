@@ -77,7 +77,7 @@ void WifiWidget::draw(){
 }
 
 int WifiWidget::onMouse(int x, int y){
-    KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
+    KeyBoardWidget & key_board_widget = MainWidget::instancePtr()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
         key_board_widget.onMouse(x, y);
@@ -140,7 +140,7 @@ void WifiWidget::call2(const std::string & s){
     f.mutex.unlock();
     
     m_close = true;
-    MainWidget::instance()->m_cmd_widget.open();
+    MainWidget::instancePtr()->m_cmd_widget.open();
 }
 
 

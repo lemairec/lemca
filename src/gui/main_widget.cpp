@@ -22,6 +22,7 @@ int l_bottom = 20;
 
 MainWidget::MainWidget()
 {
+    m_black_mode = false;
     
     m_logoImg = loadImage("/gui/logo.png");
     m_imgBineuse = loadImage("/gui/bineuse.png");
@@ -73,7 +74,7 @@ void MainWidget::setSize(int width, int height){
     m_button_langage.addValue(("DE"));
 }
 
-MainWidget * MainWidget::instance(){
+MainWidget * MainWidget::instancePtr(){
     static MainWidget gf;
     return &gf;
 }
@@ -107,7 +108,7 @@ void MainWidget::draw_force(){
     Framework & f = Framework::Instance();
     
     m_painter->setPen(m_penBlack);
-    m_painter->setBrush(m_brushDarkGray);
+    m_painter->setBrush(m_brushBackGround1);
 
     drawMain();
     drawButtons();

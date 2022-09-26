@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     //consumer.wait();
     Framework & framework = Framework::Instance();
     //framework.test();
-    MainWindow * m = MainWindow::instance();
+    MainWindow * m = MainWindow::instancePtr();
     DEBUG("init");
     framework.initOrLoadConfig();
     DEBUG("fin init");

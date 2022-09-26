@@ -12,7 +12,7 @@
 class MainWidget : public BaseWidget {
     MainWidget();
 public:
-    static MainWidget * instance();
+    static MainWidget * instancePtr();
     
     SelectWidget m_select_widget;
     

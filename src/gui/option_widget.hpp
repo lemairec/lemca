@@ -112,17 +112,30 @@ public:
     void resizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();
+    /*
+     BASE
+     */
     
     ValueGui m_port;
     ButtonGui m_auto_launch;
     void resizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();
+    int m_width2, m_height2, m_x2, m_y2;
+    int m_width3, m_y_title, m_y_begin, m_y_inter;
+    int m_part_1_x, m_part_1_w, m_part_1_m, m_part_1_x2, m_part_1_x3, m_part_2_m, m_part_2_x, m_part_2_w, m_part_2_x2, m_part_2_x3;
     
     void open();
     void call(const std::string & s);
     void call2(const std::string & s);
     
+    void drawButtonOption(ButtonGui & button, QPixmap * image, bool check, double scale);
+    void drawPart1Title(double y, double h, const std::string & title, bool separateur = false);
+    void drawPart2Title(double y, double h, const std::string & title, bool separateur = false);
+    void drawPart2(double y, double h, bool separateur = false);
+    void drawSeparateurH();
+    void drawSeparateurV1(double y);
+    void drawSeparateurV2(double y);
 };
 
 #endif

@@ -432,7 +432,7 @@ void OptionWidget::drawPage4(){
 }
 
 void OptionWidget::onMousePage4(int x, int y){
-    KeyBoardWidget & key_board_widget = MainWidget::instance()->m_key_board_widget;
+    KeyBoardWidget & key_board_widget = MainWidget::instancePtr()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
         if(key_board_widget.onMouse(x, y)){
@@ -469,7 +469,7 @@ void OptionWidget::onMousePage4(int x, int y){
         call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
     }
     if(m_quit_full_screen.isActive(x, y)){
-        MainWindow::instance()->quitFullScreen();
+        MainWindow::instancePtr()->quitFullScreen();
     }
     if(m_clear_data.isActive(x, y)){
         DirectoryManager::Instance().clearAll();
@@ -599,7 +599,7 @@ void OptionWidget::call(const std::string & s){
     f.mutex.unlock();
     
     m_close = true;
-    MainWidget::instance()->m_cmd_widget.open();
+    MainWidget::instancePtr()->m_cmd_widget.open();
 }
 
 
