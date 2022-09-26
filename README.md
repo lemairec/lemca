@@ -162,7 +162,12 @@ autologin-user=$USER
 autologin-user-timeout=0
 `````
 
-## 2. droit usb
+### 2.2. lancement de lemca (automatique)
+
+`````
+`````
+
+## 3. droit usb
 
 `````
 /usr/sbin/usermod
@@ -171,7 +176,7 @@ usermod -a -G tty Nom_Utilisateur
 `````
 
 
-## 3. grub
+## 4. grub
 
 
 `````
@@ -197,13 +202,13 @@ reboot
  => imagemagick)
 `````
 
-`````
-su
-vi /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
+# 5. xcfe
 
-update-grub2
-reboot
+
+`````
+alimentation
+=> bouton alimentation => eteindre
+=> gestion de l'alimentation (never never never off)
 `````
 
 ## wifi
