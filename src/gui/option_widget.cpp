@@ -609,3 +609,57 @@ void OptionWidget::call2(const std::string & s){
     system(s2.c_str());
 }
 
+
+/**
+ BASE
+ */
+
+void OptionWidget::drawButtonOption(ButtonGui & button, QPixmap * image, bool check, double scale){
+    drawButtonImageCarre(button, image, scale*3, check);
+
+}
+
+void OptionWidget::drawPart1Title(double y, double h, const std::string & title, bool separateur){
+    m_painter->setPen(m_penBlack);
+    m_painter->setBrush(m_brushNo);
+    //m_painter->drawRoundedRect(m_part_1_x, y+8, m_width3*0.44, h-16, 5, 5);
+    drawText(title, m_part_1_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
+    if(separateur){
+        drawSeparateurV1(y);
+    }
+    
+}
+
+void OptionWidget::drawPart2Title(double y, double h, const std::string & title, bool separateur){
+    m_painter->setPen(m_penBlack);
+    m_painter->setBrush(m_brushNo);
+    //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
+    drawText(title, m_part_2_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
+    if(separateur){
+        drawSeparateurV2(y);
+    }
+}
+
+void OptionWidget::drawPart2(double y, double h, bool separateur){
+    m_painter->setPen(m_penBlack);
+    m_painter->setBrush(m_brushNo);
+    //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
+    if(separateur){
+        drawSeparateurV2(y);
+    }
+}
+
+
+void OptionWidget::drawSeparateurH(){
+    m_painter->drawLine(m_width3/2, m_height*0.25, m_width3/2, m_height*0.75);
+}
+
+void OptionWidget::drawSeparateurV1(double y){
+    m_painter->drawLine(m_part_1_x+m_part_1_w*0.2, y, m_part_1_x+m_part_1_w*0.8, y);
+    
+}
+
+void OptionWidget::drawSeparateurV2(double y){
+    m_painter->drawLine(m_part_2_x+m_part_2_w*0.2, y, m_part_2_x+m_part_2_w*0.8, y);
+    
+}
