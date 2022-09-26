@@ -24,6 +24,17 @@ void MyWidget::mouseReleaseEvent ( QMouseEvent * event ){
     }
 }
 
+void MyWidget::paintEvent(QPaintEvent* e)
+{
+    QWidget::paintEvent(e); // effectue le comportement standard
+
+    QPainter painter(this); // construire
+    //painter.setRenderHint(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    if(m_main_widget){
+        m_main_widget->setPainter(&painter);
+        m_main_widget->draw();
+    }
+}
 
 
 
@@ -54,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-//    GpsFramework::Instance().removeObserver();
+    //GpsFramework::Instance().removeObserver();
 }
 
 void MainWindow::setupUi(){
@@ -62,7 +73,8 @@ void MainWindow::setupUi(){
     if (this->objectName().isEmpty()){
         this->setObjectName(QString::fromUtf8("MainWindow"));
     }
-    this->resize(800, 480);
+    //this->resize(800, 480);
+    this->resize(1400, 800);
     
     m_my_widget = new MyWidget();
     m_main_widget = MainWidget::instance();
