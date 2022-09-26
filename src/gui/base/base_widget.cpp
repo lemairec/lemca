@@ -76,7 +76,7 @@ void BaseWidget::setSize(int width, int height){
         m_pen_black_inv = QPen(Qt::white);
     } else {
         m_brush_background_1 = QBrush (QColor(230,230,230));
-        m_brushDarkGray = QBrush (QColor(180,180,180));
+        m_brushDarkGray = QBrush (QColor(200,200,200));
         m_pen_black_inv = QPen(Qt::black);
     }
 }

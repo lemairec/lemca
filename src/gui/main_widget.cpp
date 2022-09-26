@@ -55,16 +55,17 @@ void MainWidget::setSize(int width, int height){
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
-    m_buttonBineuse.setResize(m_width*0.2, m_height*0.8, m_gros_gros_button);
-    m_buttonGps.setResize(m_width*0.4, m_height*0.8, m_gros_gros_button);
-    m_buttonRobot.setResize(m_width*0.6, m_height*0.8, m_gros_gros_button);
-    m_buttonExit.setResize(m_width*0.8, m_height*0.8, m_gros_gros_button);
-    m_buttonWifi.setResize(m_width*0.6, m_height*0.2, m_gros_gros_button);
-    m_button_remote.setResize(m_width*0.4, m_height*0.2, m_gros_gros_button);
-    m_buttonSerial.setResize(m_width*0.8, m_height*0.5, m_gros_gros_button);
-    //m_buttonMenu2.setResize(120, m_height-30, m_petit_button);
-    m_buttonOption.setResize(m_width*0.2, m_height*0.2, m_gros_gros_button);
-    m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, m_gros_button);
+    int button_size = m_gros_gros_button*0.8;
+    m_buttonBineuse.setResize(m_width*0.2, m_height*0.8, button_size);
+    m_buttonGps.setResize(m_width*0.4, m_height*0.8, button_size);
+    m_buttonRobot.setResize(m_width*0.6, m_height*0.8, button_size);
+    m_buttonExit.setResize(m_width*0.8, m_height*0.8, button_size);
+    m_buttonWifi.setResize(m_width*0.6, m_height*0.2, button_size);
+    m_button_remote.setResize(m_width*0.4, m_height*0.2, button_size);
+    m_buttonSerial.setResize(m_width*0.8, m_height*0.5, button_size);
+    //m_buttonMenu2.setResize(120, m_height-30, button_size);
+    m_buttonOption.setResize(m_width*0.2, m_height*0.2, button_size);
+    m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, button_size);
     
     
     m_button_langage.setResize(m_width*0.8, m_height*0.2, "", true, m_width*0.2);
@@ -108,8 +109,9 @@ void MainWidget::draw_force(){
     Framework & f = Framework::Instance();
     
     m_painter->setPen(m_penBlack);
-    m_painter->setBrush(m_brushBackGround1);
-
+    m_painter->setBrush(m_brush_background_1);
+    m_painter->drawRect(0, 0, m_width, m_height);
+    
     drawMain();
     drawButtons();
     
@@ -160,37 +162,51 @@ void MainWidget::draw_force(){
 }
 
 void MainWidget::drawMain(){
-    m_painter->setBrush(m_brushWhite);
+    m_painter->setBrush(m_brush_background_1);
     
     drawMyImage(*m_logoImg, 0.5*m_width, 0.5*m_height, 2, true);
 }
 
+void MainWidget::drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
+    double scale2 = 0.5*scale;
+    int w = pixmap->size().width()*scale2;
+    int h = pixmap->size().height()*scale2;
+
+    int x = button.m_x-button.m_rayon;
+    int y = button.m_y-button.m_rayon;
+    int d = button.m_rayon*2;
+    m_painter->setPen(m_penBlack);
+    m_painter->setBrush(m_brushDarkGray);
+    m_painter->drawRoundedRect(x, y, d, d, 5, 5);
+    
+    m_painter->drawPixmap(button.m_x-w/2, button.m_y-h/2-20, w, h, *pixmap);
+    drawText(s, button.m_x, button.m_y+50, sizeText_medium,  true);
+    
+}
+
+
 void MainWidget::drawButtons(){
     Framework & f = Framework::Instance();
     
-    
-    drawButtonImage(m_buttonBineuse, m_imgBineuse);
+    drawButton(m_buttonBineuse, m_imgBineuse, Langage::getKey("HOME_BINEUSE"));
 
-    drawText(Langage::getKey("HOME_BINEUSE"), m_buttonBineuse.m_x, m_buttonBineuse.m_y+40, sizeText_medium,  true);
+    
     if(f.m_config.m_gps){
-        drawButtonImage(m_buttonGps, m_imgGPS);
-        drawText(Langage::getKey("HOME_GPS"), m_buttonGps.m_x, m_buttonGps.m_y+40, sizeText_medium,  true);
+        drawButton(m_buttonGps, m_imgGPS, Langage::getKey("HOME_GPS"));
     }
     if(f.m_config.m_robot){
-        drawButtonImage(m_buttonRobot, m_imgGPS);
-        drawText("Robot", m_buttonRobot.m_x, m_buttonRobot.m_y+40, sizeText_medium,  true);
+        drawButton(m_buttonRobot, m_imgGPS, "Robot");
     }
     if(f.m_config.m_serial){
-        drawButtonImage(m_buttonSerial, m_imgGPS);
-        drawText("Serial", m_buttonSerial.m_x, m_buttonSerial.m_y+40, sizeText_medium,  true);
+        drawButton(m_buttonSerial, m_imgGPS, "Serial");
     }
     
     if(f.m_config.m_wifi){
-        drawButtonImage(m_buttonWifi, m_imgWifi);
-        drawButtonImage(m_button_remote, m_img_remote);
+        drawButton(m_buttonWifi, m_imgWifi, Langage::getKey("HOME_WIFI"));
+        drawButton(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
     }
-    drawButtonImage(m_buttonExit, m_imgExit);
-    drawButtonImage(m_buttonOption, m_imgOption);
+    drawButton(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
+    drawButton(m_buttonOption, m_imgOption, Langage::getKey("HOME_PARAMS"), 0.8);
     /*drawButtonImage(m_buttonMenu, m_imgMenu);
     drawButton(m_buttonMenu2);
     drawButton(m_buttonMenu3);

@@ -60,6 +60,10 @@ public:
     
     void draw();
     void draw_force();
+    
+    void drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
+    
+    
     void drawButtons();
     void drawMain();
     
