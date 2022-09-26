@@ -153,7 +153,7 @@ cd lemca;
 sh first.sh
 `````
 
-### 2.1. autologin
+### 2.1. autologin (automatique)
 
 `````
 /etc/lightdm/lightdm.conf
@@ -171,12 +171,40 @@ usermod -a -G tty Nom_Utilisateur
 `````
 
 
-## 4. grub
+## 3. grub
 
-=> nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
-sudo update-grub
+
+`````
+su  
+cd deb10-master
+make install
+
+export $PATH=$PATH:/sbin/
+plymouth-set-default-theme -R deb10
+
+
+vi /etc/default/grub
+GRUB_TIMEOUT=0
+GRUB_DISTRIBUTOR="Lemca 22.09.11"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_BACKGROUND="/home/lemca/lemca/deb10-master/logo.png"
+
+update-grub2
 reboot
+
+(problem logo
+ => convert logo.png -depth 8 logo.png
+ => imagemagick)
+`````
+
+`````
+su
+vi /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
+
+update-grub2
+reboot
+`````
 
 ## wifi
 
