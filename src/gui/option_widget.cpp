@@ -37,80 +37,106 @@ OptionWidget::OptionWidget()
 
 void OptionWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
-    m_file_widget.setSize(width, height);
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
+    m_y2 = m_height*0.04;
+    m_x2 = m_y2;
+    m_width2 = m_width-2*m_y2-m_gros_button*2.4;
+    m_height2 = m_height-2*m_y2;
+
+    m_y_title = m_y2+m_height*0.08;
+    m_y_inter = 0.08*m_height2;
+    m_y_begin = m_y_title+4*m_y_inter;
     
-    m_button_p1.setResize(0.95*m_width, 0.20*m_height, m_gros_button);
-    m_button_p2.setResize(0.95*m_width, 0.30*m_height, m_gros_button);
-    m_button_p3.setResize(0.95*m_width, 0.40*m_height, m_gros_button);
-    m_button_p4.setResize(0.95*m_width, 0.50*m_height, m_gros_button);
-    m_button_p5.setResize(0.95*m_width, 0.60*m_height, m_gros_button);
-    m_button_p6.setResize(0.95*m_width, 0.70*m_height, m_gros_button);
+    m_width3 = m_width2+m_y2+m_y2;
+    m_part_1_x = m_width3*0.04;
+    m_part_1_w = m_width3*0.44;
+    m_part_1_m = m_part_1_x+0.5*m_width3*0.44;
+    m_part_1_x2 = m_part_1_x+0.1*m_width3*0.44;
+    m_part_1_x3 = m_part_1_x+0.8*m_width3*0.44;
+    m_part_2_x = m_width3*0.52;
+    m_part_2_w = m_width3*0.44;
+    m_part_2_m = m_part_2_x+0.5*m_width3*0.44;
+    m_part_2_x2 = m_part_2_x+0.1*m_width3*0.44;
+    m_part_2_x3 = m_part_2_x+0.8*m_width3*0.44;
     
-    resizePage1();
-    resizePage2();
-    resizePage3();
-    resizePage4();
-    resizePage5();
-    resizePage6();
+    int x_right = width-m_gros_button*1.2;
+    int inter = m_gros_button*2.1;
+    int y = m_gros_button*1.2;
+    y += 2*inter;
+    m_button_p1.setResize(x_right, y, m_gros_button);
+    y += inter;
+    m_button_p2.setResize(x_right, y, m_gros_button);
+    y += inter;
+    m_button_p3.setResize(x_right, y, m_gros_button);
+    y += inter;
+    m_button_p4.setResize(x_right, y, m_gros_button);
+    y += inter;
+    m_button_p5.setResize(x_right, y, m_gros_button);
+    y += inter;
+    m_button_p6.setResize(x_right, y, m_gros_button);
+    y += inter;
+    //m_button_p7.setResize(x_right, y, m_gros_button);
+    
+    //m_button_ok.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
+    
+    setSizePage1();
+    setSizePage2();
+    setSizePage3();
+    setSizePage4();
+    setSizePage5();
+    setSizePage6();
+    //setSizePage7(width, height);
+    
+    //m_select_widget.setSize(width, height);
+    //m_keypad_widget.setSize(width, height);
+    //m_keyboard_widget.setSize(width, height);
     
 }
 
 void OptionWidget::draw(){
+    
+    
+    m_painter->setBrush(m_brush_background_1);
+    m_painter->drawRect(0 , 0, m_width, m_height);
+    
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRect(0, 0, m_width, m_height);
-    m_painter->setBrush(m_brushDarkGray);
-    m_painter->drawRect(m_width*0.9, 0, m_width*0.1, m_height);
+    m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
     drawButtonImage(m_button_close, m_imgClose);
     
+    drawButtonOption(m_button_p1, m_imgOptionBlanc, (m_page == 1), 0.3);
     if(m_page == 1){
-        drawButtonImage(m_button_p1, m_imgOptionBlanc);
         drawPage1();
-    } else {
-        drawButtonImage(m_button_p1, m_imgOptionGris);
     }
     
+    drawButtonOption(m_button_p2, m_imgOptionBlanc, (m_page == 2), 0.25);
     if(m_page == 2){
-        drawButtonImage(m_button_p2, m_imgOptionBlanc);
         drawPage2();
-    } else {
-        drawButtonImage(m_button_p2, m_imgOptionGris);
-        
     }
     
     if(Framework::Instance().m_config.m_technicien){
+        drawButtonOption(m_button_p3, m_imgOptionBlanc, (m_page == 3), 0.3);
         if(m_page == 3){
-            drawButtonImage(m_button_p3, m_imgOptionBlanc);
             drawPage3();
-        } else {
-            drawButtonImage(m_button_p3, m_imgOptionGris);
-            
         }
         
+        
+        drawButtonOption(m_button_p4, m_imgOptionBlanc, (m_page == 4), 0.3);
         if(m_page == 4){
-            drawButtonImage(m_button_p4, m_imgOptionBlanc);
             drawPage4();
-        } else {
-            drawButtonImage(m_button_p4, m_imgOptionGris);
-        }
+        };
         
-        //GpsFramework & f = GpsFramework::Instance();
-        
+        drawButtonOption(m_button_p5, m_imgOptionBlanc, (m_page == 5), 0.3);
         if(m_page == 5){
-            drawButtonImage(m_button_p5, m_imgOptionBlanc);
             drawPage5();
-        } else {
-            drawButtonImage(m_button_p5, m_imgOptionGris);
-        }
+        };
         
+        drawButtonOption(m_button_p6, m_imgOptionBlanc, (m_page == 6), 0.5);
         if(m_page == 6){
-            drawButtonImage(m_button_p6, m_imgVolantBlanc);
             drawPage6();
-        } else {
-            drawButtonImage(m_button_p6, m_imgVolantGris);
-        }
+        };
+        //drawButtonOption(m_button_p7, m_img_option_7, (m_page == 7), 0.3);
     }
 }
 
@@ -155,7 +181,7 @@ int OptionWidget::onMouse(int x, int y){
  PAGE 1
  */
 
-void OptionWidget::resizePage1(){
+void OptionWidget::setSizePage1(){
     //m_select_serial
     int x = 0.15*m_width;
     int x2 = 0.55*m_width;
@@ -251,7 +277,7 @@ void OptionWidget::onMousePage1(int x, int y){
  PAGE 2
  */
 
-void OptionWidget::resizePage2(){
+void OptionWidget::setSizePage2(){
     int inter = m_width*0.08;
     int x =  m_width*0.5;
     int rayon = m_gros_button;
@@ -322,7 +348,7 @@ void OptionWidget::onMousePage2(int x, int y){
 
 
 
-void OptionWidget::resizePage3(){
+void OptionWidget::setSizePage3(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
     int x = m_width*0.2;
@@ -385,7 +411,7 @@ void OptionWidget::onMousePage3(int x, int y){
  PAGE 4
  */
 
-void OptionWidget::resizePage4(){
+void OptionWidget::setSizePage4(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
     int x = m_width*0.2;
@@ -481,7 +507,7 @@ void OptionWidget::onMousePage4(int x, int y){
  PAGE 5
  */
 
-void OptionWidget::resizePage5(){
+void OptionWidget::setSizePage5(){
     int x = m_width*0.3;
     int y = m_height*0.2;
     m_refresh.setResizeStd(x, y, "Refresh", false);
@@ -534,7 +560,7 @@ void OptionWidget::onMousePage5(int x, int y){
  PAGE 6
  */
 
-void OptionWidget::resizePage6(){
+void OptionWidget::setSizePage6(){
     
     int inter = m_width*0.07;
     int y = m_height*0.25;

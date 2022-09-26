@@ -52,7 +52,7 @@ public:
     ButtonGui m_update_robot;
     ButtonGui m_serial;
     
-    void resizePage1();
+    void setSizePage1();
     void onMousePage1(int x, int y);
     void drawPage1();
     
@@ -69,7 +69,7 @@ public:
     ButtonGui m_button9;
      
     void myDrawButton(ButtonGui * b, QString s);
-    void resizePage2();
+    void setSizePage2();
     void onMousePage2(int x, int y);
     void drawPage2();
     
@@ -84,7 +84,7 @@ public:
     ButtonGui m_update_deps;
     
     
-    void resizePage3();
+    void setSizePage3();
     void onMousePage3(int x, int y);
     void drawPage3();
     
@@ -97,7 +97,7 @@ public:
     ButtonGui m_quit_full_screen;
     ButtonGui m_run_cmd;
     
-    void resizePage4();
+    void setSizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();
     
@@ -109,13 +109,13 @@ public:
     ButtonGui m_camera31;
     ButtonGui m_reseau;
     
-    void resizePage5();
+    void setSizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();
     
     ValueGui m_port;
     ButtonGui m_auto_launch;
-    void resizePage6();
+    void setSizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();
     
