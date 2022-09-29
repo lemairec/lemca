@@ -220,19 +220,6 @@ void OptionWidget::setSizePage1(){
     m_unity.clear();
     m_unity.addValue(Langage::getKey("METRIQUE"));
     m_unity.addValue(Langage::getKey("IMPERIAL"));
-    
-    
-    /*m_update_bineuse.setResizeStd(x, y, "Update Bineuse Wifi", false, 220);
-    m_update_bineuse_usb.setResizeStd(x2, y, "Update Bineuse USB", false, 220);
-    y+= inter;
-    m_update_gps.setResizeStd(x, y, "Update GPS", false, 220);
-    y+= inter;
-    m_serial.setResizeStd(x, y, "Update Serial", false, 220);
-    y+= inter;
-    m_update_robot.setResizeStd(x, y, "Update Robot", false, 220);
-    y+= inter;*/
-    
-    
 };
 
 void OptionWidget::drawPage1(){
@@ -259,28 +246,6 @@ void OptionWidget::drawPage1(){
     
     drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("VERSION"));
     drawText(ProjectVersion, m_part_2_m, m_langage.m_y, sizeText_medium, true);
-    
-    /*if(f.m_config.m_wifi){
-        drawText("Update Wifi", 0.25*m_width, 0.2*m_height, sizeText_medium, true);
-        drawButtonLabel2(m_update_bineuse);
-        if(f.m_config.m_gps){
-            drawButtonLabel2(m_update_gps);
-        }
-        if(f.m_config.m_serial){
-            drawButtonLabel2(m_serial);
-        }
-        if(f.m_config.m_robot){
-            drawButtonLabel2(m_update_robot);
-        }
-    }
-    if(f.m_config.m_usb){
-        drawText("Update USB", 0.75*m_width, 0.2*m_height, sizeText_medium, true);
-        drawButtonLabel2(m_update_bineuse_usb);
-    }
-    
-    if(!m_file_widget.m_close){
-        m_file_widget.draw();
-    }*/
 }
 
 void OptionWidget::onMousePage1(int x, int y){
@@ -305,8 +270,60 @@ void OptionWidget::onMousePage1(int x, int y){
         m_select_widget.open();
         m_select_widget.setValueGuiKeyPad(&m_langage);
     }
+}
+
+/**
+ PAGE 2
+ */
+
+void OptionWidget::setSizePage2(){
+    int y = m_y_begin;
+    m_update_bineuse.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Bineuse Wifi", true, m_part_1_w/2);
+    m_update_bineuse_usb.setResizeStd(m_part_2_x+m_part_1_w/2, y, "Update Bineuse USB", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_update_gps.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update GPS", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_serial.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Serial", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_update_robot.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Robot", true, m_part_1_w/2);
+    y+= m_y_inter;
     
-    /*if(f.m_config.m_wifi){
+    
+};
+
+void OptionWidget::drawPage2(){
+    Framework & f = Framework::Instance();
+    drawText("Mise à jour", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
+    
+    if(f.m_config.m_wifi){
+        drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update Wifi");
+        
+        drawButtonLabel2(m_update_bineuse);
+        if(f.m_config.m_gps){
+            drawButtonLabel2(m_update_gps);
+        }
+        if(f.m_config.m_serial){
+            drawButtonLabel2(m_serial);
+        }
+        if(f.m_config.m_robot){
+            drawButtonLabel2(m_update_robot);
+        }
+    }
+    if(f.m_config.m_usb){
+        drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update USB");
+        
+        drawButtonLabel2(m_update_bineuse_usb);
+    }
+    
+    if(!m_file_widget.m_close){
+        m_file_widget.draw();
+    }
+}
+
+void OptionWidget::onMousePage2(int x, int y){
+    Framework & f = Framework::Instance();
+    if(f.m_config.m_wifi){
         if(m_update_bineuse.isActive(x, y)){
             if(f.m_config.m_code_source){
                 call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
@@ -344,23 +361,7 @@ void OptionWidget::onMousePage1(int x, int y){
         if(m_update_bineuse_usb.isActive(x, y)){
             m_file_widget.open();
         }
-    }*/
-}
-
-/**
- PAGE 2
- */
-
-void OptionWidget::setSizePage2(){
-};
-
-void OptionWidget::drawPage2(){
-    drawText("Mise à jour", 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
-    
-}
-
-void OptionWidget::onMousePage2(int x, int y){
+    }
 }
 
 
