@@ -214,6 +214,15 @@ reboot
 ## 5.2 montage usb auto
 
 
+## 5.3 unclutter
+
+`````
+su
+vi /etc/default/unclutter
+EXTRA_OPTS="-idle 0.01 -root"
+`````
+
+
 ## wifi
 
 Attention dns
