@@ -203,8 +203,7 @@ void MainWidget::drawButtons(){
 
 int MainWidget::onMouse(int x, int y){
     Framework & f = Framework::Instance();
-    Config & config = f.m_config;
-    
+
     size_t n = m_widgets.size();
     for(size_t i = 0; i < n; ++i){
         auto p = m_widgets[n-i-1];
