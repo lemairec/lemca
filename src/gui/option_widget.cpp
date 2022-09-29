@@ -16,17 +16,20 @@ OptionWidget::OptionWidget()
 {
     m_black_mode = false;
     m_imgClose = loadImage("/gui/ok.png");
-    m_imgPlus = loadImage("/images/plus.png");
-    m_imgMinus = loadImage("/images/minus.png");
-    m_imgSatBlanc = loadImage("/images/sat_blanc.png");
-    m_imgSatGris = loadImage("/images/sat_gris.png");
-    m_imgVolantBlanc = loadImage("/images/volant_blanc.png");
-    m_imgVolantGris = loadImage("/images/volant_gris.png");
-    m_imgOutilBlanc = loadImage("/images/outil_blanc.png");
-    m_imgOutilGris = loadImage("/images/outil_gris.png");
+    m_imgPlus = loadImage("/gui/plus.png");
+    m_imgMinus = loadImage("/gui/minus.png");
+    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
+    m_imgSatGris = loadImage("/gui/sat_gris.png");
+    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
+    m_imgVolantGris = loadImage("/gui/volant_gris.png");
+    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
+    m_imgOutilGris = loadImage("/gui/outil_gris.png");
+    m_imgOptionGris = loadImage("/gui/option_gris.png");
+    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
+    m_imgImuGris = loadImage("/gui/imu_gris.png");
+    
     m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
-    m_imgImuBlanc = loadImage("/images/imu_blanc.png");
-    m_imgImuGris = loadImage("/images/imu_gris.png");
+    m_img_cadena = loadImageInv("/gui/cadena.png");
     
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
@@ -65,7 +68,7 @@ void OptionWidget::setSize(int width, int height){
     int x_right = width-m_gros_button*1.2;
     int inter = m_gros_button*2.1;
     int y = m_gros_button*1.2;
-    y += 2*inter;
+    y += inter;
     m_button_p1.setResize(x_right, y, m_gros_button);
     y += inter;
     m_button_p2.setResize(x_right, y, m_gros_button);
@@ -78,7 +81,7 @@ void OptionWidget::setSize(int width, int height){
     y += inter;
     m_button_p6.setResize(x_right, y, m_gros_button);
     y += inter;
-    //m_button_p7.setResize(x_right, y, m_gros_button);
+    m_button_p7.setResize(x_right, y, m_gros_button);
     
     m_button_return.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
     
@@ -88,7 +91,7 @@ void OptionWidget::setSize(int width, int height){
     setSizePage4();
     setSizePage5();
     setSizePage6();
-    //setSizePage7(width, height);
+    setSizePage7();
     
     m_select_widget.setSize(width, height);
     //m_keypad_widget.setSize(width, height);
@@ -113,18 +116,17 @@ void OptionWidget::draw(){
         drawPage1();
     }
     
-    drawButtonOption(m_button_p2, m_imgOptionBlanc, (m_page == 2), 0.25);
+    drawButtonOption(m_button_p2, m_imgOptionBlanc, (m_page == 2), 0.3);
     if(m_page == 2){
         drawPage2();
     }
     
+    drawButtonOption(m_button_p3, m_img_cadena, (m_page == 3), 0.3);
+    if(m_page == 3){
+        drawPage3();
+    }
+    
     if(Framework::Instance().m_config.m_technicien){
-        drawButtonOption(m_button_p3, m_imgOptionBlanc, (m_page == 3), 0.3);
-        if(m_page == 3){
-            drawPage3();
-        }
-        
-        
         drawButtonOption(m_button_p4, m_imgOptionBlanc, (m_page == 4), 0.3);
         if(m_page == 4){
             drawPage4();
@@ -135,9 +137,14 @@ void OptionWidget::draw(){
             drawPage5();
         };
         
-        drawButtonOption(m_button_p6, m_imgOptionBlanc, (m_page == 6), 0.5);
+        drawButtonOption(m_button_p6, m_imgOptionBlanc, (m_page == 6), 0.3);
         if(m_page == 6){
             drawPage6();
+        };
+        
+        drawButtonOption(m_button_p7, m_imgOptionBlanc, (m_page == 7), 0.3);
+        if(m_page == 7){
+            drawPage7();
         };
         //drawButtonOption(m_button_p7, m_img_option_7, (m_page == 7), 0.3);
     }
@@ -156,15 +163,23 @@ int OptionWidget::onMouse(int x, int y){
     } else if(m_button_p2.isActive(x,y)){
         m_page = 2;
     } else if(m_button_p3.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
-            m_page = 3;
-        }
+        m_page = 3;
     } else if(m_button_p4.isActive(x,y)){
-        m_page = 4;
+        if(Framework::Instance().m_config.m_technicien){
+            m_page = 4;
+        }
     } else if(m_button_p5.isActive(x,y)){
-        m_page = 5;
+        if(Framework::Instance().m_config.m_technicien){
+            m_page = 5;
+        }
     } else if(m_button_p6.isActive(x,y)){
-        m_page = 6;
+        if(Framework::Instance().m_config.m_technicien){
+            m_page = 6;
+        }
+    } else if(m_button_p7.isActive(x,y)){
+        if(Framework::Instance().m_config.m_technicien){
+            m_page = 7;
+        }
     } else {
         if(m_page == 1){
             onMousePage1(x, y);
@@ -178,6 +193,8 @@ int OptionWidget::onMouse(int x, int y){
             onMousePage5(x, y);
         } else if(m_page == 6){
             onMousePage6(x, y);
+        } else if(m_page == 7){
+            onMousePage7(x, y);
         }
     }
     return 0;
@@ -330,12 +347,28 @@ void OptionWidget::onMousePage1(int x, int y){
     }*/
 }
 
-
 /**
  PAGE 2
  */
 
 void OptionWidget::setSizePage2(){
+};
+
+void OptionWidget::drawPage2(){
+    drawText("Mise à jour", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
+    
+}
+
+void OptionWidget::onMousePage2(int x, int y){
+}
+
+
+/**
+ PAGE 3
+ */
+
+void OptionWidget::setSizePage3(){
     int inter = m_width*0.08;
     int x =  m_width*0.5;
     int rayon = m_gros_button;
@@ -366,7 +399,7 @@ void OptionWidget::myDrawButton(ButtonGui * b, QString s){
     drawButtonLabel2(*b, COLOR_WHITE);
 }
 
-void OptionWidget::drawPage2(){
+void OptionWidget::drawPage3(){
     myDrawButton(&m_button1, "1");
     myDrawButton(&m_button2, "2");
     myDrawButton(&m_button3, "3");
@@ -382,7 +415,7 @@ void OptionWidget::drawPage2(){
 }
 
 int i5 = 0;
-void OptionWidget::onMousePage2(int x, int y){
+void OptionWidget::onMousePage3(int x, int y){
     if(i5 == 0 && m_button6.isActive(x, y)){
         i5 = 1;
     } else if(i5 == 1 && m_button1.isActive(x, y)){
@@ -401,12 +434,12 @@ void OptionWidget::onMousePage2(int x, int y){
 
 
 /**
- PAGE 3
+ PAGE 4
  */
 
 
 
-void OptionWidget::setSizePage3(){
+void OptionWidget::setSizePage4(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
     int x = m_width*0.2;
@@ -424,7 +457,7 @@ void OptionWidget::setSizePage3(){
     x = m_width*0.55;
 };
 
-void OptionWidget::drawPage3(){
+void OptionWidget::drawPage4(){
     Framework & f = Framework::Instance();
     
     drawButtonCheck(m_button_gps, f.m_config.m_gps, "gps");
@@ -438,7 +471,7 @@ void OptionWidget::drawPage3(){
     
 }
 
-void OptionWidget::onMousePage3(int x, int y){
+void OptionWidget::onMousePage4(int x, int y){
     
     
     Framework & f = Framework::Instance();
@@ -466,10 +499,10 @@ void OptionWidget::onMousePage3(int x, int y){
 }
 
 /**
- PAGE 4
+ PAGE 5
  */
 
-void OptionWidget::setSizePage4(){
+void OptionWidget::setSizePage5(){
     int inter = m_width*0.07;
     int y = m_height*0.25;
     int x = m_width*0.2;
@@ -495,7 +528,7 @@ void OptionWidget::setSizePage4(){
 
 
 
-void OptionWidget::drawPage4(){
+void OptionWidget::drawPage5(){
     Framework & f = Framework::Instance();
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
     int x = m_width*0.25;
@@ -515,7 +548,7 @@ void OptionWidget::drawPage4(){
     drawButtonLabel2(m_quit_full_screen);
 }
 
-void OptionWidget::onMousePage4(int x, int y){
+void OptionWidget::onMousePage5(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instancePtr()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
@@ -562,10 +595,10 @@ void OptionWidget::onMousePage4(int x, int y){
 
 
 /**
- PAGE 5
+ PAGE 6
  */
 
-void OptionWidget::setSizePage5(){
+void OptionWidget::setSizePage6(){
     int x = m_width*0.3;
     int y = m_height*0.2;
     m_refresh.setResizeStd(x, y, "Refresh", false);
@@ -575,7 +608,7 @@ void OptionWidget::setSizePage5(){
     m_reseau.setResizeStd(m_width*0.3, m_height*0.7, "Reseau");
 };
 
-void OptionWidget::drawPage5(){
+void OptionWidget::drawPage6(){
     drawButtonLabel2(m_refresh);
     
     int x = m_width*0.3;
@@ -598,7 +631,7 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_reseau);
 }
 
-void OptionWidget::onMousePage5(int x, int y){
+void OptionWidget::onMousePage6(int x, int y){
     if(m_refresh.isActive(x, y)){
         m_qt_network->test_camera();;
     }
@@ -615,10 +648,10 @@ void OptionWidget::onMousePage5(int x, int y){
 
 
 /**
- PAGE 6
+ PAGE 7
  */
 
-void OptionWidget::setSizePage6(){
+void OptionWidget::setSizePage7(){
     
     int inter = m_width*0.07;
     int y = m_height*0.25;
@@ -631,7 +664,7 @@ void OptionWidget::setSizePage6(){
     m_auto_launch.setResizeStd(x, y, "none");
 };
 
-void OptionWidget::drawPage6(){
+void OptionWidget::drawPage7(){
     drawText("robot", m_width*0.5, m_height*0.1, sizeText_big, true);
     
     Framework & f = Framework::Instance();
@@ -645,7 +678,7 @@ void OptionWidget::drawPage6(){
     drawButtonLabel2(m_auto_launch);
 }
 
-void OptionWidget::onMousePage6(int x, int y){
+void OptionWidget::onMousePage7(int x, int y){
     Framework & f = Framework::Instance();
     if(onMouseKeyPad2(m_port, x, y, 1)){
         f.m_config.m_port_remote = m_port.m_value;

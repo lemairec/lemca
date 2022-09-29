@@ -21,6 +21,7 @@ class OptionWidget : public BaseWidget {
     QPixmap * m_imgImuBlanc;
     QPixmap * m_imgImuGris;
     QPixmap * m_img_return;
+    QPixmap * m_img_cadena;
     
     ButtonGui m_button_return;
     
@@ -30,6 +31,7 @@ class OptionWidget : public BaseWidget {
     ButtonGui m_button_p4;
     ButtonGui m_button_p5;
     ButtonGui m_button_p6;
+    ButtonGui m_button_p7;
     
     int m_page = 1;
     
@@ -50,11 +52,7 @@ public:
     virtual void draw();
     virtual int onMouse(int x, int y);
     
-    ButtonGui m_update_bineuse_usb;
-    ButtonGui m_update_bineuse;
-    ButtonGui m_update_gps;
-    ButtonGui m_update_robot;
-    ButtonGui m_serial;
+    
     
     SelectButtonGui m_langage;
     SelectButtonGui m_unity;
@@ -64,7 +62,16 @@ public:
     void onMousePage1(int x, int y);
     void drawPage1();
     
-    //page2
+    ButtonGui m_update_bineuse_usb;
+    ButtonGui m_update_bineuse;
+    ButtonGui m_update_gps;
+    ButtonGui m_update_robot;
+    ButtonGui m_serial;
+    void setSizePage2();
+    void onMousePage2(int x, int y);
+    void drawPage2();
+    
+    //page3
     ButtonGui m_button_technicien;
     ButtonGui m_button1;
     ButtonGui m_button2;
@@ -77,11 +84,11 @@ public:
     ButtonGui m_button9;
      
     void myDrawButton(ButtonGui * b, QString s);
-    void setSizePage2();
-    void onMousePage2(int x, int y);
-    void drawPage2();
+    void setSizePage3();
+    void onMousePage3(int x, int y);
+    void drawPage3();
     
-    //page3
+    //page4
     ButtonGui m_button_gps;
     ButtonGui m_button_robot;
     ButtonGui m_button_serial;
@@ -92,11 +99,11 @@ public:
     ButtonGui m_update_deps;
     
     
-    void setSizePage3();
-    void onMousePage3(int x, int y);
-    void drawPage3();
+    void setSizePage4();
+    void onMousePage4(int x, int y);
+    void drawPage4();
     
-    //page4
+    //page5
     ButtonGui m_button_full_screen;
     ButtonGui m_clear_data;
     
@@ -105,9 +112,9 @@ public:
     ButtonGui m_quit_full_screen;
     ButtonGui m_run_cmd;
     
-    void setSizePage4();
-    void onMousePage4(int x, int y);
-    void drawPage4();
+    void setSizePage5();
+    void onMousePage5(int x, int y);
+    void drawPage5();
     
     MyQTNetwork * m_qt_network;
     ButtonGui m_refresh;
@@ -117,15 +124,15 @@ public:
     ButtonGui m_camera31;
     ButtonGui m_reseau;
     
-    void setSizePage5();
-    void onMousePage5(int x, int y);
-    void drawPage5();
-    
-    ValueGui m_port;
-    ButtonGui m_auto_launch;
     void setSizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();
+    
+    ValueGui m_port;
+    ButtonGui m_auto_launch;
+    void setSizePage7();
+    void onMousePage7(int x, int y);
+    void drawPage7();
     
     void open();
     void call(const std::string & s);
