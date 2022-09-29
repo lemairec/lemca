@@ -34,7 +34,6 @@ MainWidget::MainWidget()
 
     //m_widgets.push_back(&m_satWidget);
     m_widgets.push_back(&m_remote_widget);
-    m_widgets.push_back(&m_menuWidget);
     m_widgets.push_back(&m_key_pad_widget);
     m_widgets.push_back(&m_option_widget);
     m_widgets.push_back(&m_wifi_widget);
