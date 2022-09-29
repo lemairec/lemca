@@ -4,6 +4,7 @@
 #include "environnement.hpp"
 #include "qt/main_window.hpp"
 #include "../util/directory_manager.hpp"
+#include "../config/langage.hpp"
 #include "../framework.hpp"
 
 #include <QFileDialog>
@@ -13,7 +14,7 @@
 OptionWidget::OptionWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
-    
+    m_black_mode = false;
     m_imgClose = loadImage("/gui/ok.png");
     m_imgPlus = loadImage("/images/plus.png");
     m_imgMinus = loadImage("/images/minus.png");
@@ -23,21 +24,23 @@ OptionWidget::OptionWidget()
     m_imgVolantGris = loadImage("/images/volant_gris.png");
     m_imgOutilBlanc = loadImage("/images/outil_blanc.png");
     m_imgOutilGris = loadImage("/images/outil_gris.png");
-    m_imgOptionBlanc = loadImage("/gui/option_blanc.png");
-    m_imgOptionGris = loadImage("/gui/option_gris.png");
+    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
     m_imgImuBlanc = loadImage("/images/imu_blanc.png");
     m_imgImuGris = loadImage("/images/imu_gris.png");
     
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
+    
+    m_img_return = loadImageInv("/gui/return.png");
     //m_close=false;
     //m_page =5;
     //addSerials();
+    
 }
 
 void OptionWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
-    m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
+    
     m_y2 = m_height*0.04;
     m_x2 = m_y2;
     m_width2 = m_width-2*m_y2-m_gros_button*2.4;
@@ -77,7 +80,7 @@ void OptionWidget::setSize(int width, int height){
     y += inter;
     //m_button_p7.setResize(x_right, y, m_gros_button);
     
-    //m_button_ok.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
+    m_button_return.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
     
     setSizePage1();
     setSizePage2();
@@ -87,7 +90,7 @@ void OptionWidget::setSize(int width, int height){
     setSizePage6();
     //setSizePage7(width, height);
     
-    //m_select_widget.setSize(width, height);
+    m_select_widget.setSize(width, height);
     //m_keypad_widget.setSize(width, height);
     //m_keyboard_widget.setSize(width, height);
     
@@ -103,7 +106,7 @@ void OptionWidget::draw(){
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    drawButtonImage(m_button_close, m_imgClose);
+    drawButtonOption(m_button_return, m_img_return, false, 0.3);
     
     drawButtonOption(m_button_p1, m_imgOptionBlanc, (m_page == 1), 0.3);
     if(m_page == 1){
@@ -138,11 +141,15 @@ void OptionWidget::draw(){
         };
         //drawButtonOption(m_button_p7, m_img_option_7, (m_page == 7), 0.3);
     }
+    
+    if(!m_select_widget.m_close){
+        m_select_widget.draw();
+    }
 }
 
 int OptionWidget::onMouse(int x, int y){
     
-    if(m_button_close.isActive(x,y)){
+    if(m_button_return.isActive(x,y)){
         m_close = true;
     } else if(m_button_p1.isActive(x,y)){
         m_page = 1;
@@ -182,13 +189,23 @@ int OptionWidget::onMouse(int x, int y){
  */
 
 void OptionWidget::setSizePage1(){
-    //m_select_serial
-    int x = 0.15*m_width;
-    int x2 = 0.55*m_width;
-    int y = 0.35*m_height;
-    int inter = 0.15*m_height;
+    int y = m_y_begin;
+    m_langage.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGUAGE"), true, m_part_1_w/2);
+    m_langage.clear();
+    m_langage.addValue(Langage::getKey("FR"));
+    m_langage.addValue(Langage::getKey("EN"));
+    m_langage.addValue(Langage::getKey("DE"));
     
-    m_update_bineuse.setResizeStd(x, y, "Update Bineuse Wifi", false, 220);
+    y+= m_y_inter;
+    y+= m_y_inter;
+    y+= m_y_inter;
+    m_unity.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGUAGE"), true, m_part_1_w/2);
+    m_unity.clear();
+    m_unity.addValue(Langage::getKey("METRIQUE"));
+    m_unity.addValue(Langage::getKey("IMPERIAL"));
+    
+    
+    /*m_update_bineuse.setResizeStd(x, y, "Update Bineuse Wifi", false, 220);
     m_update_bineuse_usb.setResizeStd(x2, y, "Update Bineuse USB", false, 220);
     y+= inter;
     m_update_gps.setResizeStd(x, y, "Update GPS", false, 220);
@@ -196,17 +213,37 @@ void OptionWidget::setSizePage1(){
     m_serial.setResizeStd(x, y, "Update Serial", false, 220);
     y+= inter;
     m_update_robot.setResizeStd(x, y, "Update Robot", false, 220);
-    y+= inter;
+    y+= inter;*/
     
     
 };
 
 void OptionWidget::drawPage1(){
     Framework & f = Framework::Instance();
-    drawText(ProjectVersion, 0.2*m_width, 0.8*m_height);
+    Config & config = f.m_config;
     
-    drawText("Menu Machine", 0.5*m_width, 0.1*m_height, sizeText_medium, true);
-    if(f.m_config.m_wifi){
+    
+    drawText("Menu Infos", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
+    
+    drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_LANGUAGE"));
+    drawPart1Title(m_unity.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_UNITY"));
+    
+    if(m_select_widget.m_close){
+        m_langage.setValueString(Langage::getKey(config.m_langage));
+    }
+    drawButtonLabel2(m_langage.m_buttonOpen);
+    
+    if(m_select_widget.m_close){
+        m_unity.setValueString(Langage::getKey("METRIQUE"));
+    }
+    drawButtonLabel2(m_unity.m_buttonOpen);
+    
+    
+    drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("VERSION"));
+    drawText(ProjectVersion, m_part_2_m, m_langage.m_y, sizeText_medium, true);
+    
+    /*if(f.m_config.m_wifi){
         drawText("Update Wifi", 0.25*m_width, 0.2*m_height, sizeText_medium, true);
         drawButtonLabel2(m_update_bineuse);
         if(f.m_config.m_gps){
@@ -226,12 +263,33 @@ void OptionWidget::drawPage1(){
     
     if(!m_file_widget.m_close){
         m_file_widget.draw();
-    }
+    }*/
 }
 
 void OptionWidget::onMousePage1(int x, int y){
     Framework & f = Framework::Instance();
-    if(f.m_config.m_wifi){
+    Config & config = f.m_config;
+    if(!m_select_widget.m_close){
+        if(m_select_widget.onMouseSelect(x, y)){
+            std::string s = m_select_widget.m_selectButton->getValueString();
+            if(s == Langage::getKey("FR")){
+                config.m_langage = "FR";
+            } else if(s == Langage::getKey("EN")){
+                config.m_langage = "EN";
+            } else if(s == Langage::getKey("DE")){
+                config.m_langage = "DE";
+            }
+        }
+       
+        return;
+    }
+    
+    if(m_langage.m_buttonOpen.isActive(x, y)){
+        m_select_widget.open();
+        m_select_widget.setValueGuiKeyPad(&m_langage);
+    }
+    
+    /*if(f.m_config.m_wifi){
         if(m_update_bineuse.isActive(x, y)){
             if(f.m_config.m_code_source){
                 call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
@@ -269,7 +327,7 @@ void OptionWidget::onMousePage1(int x, int y){
         if(m_update_bineuse_usb.isActive(x, y)){
             m_file_widget.open();
         }
-    }
+    }*/
 }
 
 

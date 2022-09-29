@@ -14,8 +14,6 @@ class MainWidget : public BaseWidget {
 public:
     static MainWidget * instancePtr();
     
-    SelectWidget m_select_widget;
-    
     MenuWidget m_menuWidget;
     OptionWidget m_option_widget;
     WifiWidget m_wifi_widget;
@@ -51,7 +49,6 @@ public:
     ButtonGui m_buttonSerial;
     ButtonGui m_buttonOption;
     ButtonGui m_buttonSendMessage;
-    SelectButtonGui m_button_langage;
     
     bool m_debug = false;
     bool m_is_bineuse_call = false;

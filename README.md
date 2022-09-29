@@ -204,12 +204,15 @@ reboot
 
 # 5. xcfe
 
+## 5.1 alimentation
 
 `````
-alimentation
 => bouton alimentation => eteindre
 => gestion de l'alimentation (never never never off)
 `````
+
+## 5.2 montage usb auto
+
 
 ## wifi
 

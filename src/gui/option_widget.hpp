@@ -20,9 +20,9 @@ class OptionWidget : public BaseWidget {
     QPixmap * m_imgOptionGris;
     QPixmap * m_imgImuBlanc;
     QPixmap * m_imgImuGris;
+    QPixmap * m_img_return;
     
-    
-    ButtonGui m_button_close;
+    ButtonGui m_button_return;
     
     ButtonGui m_button_p1;
     ButtonGui m_button_p2;
@@ -33,10 +33,14 @@ class OptionWidget : public BaseWidget {
     
     int m_page = 1;
     
+    
+    
     void drawPart2(double y, double h, std::string title);
     void drawPart1(double y, double h, std::string title);
 
 public:
+    SelectWidget m_select_widget;
+    
     FileWidget m_file_widget;
     
     OptionWidget();
@@ -51,6 +55,10 @@ public:
     ButtonGui m_update_gps;
     ButtonGui m_update_robot;
     ButtonGui m_serial;
+    
+    SelectButtonGui m_langage;
+    SelectButtonGui m_unity;
+    
     
     void setSizePage1();
     void onMousePage1(int x, int y);

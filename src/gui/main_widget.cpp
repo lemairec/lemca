@@ -28,7 +28,7 @@ MainWidget::MainWidget()
     m_imgBineuse = loadImage("/gui/bineuse.png");
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
-    m_imgOption = loadImage("/gui/option_gros.png");
+    m_imgOption = loadImageInv("/gui/infos_blanc.png");
     m_imgWifi = loadImage("/gui/wifi.png");
     m_img_remote = loadImage("/gui/reseau.png");
 
@@ -51,7 +51,6 @@ void MainWidget::setSize(int width, int height){
     for(auto p : m_widgets){
         p->setSize(m_width, m_height);
     }
-    m_select_widget.setSize(m_width, m_height);
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
@@ -60,19 +59,14 @@ void MainWidget::setSize(int width, int height){
     m_buttonGps.setResize(m_width*0.4, m_height*0.8, button_size);
     m_buttonRobot.setResize(m_width*0.6, m_height*0.8, button_size);
     m_buttonExit.setResize(m_width*0.8, m_height*0.8, button_size);
-    m_buttonWifi.setResize(m_width*0.6, m_height*0.2, button_size);
-    m_button_remote.setResize(m_width*0.4, m_height*0.2, button_size);
+    
+    m_buttonWifi.setResize(m_width*0.8, m_height*0.2, button_size);
+    m_button_remote.setResize(m_width*0.6, m_height*0.2, button_size);
+    m_buttonOption.setResize(m_width*0.2, m_height*0.2, button_size);
+    
     m_buttonSerial.setResize(m_width*0.8, m_height*0.5, button_size);
     //m_buttonMenu2.setResize(120, m_height-30, button_size);
-    m_buttonOption.setResize(m_width*0.2, m_height*0.2, button_size);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, button_size);
-    
-    
-    m_button_langage.setResize(m_width*0.8, m_height*0.2, "", true, m_width*0.2);
-    m_button_langage.clear();
-    m_button_langage.addValue(("FR"));
-    m_button_langage.addValue(("EN"));
-    m_button_langage.addValue(("DE"));
 }
 
 MainWidget * MainWidget::instancePtr(){
@@ -84,12 +78,13 @@ void MainWidget::setPainter(QPainter * p){
     BaseWidget::setPainter(p);
     m_option_widget.setPainter(p);
     m_option_widget.m_file_widget.setPainter(p);
+    m_option_widget.m_file_widget.setPainter(p);
     m_option_widget.m_file_widget.m_select_widget.setPainter(p);
+    m_option_widget.m_select_widget.setPainter(p);
     m_wifi_widget.m_select_widget.setPainter(p);
     for(auto p2 : m_widgets){
         p2->setPainter(p);
     }
-    m_select_widget.setPainter(p);
     m_key_board_widget.setPainter(p);
 }
 
@@ -115,11 +110,6 @@ void MainWidget::draw_force(){
     drawMain();
     drawButtons();
     
-    if(m_select_widget.m_close){
-        m_button_langage.setValueString(f.m_config.m_langage);//Langage::getKey(config.m_langage.getStdValue())
-    }
-    drawButtonLabel2(m_button_langage.m_buttonOpen);
-    
     if(f.m_config.m_code_source){
         drawText("code source", 0.1*m_width, 0.4*m_height);
     }
@@ -133,10 +123,6 @@ void MainWidget::draw_force(){
             p->draw();
         }
     }
-    if(!m_select_widget.m_close){
-        m_select_widget.draw();
-    }
-    
     
     if(f.m_is_f_call){
         m_painter->drawRect(0.2*m_width, 0.2*m_height,0.6*m_width, 0.6*m_height);
@@ -206,7 +192,7 @@ void MainWidget::drawButtons(){
         drawButton(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
     }
     drawButton(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
-    drawButton(m_buttonOption, m_imgOption, Langage::getKey("HOME_PARAMS"), 0.8);
+    drawButton(m_buttonOption, m_imgOption, Langage::getKey("HOME_INFOS"), 1.2);
     /*drawButtonImage(m_buttonMenu, m_imgMenu);
     drawButton(m_buttonMenu2);
     drawButton(m_buttonMenu3);
@@ -227,27 +213,6 @@ int MainWidget::onMouse(int x, int y){
             return 0;
         }
     }
-    
-    if(!m_select_widget.m_close){
-        if(m_select_widget.onMouseSelect(x, y)){
-            std::string s = m_select_widget.m_selectButton->getValueString();
-            if(s == ("FR")){
-                config.m_langage = "FR";
-            } else if(s == ("EN")){
-                config.m_langage = "EN";
-            } else if(s == ("DE")){
-                config.m_langage = "DE";
-            }
-            //loadConfig();
-        }
-       
-        return 0;
-    }
-    if(m_button_langage.m_buttonOpen.isActive(x, y)){
-        m_select_widget.open();
-        m_select_widget.setValueGuiKeyPad(&m_button_langage);
-    }
-    
     
     if(m_buttonBineuse.isActive(x, y)){
         std::string cmd = f.m_config.m_bineuse_run;

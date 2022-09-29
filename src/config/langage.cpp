@@ -52,7 +52,7 @@ void Langage::setLangage(const std::string & s){
 Langage::Langage(){
     add("FR", "HOME_BINEUSE", "Bineuse");
     add("FR", "HOME_GPS", "GPS");
-    add("FR", "HOME_PARAMS", "Paramètres");
+    add("FR", "HOME_INFOS", "Infos");
     add("FR", "HOME_REMOTE", "Accès à dist");
     add("FR", "HOME_WIFI", "Wifi");
     add("FR", "HOME_OFF", "Eteindre");
