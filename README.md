@@ -5,7 +5,9 @@
 => 10 amd64 (multiarch pour n702)
 
 => current => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/archive/10.13.0-live+nonfree/amd64/iso-hybrid/
-=> https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
+
+
+=> next => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
 
 => balenaetcher => faire le boot
 
@@ -40,11 +42,13 @@ autologin-user-timeout=0
 ### 2.2. lancement de lemca (automatique)
 
 `````
+.config/autostart
 `````
 
 ## 3. droit usb
 
 `````
+su
 /usr/sbin/usermod
 usermod -a -G dialout Nom_Utilisateur
 usermod -a -G tty Nom_Utilisateur
