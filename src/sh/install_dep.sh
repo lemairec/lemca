@@ -16,4 +16,5 @@ apt-get install -y libqt5multimedia5-plugins
 apt-get install -y nmap
 apt-get install -y x11vnc
 apt-get install -y expect
+apt-get install -y unclutter
 apt-get install -y onboard
