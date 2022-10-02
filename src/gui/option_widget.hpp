@@ -22,6 +22,7 @@ class OptionWidget : public BaseWidget {
     QPixmap * m_imgImuGris;
     QPixmap * m_img_return;
     QPixmap * m_img_cadena;
+    QPixmap * m_img_update;
     
     ButtonGui m_button_return;
     
@@ -73,6 +74,7 @@ public:
     
     //page3
     ButtonGui m_button_technicien;
+    ButtonGui m_button0;
     ButtonGui m_button1;
     ButtonGui m_button2;
     ButtonGui m_button3;
@@ -82,8 +84,8 @@ public:
     ButtonGui m_button7;
     ButtonGui m_button8;
     ButtonGui m_button9;
-     
     void myDrawButton(ButtonGui * b, QString s);
+    
     void setSizePage3();
     void onMousePage3(int x, int y);
     void drawPage3();

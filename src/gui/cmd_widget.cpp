@@ -35,6 +35,21 @@ void CmdWidget::draw(){
             break;
         }
     }
+    
+    double perc = f.m_cmd_buffer.size()/100.0;
+    
+    if(f.m_cmd_end){
+        perc = 1.0;
+    } else {
+        if(perc > 0.99){
+            perc = 0.99;
+        }
+    }
+    m_painter->setBrush(m_brushWhite);
+    m_painter->drawRect(m_width*0.05, m_height*0.83, m_width*0.9, m_height*0.02);
+    m_painter->setBrush(m_brushGreen);
+    m_painter->drawRect(m_width*0.05, m_height*0.83, perc*m_width*0.9, m_height*0.02);
+    
     if(f.m_cmd_end){
         if(f.m_cmd_return == 0){
             drawButtonLabel2(m_button_close, COLOR_VALIDATE);

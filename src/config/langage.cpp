@@ -57,6 +57,8 @@ Langage::Langage(){
     add("FR", "HOME_WIFI", "Wifi");
     add("FR", "HOME_OFF", "Eteindre");
 
+    add("FR", "INFOS_AV_TITLE", "Menu avancé (infos)");
+
 
     add("FR", "OPTION_1_TITLE", "Mise à jour");
     

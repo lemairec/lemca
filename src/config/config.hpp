@@ -15,7 +15,7 @@ public:
     std::string m_langage = "EN";
     
     bool m_fullscreen = true;
-    bool m_technicien = false;
+    int m_user_mode = 0;
     bool m_code_source = false;
     bool m_wifi = true;
     bool m_usb = false;
@@ -33,6 +33,14 @@ public:
     AutoLaunch m_auto_launch = AutoLaunch_None;
     
     Config();
+    
+    bool isDeveloppeur(){
+        return m_user_mode > 1;
+    }
+    
+    bool isTechnicien(){
+        return m_user_mode > 0;
+    }
     
     void work(QSettings & settings, bool save);
     void validate();

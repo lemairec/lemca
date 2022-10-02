@@ -30,6 +30,7 @@ OptionWidget::OptionWidget()
     
     m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
     m_img_cadena = loadImageInv("/gui/cadena.png");
+    m_img_update = loadImageInv("/gui/update.png");
     
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
@@ -116,7 +117,7 @@ void OptionWidget::draw(){
         drawPage1();
     }
     
-    drawButtonOption(m_button_p2, m_imgOptionBlanc, (m_page == 2), 0.3);
+    drawButtonOption(m_button_p2, m_img_update, (m_page == 2), 0.4);
     if(m_page == 2){
         drawPage2();
     }
@@ -126,12 +127,13 @@ void OptionWidget::draw(){
         drawPage3();
     }
     
-    if(Framework::Instance().m_config.m_technicien){
+    if(Framework::Instance().m_config.isTechnicien()){
         drawButtonOption(m_button_p4, m_imgOptionBlanc, (m_page == 4), 0.3);
         if(m_page == 4){
             drawPage4();
         };
-        
+    }
+    if(Framework::Instance().m_config.isDeveloppeur()){
         drawButtonOption(m_button_p5, m_imgOptionBlanc, (m_page == 5), 0.3);
         if(m_page == 5){
             drawPage5();
@@ -165,19 +167,19 @@ int OptionWidget::onMouse(int x, int y){
     } else if(m_button_p3.isActive(x,y)){
         m_page = 3;
     } else if(m_button_p4.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
+        if(Framework::Instance().m_config.isTechnicien()){
             m_page = 4;
         }
     } else if(m_button_p5.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
+        if(Framework::Instance().m_config.isDeveloppeur()){
             m_page = 5;
         }
     } else if(m_button_p6.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
+        if(Framework::Instance().m_config.isDeveloppeur()){
             m_page = 6;
         }
     } else if(m_button_p7.isActive(x,y)){
-        if(Framework::Instance().m_config.m_technicien){
+        if(Framework::Instance().m_config.isDeveloppeur()){
             m_page = 7;
         }
     } else {
@@ -371,7 +373,7 @@ void OptionWidget::onMousePage2(int x, int y){
 
 void OptionWidget::setSizePage3(){
     int inter = m_width*0.08;
-    int x =  m_width*0.5;
+    int x = m_width2/2;
     int rayon = m_gros_button;
     int y_begin = m_height*0.4;
     
@@ -390,6 +392,10 @@ void OptionWidget::setSizePage3(){
     m_button2.setResizeStd(x, y, "2", true, 2*rayon, 2*rayon);
     m_button3.setResizeStd(x+inter, y, "3", true, 2*rayon, 2*rayon);
     
+    y = y_begin + 2*inter;
+    m_button0.setResizeStd(x, y, "0", true, 2*rayon, 2*rayon);
+    
+    y = m_height*0.3;
     y = y_begin + 3*inter;
     m_button_technicien.setResize(m_width*0.3, y, rayon);
     
@@ -401,6 +407,9 @@ void OptionWidget::myDrawButton(ButtonGui * b, QString s){
 }
 
 void OptionWidget::drawPage3(){
+    drawText(Langage::getKey("INFOS_AV_TITLE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    
+    myDrawButton(&m_button0, "0");
     myDrawButton(&m_button1, "1");
     myDrawButton(&m_button2, "2");
     myDrawButton(&m_button3, "3");
@@ -411,25 +420,35 @@ void OptionWidget::drawPage3(){
     myDrawButton(&m_button8, "8");
     myDrawButton(&m_button9, "9");
     
-    drawButtonCheck(m_button_technicien, Framework::Instance().m_config.m_technicien);
+    drawButtonCheck(m_button_technicien, Framework::Instance().m_config.isTechnicien());
     drawText("technicien", m_width*0.4, m_button_technicien.m_y);
 }
 
-int i5 = 0;
+int i_technicien = 0;
+int i_avance = 0;
 void OptionWidget::onMousePage3(int x, int y){
-    if(i5 == 0 && m_button6.isActive(x, y)){
-        i5 = 1;
-    } else if(i5 == 1 && m_button1.isActive(x, y)){
-        i5 = 2;
-    } else if(i5 == 2 && m_button5.isActive(x, y)){
-        i5 = 3;
-    } else if(i5 == 3 && m_button5.isActive(x, y)){
-        Framework::Instance().m_config.m_technicien = true;
-        i5 = 4;
+    Framework & f = Framework::Instance();
+    if(i_avance == 0 && m_button6.isActive(x, y)){
+        i_avance = 1;
+    } else if(i_avance == 1 && m_button1.isActive(x, y)){
+        i_avance = 2;
+    } else if(i_avance == 2 && m_button5.isActive(x, y)){
+        i_avance = 3;
+    } else if(i_avance == 3 && m_button5.isActive(x, y)){
+        f.m_config.m_user_mode = 2;
+    } else if(i_technicien == 0 && m_button0.isActive(x, y)){
+        i_technicien = 1;
+    } else if(i_technicien == 1 && m_button0.isActive(x, y)){
+        i_technicien = 2;
+    } else if(i_technicien == 2 && m_button0.isActive(x, y)){
+        i_technicien = 3;
+    } else if(i_technicien == 3 && m_button0.isActive(x, y)){
+        f.m_config.m_user_mode = 1;
     } else {
-        i5 = 0;
+        i_technicien = 0;
+        i_avance = 0;
     }
-    INFO(i5);
+    //INFO(i_technicien << " " << i_avance << " " << f.m_config.m_user_mode);
 }
 
 
