@@ -50,6 +50,10 @@ void Langage::setLangage(const std::string & s){
 
 
 Langage::Langage(){
+    add("FR", "OK", "OK");
+    add("FR", "CANCEL", "Annuler");
+    add("FR", "FAIL", "Erreur");
+    
     add("FR", "HOME_BINEUSE", "Bineuse");
     add("FR", "HOME_GPS", "GPS");
     add("FR", "HOME_SERIAL", "Série");

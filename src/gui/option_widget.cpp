@@ -294,7 +294,7 @@ void OptionWidget::setSizePage2(){
     m_update_robot.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_ROBOT"), true, m_part_1_w/2);
     y+= m_y_inter;
     
-    
+    m_file_widget.setSize(m_width, m_height);
 };
 
 void OptionWidget::drawPage2(){

@@ -63,7 +63,7 @@ su
 cd deb10-master
 make install
 
-export $PATH=$PATH:/sbin/
+export PATH=$PATH:/sbin/
 plymouth-set-default-theme -R deb10
 
 
@@ -86,6 +86,7 @@ reboot
 ## 5.1 alimentation
 
 `````
+=> gestionnaire d'alimentation
 => bouton alimentation => eteindre
 => gestion de l'alimentation (never never never off)
 `````
@@ -116,42 +117,11 @@ brew install python-tk
 # linux
 
 
-`````
-apt-get install wireless-tools
-# pas sur apt-get update && apt-get install wpasupplicant wireless-tools 
-
-sudo apt-get install libsdl2-image-dev
-#pip3 install kivy
-#pip3 install pillow
-`````
-
 nmcli dev wifi
                connect lemaire pzssword toto
 
 x11vnc -ssh root@139.162.182.189:5901 -forever
 
-
-#include <cstdio>
-#include <iostream>
-#include <memory>
-#include <stdexcept>
-#include <string>
-#include <array>
-
-std::string exec(const char* cmd) {
-    std::array<char, 128> buffer;
-    std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-    if (!pipe) {
-        throw std::runtime_error("popen() failed!");
-    }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
-    return result;
-}
-
-14pin Tyco Ampseal
 
 
 //imu
@@ -166,8 +136,6 @@ export PATH=$PATH:/usr/sbin
 lsusb
 `````
 
-firmware-misc-nonfree
-
 
 ## clavier
 
@@ -179,18 +147,6 @@ onboard
 ``````
 echo <password> | sudo -S <command>
 ``````
-
-## veille
-
-parametre=>gestionnaire d'allim
-
-`````
-systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-`````
-
-plymouth-set-default-theme
-GRUB_BACKGROUND=/home/lemca/deb10-master/logo.jpg
-
 
 ## reseau
 
@@ -243,16 +199,3 @@ terminal => ctrl+alt+f3
 ### panel
 
 ..config/xfce4/xfconf/xfce-perchannel-xml/
-
-## point hadrien
-
-Settings Manager -> Session and Startup
-Disable "Automatically save session on logout"
-
-## robert
-
-serveur et client guacamol
-linode
-
-vpn
-connection wifi/ ethernet => map

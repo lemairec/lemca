@@ -218,7 +218,7 @@ void BaseWidget::drawButtonLabel2(ButtonGui & button, int color){
     } else if(color == COLOR_VALIDATE){
         m_painter->setBrush(m_brushGreenButton);
     } else if(color == COLOR_FAIL){
-        m_painter->setBrush(m_brushDarkGray);
+        m_painter->setBrush(m_brushRedButton);
     } else if(color == COLOR_CHECK){
         m_painter->setBrush(m_brushDarkGray);
     } else if(color == COLOR_WHITE){
