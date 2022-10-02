@@ -186,8 +186,10 @@ void MainWidget::drawButtons(){
         drawButton(m_buttonSerial, m_imgGPS, "Serial");
     }
     
-    if(f.m_config.m_wifi){
+    if(f.m_config.m_wifi2){
         drawButton(m_buttonWifi, m_imgWifi, Langage::getKey("HOME_WIFI"));
+    }
+    if(f.m_config.m_remote){
         drawButton(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
     }
     drawButton(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
@@ -233,10 +235,12 @@ int MainWidget::onMouse(int x, int y){
     } 
     
     //Framework & f = Framework::Instance();
-    if(f.m_config.m_wifi){
+    if(f.m_config.m_wifi2){
         if(m_buttonWifi.isActive(x, y)){
             m_wifi_widget.open();
         }
+    }
+    if(f.m_config.m_remote){
         if(m_button_remote.isActive(x, y)){
             m_remote_widget.open();
         }

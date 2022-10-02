@@ -15,7 +15,10 @@ Config::Config(){
 
 void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "code_source", m_code_source, save);
-    saveLoadBool(settings, "wifi", m_wifi, save);
+    saveLoadBool(settings, "wifi", m_wifi2, save);
+    saveLoadBool(settings, "update_usb", m_update_usb, save);
+    saveLoadBool(settings, "update_wifi", m_update_wifi, save);
+    saveLoadBool(settings, "remote", m_remote, save);
     saveLoadBool(settings, "m_gps", m_gps, save);
     saveLoadBool(settings, "m_fullscreen", m_fullscreen, save);
     saveLoadInt(settings, "m_robot", m_robot, save);
@@ -35,6 +38,7 @@ void Config::work(QSettings & settings, bool save){
 }
 
 void Config::validate(){
+    m_wifi2 = (m_remote || m_update_wifi);
 }
 
 /**

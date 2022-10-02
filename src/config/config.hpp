@@ -17,9 +17,11 @@ public:
     bool m_fullscreen = true;
     int m_user_mode = 0;
     bool m_code_source = false;
-    bool m_wifi = true;
-    bool m_usb = false;
-    bool m_gps = false;
+    bool m_update_wifi = true;
+    bool m_update_usb = false;
+    bool m_remote = false;
+    bool m_wifi2 = false;
+   bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
     

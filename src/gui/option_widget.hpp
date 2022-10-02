@@ -73,7 +73,6 @@ public:
     void drawPage2();
     
     //page3
-    ButtonGui m_button_technicien;
     ButtonGui m_button0;
     ButtonGui m_button1;
     ButtonGui m_button2;
@@ -92,14 +91,13 @@ public:
     
     //page4
     ButtonGui m_button_gps;
-    ButtonGui m_button_robot;
     ButtonGui m_button_serial;
-    ButtonGui m_button_wifi;
-    ButtonGui m_button_usb;
+    ButtonGui m_button_update_wifi;
+    ButtonGui m_button_update_usb;
+    ButtonGui m_button_remote;
     
     ButtonGui m_update_lemca;
     ButtonGui m_update_deps;
-    
     
     void setSizePage4();
     void onMousePage4(int x, int y);
@@ -114,24 +112,25 @@ public:
     ButtonGui m_quit_full_screen;
     ButtonGui m_run_cmd;
     
+    MyQTNetwork * m_qt_network;
+    ButtonGui m_refresh;
+    ButtonGui m_camera30;
+    ButtonGui m_camera31;
+    ButtonGui m_reseau;
+    
     void setSizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();
     
-    MyQTNetwork * m_qt_network;
-    ButtonGui m_refresh;
-    
-    
-    ButtonGui m_camera30;
-    ButtonGui m_camera31;
-    ButtonGui m_reseau;
+   
+    ValueGui m_port;
+    ButtonGui m_auto_launch;
+    ButtonGui m_button_robot;
     
     void setSizePage6();
     void onMousePage6(int x, int y);
     void drawPage6();
     
-    ValueGui m_port;
-    ButtonGui m_auto_launch;
     void setSizePage7();
     void onMousePage7(int x, int y);
     void drawPage7();

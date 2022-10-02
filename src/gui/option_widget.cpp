@@ -52,7 +52,7 @@ void OptionWidget::setSize(int width, int height){
 
     m_y_title = m_y2+m_height*0.08;
     m_y_inter = 0.08*m_height2;
-    m_y_begin = m_y_title+4*m_y_inter;
+    m_y_begin = m_y_title+3*m_y_inter;
     
     m_width3 = m_width2+m_y2+m_y2;
     m_part_1_x = m_width3*0.04;
@@ -144,11 +144,10 @@ void OptionWidget::draw(){
             drawPage6();
         };
         
-        drawButtonOption(m_button_p7, m_imgOptionBlanc, (m_page == 7), 0.3);
+        /*drawButtonOption(m_button_p7, m_imgOptionBlanc, (m_page == 7), 0.3);
         if(m_page == 7){
             drawPage7();
-        };
-        //drawButtonOption(m_button_p7, m_img_option_7, (m_page == 7), 0.3);
+        };*/
     }
     
     if(!m_select_widget.m_close){
@@ -180,7 +179,7 @@ int OptionWidget::onMouse(int x, int y){
         }
     } else if(m_button_p7.isActive(x,y)){
         if(Framework::Instance().m_config.isDeveloppeur()){
-            m_page = 7;
+            //m_page = 7;
         }
     } else {
         if(m_page == 1){
@@ -209,6 +208,7 @@ int OptionWidget::onMouse(int x, int y){
 
 void OptionWidget::setSizePage1(){
     int y = m_y_begin;
+    y+= m_y_inter;
     m_langage.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGUAGE"), true, m_part_1_w/2);
     m_langage.clear();
     m_langage.addValue(Langage::getKey("FR"));
@@ -283,14 +283,15 @@ void OptionWidget::onMousePage1(int x, int y){
 
 void OptionWidget::setSizePage2(){
     int y = m_y_begin;
-    m_update_bineuse.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Bineuse Wifi", true, m_part_1_w/2);
-    m_update_bineuse_usb.setResizeStd(m_part_2_x+m_part_1_w/2, y, "Update Bineuse USB", true, m_part_1_w/2);
     y+= m_y_inter;
-    m_update_gps.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update GPS", true, m_part_1_w/2);
+    m_update_bineuse.setResizeStd(m_part_1_m, y, "Update Bineuse Wifi", true, m_part_1_w/2);
+    m_update_bineuse_usb.setResizeStd(m_part_2_m, y, "Update Bineuse USB", true, m_part_1_w/2);
     y+= m_y_inter;
-    m_serial.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Serial", true, m_part_1_w/2);
+    m_update_gps.setResizeStd(m_part_1_m, y, "Update GPS", true, m_part_1_w/2);
     y+= m_y_inter;
-    m_update_robot.setResizeStd(m_part_1_x+m_part_1_w/2, y, "Update Robot", true, m_part_1_w/2);
+    m_serial.setResizeStd(m_part_1_m, y, "Update Serial", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_update_robot.setResizeStd(m_part_1_m, y, "Update Robot", true, m_part_1_w/2);
     y+= m_y_inter;
     
     
@@ -301,7 +302,7 @@ void OptionWidget::drawPage2(){
     drawText("Mise à jour", 0.45*m_width, m_y_title, sizeText_bigbig, true);
     drawSeparateurH();
     
-    if(f.m_config.m_wifi){
+    if(f.m_config.m_update_wifi){
         drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update Wifi");
         
         drawButtonLabel2(m_update_bineuse);
@@ -315,7 +316,7 @@ void OptionWidget::drawPage2(){
             drawButtonLabel2(m_update_robot);
         }
     }
-    if(f.m_config.m_usb){
+    if(f.m_config.m_update_usb){
         drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update USB");
         
         drawButtonLabel2(m_update_bineuse_usb);
@@ -328,7 +329,7 @@ void OptionWidget::drawPage2(){
 
 void OptionWidget::onMousePage2(int x, int y){
     Framework & f = Framework::Instance();
-    if(f.m_config.m_wifi){
+    if(f.m_config.m_update_wifi){
         if(m_update_bineuse.isActive(x, y)){
             if(f.m_config.m_code_source){
                 call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
@@ -354,7 +355,7 @@ void OptionWidget::onMousePage2(int x, int y){
     }
     
     
-    if(f.m_config.m_usb){
+    if(f.m_config.m_update_usb){
         if(!m_file_widget.m_close){
             if(m_file_widget.onMouse(x, y)){
                 std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
@@ -397,12 +398,6 @@ void OptionWidget::setSizePage3(){
     
     y = y_begin + 2*inter;
     m_button0.setResizeStd(x, y, "0", true, 2*rayon, 2*rayon);
-    
-    y = m_height*0.3;
-    y = y_begin + 3*inter;
-    m_button_technicien.setResize(m_width*0.3, y, rayon);
-    
-    
 }
 
 void OptionWidget::myDrawButton(ButtonGui * b, QString s){
@@ -422,9 +417,6 @@ void OptionWidget::drawPage3(){
     myDrawButton(&m_button7, "7");
     myDrawButton(&m_button8, "8");
     myDrawButton(&m_button9, "9");
-    
-    drawButtonCheck(m_button_technicien, Framework::Instance().m_config.isTechnicien());
-    drawText("technicien", m_width*0.4, m_button_technicien.m_y);
 }
 
 int i_technicien = 0;
@@ -463,35 +455,45 @@ void OptionWidget::onMousePage3(int x, int y){
 
 
 void OptionWidget::setSizePage4(){
-    int inter = m_width*0.07;
-    int y = m_height*0.25;
-    int x = m_width*0.2;
-    m_button_gps.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_robot.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_serial.setResize(x, y, m_gros_button);
-    y+= inter;
-    y+= inter;
-    m_button_wifi.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_usb.setResize(x, y, m_gros_button);
-    y = m_height*0.25;
-    x = m_width*0.55;
+    int y = m_y_begin;
+    m_button_gps.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    m_button_serial.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    y += m_y_inter;
+    y += m_y_inter;
+    m_button_update_wifi.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    m_button_update_usb.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    m_button_remote.setResize(m_part_1_x2, y, m_petit_button);
+    
+    y = m_y_begin;
+    m_update_lemca.setResizeStd(m_part_2_m, y, "Mise à jour Système", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_update_deps.setResizeStd(m_part_2_m, y, "Installer dépendances", true, m_part_1_w/2);
+    y+= m_y_inter;
+    y+= m_y_inter;
 };
 
 void OptionWidget::drawPage4(){
     Framework & f = Framework::Instance();
     
-    drawButtonCheck(m_button_gps, f.m_config.m_gps, "gps");
-    drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot inrows");
-    drawButtonCheck(m_button_serial, f.m_config.m_serial, "serial");
+    drawText(Langage::getKey("INFOS_OPTIONS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
     
-    drawButtonCheck(m_button_wifi, f.m_config.m_wifi, "wifi");
-    drawButtonCheck(m_button_usb, f.m_config.m_usb, "usb");
+    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Programmes");
+    drawButtonCheck(m_button_gps, f.m_config.m_gps, "GPS");
+    drawButtonCheck(m_button_serial, f.m_config.m_serial, "diagnostique serie");
     
+    drawPart1Title(m_button_update_wifi.m_y-2*m_y_inter, 0, "Options", true);
+    drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, "mise à jour wifi");
+    drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, "mise à jour usb");
+    drawButtonCheck(m_button_remote, f.m_config.m_remote, "remote");
     
-    
+    drawPart2Title(m_y_begin-2*m_y_inter, 0, "Système");
+    drawButtonLabel2(m_update_lemca);
+    drawButtonLabel2(m_update_deps);
 }
 
 void OptionWidget::onMousePage4(int x, int y){
@@ -502,22 +504,28 @@ void OptionWidget::onMousePage4(int x, int y){
         f.m_config.m_gps = !f.m_config.m_gps;
         f.initOrLoadConfig();
     }
-    if(m_button_robot.isActive(x, y)){
-        f.m_config.m_robot += 1;
-        f.m_config.m_robot = f.m_config.m_robot%2;
-        f.initOrLoadConfig();
-    }
     if(m_button_serial.isActive(x, y)){
         f.m_config.m_serial = !f.m_config.m_serial;
         f.initOrLoadConfig();
     }
-    if(m_button_wifi.isActive(x, y)){
-        f.m_config.m_wifi = !f.m_config.m_wifi;
+    if(m_button_update_wifi.isActive(x, y)){
+        f.m_config.m_update_wifi = !f.m_config.m_update_wifi;
         f.initOrLoadConfig();
     }
-    if(m_button_usb.isActive(x, y)){
-        f.m_config.m_usb = !f.m_config.m_usb;
+    if(m_button_update_usb.isActive(x, y)){
+        f.m_config.m_update_usb = !f.m_config.m_update_usb;
         f.initOrLoadConfig();
+    }
+    if(m_button_remote.isActive(x, y)){
+        f.m_config.m_remote = !f.m_config.m_remote;
+        f.initOrLoadConfig();
+    }
+    
+    if(m_update_lemca.isActive(x, y)){
+        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
+    }
+    if(m_update_deps.isActive(x, y)){
+        call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
     }
 }
 
@@ -526,49 +534,80 @@ void OptionWidget::onMousePage4(int x, int y){
  */
 
 void OptionWidget::setSizePage5(){
-    int inter = m_width*0.07;
-    int y = m_height*0.25;
-    int x = m_width*0.2;
-    m_button_code_source.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_button_full_screen.setResize(x, y, m_gros_button);
-    y+= inter*1.5;
-    m_clear_data.setResizeStd(m_width*0.15, y, "Clear Data", false, 220);
-   
-    y+= inter;
-    m_update_deps.setResizeStd(m_width*0.15, y, "Install dep", false, 220);
     
-    y = m_height*0.25;
-    x = m_width*0.55;
-    m_run_cmd.setResizeStd(x, y, "Run cmd", false, 220);
-    y+= inter*1.5;
-    m_make_archive.setResizeStd(x, y, "Make archive", false, 220);
-    y+= inter;
-    m_update_lemca.setResizeStd(x, y, "Update Lemca", false, 220);
-    y+= inter;
-    m_quit_full_screen.setResizeStd(x, y, "Quit FullScreen", false, 220);
+    int y = m_y_begin;
+    m_button_code_source.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    m_make_archive.setResizeStd(m_part_1_m, y, "Make archive", true, m_part_1_w/2);
+    
+    y += m_y_inter;
+    y += m_y_inter;
+    m_button_full_screen.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
+    m_quit_full_screen.setResizeStd(m_part_1_m, y, "Quit FullScreen", true, m_part_1_w/2);
+    
+    y += m_y_inter;
+    y += m_y_inter;
+    m_clear_data.setResizeStd(m_part_1_m, y, "Clear Data", true, m_part_1_w/2);
+    y += m_y_inter;
+    m_run_cmd.setResizeStd(m_part_1_m, y, "Run cmd", true, m_part_1_w/2);
+    
+    y = m_y_begin;
+    m_refresh.setResizeStd(m_part_2_m, y, "Refresh", true, m_part_1_w/2);
+    y += m_y_inter;
+    m_camera30.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
+    y += m_y_inter;
+    m_camera31.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
+    y += m_y_inter;
+    m_reseau.setResizeStd(m_part_2_m, y, "Reseau", true, m_part_1_w/2);
 }
 
 
 
 void OptionWidget::drawPage5(){
     Framework & f = Framework::Instance();
-    drawButtonCheck(m_button_code_source, f.m_config.m_code_source);
-    int x = m_width*0.25;
-    drawText("code source", x, m_button_code_source.m_y);
+    drawText("Developper", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
     
-    drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen);
-    drawText("full screen", x, m_button_full_screen.m_y);
-    
+    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Source");
+    drawButtonCheck(m_button_code_source, f.m_config.m_code_source, "code source");
     if(f.m_config.m_code_source){
         drawButtonLabel2(m_make_archive);
     }
     
-    drawButtonLabel2(m_run_cmd);
-    drawButtonLabel2(m_update_lemca);
-    drawButtonLabel2(m_update_deps);
-    drawButtonLabel2(m_clear_data);
+    drawPart1Title(m_button_full_screen.m_y-m_y_inter, 0, "", true);
+    drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen, "full screen");
     drawButtonLabel2(m_quit_full_screen);
+    
+    
+    drawPart1Title(m_clear_data.m_y-m_y_inter, 0, "", true);
+    drawButtonLabel2(m_run_cmd);
+    drawButtonLabel2(m_clear_data);
+    
+    
+    
+    drawPart2Title(m_y_begin-2*m_y_inter, 0, "Caméras");
+    drawButtonLabel2(m_refresh);
+    
+    int x = m_part_2_m;
+    if(m_qt_network->m_camera_30_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("192.168.1.30", x, m_camera30.m_y, sizeText_medium, true);
+    drawButtonImage(m_camera30, m_imgOptionGris);
+    
+    if(m_qt_network->m_camera_31_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("192.168.1.31", x, m_camera31.m_y, sizeText_medium, true);
+    drawButtonImage(m_camera31, m_imgOptionGris);
+    
+    drawButtonLabel2(m_reseau);
+    
 }
 
 void OptionWidget::onMousePage5(int x, int y){
@@ -602,59 +641,15 @@ void OptionWidget::onMousePage5(int x, int y){
     if(m_run_cmd.isActive(x, y)){
         key_board_widget.m_close = false;
     }
-    if(m_update_lemca.isActive(x, y)){
-        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
-    }
-    if(m_update_deps.isActive(x, y)){
-        call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
-    }
+    
     if(m_quit_full_screen.isActive(x, y)){
         MainWindow::instancePtr()->quitFullScreen();
     }
     if(m_clear_data.isActive(x, y)){
         DirectoryManager::Instance().clearAll();
     }
-}
-
-
-/**
- PAGE 6
- */
-
-void OptionWidget::setSizePage6(){
-    int x = m_width*0.3;
-    int y = m_height*0.2;
-    m_refresh.setResizeStd(x, y, "Refresh", false);
-    x = m_width*0.2;
-    m_camera30.setResize(x, m_height*0.4, "Refresh", m_gros_button);
-    m_camera31.setResize(x, m_height*0.5, "Refresh", m_gros_button);
-    m_reseau.setResizeStd(m_width*0.3, m_height*0.7, "Reseau");
-};
-
-void OptionWidget::drawPage6(){
-    drawButtonLabel2(m_refresh);
     
-    int x = m_width*0.3;
-    if(m_qt_network->m_camera_30_connected){
-        m_painter->setPen(Qt::darkGreen);
-    } else {
-        m_painter->setPen(Qt::red);
-    }
-    drawText("192.168.1.30", x, m_height*0.4, sizeText_big);
-    drawButtonImage(m_camera30, m_imgOptionGris);
     
-    if(m_qt_network->m_camera_31_connected){
-        m_painter->setPen(Qt::darkGreen);
-    } else {
-        m_painter->setPen(Qt::red);
-    }
-    drawText("192.168.1.31", x, m_height*0.5, sizeText_big);
-    drawButtonImage(m_camera31, m_imgOptionGris);
-    
-    drawButtonLabel2(m_reseau);
-}
-
-void OptionWidget::onMousePage6(int x, int y){
     if(m_refresh.isActive(x, y)){
         m_qt_network->test_camera();;
     }
@@ -671,37 +666,35 @@ void OptionWidget::onMousePage6(int x, int y){
 
 
 /**
- PAGE 7
+ PAGE 6
  */
 
-void OptionWidget::setSizePage7(){
-    
-    int inter = m_width*0.07;
-    int y = m_height*0.25;
-    int x = m_width*0.2;
-    y+= inter;
-    INFO(x << " " << y);
-    m_port.setResizeLabel(x, y, "port label");
-    m_port.setResize(x, y, m_gros_button);
-    y+= inter;
-    m_auto_launch.setResizeStd(x, y, "none");
+void OptionWidget::setSizePage6(){
+    int y = m_y_begin;
+    m_button_robot.setResize(m_part_1_x2, y, m_petit_button);
+    y+= m_y_inter;
+    m_port.setResizeLabel(m_part_1_x3, y, "port label");
+    m_port.setResize(m_part_1_x3, y, m_gros_button);
+    y+= m_y_inter;
+    m_auto_launch.setResize(m_part_1_x2, y, m_petit_button);
 };
 
-void OptionWidget::drawPage7(){
-    drawText("robot", m_width*0.5, m_height*0.1, sizeText_big, true);
-    
+void OptionWidget::drawPage6(){
     Framework & f = Framework::Instance();
-    drawValueGuiAndLabel(m_port, f.m_config.m_port_remote);
+    drawText("Robot", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
     
-    if(f.m_config.m_auto_launch == AutoLaunch_Robot){
-        m_auto_launch.m_label = "auto launch robot";
-    } else {
-        m_auto_launch.m_label = "none";
-    }
-    drawButtonLabel2(m_auto_launch);
+    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Robot");
+    drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot");
+    
+    m_port.m_value = f.m_config.m_port_remote;
+    drawText("port label", m_part_1_x2,m_port.m_y, sizeText_medium);
+    drawValueGuiKeyPad2(m_port);
+    
+    drawButtonCheck(m_auto_launch, f.m_config.m_auto_launch, "auto launch robot");
 }
 
-void OptionWidget::onMousePage7(int x, int y){
+void OptionWidget::onMousePage6(int x, int y){
     Framework & f = Framework::Instance();
     if(onMouseKeyPad2(m_port, x, y, 1)){
         f.m_config.m_port_remote = m_port.m_value;
@@ -713,6 +706,28 @@ void OptionWidget::onMousePage7(int x, int y){
         f.m_config.m_auto_launch = (AutoLaunch)i;
         f.initOrLoadConfig();
     }
+    if(m_button_robot.isActive(x, y)){
+        f.m_config.m_robot += 1;
+        f.m_config.m_robot = f.m_config.m_robot%2;
+        f.initOrLoadConfig();
+    }
+}
+
+
+/**
+ PAGE 7
+ */
+
+void OptionWidget::setSizePage7(){
+    
+};
+
+void OptionWidget::drawPage7(){
+    drawText("Not used", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
+}
+
+void OptionWidget::onMousePage7(int x, int y){
 }
 
 

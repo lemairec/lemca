@@ -21,7 +21,7 @@ void CmdWidget::draw(){
     m_painter->drawRect(0, 0, m_width, m_height);
     
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.7);
+    m_painter->drawRoundedRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.7, 15, 15);
     
     int inter = 18;
     int x = m_width*0.08;
@@ -46,15 +46,17 @@ void CmdWidget::draw(){
         }
     }
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRect(m_width*0.05, m_height*0.83, m_width*0.9, m_height*0.02);
-    m_painter->setBrush(m_brushGreen);
-    m_painter->drawRect(m_width*0.05, m_height*0.83, perc*m_width*0.9, m_height*0.02);
+    m_painter->drawRoundedRect(m_width*0.05, m_height*0.83, m_width*0.9, m_height*0.02, 5, 5);
+    m_painter->setBrush(m_brushGreenButton);
+    m_painter->drawRoundedRect(m_width*0.05, m_height*0.83, perc*m_width*0.9, m_height*0.02, 5, 5);
+    QString s = QString::number(std::round(perc*100))+ " %";
+    drawQText(s, m_width*0.5, m_height*0.84, sizeText_medium, true);
     
     if(f.m_cmd_end){
         if(f.m_cmd_return == 0){
             drawButtonLabel2(m_button_close, COLOR_VALIDATE);
         } else {
-            drawButtonLabel2(m_button_close, COLOR_RED);
+            drawButtonLabel2(m_button_close, COLOR_FAIL);
         }
     }
     /*
