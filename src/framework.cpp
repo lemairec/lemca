@@ -1,5 +1,6 @@
 #include "framework.hpp"
 #include "config/config.hpp"
+#include "config/langage.hpp"
 #include "environnement.hpp"
 #include "util/util.hpp"
 #include "util/directory_manager.hpp"
@@ -29,6 +30,7 @@ Framework::Framework(){
     }
     
     m_config.load();
+    Langage::setLangage(m_config.m_langage);
     
 }
 
@@ -46,6 +48,7 @@ void Framework::initOrLoadConfig(){
     m_config.save();
     
     m_serial_port.initOrLoad(m_config);
+    Langage::setLangage(m_config.m_langage);
 }
 
 Consumer & Consumer::instance(){

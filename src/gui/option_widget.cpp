@@ -258,10 +258,13 @@ void OptionWidget::onMousePage1(int x, int y){
             std::string s = m_select_widget.m_selectButton->getValueString();
             if(s == Langage::getKey("FR")){
                 config.m_langage = "FR";
+                f.initOrLoadConfig();
             } else if(s == Langage::getKey("EN")){
                 config.m_langage = "EN";
+                f.initOrLoadConfig();
             } else if(s == Langage::getKey("DE")){
                 config.m_langage = "DE";
+                f.initOrLoadConfig();
             }
         }
        
