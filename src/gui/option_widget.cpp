@@ -209,7 +209,7 @@ int OptionWidget::onMouse(int x, int y){
 void OptionWidget::setSizePage1(){
     int y = m_y_begin;
     y+= m_y_inter;
-    m_langage.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGUAGE"), true, m_part_1_w/2);
+    m_langage.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGAGE"), true, m_part_1_w/2);
     m_langage.clear();
     m_langage.addValue(Langage::getKey("FR"));
     m_langage.addValue(Langage::getKey("EN"));
@@ -218,7 +218,7 @@ void OptionWidget::setSizePage1(){
     y+= m_y_inter;
     y+= m_y_inter;
     y+= m_y_inter;
-    m_unity.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_LANGUAGE"), true, m_part_1_w/2);
+    m_unity.setResize(m_part_1_x+m_part_1_w/2, y, Langage::getKey("OPT_UNITY"), true, m_part_1_w/2);
     m_unity.clear();
     m_unity.addValue(Langage::getKey("METRIQUE"));
     m_unity.addValue(Langage::getKey("IMPERIAL"));
@@ -229,10 +229,10 @@ void OptionWidget::drawPage1(){
     Config & config = f.m_config;
     
     
-    drawText("Menu Infos", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawText(Langage::getKey("INFOS_AV_TITLE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     drawSeparateurH();
     
-    drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_LANGUAGE"));
+    drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_LANGAGE"));
     drawPart1Title(m_unity.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_UNITY"));
     
     if(m_select_widget.m_close){
@@ -284,14 +284,14 @@ void OptionWidget::onMousePage1(int x, int y){
 void OptionWidget::setSizePage2(){
     int y = m_y_begin;
     y+= m_y_inter;
-    m_update_bineuse.setResizeStd(m_part_1_m, y, "Update Bineuse Wifi", true, m_part_1_w/2);
-    m_update_bineuse_usb.setResizeStd(m_part_2_m, y, "Update Bineuse USB", true, m_part_1_w/2);
+    m_update_bineuse.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_BINEUSE_WIFI"), true, m_part_1_w/2);
+    m_update_bineuse_usb.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_BINEUSE_USB"), true, m_part_1_w/2);
     y+= m_y_inter;
-    m_update_gps.setResizeStd(m_part_1_m, y, "Update GPS", true, m_part_1_w/2);
+    m_update_gps.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_GPS_WIFI"), true, m_part_1_w/2);
     y+= m_y_inter;
-    m_serial.setResizeStd(m_part_1_m, y, "Update Serial", true, m_part_1_w/2);
+    m_serial.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_SERIAL_WIFI"), true, m_part_1_w/2);
     y+= m_y_inter;
-    m_update_robot.setResizeStd(m_part_1_m, y, "Update Robot", true, m_part_1_w/2);
+    m_update_robot.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_ROBOT"), true, m_part_1_w/2);
     y+= m_y_inter;
     
     
@@ -299,11 +299,11 @@ void OptionWidget::setSizePage2(){
 
 void OptionWidget::drawPage2(){
     Framework & f = Framework::Instance();
-    drawText("Mise à jour", 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawText(Langage::getKey("UPDATE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     drawSeparateurH();
     
     if(f.m_config.m_update_wifi){
-        drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update Wifi");
+        drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("UPDATE_WIFI"));
         
         drawButtonLabel2(m_update_bineuse);
         if(f.m_config.m_gps){
@@ -317,7 +317,7 @@ void OptionWidget::drawPage2(){
         }
     }
     if(f.m_config.m_update_usb){
-        drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, "Update USB");
+        drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("UPDATE_USB"));
         
         drawButtonLabel2(m_update_bineuse_usb);
     }
@@ -469,9 +469,9 @@ void OptionWidget::setSizePage4(){
     m_button_remote.setResize(m_part_1_x2, y, m_petit_button);
     
     y = m_y_begin;
-    m_update_lemca.setResizeStd(m_part_2_m, y, "Mise à jour Système", true, m_part_1_w/2);
+    m_update_lemca.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_OS"), true, m_part_1_w/2);
     y+= m_y_inter;
-    m_update_deps.setResizeStd(m_part_2_m, y, "Installer dépendances", true, m_part_1_w/2);
+    m_update_deps.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_DEPS"), true, m_part_1_w/2);
     y+= m_y_inter;
     y+= m_y_inter;
 };
@@ -482,16 +482,16 @@ void OptionWidget::drawPage4(){
     drawText(Langage::getKey("INFOS_OPTIONS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     drawSeparateurH();
     
-    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Programmes");
-    drawButtonCheck(m_button_gps, f.m_config.m_gps, "GPS");
-    drawButtonCheck(m_button_serial, f.m_config.m_serial, "diagnostique serie");
+    drawPart1Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("SOFTWARE"));
+    drawButtonCheck(m_button_gps, f.m_config.m_gps, Langage::getKey("GPS"));
+    drawButtonCheck(m_button_serial, f.m_config.m_serial, Langage::getKey("SERIAL"));
     
-    drawPart1Title(m_button_update_wifi.m_y-2*m_y_inter, 0, "Options", true);
-    drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, "mise à jour wifi");
-    drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, "mise à jour usb");
-    drawButtonCheck(m_button_remote, f.m_config.m_remote, "remote");
+    drawPart1Title(m_button_update_wifi.m_y-2*m_y_inter, 0, Langage::getKey("OPTIONS"), true);
+    drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, Langage::getKey("UPDATE_WIFI_ENABLE"));
+    drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, Langage::getKey("UPDATE_USB_ENABLE"));
+    drawButtonCheck(m_button_remote, f.m_config.m_remote, Langage::getKey("REMOTE_ENABLE"));
     
-    drawPart2Title(m_y_begin-2*m_y_inter, 0, "Système");
+    drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
 }

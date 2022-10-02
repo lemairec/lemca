@@ -52,15 +52,43 @@ void Langage::setLangage(const std::string & s){
 Langage::Langage(){
     add("FR", "HOME_BINEUSE", "Bineuse");
     add("FR", "HOME_GPS", "GPS");
+    add("FR", "HOME_SERIAL", "Série");
     add("FR", "HOME_INFOS", "Infos");
     add("FR", "HOME_REMOTE", "Accès à dist");
     add("FR", "HOME_WIFI", "Wifi");
     add("FR", "HOME_OFF", "Eteindre");
 
     add("FR", "INFOS_AV_TITLE", "Menu avancé (infos)");
-
-
-    add("FR", "OPTION_1_TITLE", "Mise à jour");
+    add("FR", "OPT_LANGAGE", "Langue");
+    add("FR", "EN", "Anglais");
+    add("FR", "FR", "Francais");
+    add("FR", "DE", "Deutsch");
+    add("FR", "OPT_UNITY", "Unité");
+    add("FR", "METRIQUE", "Métrique");
+    add("FR", "VERSION", "Version");
+    
+    add("FR", "UPDATE", "Mise à jour");
+    add("FR", "UPDATE_WIFI", "Mise à jour par WIFI");
+    add("FR", "UPDATE_BINEUSE_WIFI", "Mise à jour de Bineuse");
+    add("FR", "UPDATE_GPS_WIFI", "Mise à jour de GPS");
+    add("FR", "UPDATE_SERIAL_WIFI", "Mise à jour de Serie");
+    add("FR", "UPDATE_USB", "Mise à jour par Clef USB");
+    add("FR", "UPDATE_BINEUSE_USB", "Mise à jour de Bineuse");
+    
+    add("FR", "INFOS_OPTIONS", "Options");
+    add("FR", "SOFTWARE", "Logiciel activé");
+    add("FR", "GPS", "GPS");
+    add("FR", "SERIAL", "Série");
+    add("FR", "OPTIONS", "Options");
+    add("FR", "UPDATE_WIFI_ENABLE", "Activer la mise a jour WIFI");
+    add("FR", "UPDATE_USB_ENABLE", "Activer la mise a jour USB");
+    add("FR", "REMOTE_ENABLE", "Activer l'accès à dist");
+    add("FR", "OPERATING_SYSTEM", "Système d'exploitations");
+    add("FR", "UPDATE_OS", "Mise à jour");
+    add("FR", "UPDATE_DEPS", "Installer dépendances");
+    
+    
+        
     
 }
 

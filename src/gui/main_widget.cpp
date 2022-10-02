@@ -183,7 +183,7 @@ void MainWidget::drawButtons(){
         drawButton(m_buttonRobot, m_imgGPS, "Robot");
     }
     if(f.m_config.m_serial){
-        drawButton(m_buttonSerial, m_imgGPS, "Serial");
+        drawButton(m_buttonSerial, m_imgGPS, Langage::getKey("HOME_SERIAL"));
     }
     
     if(f.m_config.m_wifi2){
