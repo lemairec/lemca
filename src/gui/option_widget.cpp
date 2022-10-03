@@ -266,6 +266,7 @@ void OptionWidget::onMousePage1(int x, int y){
                 config.m_langage = "DE";
                 f.initOrLoadConfig();
             }
+            MainWidget::instancePtr()->setSize(m_width, m_height);
         }
        
         return;

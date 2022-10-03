@@ -66,7 +66,7 @@ Langage::Langage(){
     add("FR", "OPT_LANGAGE", "Langue");
     add("FR", "EN", "Anglais");
     add("FR", "FR", "Francais");
-    add("FR", "DE", "Deutsch");
+    add("FR", "DE", "Allemand");
     add("FR", "OPT_UNITY", "Unité");
     add("FR", "METRIQUE", "Métrique");
     add("FR", "VERSION", "Version");
@@ -84,14 +84,54 @@ Langage::Langage(){
     add("FR", "GPS", "GPS");
     add("FR", "SERIAL", "Série");
     add("FR", "OPTIONS", "Options");
-    add("FR", "UPDATE_WIFI_ENABLE", "Activer la mise a jour WIFI");
-    add("FR", "UPDATE_USB_ENABLE", "Activer la mise a jour USB");
+    add("FR", "UPDATE_WIFI_ENABLE", "Activer la mise à jour WIFI");
+    add("FR", "UPDATE_USB_ENABLE", "Activer la mise à jour USB");
     add("FR", "REMOTE_ENABLE", "Activer l'accès à dist");
     add("FR", "OPERATING_SYSTEM", "Système d'exploitations");
     add("FR", "UPDATE_OS", "Mise à jour");
     add("FR", "UPDATE_DEPS", "Installer dépendances");
     
     
+    add("EN", "OK", "OK");
+    add("EN", "CANCEL", "Cancel");
+    add("EN", "FAIL", "Error");
+    
+    add("EN", "HOME_BINEUSE", "Hoe");
+    add("EN", "HOME_GPS", "GPS");
+    add("EN", "HOME_SERIAL", "Serial");
+    add("EN", "HOME_INFOS", "Infos");
+    add("EN", "HOME_REMOTE", "Remote");
+    add("EN", "HOME_WIFI", "Wifi");
+    add("EN", "HOME_OFF", "Off");
+
+    add("EN", "INFOS_AV_TITLE", "Advanced menu (infos)");
+    add("EN", "OPT_LANGAGE", "Language");
+    add("EN", "EN", "English");
+    add("EN", "FR", "French");
+    add("EN", "DE", "Deutsch");
+    add("EN", "OPT_UNITY", "Unity");
+    add("EN", "METRIQUE", "Metric");
+    add("EN", "VERSION", "Version");
+    
+    add("EN", "UPDATE", "Update");
+    add("EN", "UPDATE_WIFI", "Update by WIFI");
+    add("EN", "UPDATE_BINEUSE_WIFI", "Hoe update");
+    add("EN", "UPDATE_GPS_WIFI", "GPS update");
+    add("EN", "UPDATE_SERIAL_WIFI", "Serial Update");
+    add("EN", "UPDATE_USB", "Update by USB key");
+    add("EN", "UPDATE_BINEUSE_USB", "Hoe update");
+    
+    add("EN", "INFOS_OPTIONS", "Options");
+    add("EN", "SOFTWARE", "Software activated");
+    add("EN", "GPS", "GPS");
+    add("EN", "SERIAL", "Sérial");
+    add("EN", "OPTIONS", "Options");
+    add("EN", "UPDATE_WIFI_ENABLE", "Enable WIFI update");
+    add("EN", "UPDATE_USB_ENABLE", "Enable USB key update");
+    add("EN", "REMOTE_ENABLE", "Enable remote");
+    add("EN", "OPERATING_SYSTEM", "Operating System");
+    add("EN", "UPDATE_OS", "Update OS");
+    add("EN", "UPDATE_DEPS", "Install dependances");
         
     
 }
