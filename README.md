@@ -93,6 +93,11 @@ reboot
 
 ## 5.2 montage usb auto
 
+`````
+disque et media amovible
+monter/monter
+`````
+
 
 ## 5.3 unclutter
 
@@ -199,3 +204,16 @@ terminal => ctrl+alt+f3
 ### panel
 
 ..config/xfce4/xfconf/xfce-perchannel-xml/
+
+# clonezilla
+
+## 1. image
+
+download image 
+
+=> balenaetcher => faire le boot
+
+=> del to boot
+
+
+## 5.3 unclutter
