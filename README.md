@@ -9,7 +9,7 @@
 
 => next => https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/11.3.0+nonfree/amd64/iso-dvd/
 
-=> balenaetcher => faire le boot
+=> balenaetcher => faire le boot (ou rufus)
 
 => del to boot
 
@@ -45,7 +45,7 @@ autologin-user-timeout=0
 .config/autostart
 `````
 
-## 3. droit usb
+### 2.3. droit usb (automatique)
 
 `````
 su
@@ -55,7 +55,7 @@ usermod -a -G tty Nom_Utilisateur
 `````
 
 
-## 4. grub
+## 3. grub
 
 
 `````
@@ -81,9 +81,9 @@ reboot
  => imagemagick)
 `````
 
-# 5. xcfe
+# 4. xcfe
 
-## 5.1 alimentation
+## 4.1 alimentation
 
 `````
 => gestionnaire d'alimentation
@@ -91,7 +91,7 @@ reboot
 => gestion de l'alimentation (never never never off)
 `````
 
-## 5.2 montage usb auto
+## 4.2 montage usb auto
 
 `````
 disque et media amovible
@@ -99,13 +99,21 @@ monter/monter
 `````
 
 
-## 5.3 unclutter
+## 4.3 unclutter
 
 `````
 su
 vi /etc/default/unclutter
 EXTRA_OPTS="-idle 0.01 -root"
 `````
+
+## 4.4 reseau
+
+tout supprimer
+parametre ipv4
+manuel
+192.168.1.1 24
+Serveur dns 8.8.8.8
 
 # OS X
 
@@ -211,9 +219,27 @@ terminal => ctrl+alt+f3
 
 download image 
 
-=> balenaetcher => faire le boot
+=> balenaetcher => faire le boot (ou rufus)
 
 => del to boot
 
 
-## 5.3 unclutter
+## 2. cloner
+
+`````
+clonezilla live vga 800x600
+start_clonezilla
+device-image
+local_dev
+savedisk
+z1p
+`````
+
+
+
+## idee
+
+https://stackoverflow.com/questions/65848953/how-to-create-an-automated-and-unattended-clonezilla-restore-solutions
+
+gnome-disk-utility
+gnome-disk
