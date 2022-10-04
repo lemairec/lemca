@@ -545,7 +545,7 @@ void OptionWidget::setSizePage5(){
     y += m_y_inter;
     m_button_full_screen.setResize(m_part_1_x2, y, m_petit_button);
     y += m_y_inter;
-    m_quit_full_screen.setResizeStd(m_part_1_m, y, "Quit FullScreen", true, m_part_1_w/2);
+    m_quit_full_screen.setResizeStd(m_part_1_m, y, "Minimized", true, m_part_1_w/2);
     
     y += m_y_inter;
     y += m_y_inter;
