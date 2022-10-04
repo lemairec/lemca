@@ -45,6 +45,7 @@ Framework::~Framework(){
 }
 
 void Framework::initOrLoadConfig(){
+    m_config.validate();
     m_config.save();
     
     m_serial_port.initOrLoad(m_config);

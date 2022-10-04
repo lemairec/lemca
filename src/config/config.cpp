@@ -19,21 +19,21 @@ void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "update_usb", m_update_usb, save);
     saveLoadBool(settings, "update_wifi", m_update_wifi, save);
     saveLoadBool(settings, "remote", m_remote, save);
-    saveLoadBool(settings, "m_gps", m_gps, save);
-    saveLoadBool(settings, "m_fullscreen", m_fullscreen, save);
-    saveLoadInt(settings, "m_robot", m_robot, save);
-    saveLoadBool(settings, "m_serial", m_serial, save);
+    saveLoadBool(settings, "gps", m_gps, save);
+    saveLoadBool(settings, "fullscreen", m_fullscreen, save);
+    saveLoadInt(settings, "robot", m_robot, save);
+    saveLoadBool(settings, "serial", m_serial, save);
     
     saveLoadString(settings, "langage", m_langage, save);
     
     
-    saveLoadString(settings, "m_bineuse_run", m_bineuse_run, save);
-    saveLoadString(settings, "m_gps_run", m_gps_run, save);
-    saveLoadString(settings, "m_serie_run", m_serie_run, save);
-    saveLoadString(settings, "m_robot_inrows_run", m_robot_inrows_run, save);
+    saveLoadString(settings, "bineuse_run", m_bineuse_run, save);
+    saveLoadString(settings, "gps_run", m_gps_run, save);
+    saveLoadString(settings, "serie_run", m_serie_run, save);
+    saveLoadString(settings, "robot_inrows_run", m_robot_inrows_run, save);
     
-    saveLoadInt(settings, "m_port_remote", m_port_remote, save);
-    saveLoadEnum(settings, "m_auto_launch", m_auto_launch, save);
+    saveLoadInt(settings, "port_remote", m_port_remote, save);
+    saveLoadEnum(settings, "auto_launch", m_auto_launch, save);
     
 }
 
