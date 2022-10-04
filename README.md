@@ -235,6 +235,48 @@ savedisk
 z1p
 `````
 
+## 3. restaurer
+
+
+# camera
+
+Video
+=> resolution 1024
+=> h 265
+=> frzme rate 25
+=> quality //40
+=> bitrate 4096
+=> cbr
+=> 50
+
+Video mode
+PAL/50hz
+
+Day/Night
+CDS
+disable led
+
+OSD
+disable all
+
+Zone
+rien
+
+image adustemet
+50 partout
+
+white balance
+auto-outdoor
+
+wdr
+disable
+
+dnr
+3d / dynammic / 50
+
+deflog
+disable
+
 
 
 ## idee
