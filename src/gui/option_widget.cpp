@@ -561,6 +561,16 @@ void OptionWidget::setSizePage5(){
     m_camera31.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
     y += m_y_inter;
     m_reseau.setResizeStd(m_part_2_m, y, "Reseau", true, m_part_1_w/2);
+    
+    y += m_y_inter;
+    y += m_y_inter;
+    y += m_y_inter;
+    m_constructor.setResize(m_part_2_x+m_part_1_w/2, y, "Constructor", true, m_part_1_w/2);
+    m_constructor.clear();
+    m_constructor.addValue(("0. Lemca"));
+    m_constructor.addValue(("1. Marechalle"));
+    m_constructor.addValue(("2. Vanhouke"));
+    
 }
 
 
@@ -608,6 +618,14 @@ void OptionWidget::drawPage5(){
     drawButtonImage(m_camera31, m_imgOptionGris);
     
     drawButtonLabel2(m_reseau);
+    
+    //constructor
+    drawPart2Title(m_constructor.m_y-m_y_inter, 0, "Constructeur", true);
+    if(m_select_widget.m_close){
+        m_constructor.setSelectedValue(f.m_config.m_constructor);
+    }
+    drawButtonLabel2(m_constructor.m_buttonOpen);
+    
     
 }
 
@@ -662,6 +680,21 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_reseau.isActive(x, y)){
         call("nmap 192.168.1.0/24");
+    }
+    
+    //constructor
+    if(!m_select_widget.m_close){
+        if(m_select_widget.onMouseSelect(x, y)){
+            f.m_config.m_constructor = m_constructor.m_selectedValue;
+            f.initOrLoadConfig();
+        }
+       
+        return;
+    }
+    
+    if(m_constructor.m_buttonOpen.isActive(x, y)){
+        m_select_widget.open();
+        m_select_widget.setValueGuiKeyPad(&m_constructor);
     }
 }
 

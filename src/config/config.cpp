@@ -24,6 +24,8 @@ void Config::work(QSettings & settings, bool save){
     saveLoadInt(settings, "robot", m_robot, save);
     saveLoadBool(settings, "serial", m_serial, save);
     
+    saveLoadInt(settings, "constructor", m_constructor, save);
+    
     saveLoadString(settings, "langage", m_langage, save);
     
     

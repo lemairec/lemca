@@ -118,6 +118,8 @@ public:
     ButtonGui m_camera31;
     ButtonGui m_reseau;
     
+    SelectButtonGui m_constructor;
+    
     void setSizePage5();
     void onMousePage5(int x, int y);
     void drawPage5();

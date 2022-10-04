@@ -97,7 +97,7 @@ void MainWindow::setupUi(){
 }
 
 void MainWindow::quitFullScreen(){
-    showMaximized();
+    showMinimized();
 }
 
 //debug

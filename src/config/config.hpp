@@ -21,11 +21,12 @@ public:
     bool m_update_usb = false;
     bool m_remote = false;
     bool m_wifi2 = false;
-   bool m_gps = false;
+    bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
     
-
+    int m_constructor = 0; //0 Lemca
+    
     std::string m_bineuse_run;
     std::string m_gps_run;
     std::string m_robot_inrows_run;
