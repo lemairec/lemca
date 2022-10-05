@@ -151,7 +151,9 @@ void MainWidget::drawMain(){
     m_painter->setBrush(m_brush_background_1);
     Framework & f = Framework::Instance();
     if(f.m_config.m_constructor == 1){
-        drawMyImage(*m_logo_marechalle, 0.5*m_width, 0.5*m_height, 1.5, true);
+        drawMyImage(*m_logo_marechalle, 0.5*m_width, 0.4*m_height, 1.1, true);
+        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.55*m_height, 0.3, true);
+        
     } else {
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
     }
