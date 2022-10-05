@@ -24,7 +24,8 @@ MainWidget::MainWidget()
 {
     m_black_mode = false;
     
-    m_logoImg = loadImage("/gui/logo.png");
+    m_logo_lemca = loadImage("/gui/logo/logo.png");
+    m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
     m_imgBineuse = loadImage("/gui/bineuse.png");
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
@@ -148,8 +149,14 @@ void MainWidget::draw_force(){
 
 void MainWidget::drawMain(){
     m_painter->setBrush(m_brush_background_1);
+    Framework & f = Framework::Instance();
+    if(f.m_config.m_constructor == 1){
+        drawMyImage(*m_logo_marechalle, 0.5*m_width, 0.5*m_height, 1.5, true);
+    } else {
+        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
+    }
     
-    drawMyImage(*m_logoImg, 0.5*m_width, 0.5*m_height, 2, true);
+    
 }
 
 void MainWidget::drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
@@ -216,7 +223,7 @@ int MainWidget::onMouse(int x, int y){
     
     if(m_buttonBineuse.isActive(x, y)){
         std::string cmd = f.m_config.m_bineuse_run;
-        cmd = cmd + " -l "+ f.m_config.m_langage;
+        cmd = cmd + " -l "+ f.m_config.m_langage + " -c "+ std::to_string(f.m_config.m_constructor);
         call(cmd);
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){

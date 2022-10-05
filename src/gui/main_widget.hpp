@@ -28,8 +28,10 @@ public:
     int m_widthMax;
     int m_heightMax;
     
+    QPixmap * m_logo_lemca;
+    QPixmap * m_logo_marechalle;
     
-    QPixmap * m_logoImg;
+    
     QPixmap * m_imgBineuse;
     QPixmap * m_imgGPS;
     QPixmap * m_imgExit;

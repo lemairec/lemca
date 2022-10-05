@@ -2,6 +2,6 @@
 Type=Application
 Name=agtf
 Exec=sh -c "~/lemca/build/lemca"
-Terminal=true
+Terminal=false
 Hidden=false
 X-GNOME-Autostart-enabled=true

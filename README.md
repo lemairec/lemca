@@ -237,8 +237,19 @@ z1p
 
 ## 3. restaurer
 
+`````
+clonezilla live vga 800x600
+start_clonezilla
+device-image
+local_dev
+restoredisk
+`````
 
-# camera
+# nouveau panel
+
+## licence
+
+## camera
 
 Video
 => resolution 1024
