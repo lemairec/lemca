@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-apt-get update
 apt-get install -y build-essential
 apt-get install -y cmake 
 apt-get install -y libqt5serialport5-dev
