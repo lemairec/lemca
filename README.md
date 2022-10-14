@@ -20,6 +20,7 @@ su
 
 vi /etc/apt/sources.list
 #remove dvd
+#apt-get update --allow-releaseinfo-change
 apt-get update
 
 apt-get install git
