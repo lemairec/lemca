@@ -289,6 +289,12 @@ dnr
 deflog
 disable
 
+## pci error
+
+`````
+uname -r
+lspci
+`````
 
 
 ## idee
