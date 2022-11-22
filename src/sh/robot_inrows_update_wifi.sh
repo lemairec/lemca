@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-[ ! -d ~/inrows ] && git clone https://github.com/lemairec/inrows.git ~/inrows
+[ ! -d ~/inrows ] && git clone git@github.com:lemairec/inrows.git ~/inrows
 
 cd ~/inrows
 mkdir -p build
