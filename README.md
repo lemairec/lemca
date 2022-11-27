@@ -71,7 +71,7 @@ plymouth-set-default-theme -R deb10
 vi /etc/default/grub
 GRUB_TIMEOUT=0
 GRUB_DISTRIBUTOR="Lemca 22.09.11"
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"
 GRUB_BACKGROUND="/home/lemca/lemca/deb10-master/logo.png"
 
 update-grub2
@@ -80,6 +80,8 @@ reboot
 (problem logo
  => convert logo.png -depth 8 logo.png
  => imagemagick)
+
+(problem pci => https://itsfoss.com/pcie-bus-error-severity-corrected/)
 `````
 
 # 4. xcfe
@@ -218,7 +220,7 @@ terminal => ctrl+alt+f3
 
 ## 1. image
 
-download image 
+download image
 
 => balenaetcher => faire le boot (ou rufus)
 
