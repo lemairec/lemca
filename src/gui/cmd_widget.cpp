@@ -42,7 +42,8 @@ void CmdWidget::draw(){
         }
     }
     
-    double perc = f.m_cmd_buffer.size()/100.0;
+    int perc_i = f.m_cmd_buffer.size()%99;
+    double perc = perc_i/100.0;
     
     bool good = true;
     if(f.m_cmd_end){
