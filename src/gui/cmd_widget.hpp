@@ -5,6 +5,7 @@
 
 class CmdWidget : public BaseWidget {
     ButtonGui m_button_close;
+    ButtonGui m_button_cancel;
     
 public:
     bool m_button_ok = false;

@@ -12,8 +12,8 @@ CmdWidget::CmdWidget(){
 
 void CmdWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
-    m_button_close.setResizeStd(0.5*m_width, 0.9*m_height, Langage::getKey("OK"), true);
-
+    m_button_close.setResizeStd(0.4*m_width, 0.9*m_height, Langage::getKey("OK"), true);
+    m_button_cancel.setResizeStd(0.4*m_width, 0.9*m_height, Langage::getKey("CANCEL"), true);
 };
 
 void CmdWidget::draw(){
@@ -88,6 +88,7 @@ void CmdWidget::draw(){
             drawButtonLabel2(m_button_close, COLOR_FAIL);
         }
     }
+    drawButtonLabel2(m_button_cancel, COLOR_CANCEL);
     /*
     drawButtonLabel2(m_connect);
 
@@ -108,6 +109,11 @@ int CmdWidget::onMouse(int x, int y){
         if(f.m_cmd_end){
             m_close = true;
         }
+    }
+    if(m_button_cancel.isActive(x, y)){
+        Framework & f = Framework::Instance();
+        f.m_stop_cmd = true;
+        m_close = true;
     }
     return 0;
     
