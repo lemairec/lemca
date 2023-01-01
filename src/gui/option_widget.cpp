@@ -563,6 +563,7 @@ void OptionWidget::setSizePage5(){
     m_reseau.setResizeStd(m_part_2_m, y, "Reseau", true, m_part_1_w/2);
     
     y += m_y_inter;
+    m_ping.setResizeStd(m_part_2_m, y, "Ping", true, m_part_1_w/2);
     y += m_y_inter;
     y += m_y_inter;
     m_constructor.setResize(m_part_2_x+m_part_1_w/2, y, "Constructor", true, m_part_1_w/2);
@@ -618,6 +619,7 @@ void OptionWidget::drawPage5(){
     drawButtonImage(m_camera31, m_imgOptionGris);
     
     drawButtonLabel2(m_reseau);
+    drawButtonLabel2(m_ping);
     
     //constructor
     drawPart2Title(m_constructor.m_y-m_y_inter, 0, "Constructeur", true);
@@ -673,13 +675,16 @@ void OptionWidget::onMousePage5(int x, int y){
         m_qt_network->test_camera();;
     }
     if(m_camera30.isActive(x, y)){
-        call("onboard & firefox http://192.168.1.30");
+        call("onboard & firefox http://192.168.1.30 &");
     }
     if(m_camera31.isActive(x, y)){
-        call("onboard & firefox http://192.168.1.31");
+        call("onboard & firefox http://192.168.1.31 &");
     }
     if(m_reseau.isActive(x, y)){
         call("nmap 192.168.1.0/24");
+    }
+    if(m_ping.isActive(x, y)){
+        call("ping 192.168.1.30 -c 20 -i 0.1 -q; ping 192.168.1.31 -c 20 -i 0.1 -q;");
     }
     
     //constructor

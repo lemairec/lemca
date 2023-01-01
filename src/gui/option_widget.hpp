@@ -117,6 +117,7 @@ public:
     ButtonGui m_camera30;
     ButtonGui m_camera31;
     ButtonGui m_reseau;
+    ButtonGui m_ping;
     
     SelectButtonGui m_constructor;
     
