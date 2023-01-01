@@ -675,15 +675,19 @@ void OptionWidget::onMousePage5(int x, int y){
         m_qt_network->test_camera();;
     }
     if(m_camera30.isActive(x, y)){
-        call("onboard & firefox http://192.168.1.30 & echo toto;");
+        MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
+        call("onboard & firefox http://192.168.1.30;");
     }
     if(m_camera31.isActive(x, y)){
-        call("onboard & firefox http://192.168.1.31 & echo toto;");
+        MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
+        call("onboard & firefox http://192.168.1.31;");
     }
     if(m_reseau.isActive(x, y)){
+        MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
         call("nmap 192.168.1.0/24");
     }
     if(m_ping.isActive(x, y)){
+        MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
         call("ping 192.168.1.30 -c 20 -i 0.2; ping 192.168.1.31 -c 20 -i 0.2;");
     }
     

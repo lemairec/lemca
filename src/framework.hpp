@@ -56,7 +56,7 @@ public:
     bool m_cmd_interrupt = false;
     std::vector<std::string> m_cmd_buffer;
     bool m_cmd_end = false;
-    bool m_stop_cmd = false;
+    bool m_cmd_abort = false;
     
     int m_cmd_return = 0;
 private:

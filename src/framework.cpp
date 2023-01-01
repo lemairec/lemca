@@ -143,8 +143,8 @@ void Consumer::run(){
             f.m_cmd_buffer.clear();
             f.m_cmd_buffer.push_back(cmd);
             f.m_cmd_end = false;
-            f.m_stop_cmd = false;
-            while (!f.m_stop_cmd && fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+            f.m_cmd_abort = false;
+            while (!f.m_cmd_abort && fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
                 INFO("result " <<buffer.data());
                 f.mutex.lock();
                 f.m_command_result2 += buffer.data();
