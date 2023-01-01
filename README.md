@@ -297,7 +297,13 @@ disable
 uname -r
 lspci
 `````
+## segfault
 
+````
+ulimit -c unlimited
+bineuse/bineuse -l FR -c 0
+gdb bineuse/bineuse core
+````
 
 ## idee
 
