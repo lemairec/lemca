@@ -51,6 +51,7 @@ private:
 
 public:
     QMutex mutex;
+    FILE * m_pipe = NULL;
     std::string m_command_to_execute;
     std::string m_command_result;
     std::string m_command_to_execute2;

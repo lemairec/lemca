@@ -54,7 +54,8 @@ void Framework::initOrLoadConfig(){
 
 
 void Framework::abortCurrentRun(){
-    m_cmd_abort = true;
+    Framework & f = Framework::Instance();
+    f.m_cmd_return = pclose(f.m_pipe);
 }
 
 Consumer & Consumer::instance(){
@@ -140,7 +141,7 @@ void Consumer::run(){
             std::string cmd = f.m_command_to_execute2;
             INFO("exec " << cmd);
             f.mutex.unlock();
-            FILE* pipe(popen(cmd.c_str(), "r"));
+            f.m_pipe = popen(cmd.c_str(), "r");
             if (!pipe) {
                 throw std::runtime_error("popen() failed!");
             }
@@ -149,7 +150,7 @@ void Consumer::run(){
             f.m_cmd_buffer.push_back(cmd);
             f.m_cmd_end = false;
             f.m_cmd_abort = false;
-            while (!f.m_cmd_abort && fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+            while (!f.m_cmd_abort && fgets(buffer.data(), buffer.size(), f.m_pipe) != nullptr) {
                 INFO("result " <<buffer.data());
                 f.mutex.lock();
                 f.m_command_result2 += buffer.data();
@@ -157,7 +158,7 @@ void Consumer::run(){
                 f.m_cmd_buffer.push_back(buffer.data());
                 f.mutex.unlock();
             }
-            f.m_cmd_return = pclose(pipe);
+            f.m_cmd_return = pclose(f.m_pipe);
             INFO("returnCode " << f.m_cmd_return);
             
             f.m_cmd_end = true;
