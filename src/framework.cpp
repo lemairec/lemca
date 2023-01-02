@@ -52,6 +52,11 @@ void Framework::initOrLoadConfig(){
     Langage::setLangage(m_config.m_langage);
 }
 
+
+void Framework::abortCurrentRun(){
+    m_cmd_abort = true;
+}
+
 Consumer & Consumer::instance(){
     static Consumer gf;
     return gf;

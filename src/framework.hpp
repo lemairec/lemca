@@ -43,7 +43,13 @@ public:
     
     int m_session;
     std::string m_session_str;
+private:
+    void readFile();
     
+    
+private:
+
+public:
     QMutex mutex;
     std::string m_command_to_execute;
     std::string m_command_result;
@@ -59,8 +65,9 @@ public:
     bool m_cmd_abort = false;
     
     int m_cmd_return = 0;
-private:
-    void readFile();
+    
+    void abortCurrentRun();
+
 };
 
 class Consumer : public QThread
