@@ -676,11 +676,12 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_camera30.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
-        call("onboard & firefox http://192.168.1.30;");
+        call("onboard");
     }
     if(m_camera31.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
         call("onboard & firefox http://192.168.1.31;");
+        call("firefox http://192.168.1.31");
     }
     if(m_reseau.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
