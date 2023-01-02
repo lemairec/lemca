@@ -114,8 +114,10 @@ int CmdWidget::onMouse(int x, int y){
     }
     if(m_enable_abort && m_button_abort.isActive(x, y)){
         Framework & f = Framework::Instance();
-        f.abortCurrentRun();
+        INFO("+++ abort");
         m_close = true;
+        f.abortCurrentRun();
+        INFO("--- abort");
     }
     return 0;
     
