@@ -119,7 +119,10 @@ int CmdWidget::onMouse(int x, int y){
         INFO("+++ abort");
         m_close = true;
         f.abortCurrentRun();
-        MainWindow::instancePtr()->m_process->kill();
+        QProcess * p = MainWindow::instancePtr()->m_process;
+        if(p){
+            p->kill();
+        }
         
         INFO("--- abort");
     }
