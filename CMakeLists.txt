@@ -40,7 +40,7 @@ set(sources ${src_hpp} ${src_cpp} ${src_sh} ${PROJECT_BINARY_DIR}/environnement.
 
 FIND_PACKAGE(Qt5Core)
 add_executable(lemca ${sources})
-qt5_use_modules(lemca Widgets SerialPort Network)
+qt5_use_modules(lemca Core Widgets SerialPort Network)
 
 target_link_libraries(lemca ${Boost_LIBRARIES})
 
