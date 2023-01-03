@@ -121,7 +121,7 @@ int CmdWidget::onMouse(int x, int y){
         f.abortCurrentRun();
         QProcess * p = MainWindow::instancePtr()->m_process;
         if(p){
-            p->kill();
+            p->terminate();
         }
         
         INFO("--- abort");
