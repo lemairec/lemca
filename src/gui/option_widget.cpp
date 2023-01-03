@@ -792,10 +792,15 @@ void OptionWidget::open(){
 
 void OptionWidget::call(const std::string & s){
     Framework & f = Framework::Instance();
-    f.mutex.lock();
-    f.m_command_to_execute2 = s+" 2>&1";
-    f.bufferNotEmpty.wakeAll();
-    f.mutex.unlock();
+    //f.mutex.lock();
+    //f.m_command_to_execute2 = s+" 2>&1";
+    f.m_cmd_buffer.clear();
+    f.m_cmd_buffer.push_back(s);
+    f.m_cmd_end = false;
+    f.m_cmd_abort = false;
+    MainWindow::instancePtr()->m_process->start("/bin/bash", QStringList() << "-c" << QString::fromStdString(s));
+    //f.bufferNotEmpty.wakeAll();
+    //f.mutex.unlock();
     
     m_close = true;
     MainWidget::instancePtr()->m_cmd_widget.open();

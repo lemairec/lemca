@@ -4,6 +4,8 @@
 #include "../util/util.hpp"
 #include "../config/langage.hpp"
 
+#include "qt/main_window.hpp"
+
 #define PETIT_RAYON2 0.025
 
 CmdWidget::CmdWidget(){
@@ -117,6 +119,8 @@ int CmdWidget::onMouse(int x, int y){
         INFO("+++ abort");
         m_close = true;
         f.abortCurrentRun();
+        MainWindow::instancePtr()->m_process->kill();
+        
         INFO("--- abort");
     }
     return 0;

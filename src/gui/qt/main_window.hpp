@@ -2,6 +2,8 @@
 #include "../main_widget.hpp"
 #include "../../util/log.hpp"
 
+#include <QProcess.h>
+
 class MyWidget : public QWidget
 {
 public:
@@ -25,6 +27,7 @@ class MainWindow : public QMainWindow
 public:
     static MainWindow * instancePtr();
     MyWidget * m_my_widget;
+    QProcess * m_process;
 
     ~MainWindow();
     
@@ -67,5 +70,7 @@ public slots:
     
     void openFile();
     void quitFullScreen();
-    
+    void rightMessage();
+    void wrongMessage();
+    void processFinished(int exitCode, QProcess::ExitStatus exitStatus = QProcess::NormalExit);
 };

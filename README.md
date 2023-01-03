@@ -311,3 +311,5 @@ https://stackoverflow.com/questions/65848953/how-to-create-an-automated-and-unat
 
 gnome-disk-utility
 gnome-disk
+
+///Users/lemairec/workspace/bineuse/build/Debug/bineuse.app/Contents/MacOS/bineuse & 2>&1"

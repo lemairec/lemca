@@ -114,5 +114,6 @@ void MyQTNetwork::test_camera(){
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
+        QProcess* proc= new QProcess();
     }
 }

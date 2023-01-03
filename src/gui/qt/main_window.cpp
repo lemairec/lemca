@@ -51,12 +51,16 @@ MainWindow::MainWindow(QWidget *parent)
     m_timer = new QTimer(this);
     m_timer->start(200);
     
-
+    m_process = new QProcess();
     
     
     connect(m_timer, SIGNAL(timeout()), this, SLOT(onTimerSlot()));
-    
     connect(this, SIGNAL(onValueChangeSignal()), this, SLOT(onValueChangeSlot()));
+    
+    connect(m_process, SIGNAL(readyReadStandardOutput()),this, SLOT(rightMessage()) );
+    connect(m_process, SIGNAL(readyReadStandardError()), this, SLOT(wrongMessage()) );
+    connect(m_process,SIGNAL(finished(int, QProcess::ExitStatus)),this,SLOT(processFinished(int, QProcess::ExitStatus)));
+    m_process->start("/bin/bash", QStringList() << "-c" << QString("ls -la"));
     
     setupUi();
     DEBUG("end");
@@ -151,3 +155,26 @@ void MainWindow::openFile(){
     DEBUG("end");*/
 }
 
+void MainWindow::rightMessage()
+{
+    QByteArray strdata = m_process->readAllStandardOutput();
+    Framework & f = Framework::Instance();
+    f.m_cmd_buffer.push_back(strdata.constData());
+
+}
+
+// show wrong message
+void MainWindow::wrongMessage()
+{
+    QByteArray strdata = m_process->readAllStandardError();
+    Framework & f = Framework::Instance();
+    f.m_cmd_buffer.push_back(strdata.constData());
+}
+
+void MainWindow::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    INFO("finished");
+    Framework & f = Framework::Instance();
+    f.m_cmd_return = 0;
+    f.m_cmd_end = true;
+}
