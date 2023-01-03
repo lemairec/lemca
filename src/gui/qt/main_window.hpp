@@ -2,7 +2,7 @@
 #include "../main_widget.hpp"
 #include "../../util/log.hpp"
 
-#include <QProcess.h>
+#include <QProcess>
 
 class MyWidget : public QWidget
 {
