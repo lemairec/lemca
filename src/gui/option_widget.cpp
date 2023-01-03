@@ -806,6 +806,7 @@ void OptionWidget::call(const std::string & s){
 }
 
 void OptionWidget::openFirefox(const std::string & s){
+    INFO("firefox");
     QProcess * p = new QProcess();
     p->start("/bin/bash", QStringList() << "-c" << QString::fromStdString(s));
 }
