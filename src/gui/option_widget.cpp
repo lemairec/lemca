@@ -676,12 +676,11 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_camera30.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
-        call("onboard");
+        openFirefox("onboard & firefox http://192.168.1.30;");
     }
     if(m_camera31.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
-        call("onboard & firefox http://192.168.1.31;");
-        call("firefox http://192.168.1.31");
+        openFirefox("onboard & firefox http://192.168.1.31;");
     }
     if(m_reseau.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
@@ -804,6 +803,11 @@ void OptionWidget::call(const std::string & s){
     
     m_close = true;
     MainWidget::instancePtr()->m_cmd_widget.open();
+}
+
+void OptionWidget::openFirefox(const std::string & s){
+    QProcess * p = new QProcess();
+    p->start("/bin/bash", QStringList() << "-c" << QString::fromStdString(s));
 }
 
 
