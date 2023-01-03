@@ -125,8 +125,15 @@ void MainWidget::draw_force(){
     }
     
     if(f.m_is_f_call){
-        m_painter->drawRect(0.2*m_width, 0.2*m_height,0.6*m_width, 0.6*m_height);
-        drawText("loading", 0.5*m_width, 0.5*m_height);
+        int y2 = m_height*0.1;
+        int x2 = y2;
+        int width2 = m_width-2*y2;
+        int height2 = m_height-2*y2;
+        m_painter->setPen(m_penBlack);
+        m_painter->setBrush(m_brushWhite);
+        m_painter->drawRoundedRect(x2, y2, width2, height2, RAYON_ROUNDED, RAYON_ROUNDED);
+        
+        drawText(Langage::getKey("LOADING"), 0.5*m_width, 0.5*m_height, sizeText_bigbig, true);
     }
     
     if(!m_key_board_widget.m_close){

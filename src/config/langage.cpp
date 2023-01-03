@@ -53,6 +53,7 @@ Langage::Langage(){
     add("FR", "OK", "OK");
     add("FR", "CANCEL", "Annuler");
     add("FR", "FAIL", "Erreur");
+    add("FR", "LOADING", "Chargement ...");
     
     add("FR", "HOME_BINEUSE", "Bineuse");
     add("FR", "HOME_GPS", "GPS");
@@ -95,6 +96,7 @@ Langage::Langage(){
     add("EN", "OK", "OK");
     add("EN", "CANCEL", "Cancel");
     add("EN", "FAIL", "Error");
+    add("EN", "LOADING", "Loading ...");
     
     add("EN", "HOME_BINEUSE", "Hoe");
     add("EN", "HOME_GPS", "GPS");

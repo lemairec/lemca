@@ -175,6 +175,6 @@ void MainWindow::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     INFO("finished");
     Framework & f = Framework::Instance();
-    f.m_cmd_return = 0;
+    f.m_cmd_return = exitCode;
     f.m_cmd_end = true;
 }
