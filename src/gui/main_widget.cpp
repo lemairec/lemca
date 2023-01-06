@@ -236,7 +236,9 @@ int MainWidget::onMouse(int x, int y){
     }
     
     if(m_buttonBineuse.isActive(x, y)){
-        call("/Users/lemairec/workspace/bineuse/build/Debug/bineuse.app/Contents/MacOS/bineuse & 2>&1");
+        std::string cmd = f.m_config.m_bineuse_run;
+        cmd = cmd + " -l "+ f.m_config.m_langage + " -c "+ std::to_string(f.m_config.m_constructor);
+        call(cmd);
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
             call(f.m_config.m_gps_run);
