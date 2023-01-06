@@ -26,6 +26,7 @@ MainWidget::MainWidget()
     
     m_logo_lemca = loadImage("/gui/logo/logo.png");
     m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
+    m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
     m_imgBineuse = loadImage("/gui/bineuse.png");
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
@@ -161,7 +162,11 @@ void MainWidget::drawMain(){
         drawMyImage(*m_logo_marechalle, 0.5*m_width, 0.38*m_height, 1.2, true);
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.4, true);
         
-    } else {
+    } else if(f.m_config.m_constructor == 2){
+        drawMyImage(*m_logo_vanhoucke, 0.5*m_width, 0.38*m_height, 1.5, true);
+        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.3, true);
+        
+    }else {
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
     }
     
@@ -231,9 +236,7 @@ int MainWidget::onMouse(int x, int y){
     }
     
     if(m_buttonBineuse.isActive(x, y)){
-        std::string cmd = f.m_config.m_bineuse_run;
-        cmd = cmd + " -l "+ f.m_config.m_langage + " -c "+ std::to_string(f.m_config.m_constructor);
-        call(cmd);
+        call("/Users/lemairec/workspace/bineuse/build/Debug/bineuse.app/Contents/MacOS/bineuse & 2>&1");
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
             call(f.m_config.m_gps_run);
