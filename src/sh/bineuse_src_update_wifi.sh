@@ -12,9 +12,11 @@ make -j4
 
 rm -rf ~/bineuse
 mkdir ~/bineuse
-cp ~/bineuse_src/build/bineuse ~/bineuse
-cp -r ~/bineuse_src/gui ~/bineuse
-cp -r ~/bineuse_src/sound ~/bineuse
+
+$archive=~/bineuse
+cp ~/bineuse_src/build/bineuse $archive
+cp -r ~/bineuse_src/gui $archive
+cp -r ~/bineuse_src/sound $archive
 
 mkdir -p $archive/images
 cp -r ~/bineuse_src/images/colza.jpg $archive/images/colza.jpg

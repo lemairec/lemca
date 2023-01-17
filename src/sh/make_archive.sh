@@ -14,13 +14,15 @@ mkdir -p $archive
 
 cp ~/bineuse_src/build/bineuse $archive
 cp -r ~/bineuse_src/gui $archive
+cp -r ~/bineuse_src/sound $archive
+
 mkdir -p $archive/images
 cp -r ~/bineuse_src/images/colza.jpg $archive/images/colza.jpg
 cp -r ~/bineuse_src/images/ble.jpg $archive/images/ble.jpg
 cp -r ~/bineuse_src/images/mais.jpg $archive/images/mais.jpg
 cp -r ~/bineuse_src/images/betterave_sale.jpg $archive/images/betterave_sale.jpg
 cp -r ~/bineuse_src/images/quinoa_sale.jpg $archive/images/quinoa_sale.jpg
-cp -r ~/bineuse_src/sound $archive
+
 
 cd ~/bineuse_src/archive
 tar -czvf bineuse.tar.gz bineuse
