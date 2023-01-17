@@ -14,6 +14,7 @@ mkdir -p $archive
 
 cp ~/bineuse_src/build/bineuse $archive
 cp -r ~/bineuse_src/gui $archive
+cp -r ~/bineuse_src/images $archive
 cp -r ~/bineuse_src/sound $archive
 
 cd ~/bineuse_src/archive
