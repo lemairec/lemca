@@ -13,7 +13,7 @@ make -j4
 rm -rf ~/bineuse
 mkdir ~/bineuse
 
-$archive=~/bineuse
+archive=~/bineuse
 cp ~/bineuse_src/build/bineuse $archive
 cp -r ~/bineuse_src/gui $archive
 cp -r ~/bineuse_src/sound $archive
