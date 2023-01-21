@@ -32,6 +32,9 @@ public:
     std::string m_robot_inrows_run;
     std::string m_serie_run;
     
+    std::string m_version_selected = "";
+    
+    
     int m_port_remote = 0;
     AutoLaunch m_auto_launch = AutoLaunch_None;
     

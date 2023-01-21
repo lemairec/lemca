@@ -27,6 +27,7 @@ void Config::work(QSettings & settings, bool save){
     saveLoadInt(settings, "constructor", m_constructor, save);
     
     saveLoadString(settings, "langage", m_langage, save);
+    saveLoadString(settings, "version_selected", m_version_selected, save);
     
     
     saveLoadString(settings, "bineuse_run", m_bineuse_run, save);

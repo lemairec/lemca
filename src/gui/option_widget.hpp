@@ -99,6 +99,8 @@ public:
     ButtonGui m_update_lemca;
     ButtonGui m_update_deps;
     
+    SelectButtonGui m_version_selected;
+    
     void setSizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();

@@ -475,6 +475,12 @@ void OptionWidget::setSizePage4(){
     m_update_deps.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_DEPS"), true, m_part_1_w/2);
     y+= m_y_inter;
     y+= m_y_inter;
+    
+    m_version_selected.setResize(m_part_2_x+m_part_1_w/2, y, "Version", true, m_part_1_w/2);
+    m_version_selected.clear();
+    m_version_selected.addValue((""));
+    m_version_selected.addValue(("test"));
+    m_version_selected.addValue(("22_09"));
 };
 
 void OptionWidget::drawPage4(){
@@ -495,6 +501,12 @@ void OptionWidget::drawPage4(){
     drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
+    
+    drawPart2Title(m_version_selected.m_y-m_y_inter, 0, "Version", true);
+    if(m_select_widget.m_close){
+        m_version_selected.setValueString(f.m_config.m_version_selected);
+    }
+    drawButtonLabel2(m_version_selected.m_buttonOpen);
 }
 
 void OptionWidget::onMousePage4(int x, int y){
@@ -527,6 +539,21 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_update_deps.isActive(x, y)){
         call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
+    }
+    
+    //m_version_selected
+    if(!m_select_widget.m_close){
+        if(m_select_widget.onMouseSelect(x, y)){
+            f.m_config.m_version_selected = m_version_selected.getValueString();
+            f.initOrLoadConfig();
+        }
+       
+        return;
+    }
+    
+    if(m_version_selected.m_buttonOpen.isActive(x, y)){
+        m_select_widget.open();
+        m_select_widget.setValueGuiKeyPad(&m_version_selected);
     }
 }
 

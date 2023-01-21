@@ -166,7 +166,7 @@ void MainWidget::drawMain(){
         drawMyImage(*m_logo_vanhoucke, 0.5*m_width, 0.38*m_height, 1.5, true);
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.3, true);
         
-    }else {
+    } else {
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
     }
     
