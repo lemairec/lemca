@@ -38,13 +38,5 @@ cd ~/bineuse_src/archive
 tar -czvf bineuse_$branch.tar.gz bineuse
 cd ~/;
 curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch' --form 'myfile=@"./bineuse_src/archive/bineuse_$branch.tar.gz"'
-  
-if [[ "$branch" == "prod" ]];
-then
-    tar -czvf bineuse.tar.gz bineuse
-    cd ~/;
-    curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch' --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
-fi
-
 
 rm -rf ~/bineuse_src
