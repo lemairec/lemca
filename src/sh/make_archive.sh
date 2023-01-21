@@ -2,9 +2,16 @@
 
 archive=~/bineuse_src/archive/bineuse
 
+branch=$1;
+echo "--- branche $branch\n"
+
 rm -rf ~/bineuse
 rm -rf ~/bineuse_src
 git clone git@github.com:lemairec/bineuse.git ~/bineuse_src
+
+cd ~/bineuse_src
+git checkout -B $branch origin/$branch
+
 rm -rf $archive
 rm -rf ~/bineuse_src/archive
 
@@ -23,13 +30,21 @@ cp -r ~/bineuse_src/images/mais.jpg $archive/images/mais.jpg
 cp -r ~/bineuse_src/images/betterave_sale.jpg $archive/images/betterave_sale.jpg
 cp -r ~/bineuse_src/images/quinoa_sale.jpg $archive/images/quinoa_sale.jpg
 
+git branch --show-current > ~/bineuse_src/version.txt
+git rev-parse HEAD >> ~/bineuse_src/version.txt
+
 
 cd ~/bineuse_src/archive
-tar -czvf bineuse.tar.gz bineuse
-
-
+tar -czvf bineuse_$branch.tar.gz bineuse
 cd ~/;
+curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch' --form 'myfile=@"./bineuse_src/archive/bineuse_$branch.tar.gz"'
+  
+if [[ "$branch" == "prod" ]];
+then
+    tar -czvf bineuse.tar.gz bineuse
+    cd ~/;
+    curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch' --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
+fi
 
-curl --request POST 'https://maplaine.fr/lemca/send_file' --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
 
 rm -rf ~/bineuse_src
