@@ -38,6 +38,6 @@ git rev-parse HEAD >> ~/bineuse_src/version.txt
 cd ~/bineuse_src/archive
 tar -czvf bineuse.tar.gz bineuse
 cd ~/;
-curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch&head=$head' --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
+curl --request POST "https://maplaine.fr/lemca/send_file?branch=$branch&head=$head" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
 
 rm -rf ~/bineuse_src
