@@ -58,7 +58,6 @@ protected:
     }
     
     void keyReleaseEvent(QKeyEvent *event){
-        INFO("tutu");
     }
     
 signals:

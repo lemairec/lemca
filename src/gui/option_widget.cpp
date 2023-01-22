@@ -333,9 +333,12 @@ void OptionWidget::onMousePage2(int x, int y){
     if(f.m_config.m_update_wifi){
         if(m_update_bineuse.isActive(x, y)){
             if(f.m_config.m_code_source){
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh");
+                std::string opt = f.m_config.m_version_selected;
+                std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
+                call(cmd);
             } else {
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh");
+                std::string opt = f.m_config.m_version_selected;
+                std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
             }
         }
         if(f.m_config.m_gps){
@@ -478,9 +481,10 @@ void OptionWidget::setSizePage4(){
     
     m_version_selected.setResize(m_part_2_x+m_part_1_w/2, y, "Version", true, m_part_1_w/2);
     m_version_selected.clear();
-    m_version_selected.addValue((""));
+    m_version_selected.addValue(("prod"));
     m_version_selected.addValue(("test"));
-    m_version_selected.addValue(("22_09"));
+    m_version_selected.addValue(("v_22_09"));
+    m_version_selected.addValue(("v_22_02"));
 };
 
 void OptionWidget::drawPage4(){
@@ -682,7 +686,8 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(f.m_config.m_code_source){
         if(m_make_archive.isActive(x, y)){
-            call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/make_archive.sh");;
+            std::string opt = f.m_config.m_version_selected;
+            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/make_archive.sh " + opt;
         }
     }
     

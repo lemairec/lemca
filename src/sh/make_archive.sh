@@ -30,13 +30,14 @@ cp -r ~/bineuse_src/images/mais.jpg $archive/images/mais.jpg
 cp -r ~/bineuse_src/images/betterave_sale.jpg $archive/images/betterave_sale.jpg
 cp -r ~/bineuse_src/images/quinoa_sale.jpg $archive/images/quinoa_sale.jpg
 
+head=$(git rev-parse HEAD)
 git branch --show-current > ~/bineuse_src/version.txt
 git rev-parse HEAD >> ~/bineuse_src/version.txt
 
 
 cd ~/bineuse_src/archive
-tar -czvf bineuse_$branch.tar.gz bineuse
+tar -czvf bineuse.tar.gz bineuse
 cd ~/;
-curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch' --form 'myfile=@"./bineuse_src/archive/bineuse_$branch.tar.gz"'
+curl --request POST 'https://maplaine.fr/lemca/send_file?branch=$branch&head=$head' --form 'myfile=@"./bineuse_src/archive/bineuse_$branch.tar.gz"'
 
 rm -rf ~/bineuse_src

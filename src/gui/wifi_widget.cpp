@@ -97,7 +97,7 @@ int WifiWidget::onMouse(int x, int y){
             key_board_widget.m_close = false;
         }
         if(m_connect.isActive(x, y)){
-            call2("nmcli dev wifi connect "+ m_reseau + " password " + m_password.m_text);
+            call2("nmcli dev wifi connect \""+ m_reseau + "\" password " + m_password.m_text);
             //nmcli dev wifi connect <mySSID> password <myPassword>
             //key_board_widget.m_close = false;
         }
