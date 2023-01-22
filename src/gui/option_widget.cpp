@@ -339,6 +339,7 @@ void OptionWidget::onMousePage2(int x, int y){
             } else {
                 std::string opt = f.m_config.m_version_selected;
                 std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
+                call(cmd);
             }
         }
         if(f.m_config.m_gps){
@@ -686,8 +687,10 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(f.m_config.m_code_source){
         if(m_make_archive.isActive(x, y)){
+            INFO("m_make_archive");
             std::string opt = f.m_config.m_version_selected;
             std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/make_archive.sh " + opt;
+            call(cmd);
         }
     }
     
@@ -822,6 +825,8 @@ void OptionWidget::open(){
 
 
 void OptionWidget::call(const std::string & s){
+    INFO("cmd " << s);
+    
     Framework & f = Framework::Instance();
     //f.mutex.lock();
     //f.m_command_to_execute2 = s+" 2>&1";
