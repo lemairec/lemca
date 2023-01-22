@@ -31,7 +31,7 @@ cp -r ~/bineuse_src/images/betterave_sale.jpg $archive/images/betterave_sale.jpg
 cp -r ~/bineuse_src/images/quinoa_sale.jpg $archive/images/quinoa_sale.jpg
 
 head=$(git rev-parse HEAD)
-git branch --show-current > $archive/version.txt
+echo $branch > $archive/version.txt
 git rev-parse HEAD >> $archive/version.txt
 
 
