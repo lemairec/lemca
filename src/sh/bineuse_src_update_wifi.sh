@@ -7,11 +7,12 @@ echo "--- branche $branch\n"
 [ ! -d ~/bineuse_src ] && git clone git@github.com:lemairec/bineuse.git ~/bineuse_src
 
 cd ~/bineuse_src
+
+git fetch origin
+git reset --hard
 git checkout origin/$branch
 
 mkdir -p build
-git reset --hard
-git pull
 cd build
 cmake ..
 make -j4
