@@ -487,8 +487,8 @@ void OptionWidget::setSizePage4(){
     
     m_version_selected.setResize(m_part_2_x+m_part_1_w/2, y, "Version", true, m_part_1_w/2);
     m_version_selected.clear();
-    m_version_selected.addValue(("prod"));
     m_version_selected.addValue(("test"));
+    m_version_selected.addValue(("prod"));
     m_version_selected.addValue(("v_22_09"));
     m_version_selected.addValue(("v_22_02"));
 };
@@ -620,6 +620,7 @@ void OptionWidget::drawPage5(){
     
     drawPart1Title(m_y_begin-2*m_y_inter, 0, "Source");
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source, "code source");
+    m_make_archive.m_label = "Make archive - "+QString::fromStdString(f.m_config.m_version_selected);
     if(f.m_config.m_code_source){
         drawButtonLabel2(m_make_archive);
     }
