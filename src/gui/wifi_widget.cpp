@@ -45,7 +45,8 @@ void WifiWidget::draw(){
     m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
     
     if(m_search_wifi > 0){
-        drawText("Search Wifi", 0.55*m_width, m_refresh.m_y, sizeText_big);
+        QString s = "Search Wifi " + QString::number(m_search_wifi);
+        drawQText(s, 0.55*m_width, m_refresh.m_y, sizeText_big);
         if(m_search_wifi == 1){
            addWifis();
         }
@@ -161,7 +162,7 @@ void WifiWidget::call2(const std::string & s){
 void WifiWidget::open(){
     m_qt_network->test();
     m_close = false;
-    m_search_wifi = true;
+    m_search_wifi = 2;
 }
 void WifiWidget::call(const std::string & s){
     INFO("call " << s);
@@ -206,7 +207,6 @@ void WifiWidget::addWifis(){
                 }
             }
         }
-        m_search_wifi = 2;
         
     }
 }
