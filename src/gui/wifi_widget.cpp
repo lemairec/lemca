@@ -44,10 +44,12 @@ void WifiWidget::draw(){
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    if(m_search_wifi){
+    if(m_search_wifi > 0){
         drawText("Search Wifi", 0.55*m_width, m_refresh.m_y, sizeText_big);
-        m_search_wifi = false;
-        addWifis();
+        m_search_wifi--;
+        if(m_search_wifi == 1){
+           addWifis();
+        }
         return;
     }
     
@@ -204,7 +206,7 @@ void WifiWidget::addWifis(){
                 }
             }
         }
-        m_search_wifi = false;
+        m_search_wifi = 2;
         
     }
 }
