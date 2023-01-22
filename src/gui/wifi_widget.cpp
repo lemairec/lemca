@@ -46,6 +46,8 @@ void WifiWidget::draw(){
     
     if(m_search_wifi){
         drawText("Search Wifi", 0.55*m_width, m_refresh.m_y, sizeText_big);
+        m_search_wifi = false;
+        addWifis();
         return;
     }
     
@@ -102,7 +104,12 @@ int WifiWidget::onMouse(int x, int y){
             key_board_widget.m_close = false;
         }
         if(m_connect.isActive(x, y)){
-            call2("nmcli dev wifi connect \""+ m_reseau + "\" password " + m_password.m_text);
+            std::string cmd = "nmcli dev wifi connect \""+ m_reseau + "\"";
+            if(m_password.m_text.size()>0){
+                cmd = cmd + " password " + m_password.m_text;
+            }
+    
+            call2(cmd);
             //nmcli dev wifi connect <mySSID> password <myPassword>
             //key_board_widget.m_close = false;
         }
@@ -153,7 +160,6 @@ void WifiWidget::open(){
     m_qt_network->test();
     m_close = false;
     m_search_wifi = true;
-    addWifis();
 }
 void WifiWidget::call(const std::string & s){
     INFO("call " << s);
