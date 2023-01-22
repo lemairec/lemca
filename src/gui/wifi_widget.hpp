@@ -36,6 +36,7 @@ public:
     void call(const std::string & s);
     void call2(const std::string & s);
     
+    bool m_search_wifi = false;
     void addWifis();
     
 };

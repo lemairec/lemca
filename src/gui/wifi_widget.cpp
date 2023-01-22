@@ -44,6 +44,11 @@ void WifiWidget::draw(){
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
     
+    if(m_search_wifi){
+        drawText("Search Wifi", 0.55*m_width, m_refresh.m_y, sizeText_big);
+        return;
+    }
+    
     if(!m_select_widget.m_close){
         m_select_widget.draw();
         return;
@@ -146,12 +151,31 @@ void WifiWidget::call2(const std::string & s){
 
 void WifiWidget::open(){
     m_qt_network->test();
-    addWifis();
     m_close = false;
+    m_search_wifi = true;
+    addWifis();
 }
 void WifiWidget::call(const std::string & s){
     INFO("call " << s);
     system(s.c_str());
+}
+
+const std::string WHITESPACE = " \n\r\t\f\v";
+
+std::string ltrim(const std::string &s)
+{
+    size_t start = s.find_first_not_of(WHITESPACE);
+    return (start == std::string::npos) ? "" : s.substr(start);
+}
+ 
+std::string rtrim(const std::string &s)
+{
+    size_t end = s.find_last_not_of(WHITESPACE);
+    return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+ 
+std::string trim(const std::string &s) {
+    return rtrim(ltrim(s));
 }
 
 #include <sstream>      // std::stringstream
@@ -168,10 +192,13 @@ void WifiWidget::addWifis(){
             if(!item.empty()){
                 INFO(item);
                 if(item.find("SSID") == std::string::npos){
-                    m_select_wifi.addValue(item);
+                    std::string s = item;
+                    
+                    m_select_wifi.addValue(trim(s));
                 }
             }
         }
+        m_search_wifi = false;
         
     }
 }
