@@ -230,6 +230,7 @@ download image
 ## 2. cloner
 
 `````
+( uefi )
 clonezilla live vga 800x600
 start_clonezilla
 device-image
@@ -241,11 +242,25 @@ z1p
 ## 3. restaurer
 
 `````
+( usb flash memory )
 clonezilla live vga 800x600
 start_clonezilla
 device-image
 local_dev
 restoredisk
+`````
+
+## 4. restaurer
+
+`````
+config reseau a refaire
+Lemca a update
+Logo companie
+Licence
+hydraulique 100
+angle 30
+devers deactiver 150
+reset heure
 `````
 
 # nouveau panel
@@ -313,3 +328,6 @@ gnome-disk-utility
 gnome-disk
 
 ///Users/lemairec/workspace/bineuse/build/Debug/bineuse.app/Contents/MacOS/bineuse & 2>&1"
+
+
+export PATH=$PATH:/opt/homebrew/bin

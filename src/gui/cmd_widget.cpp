@@ -25,24 +25,6 @@ void CmdWidget::draw(){
     
     
     Framework & f = Framework::Instance();
-    bool debug = f.m_config.isTechnicien();
-    
-    if(debug){
-        m_painter->setBrush(m_brushWhite);
-        m_painter->drawRoundedRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.7, 15, 15);
-        
-        int inter = 18;
-        int x = m_width*0.08;
-        int y = m_height*0.8-inter;
-        for(size_t i = 0; i < f.m_cmd_buffer.size(); ++i){
-            std::string s = f.m_cmd_buffer[f.m_cmd_buffer.size()-i-1];
-            drawText(s, x, y);
-            y-= inter;
-            if(y<m_height*0.1){
-                break;
-            }
-        }
-    }
     
     int perc_i = f.m_cmd_buffer.size()%99;
     double perc = perc_i/100.0;
@@ -61,6 +43,27 @@ void CmdWidget::draw(){
     
     int y = m_height*0.45;
     int h = m_height*0.1;
+    
+    bool debug = f.m_config.isTechnicien() || m_debug || !good;
+    
+    if(debug){
+        m_painter->setBrush(m_brushWhite);
+        m_painter->drawRoundedRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.7, 15, 15);
+        
+        int inter = 18;
+        int x = m_width*0.08;
+        int y = m_height*0.8-inter;
+        for(size_t i = 0; i < f.m_cmd_buffer.size(); ++i){
+            std::string s = f.m_cmd_buffer[f.m_cmd_buffer.size()-i-1];
+            drawText(s, x, y);
+            y-= inter;
+            if(y<m_height*0.1){
+                break;
+            }
+        }
+    }
+    
+    
     if(debug){
         y = m_height*0.84;
         h = m_height*0.02;
@@ -131,6 +134,7 @@ int CmdWidget::onMouse(int x, int y){
 }
 
 void CmdWidget::open(){
+    m_debug = false;
     m_close = false;
     m_button_ok = false;
 }

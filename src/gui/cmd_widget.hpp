@@ -10,6 +10,7 @@ class CmdWidget : public BaseWidget {
 public:
     bool m_button_ok = false;
     bool m_enable_abort = false;
+    bool m_debug = false;
     
     CmdWidget();
     
