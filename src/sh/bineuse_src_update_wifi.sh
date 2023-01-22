@@ -7,7 +7,7 @@ echo "--- branche $branch\n"
 [ ! -d ~/bineuse_src ] && git clone git@github.com:lemairec/bineuse.git ~/bineuse_src
 
 cd ~/bineuse_src
-git checkout -B $branch origin/$branch
+git checkout origin/$branch
 
 mkdir -p build
 git reset --hard
