@@ -46,10 +46,10 @@ void WifiWidget::draw(){
     
     if(m_search_wifi > 0){
         drawText("Search Wifi", 0.55*m_width, m_refresh.m_y, sizeText_big);
-        m_search_wifi--;
         if(m_search_wifi == 1){
            addWifis();
         }
+        m_search_wifi--;
         return;
     }
     
