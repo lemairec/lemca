@@ -23,6 +23,6 @@ mkdir ~/bineuse
 archive=~/bineuse
 cp ~/bineuse_src/build/bineuse $archive
 cp -r ~/bineuse_src/gui $archive
-cp -r ~/bineuse_src/sound $archive
+cp -r ~/bineuse_src/sound $archive 2>/dev/null
 
 mkdir -p $archive/images
