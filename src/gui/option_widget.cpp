@@ -246,8 +246,13 @@ void OptionWidget::drawPage1(){
     drawButtonLabel2(m_unity.m_buttonOpen);
     
     
-    drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("VERSION"));
-    drawText(ProjectVersion, m_part_2_m, m_langage.m_y, sizeText_medium, true);
+    int y = m_y_begin+m_y_inter;
+    drawPart2Title(m_langage.m_y-2*m_y_inter, y, Langage::getKey("VERSION"));
+    y+= m_y_inter;
+    drawText(ProjectVersion, m_part_2_m, y, sizeText_medium, true);
+    y+= m_y_inter;
+    drawText(f.m_config.m_version_selected, m_part_2_m, y, sizeText_medium, true);
+    
 }
 
 void OptionWidget::onMousePage1(int x, int y){
