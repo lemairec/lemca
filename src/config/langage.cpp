@@ -76,6 +76,7 @@ Langage::Langage(){
     add("FR", "EN", "Anglais");
     add("FR", "FR", "Francais");
     add("FR", "DE", "Allemand");
+    add("FR", "NL", "Néerlandais");
     add("FR", "OPT_UNITY", "Unité");
     add("FR", "METRIQUE", "Métrique");
     add("FR", "VERSION", "Version");
@@ -119,6 +120,7 @@ Langage::Langage(){
     add("EN", "EN", "English");
     add("EN", "FR", "French");
     add("EN", "DE", "Deutsch");
+    add("EN", "NL", "Dutch");
     add("EN", "OPT_UNITY", "Unity");
     add("EN", "METRIQUE", "Metric");
     add("EN", "VERSION", "Version");
@@ -142,7 +144,46 @@ Langage::Langage(){
     add("EN", "OPERATING_SYSTEM", "Operating System");
     add("EN", "UPDATE_OS", "Update OS");
     add("EN", "UPDATE_DEPS", "Install dependances");
-        
+    
+    add("NL", "OK", "OK");
+    add("NL", "CANCEL", "annuleren");
+    add("NL", "FAIL", "Fout");
+    add("NL", "LOADING", "Bezig met laden...");
+    add("NL", "HOME_BINEUSE", "Schoffel");
+    add("NL", "HOME_GPS", "GPS");
+    add("NL", "HOME_SERIAL", "Serial");
+    add("NL", "HOME_INFOS", "Info");
+    add("NL", "HOME_REMOTE", "Remote");
+    add("NL", "HOME_WIFI", "Wifi");
+    add("NL", "HOME_OFF", "Uitroeien");
+    add("NL", "INFOS_AV_TITLE", "Geavanceerd menu (info)");
+    add("NL", "OPT_LANGAGE", "Taal");
+    add("NL", "EN", "English");
+    add("NL", "FR", "Français");
+    add("NL", "DE", "Deutsch");
+    add("NL", "NL", "Nederlands");
+    add("NL", "OPT_UNITY", "Eenheid");
+    add("NL", "METRIQUE", "Metriek");
+    add("NL", "VERSION", "Versie");
+    add("NL", "UPDATE", "Bijwerken");
+    add("NL", "UPDATE_WIFI", "Bijwerken via WIFI");
+    add("NL", "UPDATE_BINEUSE_WIFI", "Weeder-update");
+    add("NL", "UPDATE_GPS_WIFI", "GPS-update");
+    add("NL", "UPDATE_SERIAL_WIFI", "Serie-update");
+    add("NL", "UPDATE_USB", "Bijwerken via USB-sleutel");
+    add("NL", "UPDATE_BINEUSE_USB", "Weeder-update");
+    add("NL", "INFOS_OPTIONS", "Opties");
+    add("NL", "SOFTWARE", "Software geactiveerd");
+    add("NL", "GPS", "GPS");
+    add("NL", "SERIAL", "Serial");
+    add("NL", "OPTIONS", "Opties");
+    add("NL", "UPDATE_WIFI_ENABLE", "WIFI-update inschakelen");
+    add("NL", "UPDATE_USB_ENABLE", "Schakel USB-update in");
+    add("NL", "REMOTE_ENABLE", "Schakel externe toegang in");
+    add("NL", "OPERATING_SYSTEM", "Besturingssysteem");
+    add("NL", "UPDATE_OS", "Bijwerken");
+    add("NL", "UPDATE_DEPS", "Afhankelijkheden installeren");
+
     
     //verifyAll();
 }
