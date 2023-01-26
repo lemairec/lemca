@@ -28,6 +28,12 @@ const std::string & Langage::getKey(const std::string & ref){
             return i->second;
         }
     }
+    if(l.m_l == MyLangage_nl){
+        auto i = l.m_nl.find(ref);
+        if(i != l.m_nl.end()){
+            return i->second;
+        }
+    }
     l.m_fr["ref"] = "$" + ref;
     return l.m_fr["ref"];
 }
@@ -45,6 +51,8 @@ void Langage::setLangage(const std::string & s){
         l.m_l = MyLangage_en;
     } else if(s == "DE"){
         l.m_l = MyLangage_de;
+    }else if(s == "NL"){
+        l.m_l = MyLangage_nl;
     }
 }
 
@@ -136,6 +144,7 @@ Langage::Langage(){
     add("EN", "UPDATE_DEPS", "Install dependances");
         
     
+    //verifyAll();
 }
 
 void Langage::add(std::string langage, std::string key, std::string trad){
@@ -145,6 +154,8 @@ void Langage::add(std::string langage, std::string key, std::string trad){
         m_en[key] = trad;
     } else if(langage == "DE"){
         m_de[key] = trad;
+    } else if(langage == "NL"){
+        m_nl[key] = trad;
     }
     for(auto e : m_all){
         if(e == key){
@@ -154,11 +165,42 @@ void Langage::add(std::string langage, std::string key, std::string trad){
     m_all.push_back(key);
 }
 
+void Langage::VerifyLangage(std::string lg, std::ofstream & myfile2){
+    auto & dico_trad = m_nl;
+    if(lg == "EN"){
+        dico_trad = m_en;
+    } else if(lg == "DE"){
+        dico_trad = m_de;
+    } else if(lg == "NL"){
+        dico_trad = m_nl;
+    }
+    
+    for(auto s : m_all){
+        std::string trad = "*****";
+        std::string s2 = s;
+        auto i = dico_trad.find(s2);
+        
+        if(i != dico_trad.end()){
+            trad = i->second;
+            myfile2 << "add(\"" << lg << "\", \"" << s << "\", \"" << trad << "\");\n";
+        } else {
+            std::string trad_fr = "*****";
+            std::string s2_fr = s;
+            auto i_fr = m_fr.find(s2);
+            if(i_fr != m_fr.end()){
+                trad_fr = i_fr->second;
+            }
+            
+            myfile2 << "add(\"" << lg << "\", \"" << s << "\", \"" << trad << "\");//" << trad_fr << "\n";
+        }
+    }
+}
+
 
 void Langage::verifyAll(){
 
     std::ofstream myfile;
-    myfile.open ("/Users/lemairec/workspace/bineuse/all.txt");
+    myfile.open ("/Users/lemairec/workspace/lemca/all.txt");
     for(auto s : m_all){
         myfile << s << "\n";
         
@@ -166,7 +208,7 @@ void Langage::verifyAll(){
     myfile.close();
     
     std::ofstream myfile2;
-    myfile2.open ("/Users/lemairec/workspace/bineuse/all2.txt");
+    myfile2.open ("/Users/lemairec/workspace/lemca/all2.txt");
     for(auto s : m_all){
         std::string trad = "*****";
         std::string s2 = s;
@@ -178,40 +220,17 @@ void Langage::verifyAll(){
     }
     myfile2 << "\n";
     myfile2 << "\n";
-    
-    for(auto s : m_all){
-        std::string trad = "*****";
-        std::string s2 = s;
-        auto i = m_en.find(s2);
-        if(i != m_en.end()){
-            trad = i->second;
-            myfile2 << "add(\"EN\", \"" << s << "\", \"" << trad << "\");\n";
-        } else {
-            myfile2 << "add(\"EN\", \"" << s << "\", \"" << trad << "\");//" << m_fr[s]<<"\n";
-        }
-    }
+    VerifyLangage("EN", myfile2);
     
     myfile2 << "\n";
     myfile2 << "\n";
-    for(auto s : m_all){
-        std::string trad = "*****";
-        std::string s2 = s;
-        auto i = m_de.find(s2);
-        if(i != m_de.end()){
-            trad = i->second;
-            myfile2 << "add(\"DE\", \"" << s << "\", \"" << trad << "\");\n";
-        } else {
-            myfile2 << "add(\"DE\", \"" << s << "\", \"" << trad << "\");\n";
-        }
-        
-    }
+    VerifyLangage("DE", myfile2);
     
-    for(auto s : m_all){
-        std::string trad = "*****";
-        std::string s2 = s;
-        myfile2 << "add(\"NL\", \"" << s << "\", \"" << m_fr[s] << "\");" <<"\n";
-        
-    }
+    myfile2 << "\n";
+    myfile2 << "\n";
+    VerifyLangage("NL", myfile2);
+    
+    
     myfile2.close();
         
 }
