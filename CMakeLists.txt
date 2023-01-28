@@ -3,7 +3,7 @@ project(lemca)
 
 # The version number.
 set (PROJECT_VERSION_MAJOR 23)
-set (PROJECT_VERSION_MINOR 01)
+set (PROJECT_VERSION_MINOR 02)
 set (PROJECT_VERSION_PATCH 01)
 
 configure_file (

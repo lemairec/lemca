@@ -101,6 +101,9 @@ public:
     
     SelectButtonGui m_version_selected;
     
+    ButtonGui m_send_images;
+    
+    
     void setSizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();
