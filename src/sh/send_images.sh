@@ -6,7 +6,7 @@ yourfilenames=`ls ./*.jpg`
 for eachfile in $yourfilenames
 do
     echo $eachfile --form myfile=@"$eachfile"
-    curl --request POST "localhost:8000/lemca/send_file2" --form myfile=@"$eachfile"
+    curl --request POST "https://maplaine.fr/lemca/send_file2" --form myfile=@"$eachfile"
 done
                            
 
