@@ -80,6 +80,7 @@ Langage::Langage(){
     add("FR", "OPT_UNITY", "Unité");
     add("FR", "METRIQUE", "Métrique");
     add("FR", "VERSION", "Version");
+    add("FR", "SEND_IMAGES", "Envoyer les images");
     
     add("FR", "UPDATE", "Mise à jour");
     add("FR", "UPDATE_WIFI", "Mise à jour par WIFI");
@@ -124,6 +125,7 @@ Langage::Langage(){
     add("EN", "OPT_UNITY", "Unity");
     add("EN", "METRIQUE", "Metric");
     add("EN", "VERSION", "Version");
+    add("EN", "SEND_IMAGES", "Send pictures");
     
     add("EN", "UPDATE", "Update");
     add("EN", "UPDATE_WIFI", "Update by WIFI");
@@ -165,6 +167,7 @@ Langage::Langage(){
     add("NL", "OPT_UNITY", "Eenheid");
     add("NL", "METRIQUE", "Metriek");
     add("NL", "VERSION", "Versie");
+    add("NL", "SEND_IMAGES", "Stuur foto's");
     add("NL", "UPDATE", "Bijwerken");
     add("NL", "UPDATE_WIFI", "Bijwerken via WIFI");
     add("NL", "UPDATE_BINEUSE_WIFI", "Weeder-update");
