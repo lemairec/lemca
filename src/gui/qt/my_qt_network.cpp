@@ -20,7 +20,7 @@ MyQTNetwork::MyQTNetwork(){
     QObject::connect(manager, &QNetworkAccessManager::finished, this,&MyQTNetwork::handleNetwork);
     connect(this, SIGNAL(testSignal()), this, SLOT(testSlot()));
     
-    m_host_url = "https://maplaine.fr/lemca/ping";
+    m_host_url = "https://cloud.lemcavision.com/ping";
     
     m_camera_30_url = "http://192.168.1.30";
     m_camera_31_url = "http://192.168.1.31";
