@@ -31,6 +31,7 @@ public:
     QPixmap * m_logo_lemca;
     QPixmap * m_logo_marechalle;
     QPixmap * m_logo_vanhoucke;
+    QPixmap * m_logo_binnove;
     
     
     QPixmap * m_imgBineuse;

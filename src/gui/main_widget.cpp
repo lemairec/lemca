@@ -27,6 +27,7 @@ MainWidget::MainWidget()
     m_logo_lemca = loadImage("/gui/logo/logo.png");
     m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
     m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
+    m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
     m_imgBineuse = loadImage("/gui/bineuse.png");
     m_imgGPS = loadImage("/gui/gps.png");
     m_imgExit = loadImage("/gui/off.png");
@@ -166,6 +167,8 @@ void MainWidget::drawMain(){
         drawMyImage(*m_logo_vanhoucke, 0.5*m_width, 0.38*m_height, 1.5, true);
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.3, true);
         
+    } else if(f.m_config.m_constructor == 3){
+        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.5*m_height, 0.8, true);
     } else {
         drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
     }

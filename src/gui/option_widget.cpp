@@ -499,7 +499,9 @@ void OptionWidget::setSizePage4(){
     y+= m_y_inter;
     y+= m_y_inter;
     m_send_images.setResizeStd(m_part_2_m, y, Langage::getKey("SEND_IMAGES"), true, m_part_1_w/2);
-    
+    y+= m_y_inter;
+    y+= m_y_inter;
+    m_test_cam.setResizeStd(m_part_2_x+m_part_1_w*0.3, y, "Test cam", true, m_part_1_w*0.3);
 };
 
 void OptionWidget::drawPage4(){
@@ -529,6 +531,23 @@ void OptionWidget::drawPage4(){
     
     drawPart2Title(m_send_images.m_y-m_y_inter, 0, "", true);
     drawButtonLabel2(m_send_images);
+    
+    
+    drawPart2Title(m_test_cam.m_y-m_y_inter, 0, "", true);
+    drawButtonLabel2(m_test_cam);
+    if(m_qt_network->m_camera_30_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("IP-30", m_part_2_x+m_part_1_w*0.6, m_test_cam.m_y, sizeText_medium, true);
+    
+    if(m_qt_network->m_camera_31_connected){
+        m_painter->setPen(Qt::darkGreen);
+    } else {
+        m_painter->setPen(Qt::red);
+    }
+    drawText("IP-31", m_part_2_x+m_part_1_w*0.8, m_test_cam.m_y, sizeText_medium, true);
     
 }
 
@@ -581,6 +600,10 @@ void OptionWidget::onMousePage4(int x, int y){
         m_select_widget.open();
         m_select_widget.setValueGuiKeyPad(&m_version_selected);
     }
+    
+    if(m_test_cam.isActive(x, y)){
+        m_qt_network->test_camera();;
+    }
 }
 
 /**
@@ -624,6 +647,7 @@ void OptionWidget::setSizePage5(){
     m_constructor.addValue(("0. Lemca"));
     m_constructor.addValue(("1. Marechalle"));
     m_constructor.addValue(("2. Vanhouke"));
+    m_constructor.addValue(("3. Binnove"));
     
 }
 
@@ -681,8 +705,6 @@ void OptionWidget::drawPage5(){
         m_constructor.setSelectedValue(f.m_config.m_constructor);
     }
     drawButtonLabel2(m_constructor.m_buttonOpen);
-    
-    
 }
 
 void OptionWidget::onMousePage5(int x, int y){

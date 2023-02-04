@@ -103,6 +103,7 @@ public:
     
     ButtonGui m_send_images;
     
+    ButtonGui m_test_cam;
     
     void setSizePage4();
     void onMousePage4(int x, int y);
