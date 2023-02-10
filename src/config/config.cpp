@@ -16,7 +16,7 @@ Config::Config(){
 void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "code_source", m_code_source, save);
     saveLoadBool(settings, "wifi", m_wifi2, save);
-    saveLoadBool(settings, "update_usb", m_update_usb, save);
+    saveLoadBool(settings, "update_usb2", m_update_usb, save);
     saveLoadBool(settings, "update_wifi", m_update_wifi, save);
     saveLoadBool(settings, "remote", m_remote, save);
     saveLoadBool(settings, "gps", m_gps, save);

@@ -18,7 +18,7 @@ public:
     int m_user_mode = 0;
     bool m_code_source = false;
     bool m_update_wifi = true;
-    bool m_update_usb = false;
+    bool m_update_usb = true;
     bool m_remote = false;
     bool m_wifi2 = false;
     bool m_gps = false;
