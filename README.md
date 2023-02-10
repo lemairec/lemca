@@ -243,24 +243,40 @@ z1p
 
 `````
 ( usb flash memory )
-clonezilla live vga 800x600
+clonezilla live vga 800x600 fr -keep
 start_clonezilla
 device-image
 local_dev
+enter
+(ctrl-c)
+(931.5G)
+(no-fsck)
+(done)
+enter
+beginner
 restoredisk
+-scr
+-p choose
+y
+y
+
+boot
+=> debian P0
 `````
 
 ## 4. restaurer
 
 `````
-config reseau a refaire
+config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
 Lemca a update
 Logo companie
 Licence
-hydraulique 100
-angle 30
+1 camera
+hydraulique 100 ok
+angle 30 h 100
 devers deactiver 150
 reset heure
+vis
 `````
 
 # nouveau panel
@@ -270,7 +286,7 @@ reset heure
 ## camera
 
 Video
-=> resolution 1024
+=> resolution 1920x1024
 => h 265
 => frzme rate 25
 => quality //40
@@ -299,11 +315,22 @@ auto-outdoor
 
 wdr
 disable
+hdr => ENABLE
 
 dnr
 3d / dynammic / 50
 
+exposure
+auto
+1/25 1/30000
+100
+disable
+50
+
 deflog
+disable
+
+LDC
 disable
 
 ## pci error
