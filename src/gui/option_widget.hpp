@@ -104,8 +104,6 @@ public:
     
     ButtonGui m_send_images;
     
-    ButtonGui m_test_cam;
-    
     void setSizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();
@@ -120,7 +118,6 @@ public:
     ButtonGui m_run_cmd;
     
     MyQTNetwork * m_qt_network;
-    ButtonGui m_refresh;
     ButtonGui m_camera30;
     ButtonGui m_camera31;
     ButtonGui m_reseau;
