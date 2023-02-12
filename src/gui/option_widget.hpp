@@ -90,8 +90,6 @@ public:
     void drawPage3();
     
     //page4
-    ButtonGui m_button_gps;
-    ButtonGui m_button_serial;
     ButtonGui m_button_update_wifi;
     ButtonGui m_button_update_usb;
     ButtonGui m_button_remote;
@@ -135,6 +133,8 @@ public:
     ValueGui m_port;
     ButtonGui m_auto_launch;
     ButtonGui m_button_robot;
+    ButtonGui m_button_gps;
+    ButtonGui m_button_serial;
     
     void setSizePage6();
     void onMousePage6(int x, int y);
