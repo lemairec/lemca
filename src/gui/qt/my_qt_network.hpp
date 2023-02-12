@@ -30,7 +30,8 @@ public:
     void closeAll();
     
     void test();
-    void test_camera();
+    bool m_test_camera = false;
+    void testCamera();
     
     QString m_camera_30_url;
     bool m_camera_30_connected = false;
@@ -38,11 +39,17 @@ public:
     bool m_camera_31_connected = false;
 signals:
     void testSignal();
+private:
+    QTimer m_timerPilot;
 private slots:
+    
+    void handlePilot();
     void testSlot();
     
     void handleNetwork(QNetworkReply *reply);
     void handleErrorGps(QSerialPort::SerialPortError error);
+    
+
 };
 
 

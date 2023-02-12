@@ -19,11 +19,15 @@ MyQTNetwork::MyQTNetwork(){
     
     QObject::connect(manager, &QNetworkAccessManager::finished, this,&MyQTNetwork::handleNetwork);
     connect(this, SIGNAL(testSignal()), this, SLOT(testSlot()));
+    connect(&m_timerPilot, SIGNAL(timeout()), this, SLOT(handlePilot()));
     
     m_host_url = "https://cloud.lemcavision.com/ping";
     
     m_camera_30_url = "http://192.168.1.30";
     m_camera_31_url = "http://192.168.1.31";
+    
+    m_timerPilot.stop();
+    m_timerPilot.start(1000); //1s
 }
 void MyQTNetwork::initOrLoad(Config & config){
     //m_host_url = "http://localhost:4000";
@@ -37,15 +41,11 @@ std::string m_name;
 void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     if (reply->error()) {
         std::string error = reply->errorString().toUtf8().constData();
-        WARN(error);
         if(reply->url() == m_host_url){
-            INFO("lu2");
             m_is_connected = false;
         } else if (reply->url() == m_camera_30_url){
-            INFO("lu2");
             m_camera_30_connected = false;
         } else if (reply->url() == m_camera_31_url){
-            INFO("lu2");
             m_camera_31_connected = false;
         } else {
             WARN("pas bien");
@@ -53,15 +53,11 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
         return;
     } else {
         std::string s = reply->readAll().toStdString();
-        INFO("la");
         if(reply->url() == m_host_url){
-            INFO("la2");
             m_is_connected = true;
         } else if (reply->url() == m_camera_30_url){
-            INFO("la3");
             m_camera_30_connected = true;
         } else if (reply->url() == m_camera_31_url){
-            INFO("la4");
             m_camera_31_connected = true;
         } else {
             WARN("pas bien");
@@ -92,12 +88,12 @@ void MyQTNetwork::testSlot(){
     
 }
 
-void MyQTNetwork::test_camera(){
+void MyQTNetwork::testCamera(){
     {
         QNetworkRequest request;
 
         QString url = m_camera_30_url;
-        INFO(url.toUtf8().constData());
+        //INFO(url.toUtf8().constData());
         QUrl serviceUrl = QUrl(url);
         QNetworkRequest networkRequest(serviceUrl);
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
@@ -108,11 +104,21 @@ void MyQTNetwork::test_camera(){
         QNetworkRequest request;
 
         QString url = m_camera_31_url;
-        INFO(url.toUtf8().constData());
+        //INFO(url.toUtf8().constData());
         QUrl serviceUrl = QUrl(url);
         QNetworkRequest networkRequest(serviceUrl);
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
     }
+}
+
+void MyQTNetwork::handlePilot(){
+    if(m_test_camera){
+        INFO("la - ");
+        testCamera();
+    } else {
+        INFO("la");
+    }
+    
 }

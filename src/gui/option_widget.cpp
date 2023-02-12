@@ -42,6 +42,19 @@ OptionWidget::OptionWidget()
     
 }
 
+
+void OptionWidget::open(){
+    m_close = false;
+    m_file_widget.m_close = true;
+    m_qt_network->m_test_camera = true;
+}
+
+
+void OptionWidget::close(){
+    m_close = true;
+    m_qt_network->m_test_camera = false;
+}
+
 void OptionWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     
@@ -158,7 +171,7 @@ void OptionWidget::draw(){
 int OptionWidget::onMouse(int x, int y){
     
     if(m_button_return.isActive(x,y)){
-        m_close = true;
+        close();
     } else if(m_button_p1.isActive(x,y)){
         m_page = 1;
     } else if(m_button_p2.isActive(x,y)){
@@ -587,7 +600,7 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     
     if(m_test_cam.isActive(x, y)){
-        m_qt_network->test_camera();;
+        //m_qt_network->test_camera();;
     }
 }
 
@@ -699,7 +712,7 @@ void OptionWidget::onMousePage5(int x, int y){
         if(key_board_widget.onMouse(x, y)){
             std::string s1 = key_board_widget.getText().toUtf8().constData();
             call(s1);
-            m_close = false;
+            close();
             key_board_widget.clear();
         };
         return;
@@ -736,7 +749,7 @@ void OptionWidget::onMousePage5(int x, int y){
     
     
     if(m_refresh.isActive(x, y)){
-        m_qt_network->test_camera();;
+        //m_qt_network->test_camera();;
     }
     if(m_camera30.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
@@ -859,14 +872,6 @@ void OptionWidget::drawPage7(){
 void OptionWidget::onMousePage7(int x, int y){
 }
 
-
-
-
-void OptionWidget::open(){
-    m_close = false;
-    m_file_widget.m_close = true;
-}
-
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -888,8 +893,7 @@ void OptionWidget::call(const std::string & s){
     MainWindow::instancePtr()->m_process->start("/bin/bash", QStringList() << "-c" << QString::fromStdString(s));
     //f.bufferNotEmpty.wakeAll();
     //f.mutex.unlock();
-    
-    m_close = true;
+
     MainWidget::instancePtr()->m_cmd_widget.open();
 }
 

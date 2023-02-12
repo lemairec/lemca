@@ -42,6 +42,9 @@ class OptionWidget : public BaseWidget {
     void drawPart1(double y, double h, std::string title);
 
 public:
+    void open();
+    void close();
+    
     SelectWidget m_select_widget;
     
     FileWidget m_file_widget;
@@ -144,7 +147,6 @@ public:
     void onMousePage7(int x, int y);
     void drawPage7();
     
-    void open();
     void call(const std::string & s);
     void call2(const std::string & s);
     void openFirefox(const std::string & s);
