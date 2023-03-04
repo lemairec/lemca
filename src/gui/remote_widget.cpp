@@ -93,7 +93,9 @@ int RemoteWidget::onMouse(int x, int y){
             
         if(m_button_open_connection.isActive(x, y)){
             if(f.m_session == 0){
-                f.m_session = rand() % 4 + 1;
+                srand (time (NULL));
+                int my_rand = rand();
+                f.m_session = my_rand % 4 + 1;
             }
             RemoteConsumer & consumer = RemoteConsumer::instance();
             consumer.start();
