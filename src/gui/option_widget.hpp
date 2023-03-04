@@ -118,8 +118,8 @@ public:
     ButtonGui m_run_cmd;
     
     MyQTNetwork * m_qt_network;
-    ButtonGui m_camera30;
-    ButtonGui m_camera31;
+    ButtonGui m_cam1;
+    ButtonGui m_cam2;
     ButtonGui m_reseau;
     ButtonGui m_ping;
     

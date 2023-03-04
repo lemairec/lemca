@@ -23,8 +23,8 @@ MyQTNetwork::MyQTNetwork(){
     
     m_host_url = "https://cloud.lemcavision.com/ping";
     
-    m_camera_30_url = "http://192.168.1.30";
-    m_camera_31_url = "http://192.168.1.31";
+    m_cam1_url = "http://192.168.1.30";
+    m_cam2_url = "http://192.168.1.31";
     
     m_timerPilot.stop();
     m_timerPilot.start(1000); //1s
@@ -43,10 +43,10 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
         std::string error = reply->errorString().toUtf8().constData();
         if(reply->url() == m_host_url){
             m_is_connected = false;
-        } else if (reply->url() == m_camera_30_url){
-            m_camera_30_connected = false;
-        } else if (reply->url() == m_camera_31_url){
-            m_camera_31_connected = false;
+        } else if (reply->url() == m_cam1_url){
+            m_cam1_connected = false;
+        } else if (reply->url() == m_cam2_url){
+            m_cam2_connected = false;
         } else {
             WARN("pas bien");
         }
@@ -55,10 +55,10 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
         std::string s = reply->readAll().toStdString();
         if(reply->url() == m_host_url){
             m_is_connected = true;
-        } else if (reply->url() == m_camera_30_url){
-            m_camera_30_connected = true;
-        } else if (reply->url() == m_camera_31_url){
-            m_camera_31_connected = true;
+        } else if (reply->url() == m_cam1_url){
+            m_cam1_connected = true;
+        } else if (reply->url() == m_cam2_url){
+            m_cam2_connected = true;
         } else {
             WARN("pas bien");
         }
@@ -92,7 +92,7 @@ void MyQTNetwork::testCamera(){
     {
         QNetworkRequest request;
 
-        QString url = m_camera_30_url;
+        QString url = m_cam1_url;
         //INFO(url.toUtf8().constData());
         QUrl serviceUrl = QUrl(url);
         QNetworkRequest networkRequest(serviceUrl);
@@ -103,7 +103,7 @@ void MyQTNetwork::testCamera(){
     {
         QNetworkRequest request;
 
-        QString url = m_camera_31_url;
+        QString url = m_cam2_url;
         //INFO(url.toUtf8().constData());
         QUrl serviceUrl = QUrl(url);
         QNetworkRequest networkRequest(serviceUrl);
@@ -118,7 +118,7 @@ void MyQTNetwork::handlePilot(){
         INFO("la - ");
         testCamera();
     } else {
-        INFO("la");
+        //INFO("la");
     }
     
 }

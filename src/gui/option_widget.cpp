@@ -525,19 +525,19 @@ void OptionWidget::drawPage4(){
     
     int y = m_send_images.m_y + 2*m_y_inter;
     drawPart1Title(y-m_y_inter, 0, "", true);
-    if(m_qt_network->m_camera_30_connected){
+    if(m_qt_network->m_cam1_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("IP-30", m_part_1_x+m_part_1_w*0.4, y, sizeText_medium, true);
+    drawText("CAM1", m_part_1_x+m_part_1_w*0.4, y, sizeText_medium, true);
     
-    if(m_qt_network->m_camera_31_connected){
+    if(m_qt_network->m_cam2_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("IP-31", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
+    drawText("CAM2", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
     
     
     drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
@@ -621,9 +621,9 @@ void OptionWidget::setSizePage5(){
     m_run_cmd.setResizeStd(m_part_1_m, y, "Run cmd", true, m_part_1_w/2);
     
     y = m_y_begin;
-    m_camera30.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
+    m_cam1.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
     y += m_y_inter;
-    m_camera31.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
+    m_cam2.setResize(m_part_2_x2, y, "Refresh", m_gros_button);
     y += m_y_inter;
     m_reseau.setResizeStd(m_part_2_m, y, "Reseau", true, m_part_1_w/2);
     
@@ -668,21 +668,21 @@ void OptionWidget::drawPage5(){
     drawPart2Title(m_y_begin-2*m_y_inter, 0, "Caméras");
     
     int x = m_part_2_m;
-    if(m_qt_network->m_camera_30_connected){
+    if(m_qt_network->m_cam1_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("192.168.1.30", x, m_camera30.m_y, sizeText_medium, true);
-    drawButtonImage(m_camera30, m_imgOptionGris);
+    drawText("CAM1 - 192.168.1.30", x, m_cam1.m_y, sizeText_medium, true);
+    drawButtonImage(m_cam1, m_imgOptionGris);
     
-    if(m_qt_network->m_camera_31_connected){
+    if(m_qt_network->m_cam2_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
         m_painter->setPen(Qt::red);
     }
-    drawText("192.168.1.31", x, m_camera31.m_y, sizeText_medium, true);
-    drawButtonImage(m_camera31, m_imgOptionGris);
+    drawText("CAM2 - 192.168.1.31", x, m_cam2.m_y, sizeText_medium, true);
+    drawButtonImage(m_cam2, m_imgOptionGris);
     
     drawButtonLabel2(m_reseau);
     drawButtonLabel2(m_ping);
@@ -738,11 +738,11 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     
     
-    if(m_camera30.isActive(x, y)){
+    if(m_cam1.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
         openFirefox("onboard & firefox http://192.168.1.30;");
     }
-    if(m_camera31.isActive(x, y)){
+    if(m_cam2.isActive(x, y)){
         MainWidget::instancePtr()->m_cmd_widget.m_enable_abort = true;
         openFirefox("onboard & firefox http://192.168.1.31;");
     }

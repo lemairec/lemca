@@ -33,10 +33,10 @@ public:
     bool m_test_camera = false;
     void testCamera();
     
-    QString m_camera_30_url;
-    bool m_camera_30_connected = false;
-    QString m_camera_31_url;
-    bool m_camera_31_connected = false;
+    QString m_cam1_url;
+    bool m_cam1_connected = false;
+    QString m_cam2_url;
+    bool m_cam2_connected = false;
 signals:
     void testSignal();
 private:
