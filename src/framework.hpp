@@ -41,7 +41,7 @@ public:
     
     MyQTSerialPorts m_serial_port;
     
-    int m_session;
+    int m_session = 0;
     std::string m_session_str;
 private:
     void readFile();
@@ -66,6 +66,9 @@ public:
     bool m_cmd_abort = false;
     
     int m_cmd_return = 0;
+    
+    std::string m_remote_error = "";
+    
     
     void abortCurrentRun();
 

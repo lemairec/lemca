@@ -24,6 +24,7 @@ public:
     bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
+    bool m_control_view_only = true;
     
     int m_constructor = 0; //0 Lemca
     

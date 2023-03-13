@@ -64,10 +64,17 @@ void RemoteWidget::draw(){
 
         drawButtonLabel2(m_button_open_connection);
     } else {
-        drawText("Connecté", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-        drawText("numero de session : ", 0.5*m_width, 0.4*m_height, sizeText_big, true);
-        drawText(f.m_session_str, 0.5*m_width, 0.5*m_height, sizeText_big, true);
+        if(!f.m_remote_error.empty()){
+            m_painter->setBrush(m_brushRedButton);
+            m_painter->drawRoundedRect(0.3*m_width, 0.3*m_height, 0.4*m_width, 0.15*m_height, 15, 15);
+            drawText("Erreur : ", 0.5*m_width, 0.35*m_height, sizeText_big, true);
+            drawText(f.m_remote_error, 0.5*m_width, 0.4*m_height, sizeText_medium, true);
+        }
+        
+        drawText("numero de session : ", 0.5*m_width, 0.55*m_height, sizeText_big, true);
+        drawText(f.m_session_str, 0.5*m_width, 0.6*m_height, sizeText_big, true);
         
         drawButtonLabel2(m_button_interrupt, COLOR_OTHER);
 

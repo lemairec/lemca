@@ -87,26 +87,43 @@ void RemoteConsumer::run(){
     while(true){
         MyQTNetwork *q = MyQTNetwork::Instance_ptr();
         q->test();
-        if(!q->m_is_connected){
-            mySleep(2000);
-            continue;
-        }
+        std::string s;
         if(f.m_session){
             f.m_session_str = "lemca_"+std::to_string(f.m_session);
-            std::string s = "x11vnc -viewonly -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:590"+std::to_string(f.m_session);
+            s = "x11vnc ";
+            if(f.m_config.m_control_view_only){
+                s = s + "-viewonly ";
+            }
+            s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:590"+std::to_string(f.m_session);
             INFO("session");
             INFO(s);
-            //s = "ping google.com";
-            system(s.c_str());
         } else if(f.m_config.m_port_remote){
             f.m_session_str = "port_593"+std::to_string(f.m_config.m_port_remote);
             std::string s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
             INFO("port");
             INFO(s);
-            //s = "ping google.com";
-            system(s.c_str());
         }
-        mySleep(2000);
+        s += " 2>&1";
+        
+        
+        char buffer[128];
+        FILE * pipe = popen(s.c_str(), "r");
+        if (!pipe) {
+            throw std::runtime_error("popen() failed!");
+        }
+        std::string error = "";
+        f.m_remote_error = "";
+        while (fgets(buffer, 128, pipe) != nullptr) {
+            INFO("result " <<buffer);
+            error = buffer;
+            f.mutex.lock();
+            f.m_command_result2 += buffer;
+            
+            f.m_cmd_buffer.push_back(buffer);
+            f.mutex.unlock();
+        }
+        f.m_remote_error = error;
+        mySleep(5000);
     }
    
 }

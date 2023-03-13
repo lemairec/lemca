@@ -115,7 +115,6 @@ void MyQTNetwork::testCamera(){
 
 void MyQTNetwork::handlePilot(){
     if(m_test_camera){
-        INFO("la - ");
         testCamera();
     } else {
         //INFO("la");
