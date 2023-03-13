@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-rm ~/.ssh/known_hosts; echo 4bspC3JXwgTm | ssh-copy-id  -o StrictHostKeyChecking=no debian@remote.lemcavision.com
+rm -rf ~/.ssh/known_hosts; echo 4bspC3JXwgTm | ssh-copy-id  -o StrictHostKeyChecking=no debian@remote.lemcavision.com
 
 apt-get install -y build-essential
 apt-get install -y cmake 
