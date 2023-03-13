@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-rm -rf ~/.ssh/known_hosts;
-expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect "password:"; send "test\r"; interact'
-
-
 apt-get install -y build-essential
 apt-get install -y cmake 
 apt-get install -y libqt5serialport5-dev

@@ -36,7 +36,7 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
-    m_button_interrupt.setResizeStd(0.5*m_width, y, "Fermer la connection", true, width/4);
+    m_button_interrupt.setResizeStd(0.5*m_width, y, "Fermer la fenêtre", true, width/4);
     
 };
 
@@ -60,7 +60,7 @@ void RemoteWidget::draw(){
             drawText("Non connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
         }
         m_painter->setPen(m_penBlack);
-        drawButtonCheck(m_control_panel, m_control_b, "autoriser le controle du panel");
+        drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
 
         drawButtonLabel2(m_button_open_connection);
     } else {
@@ -94,7 +94,7 @@ int RemoteWidget::onMouse(int x, int y){
     
     if(f.m_session == 0){
         if(m_control_panel.isActive(x, y)){
-            m_control_b = !m_control_b;
+            f.m_config.m_control_view_only = !f.m_config.m_control_view_only;
         }
         
             
@@ -111,10 +111,7 @@ int RemoteWidget::onMouse(int x, int y){
         }
     } else {
         if(m_button_interrupt.isActive(x, y)){
-            RemoteConsumer & consumer = RemoteConsumer::instance();
-            consumer.quit();
-            consumer.exit();
-            consumer.terminate();
+            m_close = true;
             //f.m_session = 0;
         }
     }

@@ -27,7 +27,6 @@ public:
     ButtonGui m_button_open_connection;
     ButtonGui m_button_interrupt;
     
-    bool m_control_b = false;
     ButtonGui m_control_panel;
     
     int m_page = 1;
