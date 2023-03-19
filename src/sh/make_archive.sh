@@ -41,3 +41,4 @@ cd ~/;
 curl --request POST "https://cloud.lemcavision.com/binary/send?branch=$branch&head=$head" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
 
 rm -rf ~/bineuse_src
+rm -rf ~/bineuse
