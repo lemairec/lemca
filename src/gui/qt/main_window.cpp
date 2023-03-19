@@ -161,15 +161,11 @@ void MainWindow::rightMessage()
     Framework & f = Framework::Instance();
     QString s = strdata.constData();
     auto list = s.split("\n");
-    //f.m_cmd_buffer.push_back("---1-");
     for(auto l : list){
-        if(l.isEmpty()){
+        if(!l.isEmpty()){
             f.m_cmd_buffer.push_back(l.toUtf8().constData());
         }
-        //f.m_cmd_buffer.push_back("--");
     }
-    //f.m_cmd_buffer.push_back("---2-");
-
 }
 
 // show wrong message
@@ -179,14 +175,11 @@ void MainWindow::wrongMessage()
     Framework & f = Framework::Instance();
     QString s = strdata.constData();
     auto list = s.split("\n");
-    //f.m_cmd_buffer.push_back("---1-");
     for(auto l : list){
-        if(l.isEmpty()){
+        if(!l.isEmpty()){
             f.m_cmd_buffer.push_back(l.toUtf8().constData());
         }
-        //f.m_cmd_buffer.push_back("--");
     }
-    //f.m_cmd_buffer.push_back("---2-");
 }
 
 void MainWindow::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
