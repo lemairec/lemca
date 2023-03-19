@@ -173,6 +173,7 @@ void Consumer::run(){
                 f.m_command_result2 += buffer.data();
                 
                 f.m_cmd_buffer.push_back(buffer.data());
+                f.m_cmd_buffer.push_back("----");
                 f.mutex.unlock();
             }
             f.m_cmd_return = pclose(f.m_pipe);
