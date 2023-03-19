@@ -159,7 +159,13 @@ void MainWindow::rightMessage()
 {
     QByteArray strdata = m_process->readAllStandardOutput();
     Framework & f = Framework::Instance();
-    f.m_cmd_buffer.push_back(strdata.constData());
+    QString s = strdata.constData();
+    auto list = s.split("\n");
+    f.m_cmd_buffer.push_back("---1-");
+    for(auto l : list){
+        f.m_cmd_buffer.push_back(l.toUtf8().constData());
+        f.m_cmd_buffer.push_back("--");
+    }
     f.m_cmd_buffer.push_back("---2-");
 
 }
