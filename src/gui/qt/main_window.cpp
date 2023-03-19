@@ -160,6 +160,7 @@ void MainWindow::rightMessage()
     QByteArray strdata = m_process->readAllStandardOutput();
     Framework & f = Framework::Instance();
     f.m_cmd_buffer.push_back(strdata.constData());
+    f.m_cmd_buffer.push_back("---2-");
 
 }
 
