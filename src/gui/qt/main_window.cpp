@@ -161,12 +161,14 @@ void MainWindow::rightMessage()
     Framework & f = Framework::Instance();
     QString s = strdata.constData();
     auto list = s.split("\n");
-    f.m_cmd_buffer.push_back("---1-");
+    //f.m_cmd_buffer.push_back("---1-");
     for(auto l : list){
-        f.m_cmd_buffer.push_back(l.toUtf8().constData());
-        f.m_cmd_buffer.push_back("--");
+        if(l.isEmpty()){
+            f.m_cmd_buffer.push_back(l.toUtf8().constData());
+        }
+        //f.m_cmd_buffer.push_back("--");
     }
-    f.m_cmd_buffer.push_back("---2-");
+    //f.m_cmd_buffer.push_back("---2-");
 
 }
 
@@ -175,7 +177,16 @@ void MainWindow::wrongMessage()
 {
     QByteArray strdata = m_process->readAllStandardError();
     Framework & f = Framework::Instance();
-    f.m_cmd_buffer.push_back(strdata.constData());
+    QString s = strdata.constData();
+    auto list = s.split("\n");
+    //f.m_cmd_buffer.push_back("---1-");
+    for(auto l : list){
+        if(l.isEmpty()){
+            f.m_cmd_buffer.push_back(l.toUtf8().constData());
+        }
+        //f.m_cmd_buffer.push_back("--");
+    }
+    //f.m_cmd_buffer.push_back("---2-");
 }
 
 void MainWindow::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
