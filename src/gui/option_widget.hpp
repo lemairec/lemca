@@ -71,6 +71,8 @@ public:
     ButtonGui m_update_gps;
     ButtonGui m_update_robot;
     ButtonGui m_serial;
+    ButtonGui m_update_remote;
+    
     void setSizePage2();
     void onMousePage2(int x, int y);
     void drawPage2();
@@ -99,7 +101,6 @@ public:
     
     ButtonGui m_update_lemca;
     ButtonGui m_update_deps;
-    ButtonGui m_update_acces_dist;
     
     SelectButtonGui m_version_selected;
     
