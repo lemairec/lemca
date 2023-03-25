@@ -87,7 +87,7 @@ void RemoteConsumer::run(){
             INFO("session");
         } else if(f.m_config.m_port_remote){
             f.m_session_str = "port_593"+std::to_string(f.m_config.m_port_remote);
-            std::string s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
+            s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
             INFO("port");
         }
         s += " 2>&1";
