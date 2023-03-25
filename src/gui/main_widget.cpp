@@ -1,5 +1,7 @@
 #include "main_widget.hpp"
 
+#include "qt/main_window.hpp"
+
 #include <sstream>
 #include <fstream>
 #include <math.h>
@@ -278,15 +280,8 @@ int MainWidget::onMouse(int x, int y){
 void MainWidget::call(const std::string & s){
     Framework & f = Framework::Instance();
     if(!f.m_is_f_call){
-        INFO("call " << s);
-        f.mutex.lock();
         f.m_is_f_call = true;
-        f.m_command_to_execute = s;
-        f.mutex.unlock();
-        f.bufferNotEmpty.wakeAll();
-        //(100);
-        //m_is_f_call = false;
-        
+        MainWindow::instancePtr()->call(s);
     } else {
         INFO("not call! " << s);
         

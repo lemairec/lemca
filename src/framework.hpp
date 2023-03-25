@@ -74,24 +74,6 @@ public:
 
 };
 
-class Consumer : public QThread
-{
-    bool m_stop = false;
-    Q_OBJECT
-
-    Consumer(QObject *parent = NULL) : QThread(parent)
-    {
-    }
-public:
-    static Consumer & instance();
-    ~Consumer();
-
-    void run() override;
-
-signals:
-    void stringConsumed(const QString &text);
-};
-
 class RemoteConsumer : public QThread
 {
     bool m_stop = false;

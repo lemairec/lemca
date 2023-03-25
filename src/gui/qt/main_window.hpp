@@ -27,8 +27,7 @@ class MainWindow : public QMainWindow
 public:
     static MainWindow * instancePtr();
     MyWidget * m_my_widget;
-    QProcess * m_process;
-
+    
     ~MainWindow();
     
     void test();
@@ -72,4 +71,8 @@ public slots:
     void rightMessage();
     void wrongMessage();
     void processFinished(int exitCode, QProcess::ExitStatus exitStatus = QProcess::NormalExit);
+    
+public:
+    QProcess * m_process;
+    void call(const std::string & s);
 };

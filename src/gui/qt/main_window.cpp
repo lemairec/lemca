@@ -160,6 +160,8 @@ void MainWindow::rightMessage()
     QByteArray strdata = m_process->readAllStandardOutput();
     Framework & f = Framework::Instance();
     QString s = strdata.constData();
+    INFO(s.toUtf8().constData());
+    
     auto list = s.split("\n");
     for(auto l : list){
         if(!l.isEmpty()){
@@ -174,6 +176,8 @@ void MainWindow::wrongMessage()
     QByteArray strdata = m_process->readAllStandardError();
     Framework & f = Framework::Instance();
     QString s = strdata.constData();
+    INFO("error " << s.toUtf8().constData());
+    
     auto list = s.split("\n");
     for(auto l : list){
         if(!l.isEmpty()){
@@ -188,4 +192,16 @@ void MainWindow::processFinished(int exitCode, QProcess::ExitStatus exitStatus)
     Framework & f = Framework::Instance();
     f.m_cmd_return = exitCode;
     f.m_cmd_end = true;
+    f.m_is_f_call = false;
+}
+
+
+void MainWindow::call(const std::string & s){
+    Framework & f = Framework::Instance();
+    
+    f.m_cmd_buffer.clear();
+    f.m_cmd_buffer.push_back(s);
+    f.m_cmd_end = false;
+    f.m_cmd_abort = false;
+    m_process->start("/bin/bash", QStringList() << "-c" << QString::fromStdString(s));
 }

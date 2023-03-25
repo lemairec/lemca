@@ -148,12 +148,7 @@ int WifiWidget::onMouse(int x, int y){
 }
 
 void WifiWidget::call2(const std::string & s){
-    Framework & f = Framework::Instance();
-    f.mutex.lock();
-    f.m_command_to_execute2 = s+" 2>&1";
-    f.bufferNotEmpty.wakeAll();
-    f.mutex.unlock();
-    
+    MainWindow::instancePtr()->call(s);
     m_close = true;
     MainWidget::instancePtr()->m_cmd_widget.open();
 }
