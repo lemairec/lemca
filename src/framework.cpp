@@ -107,13 +107,13 @@ void RemoteConsumer::run(){
         
         
         char buffer[128];
-        FILE * pipe = popen(s.c_str(), "r");
-        if (!pipe) {
+        FILE * my_pipe = popen(s.c_str(), "r");
+        if (!my_pipe) {
             throw std::runtime_error("popen() failed!");
         }
         std::string error = "";
         f.m_remote_error = "";
-        while (fgets(buffer, 128, pipe) != nullptr) {
+        while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
             error = buffer;
             f.mutex.lock();
