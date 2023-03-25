@@ -499,8 +499,10 @@ void OptionWidget::setSizePage4(){
     y+= m_y_inter;
     m_update_deps.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_DEPS"), true, m_part_1_w/2);
     y+= m_y_inter;
+    m_update_acces_dist.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_ACCES_DIST"), true, m_part_1_w/2);
     y+= m_y_inter;
-    
+    y+= m_y_inter;
+   
     m_version_selected.setResize(m_part_2_x+m_part_1_w/2, y, "Version", true, m_part_1_w/2);
     m_version_selected.clear();
     m_version_selected.addValue(("test"));
@@ -543,6 +545,7 @@ void OptionWidget::drawPage4(){
     drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
+    drawButtonLabel2(m_update_acces_dist);
     
     drawPart2Title(m_version_selected.m_y-m_y_inter, 0, "", true);
     if(m_select_widget.m_close){
@@ -576,6 +579,10 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_update_deps.isActive(x, y)){
         call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
+    }
+    if(m_update_acces_dist.isActive(x, y)){
+        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_acces_dist.sh");
+        
     }
     if(m_send_images.isActive(x, y)){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/send_images.sh");

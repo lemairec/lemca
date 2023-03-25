@@ -99,6 +99,7 @@ public:
     
     ButtonGui m_update_lemca;
     ButtonGui m_update_deps;
+    ButtonGui m_update_acces_dist;
     
     SelectButtonGui m_version_selected;
     
