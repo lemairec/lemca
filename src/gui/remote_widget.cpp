@@ -112,7 +112,6 @@ int RemoteWidget::onMouse(int x, int y){
     } else {
         if(m_button_interrupt.isActive(x, y)){
             m_close = true;
-            //f.m_session = 0;
         }
     }
     
@@ -125,24 +124,9 @@ int RemoteWidget::onMouse(int x, int y){
     
 }
 
-void RemoteWidget::call2(const std::string & s){
-    Framework & f = Framework::Instance();
-    
-    f.mutex.lock();
-    f.m_command_to_execute2 = s;
-    f.bufferNotEmpty.wakeAll();
-    f.mutex.unlock();
-    
-    m_page = 2;
-}
-
 
 void RemoteWidget::open(){
     m_qt_network->test();
     m_close = false;
     m_page = 1;
-}
-void RemoteWidget::call(const std::string & s){
-    INFO("call " << s);
-    system(s.c_str());
 }

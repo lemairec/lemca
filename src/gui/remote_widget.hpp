@@ -33,9 +33,6 @@ public:
     void resizePage1();
     void onMousePage1(int x, int y);
     void drawPage1();
-    
-    void call(const std::string & s);
-    void call2(const std::string & s);
 };
 
 #endif
