@@ -159,7 +159,7 @@ void Consumer::run(){
             INFO("exec " << cmd);
             f.mutex.unlock();
             f.m_pipe = popen(cmd.c_str(), "r");
-            if (!pipe) {
+            if (!f.m_pipe) {
                 throw std::runtime_error("popen() failed!");
             }
             INFO("read");
