@@ -123,6 +123,7 @@ void RemoteConsumer::run(){
             f.mutex.unlock();
         }
         f.m_remote_error = error;
+        INFO("error" << error);
         mySleep(5000);
     }
    
