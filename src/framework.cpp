@@ -88,7 +88,12 @@ void RemoteConsumer::run(){
         MyQTNetwork *q = MyQTNetwork::Instance_ptr();
         q->test();
         std::string s;
-        if(f.m_session){
+        if(f.m_config.m_port_remote){
+            f.m_session_str = "port_593"+std::to_string(f.m_config.m_port_remote);
+            std::string s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
+            INFO("port");
+            INFO(s);
+        } else if(f.m_session){
             f.m_session_str = "lemca_"+std::to_string(f.m_session);
             s = "x11vnc ";
             if(f.m_config.m_control_view_only){
@@ -96,11 +101,6 @@ void RemoteConsumer::run(){
             }
             s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:590"+std::to_string(f.m_session);
             INFO("session");
-            INFO(s);
-        } else if(f.m_config.m_port_remote){
-            f.m_session_str = "port_593"+std::to_string(f.m_config.m_port_remote);
-            std::string s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
-            INFO("port");
             INFO(s);
         }
         s += " 2>&1";
