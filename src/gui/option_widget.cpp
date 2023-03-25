@@ -581,7 +581,7 @@ void OptionWidget::onMousePage4(int x, int y){
         call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
     }
     if(m_update_acces_dist.isActive(x, y)){
-        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_acces_dist.sh");
+        call("expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_acces_dist.sh");
         
     }
     if(m_send_images.isActive(x, y)){
