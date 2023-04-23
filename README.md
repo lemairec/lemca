@@ -51,8 +51,8 @@ autologin-user-timeout=0
 `````
 su
 /usr/sbin/usermod
-usermod -a -G dialout Nom_Utilisateur
-usermod -a -G tty Nom_Utilisateur
+usermod -a -G dialout lemca
+usermod -a -G tty lemca
 `````
 
 
@@ -132,6 +132,7 @@ brew install python-tk
 
 # linux
 
+debian 10.13
 
 nmcli dev wifi
                connect lemaire pzssword toto
@@ -197,6 +198,7 @@ rm ~/.ssh/known_hosts; echo 4bspC3JXwgTm | ssh-copy-id  -o StrictHostKeyChecking
 expect -c 'spawn ssh-copy-id -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com ; expect "password:"; send "test\r"; interact'
 
 
+ssh remote listen failed
 
 ## wifi
 
@@ -267,15 +269,22 @@ boot
 ## 4. restaurer
 
 `````
-config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
+wifi potchpotch
 Lemca a update
+remote a update
+
+config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
+
+Bineuse a update
 Logo companie
 Licence
-1 camera
+1 camera (CAM1)
 hydraulique 100 ok
 angle 30 h 100
 devers deactiver 150
 reset heure
+etiquette camera
+cache transparent camera
 vis
 `````
 
@@ -358,3 +367,6 @@ gnome-disk
 
 
 export PATH=$PATH:/opt/homebrew/bin
+
+admin-admin
+admin-123456
