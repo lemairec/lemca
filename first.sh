@@ -17,5 +17,4 @@ echo "4. autostart"
 sh /home/lemca/lemca/install/autostart/install.sh
 
 echo "5. usb"
-sh /home/lemca/lemca/install/usb/usb.sh
-
+echo lemca | su -c "sh /home/lemca/lemca/install/usb/usb.sh"
