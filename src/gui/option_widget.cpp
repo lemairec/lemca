@@ -341,7 +341,7 @@ void OptionWidget::drawPage2(){
             drawButtonLabel2(m_update_robot);
         }
         if(f.m_config.m_remote){
-            drawButtonLabel2(m_update_remote);
+            //drawButtonLabel2(m_update_remote);
         }
     }
     if(f.m_config.m_update_usb){
@@ -386,7 +386,7 @@ void OptionWidget::onMousePage2(int x, int y){
         }
         if(f.m_config.m_remote == 1){
             if(m_update_remote.isActive(x, y)){
-                call("expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh");
+                //call("expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh");
             }
         }
     }

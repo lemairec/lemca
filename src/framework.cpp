@@ -79,7 +79,7 @@ void RemoteConsumer::run(){
         std::string s;
         if(f.m_session){
             f.m_session_str = "lemca_"+std::to_string(f.m_session);
-            s = "x11vnc ";
+            s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh; x11vnc ";
             if(f.m_config.m_control_view_only){
                 s = s + "-viewonly ";
             }
