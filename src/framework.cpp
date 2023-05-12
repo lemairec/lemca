@@ -77,19 +77,33 @@ void RemoteConsumer::run(){
         MyQTNetwork *q = MyQTNetwork::Instance_ptr();
         q->test();
         std::string s;
+        int port = 5900;
+        std::string name = "lemca";
+        bool view_only = true;
         if(f.m_session){
-            f.m_session_str = "lemca_"+std::to_string(f.m_session);
-            s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh; x11vnc ";
-            if(f.m_config.m_control_view_only){
-                s = s + "-viewonly ";
+            if(f.m_config.m_constructor == 3){
+                port = 5910 + f.m_session;
+                name = "binnove_"+std::to_string(f.m_session);
+            } else {
+                port = 5900 + f.m_session;
+                name = "lemca_"+std::to_string(f.m_session);
             }
-            s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:590"+std::to_string(f.m_session);
-            INFO("session");
+            f.m_session_str = name;
+            view_only = f.m_config.m_control_view_only;
+            
         } else if(f.m_config.m_port_remote){
-            f.m_session_str = "port_593"+std::to_string(f.m_config.m_port_remote);
-            s = "x11vnc -forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:593"+std::to_string(f.m_config.m_port_remote);
+            view_only = false;
+            port = 5930 + f.m_config.m_port_remote;
+            name = "robot_" + std::to_string(f.m_config.m_port_remote);
             INFO("port");
         }
+        
+        s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        s = s + " x11vnc ";
+        if(view_only){
+            s = s + "-viewonly ";
+        }
+        s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
         s += " 2>&1";
         INFO(s);
         

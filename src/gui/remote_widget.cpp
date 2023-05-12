@@ -59,10 +59,10 @@ void RemoteWidget::draw(){
         
         
         //Framework & f = Framework::Instance();
-        drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
         if(tick_ms < 5000){
-            drawQText("Recherche des connections     " + QString::number((tick_ms/1000)+1) + "/5", 0.25*m_width, 0.35*m_height, sizeText_big, false);
+            drawQText("Recherche des connexions     " + QString::number((tick_ms/1000)+1) + "/5", 0.25*m_width, 0.35*m_height, sizeText_big, false);
         } else {
             if(m_qt_network->m_is_connected){
                 m_painter->setPen(Qt::darkGreen);
@@ -81,7 +81,7 @@ void RemoteWidget::draw(){
             
         }
     } else {
-        drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
         if(!f.m_remote_error.empty()){
             m_painter->setBrush(m_brushRedButton);
