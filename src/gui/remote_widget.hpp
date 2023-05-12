@@ -16,6 +16,7 @@ public:
     RemoteWidget();
     
     std::chrono::time_point<std::chrono::system_clock> m_time_open;
+    int m_last_s = 10;
     SelectWidget m_select_widget;
     
     MyQTNetwork * m_qt_network;

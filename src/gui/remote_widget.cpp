@@ -62,6 +62,11 @@ void RemoteWidget::draw(){
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
         if(tick_ms < 5000){
+            int last_s = tick_ms/1000;
+            if(last_s != m_last_s){
+                m_qt_network->test();
+                m_last_s = last_s;
+            }
             drawQText("Recherche des connexions     " + QString::number((tick_ms/1000)+1) + "/5", 0.25*m_width, 0.35*m_height, sizeText_big, false);
         } else {
             if(m_qt_network->m_is_connected){
@@ -149,4 +154,5 @@ void RemoteWidget::open(){
     
     m_close = false;
     m_page = 1;
+    m_last_s = 10;
 }
