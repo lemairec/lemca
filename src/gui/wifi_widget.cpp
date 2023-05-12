@@ -12,29 +12,39 @@
 WifiWidget::WifiWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
-    m_imgClose = loadImage("/gui/ok.png");
+    m_black_mode = false;
+    m_img_return = loadImageInv("/gui/return.png");
 }
 
 void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
+    
+    m_y2 = m_height*0.04;
+    m_x2 = m_y2;
+    m_width2 = m_width-2*m_y2-m_gros_button*2.4;
+    m_height2 = m_height-2*m_y2;
+
     m_select_widget.setSize(width, height);
+    
     
     
     //m_select_serial
     int x = 0.55*m_width;
     int y = 0.35*m_height;
     int inter = 0.1*m_height;
-    m_refresh.setResizeStd(0.25*m_width, y, "refresh");
-    y+=1.5*inter;
+     y+=1.5*inter;
     m_select_wifi.setResize(x, y, "Wifi", true, width/4);
     y+=inter;
     m_password.setResize(x, y);
     y+=1.5*inter;
-    m_connect.setResizeStd(0.25*m_width, y, "connect");
+    m_connect.setResizeStd(0.5*m_width, y, "Connection", true, width/4);
     y+=inter;
-    m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
+    
+    int x_right = width-m_gros_button*1.2;
+    m_button_close.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
 };
+
 
 std::string m_reseau;
 
@@ -42,15 +52,17 @@ void WifiWidget::draw(){
     
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
+    m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    if(m_search_wifi > 0){
-        QString s = "Search Wifi " + QString::number(m_search_wifi);
-        drawQText(s, 0.55*m_width, m_refresh.m_y, sizeText_big);
-        if(m_search_wifi == 1){
-           addWifis();
-        }
-        m_search_wifi--;
+    drawButtonImageCarre(m_button_close, m_img_return, 0.9, false);
+    
+    auto now = std::chrono::system_clock::now();
+    int tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now-m_time_open).count();
+    
+    
+    if(tick_ms < 4000){
+        drawQText("Recherche des reseaux wifis     " + QString::number((tick_ms/1000)+1) + "/4", 0.25*m_width, 0.35*m_height, sizeText_big, false);
+
         return;
     }
     
@@ -59,15 +71,13 @@ void WifiWidget::draw(){
         return;
     }
     
-    drawButtonImage(m_button_close, m_imgClose);
     drawButtonLabel2(m_connect);
-    drawButtonLabel2(m_refresh);
     if(m_qt_network->m_is_connected){
         m_painter->setPen(Qt::darkGreen);
-        drawText("Connected", 0.55*m_width, m_refresh.m_y, sizeText_big);
+        drawText("Connecté à internet", 0.35*m_width, 0.35*m_height, sizeText_big);
     } else {
         m_painter->setPen(Qt::red);
-        drawText("Not connected", 0.55*m_width, m_refresh.m_y, sizeText_big);
+        drawText("Non connecté à internet", 0.35*m_width, 0.35*m_height, sizeText_big);
     }
 
     m_painter->setPen(m_penBlack);
@@ -83,7 +93,8 @@ void WifiWidget::draw(){
     
     drawText("Password", 0.25*m_width, m_password.m_y, sizeText_big);
     drawValueGuiKeyBoard(m_password);
-        
+    
+    
 }
 
 int WifiWidget::onMouse(int x, int y){
@@ -132,9 +143,6 @@ int WifiWidget::onMouse(int x, int y){
             m_select_widget.open();
             m_select_widget.setValueGuiKeyPad(&m_select_wifi);
         }
-        if(m_refresh.isActive(x, y)){
-            m_qt_network->test();
-        }
         //if(onMouseSelectButton(m_select_wifi, x, y)){
             //config.m_serial.setValue(QString::fromStdString(m_select_serial.getValueString()));
             //loadConfig();
@@ -155,9 +163,10 @@ void WifiWidget::call2(const std::string & s){
 
 
 void WifiWidget::open(){
+    addWifis();
+    m_time_open = std::chrono::system_clock::now();
     m_qt_network->test();
     m_close = false;
-    m_search_wifi = 2;
 }
 void WifiWidget::call(const std::string & s){
     INFO("call " << s);

@@ -14,7 +14,8 @@
 RemoteWidget::RemoteWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
-    m_imgClose = loadImage("/gui/ok.png");
+    m_black_mode = false;
+    m_img_return = loadImageInv("/gui/return.png");
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
 }
@@ -23,9 +24,11 @@ void RemoteWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     m_select_widget.setSize(width, height);
     
-    
-    //m_select_serial
-    //int x = 0.55*m_width;
+    m_y2 = m_height*0.04;
+    m_x2 = m_y2;
+    m_width2 = m_width-2*m_y2-m_gros_button*2.4;
+    m_height2 = m_height-2*m_y2;
+
     int y = 0.35*m_height;
     int inter = 0.1*m_height;
     y+=1.5*inter;
@@ -33,36 +36,50 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     y+=inter;
     m_button_open_connection.setResizeStd(0.5*m_width, y, "Ouvrir la connection", true, width/4);
+    m_button_open_wifi.setResizeStd(0.7*m_width, 0.35*m_height, "Paramétrer le Wifi", true, width/4);
     y+=inter;
-    m_button_close.setResize(0.75*m_width, 0.83*m_height, m_gros_button);
     
-    m_button_interrupt.setResizeStd(0.5*m_width, y, "Fermer la fenêtre", true, width/4);
-    
+    int x_right = width-m_gros_button*1.2;
+    m_button_close.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
 };
+
+
 
 void RemoteWidget::draw(){
     
     m_painter->setPen(m_penBlack);
     m_painter->setBrush(m_brushWhite);
-    m_painter->drawRoundedRect(m_width*0.025, m_height*0.05, m_width*0.95, m_height*0.9, RAYON_ROUNDED, RAYON_ROUNDED);
+    m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
     Framework & f = Framework::Instance();
     
     if(f.m_session == 0){
+        auto now = std::chrono::system_clock::now();
+        int tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now-m_time_open).count();
+        
+        
         //Framework & f = Framework::Instance();
         drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-        if(m_qt_network->m_is_connected){
-            m_painter->setPen(Qt::darkGreen);
-            drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+        if(tick_ms < 5000){
+            drawQText("Recherche des connections     " + QString::number((tick_ms/1000)+1) + "/5", 0.25*m_width, 0.35*m_height, sizeText_big, false);
         } else {
-            m_painter->setPen(Qt::red);
-            drawText("Non connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
-        }
-        m_painter->setPen(m_penBlack);
-        drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
+            if(m_qt_network->m_is_connected){
+                m_painter->setPen(Qt::darkGreen);
+                drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+            
+                m_painter->setPen(m_penBlack);
+                drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
 
-        drawButtonLabel2(m_button_open_connection);
+                drawButtonLabel2(m_button_open_connection);
+            } else {
+                m_painter->setPen(Qt::red);
+                drawText("Non connecté à internet", 0.2*m_width, 0.35*m_height, sizeText_big);
+                
+                drawButtonLabel2(m_button_open_wifi);
+            }
+            
+        }
     } else {
         drawText("Connection à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
@@ -75,11 +92,10 @@ void RemoteWidget::draw(){
         
         drawText("numero de session : ", 0.5*m_width, 0.55*m_height, sizeText_big, true);
         drawText(f.m_session_str, 0.5*m_width, 0.6*m_height, sizeText_big, true);
-        
-        drawButtonLabel2(m_button_interrupt, COLOR_OTHER);
 
     }
-    drawButtonImage(m_button_close, m_imgClose);
+    
+    drawButtonImageCarre(m_button_close, m_img_return, 0.9, false);
 }
 
 
@@ -109,8 +125,9 @@ int RemoteWidget::onMouse(int x, int y){
             
             m_page = 2;
         }
-    } else {
-        if(m_button_interrupt.isActive(x, y)){
+        
+        if(m_button_open_wifi.isActive(x, y)){
+            MainWidget::instancePtr()->m_wifi_widget.open();
             m_close = true;
         }
     }
@@ -126,7 +143,10 @@ int RemoteWidget::onMouse(int x, int y){
 
 
 void RemoteWidget::open(){
+    m_time_open = std::chrono::system_clock::now();
+    
     m_qt_network->test();
+    
     m_close = false;
     m_page = 1;
 }

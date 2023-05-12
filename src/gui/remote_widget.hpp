@@ -6,14 +6,16 @@
 #include "qt/my_qt_network.hpp"
 
 class RemoteWidget : public BaseWidget {
-    QPixmap * m_imgClose;
+    QPixmap * m_img_return;
     
     ButtonGui m_button_close;
     std::string m_reseau;
     
+    int m_width2, m_height2, m_x2, m_y2;
 public:
     RemoteWidget();
     
+    std::chrono::time_point<std::chrono::system_clock> m_time_open;
     SelectWidget m_select_widget;
     
     MyQTNetwork * m_qt_network;
@@ -25,7 +27,7 @@ public:
     virtual void open();
     
     ButtonGui m_button_open_connection;
-    ButtonGui m_button_interrupt;
+    ButtonGui m_button_open_wifi;
     
     ButtonGui m_control_panel;
     
