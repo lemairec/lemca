@@ -99,6 +99,7 @@ void RemoteConsumer::run(){
         }
         
         s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        s = "ssh 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
         s = s + " x11vnc ";
         if(view_only){
             s = s + "-viewonly ";
@@ -124,7 +125,7 @@ void RemoteConsumer::run(){
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error = error;
+        f.m_remote_error = "error " + error;
         INFO("error" << error);
         mySleep(5000);
     }
