@@ -115,19 +115,18 @@ void RemoteConsumer::run(){
         if (!my_pipe) {
             INFO("error3");
         }
-        std::string error = "";
+        std::string error1 = "";
         f.m_remote_error = "";
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result1 " <<buffer);
-            error = buffer;
+            error1 = buffer;
             f.mutex.lock();
             f.m_command_result2 += buffer;
             
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error = "ok1 " + error;
         
         
         
@@ -136,37 +135,38 @@ void RemoteConsumer::run(){
         if (!my_pipe) {
             INFO("error3");
         }
-        error = "";
+        std::string error2 = "";
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
-            error = buffer;
+            error2 = buffer;
             f.mutex.lock();
             f.m_command_result2 += buffer;
             
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error += "\nok2 " + error;
         
         my_pipe = popen(s.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
         }
         
-        error = "";
+        std::string error3 = "";
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
-            error = buffer;
+            error3 = buffer;
             f.mutex.lock();
             f.m_command_result2 += buffer;
             
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error += "\nok3 " + error;
-        INFO("error" << error);
+        f.m_remote_error = "1 " + error1;
+        f.m_remote_error += "\n2 " + error2;
+        f.m_remote_error += "\n3 " + error3;
+        INFO("error" << f.m_remote_error);
         mySleep(5000);
     }
    
