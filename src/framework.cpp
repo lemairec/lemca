@@ -98,8 +98,6 @@ void RemoteConsumer::run(){
             INFO("port");
         }
         
-        s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
-        s = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
         s = s + " x11vnc ";
         if(view_only){
             s = s + "-viewonly ";
@@ -108,13 +106,37 @@ void RemoteConsumer::run(){
         s += " 2>&1";
         INFO(s);
         
+        
+        
+        
+        std::string s2 = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
         char buffer[128];
-        FILE * my_pipe = popen(s.c_str(), "r");
+        FILE * my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
         }
         std::string error = "";
         f.m_remote_error = "";
+        INFO("launch");
+        while (fgets(buffer, 128, my_pipe) != nullptr) {
+            INFO("result1 " <<buffer);
+            error = buffer;
+            f.mutex.lock();
+            f.m_command_result2 += buffer;
+            
+            f.m_cmd_buffer.push_back(buffer);
+            f.mutex.unlock();
+        }
+        f.m_remote_error = "ok1 " + error;
+        
+        
+        
+        s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
+        my_pipe = popen(s2.c_str(), "r");
+        if (!my_pipe) {
+            INFO("error3");
+        }
+        error = "";
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
@@ -125,7 +147,25 @@ void RemoteConsumer::run(){
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error = "error2 " + error;
+        f.m_remote_error += "\nok2 " + error;
+        
+        my_pipe = popen(s.c_str(), "r");
+        if (!my_pipe) {
+            INFO("error3");
+        }
+        
+        error = "";
+        INFO("launch");
+        while (fgets(buffer, 128, my_pipe) != nullptr) {
+            INFO("result " <<buffer);
+            error = buffer;
+            f.mutex.lock();
+            f.m_command_result2 += buffer;
+            
+            f.m_cmd_buffer.push_back(buffer);
+            f.mutex.unlock();
+        }
+        f.m_remote_error += "\nok3 " + error;
         INFO("error" << error);
         mySleep(5000);
     }
