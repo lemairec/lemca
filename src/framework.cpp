@@ -99,7 +99,7 @@ void RemoteConsumer::run(){
         }
         
         s = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
-        s = "ssh 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
+        s = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
         s = s + " x11vnc ";
         if(view_only){
             s = s + "-viewonly ";
