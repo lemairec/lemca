@@ -106,17 +106,34 @@ void RemoteConsumer::run(){
         s += " 2>&1";
         INFO(s);
         
-        
-        
-        
-        std::string s2 = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        f.m_remote_error = "";
+       
+        std::string s2 = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/ssh-key-gen.sh;";
         char buffer[128];
         FILE * my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
         }
+        std::string error0 = "";
+        INFO("launch");
+        while (fgets(buffer, 128, my_pipe) != nullptr) {
+            INFO("result1 " <<buffer);
+            error0 = buffer;
+            f.mutex.lock();
+            f.m_command_result2 += buffer;
+            
+            f.m_cmd_buffer.push_back(buffer);
+            f.mutex.unlock();
+        }
+        
+        
+        
+        s2 = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        my_pipe = popen(s2.c_str(), "r");
+        if (!my_pipe) {
+            INFO("error3");
+        }
         std::string error1 = "";
-        f.m_remote_error = "";
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result1 " <<buffer);
@@ -163,7 +180,8 @@ void RemoteConsumer::run(){
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error = "1 " + error1;
+        f.m_remote_error = "0 " + error0;
+        f.m_remote_error += "1 " + error1;
         f.m_remote_error += "\n2 " + error2;
         f.m_remote_error += "\n3 " + error3;
         INFO("error" << f.m_remote_error);
