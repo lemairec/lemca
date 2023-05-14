@@ -125,7 +125,7 @@ void RemoteConsumer::run(){
             f.m_cmd_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_error = "error " + error;
+        f.m_remote_error = "error2 " + error;
         INFO("error" << error);
         mySleep(5000);
     }
