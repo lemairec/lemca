@@ -381,6 +381,7 @@ void OptionWidget::onMousePage2(int x, int y){
         }
         if(f.m_config.m_robot == 1){
             if(m_update_robot.isActive(x, y)){
+                f.m_config.m_user_mode = 1;
                 call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
             }
         }

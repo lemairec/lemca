@@ -95,6 +95,7 @@ void RemoteConsumer::run(){
             view_only = false;
             port = 5930 + f.m_config.m_port_remote;
             name = "robot_" + std::to_string(f.m_config.m_port_remote);
+            f.m_session_str = name;
             INFO("port");
         }
         
