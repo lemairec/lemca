@@ -102,7 +102,7 @@ monter/monter
 `````
 
 
-## 4.3 unclutter
+## 4.3 unclutter ???
 
 `````
 su
@@ -213,6 +213,10 @@ nameserver 8.8.8.8
 ## xfce
 
 terminal => ctrl+alt+f3
+
+## mise a jour
+
+apt-get update --allow-releaseinfo-change
 
 ### panel
 
