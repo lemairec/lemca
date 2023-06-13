@@ -285,11 +285,12 @@ Licence
 1 camera (CAM1)
 hydraulique 100 ok
 angle 30 h 100
-devers deactiver 150
+devers deactiver 50
 reset heure
 etiquette camera
 cache transparent camera
-vis
+camera verifier poignée
+vis au panel
 `````
 
 # nouveau panel
