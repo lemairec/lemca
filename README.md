@@ -300,13 +300,14 @@ vis au panel
 ## camera
 
 Video
-=> resolution 1920x1024
+=> resolution 1024x768 // avant 1920x1024
 => h 265
 => frzme rate 25
 => quality //40
 => bitrate 4096
 => cbr
 => 50
+=> deactiver flux secondaire
 
 Video mode
 PAL/50hz
