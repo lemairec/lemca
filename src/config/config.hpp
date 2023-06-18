@@ -14,6 +14,9 @@ class Config  {
 public:
     std::string m_langage = "EN";
     
+    int m_constructor = 0; //0 Lemca
+    std::string m_panel = "";
+    
     bool m_fullscreen = true;
     int m_user_mode = 0;
     bool m_code_source = false;
@@ -26,7 +29,6 @@ public:
     bool m_serial = false;
     bool m_control_view_only = true;
     
-    int m_constructor = 0; //0 Lemca
     
     std::string m_bineuse_run;
     std::string m_gps_run;

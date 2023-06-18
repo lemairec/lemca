@@ -359,12 +359,12 @@ void OptionWidget::onMousePage2(int x, int y){
     Framework & f = Framework::Instance();
     if(f.m_config.m_update_wifi){
         if(m_update_bineuse.isActive(x, y)){
+            Config & c = f.m_config;
+            std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
             if(f.m_config.m_code_source){
-                std::string opt = f.m_config.m_version_selected;
                 std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
                 call(cmd);
             } else {
-                std::string opt = f.m_config.m_version_selected;
                 std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
                 call(cmd);
             }

@@ -15,6 +15,10 @@ Config::Config(){
 
 void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "code_source", m_code_source, save);
+    saveLoadInt(settings, "constructor", m_constructor, save);
+    saveLoadString(settings, "panel", m_panel, save);
+   
+    
     saveLoadBool(settings, "wifi", m_wifi2, save);
     saveLoadBool(settings, "update_usb2", m_update_usb, save);
     saveLoadBool(settings, "update_wifi", m_update_wifi, save);
@@ -24,7 +28,6 @@ void Config::work(QSettings & settings, bool save){
     saveLoadInt(settings, "robot", m_robot, save);
     saveLoadBool(settings, "serial", m_serial, save);
     
-    saveLoadInt(settings, "constructor", m_constructor, save);
     
     saveLoadString(settings, "langage", m_langage, save);
     saveLoadString(settings, "version_selected", m_version_selected, save);
