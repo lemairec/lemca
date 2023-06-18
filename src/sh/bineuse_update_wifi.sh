@@ -11,7 +11,7 @@ rm -rf ~/bineuse.tar.gz
 echo  "**** telechargement"
 echo "https://cloud.lemcavision.com/binary/bineuse?branch=$branch&constructeur=$constructeur&panel=$panel\n"
 
-wget -c https://cloud.lemcavision.com/binary/bineuse?branch=$branch&constructeur=$constructeur&panel=$panel -o ~/bineuse.tar.gz
+wget -c https://cloud.lemcavision.com/binary/bineuse?branch=$branch\&constructeur=$constructeur\&panel=$panel -o ~/bineuse.tar.gz
 
 echo  "**** telechargement ok"
 rm -rf bineuse
