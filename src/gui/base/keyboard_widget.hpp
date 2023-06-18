@@ -104,6 +104,9 @@ public:
     void setValueGuiKeyBoard(ValueGuiKeyBoard * value){
         m_value = value;
         m_res = QString();
+        if(value){
+            m_res = QString::fromStdString(value->m_text);
+        }
     }
     
     void addLetter(QString se);
