@@ -31,14 +31,16 @@ cp -r ~/bineuse_src/images/betterave_sale.jpg $archive/images/betterave_sale.jpg
 cp -r ~/bineuse_src/images/quinoa_sale.jpg $archive/images/quinoa_sale.jpg
 
 head=$(git rev-parse HEAD)
-echo $branch > $archive/version.txt
+version=$(~/bineuse_src/build/bineuse --version)
+echo $version > $archive/version.txt
+echo $branch >> $archive/version.txt
 git rev-parse HEAD >> $archive/version.txt
 
 
 cd ~/bineuse_src/archive
 tar -czvf bineuse.tar.gz bineuse
 cd ~/;
-curl --request POST "https://cloud.lemcavision.com/binary/send?branch=$branch&head=$head" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
+curl --request POST "https://cloud.lemcavision.com/binary/send?branch=$branch&head=$head&version=$version" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
 
 rm -rf ~/bineuse_src
 rm -rf ~/bineuse
