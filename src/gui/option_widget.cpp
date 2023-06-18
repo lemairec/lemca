@@ -466,7 +466,7 @@ void OptionWidget::drawPage3(){
     
     Config & config = Framework::Instance().m_config;
     
-    int y = m_y_title+1*m_y_inter;
+    //int y = m_y_title+1*m_y_inter;
     //drawPart2Title(y, m_y_inter*3, Langage::getKey("OPT_LICENCE_TITLE"), false);
     
     Framework & f = Framework::Instance();
