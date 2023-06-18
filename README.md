@@ -300,13 +300,14 @@ vis au panel
 ## camera
 
 Video
-=> resolution 1920x1024
+=> resolution 1024x768 // avant 1920x1024
 => h 265
 => frzme rate 25
 => quality //40
 => bitrate 4096
 => cbr
 => 50
+=> deactiver flux secondaire
 
 Video mode
 PAL/50hz
@@ -347,6 +348,8 @@ disable
 LDC
 disable
 
+
+
 ## pci error
 
 `````
@@ -375,3 +378,16 @@ export PATH=$PATH:/opt/homebrew/bin
 
 admin-admin
 admin-123456
+
+## camera
+
+#DNR
+
+Digital Noise Reduction
+
+#WDR
+
+La plage dynamique est la différence d'intensité de lumière entre le point le plus sombre et le point le plus lumineux d'une scène donnée.
+
+Une journée nuageuse avec quelques ombres présente une plage dynamique faible.Il n'y a pas de zones très obscures ni de zones extrêmement lumineuses.Par une journée ensoleillée en revanche, avec des ombres vraiment différenciées, il pourrait y avoir une grande différence entre les zones les plus lumineuses et les zones les plus sombres. Cette différence est appelée plage dynamique étendue (WDR pour Wide Dynamic Range, également désignée par HDR, pour High Dynamic Range).
+
