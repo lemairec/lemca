@@ -72,6 +72,8 @@ Langage::Langage(){
     add("FR", "HOME_OFF", "Eteindre");
 
     add("FR", "INFOS_AV_TITLE", "Menu avancé (infos)");
+    add("FR", "INFOS_LIC_PANEL", "panel : ");
+    
     add("FR", "OPT_LANGAGE", "Langue");
     add("FR", "EN", "Anglais");
     add("FR", "FR", "Francais");
@@ -117,6 +119,7 @@ Langage::Langage(){
     add("EN", "HOME_OFF", "Off");
 
     add("EN", "INFOS_AV_TITLE", "Advanced menu (infos)");
+    add("EN", "INFOS_LIC_PANEL", "panel : ");
     add("EN", "OPT_LANGAGE", "Language");
     add("EN", "EN", "English");
     add("EN", "FR", "French");
@@ -159,6 +162,7 @@ Langage::Langage(){
     add("NL", "HOME_WIFI", "Wifi");
     add("NL", "HOME_OFF", "Uitroeien");
     add("NL", "INFOS_AV_TITLE", "Geavanceerd menu (info)");
+    add("NL", "INFOS_LIC_PANEL", "Paneel :");
     add("NL", "OPT_LANGAGE", "Taal");
     add("NL", "EN", "English");
     add("NL", "FR", "Français");

@@ -4,6 +4,7 @@
 #include "base/base_widget.hpp"
 #include "file_widget.hpp"
 #include "qt/my_qt_network.hpp"
+#include "base/keyboard_widget.hpp"
 
 class OptionWidget : public BaseWidget {
     QPixmap * m_imgClose;
@@ -34,6 +35,7 @@ class OptionWidget : public BaseWidget {
     ButtonGui m_button_p6;
     ButtonGui m_button_p7;
     
+    
     int m_page = 1;
     
     
@@ -45,6 +47,7 @@ public:
     void open();
     void close();
     
+    KeyBoardWidget m_keyboard_widget;
     SelectWidget m_select_widget;
     
     FileWidget m_file_widget;
@@ -88,6 +91,8 @@ public:
     ButtonGui m_button7;
     ButtonGui m_button8;
     ButtonGui m_button9;
+    
+    ValueGuiKeyBoard m_panel;
     void myDrawButton(ButtonGui * b, QString s);
     
     void setSizePage3();
@@ -106,11 +111,12 @@ public:
     
     ButtonGui m_send_images;
     
+    
     void setSizePage4();
     void onMousePage4(int x, int y);
     void drawPage4();
     
-    //page5
+    //page6
     ButtonGui m_button_full_screen;
     ButtonGui m_clear_data;
     

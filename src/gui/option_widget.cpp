@@ -109,7 +109,7 @@ void OptionWidget::setSize(int width, int height){
     
     m_select_widget.setSize(width, height);
     //m_keypad_widget.setSize(width, height);
-    //m_keyboard_widget.setSize(width, height);
+    m_keyboard_widget.setSize(width, height);
     
 }
 
@@ -412,10 +412,13 @@ void OptionWidget::onMousePage2(int x, int y){
 /**
  PAGE 3
  */
+void OptionWidget::myDrawButton(ButtonGui * b, QString s){
+    drawButtonLabel2(*b, COLOR_WHITE);
+}
 
 void OptionWidget::setSizePage3(){
     int inter = m_width*0.08;
-    int x = m_width2/2;
+    int x = m_part_1_x2+m_part_1_w/2;
     int rayon = m_gros_button;
     int y_begin = m_height*0.4;
     
@@ -436,14 +439,19 @@ void OptionWidget::setSizePage3(){
     
     y = y_begin + 2*inter;
     m_button0.setResizeStd(x, y, "0", true, 2*rayon, 2*rayon);
+    
+    y = m_height*0.3;
+    
+    y+= m_y_inter;
+    m_panel.setResize(m_part_2_x+m_part_2_w*0.6, y, m_height2*0.35);
+    y+= m_y_inter;
 }
 
-void OptionWidget::myDrawButton(ButtonGui * b, QString s){
-    drawButtonLabel2(*b, COLOR_WHITE);
-}
+
 
 void OptionWidget::drawPage3(){
     drawText(Langage::getKey("INFOS_AV_TITLE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    drawSeparateurH();
     
     myDrawButton(&m_button0, "0");
     myDrawButton(&m_button1, "1");
@@ -455,33 +463,66 @@ void OptionWidget::drawPage3(){
     myDrawButton(&m_button7, "7");
     myDrawButton(&m_button8, "8");
     myDrawButton(&m_button9, "9");
+    
+    Config & config = Framework::Instance().m_config;
+    
+    int y = m_y_title+1*m_y_inter;
+    //drawPart2Title(y, m_y_inter*3, Langage::getKey("OPT_LICENCE_TITLE"), false);
+    
+    Framework & f = Framework::Instance();
+    drawText(Langage::getKey("INFOS_LIC_PANEL") , m_part_2_x2, m_panel.m_y, sizeText_medium, false);
+    m_panel.m_text = f.m_config.m_panel;
+    
+    
+    if(config.isTechnicien()){
+        drawValueGuiKeyBoard(m_panel);
+    } else {
+        drawValueGuiKeyBoardDisable(m_panel);
+    }
+    
+    if(!m_keyboard_widget.m_close){
+        m_keyboard_widget.draw();
+    }
 }
 
 int i_technicien = 0;
 int i_avance = 0;
 void OptionWidget::onMousePage3(int x, int y){
-    Framework & f = Framework::Instance();
-    if(i_avance == 0 && m_button6.isActive(x, y)){
-        i_avance = 1;
-    } else if(i_avance == 1 && m_button1.isActive(x, y)){
-        i_avance = 2;
-    } else if(i_avance == 2 && m_button5.isActive(x, y)){
-        i_avance = 3;
-    } else if(i_avance == 3 && m_button5.isActive(x, y)){
-        f.m_config.m_user_mode = 2;
-    } else if(i_technicien == 0 && m_button0.isActive(x, y)){
-        i_technicien = 1;
-    } else if(i_technicien == 1 && m_button0.isActive(x, y)){
-        i_technicien = 2;
-    } else if(i_technicien == 2 && m_button0.isActive(x, y)){
-        i_technicien = 3;
-    } else if(i_technicien == 3 && m_button0.isActive(x, y)){
-        f.m_config.m_user_mode = 1;
+    if(!m_keyboard_widget.m_close){
+        m_keyboard_widget.onMouse(x, y);
+        Framework & f = Framework::Instance();
+        f.m_config.m_panel = m_panel.m_text;
+        f.initOrLoadConfig();
     } else {
-        i_technicien = 0;
-        i_avance = 0;
+        Config & config = Framework::Instance().m_config;
+        if(i_avance == 0 && m_button6.isActive(x, y)){
+            i_avance = 1;
+        } else if(i_avance == 1 && m_button1.isActive(x, y)){
+            i_avance = 2;
+        } else if(i_avance == 2 && m_button5.isActive(x, y)){
+            i_avance = 3;
+        } else if(i_avance == 3 && m_button5.isActive(x, y)){
+            config.m_user_mode = 2;
+        } else if(i_technicien == 0 && m_button0.isActive(x, y)){
+            i_technicien = 1;
+        } else if(i_technicien == 1 && m_button0.isActive(x, y)){
+            i_technicien = 2;
+        } else if(i_technicien == 2 && m_button0.isActive(x, y)){
+            i_technicien = 3;
+        } else if(i_technicien == 3 && m_button0.isActive(x, y)){
+            config.m_user_mode = 1;
+        } else {
+            i_technicien = 0;
+            i_avance = 0;
+        }
+        //INFO(i_technicien << " " << i_avance << " " << f.m_config.m_user_mode);
+        if(config.isTechnicien()){
+            if(isActiveValueGuiKeyBoard(m_panel,x,y)){
+                m_keyboard_widget.m_close = false;
+                m_keyboard_widget.setValueGuiKeyBoard(&m_panel);
+            }
+        }
     }
-    //INFO(i_technicien << " " << i_avance << " " << f.m_config.m_user_mode);
 }
 
 
