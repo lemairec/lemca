@@ -121,3 +121,36 @@ void MyQTNetwork::handlePilot(){
     }
     
 }
+
+void MyQTNetwork::sendStats(){
+    Framework & f = Framework::Instance();
+    QString url = "https://cloud.lemcavision.com/panel/post_stats";
+    
+    QJsonObject obj;
+    obj["panel"] = QString::fromStdString(f.m_config.m_panel);
+    obj["gps_enable"] = QString::number(f.m_config.m_gps);
+    obj["langage"] = QString::fromStdString(f.m_config.m_langage);
+    obj["constructor"] = QString::number(f.m_config.m_constructor);
+    obj["remote"] = QString::number(f.m_config.m_remote);
+    
+    
+    std::string path_bineuse = DirectoryManager::Instance().getHome()+"/lemca_data/bineuse/stat.txt";
+    INFO(path_bineuse);
+    QString s3 = QString::fromStdString(path_bineuse);
+    QFile file(s3);
+    file.open(QIODevice::ReadOnly);
+    QTextStream s(&file);
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(s.readAll().toUtf8());
+    QJsonObject jsonObject = jsonResponse.object();
+    obj["bineuse"] = jsonObject;
+    
+    
+    QJsonDocument doc(obj);
+    QByteArray data = doc.toJson();
+    
+    QUrl serviceUrl = QUrl(url);
+    QNetworkRequest networkRequest(serviceUrl);
+    networkRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    manager->post(networkRequest, data);
+}

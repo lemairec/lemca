@@ -37,6 +37,8 @@ public:
     bool m_cam1_connected = false;
     QString m_cam2_url;
     bool m_cam2_connected = false;
+    
+    void sendStats();
 signals:
     void testSignal();
 private:
@@ -48,6 +50,7 @@ private slots:
     
     void handleNetwork(QNetworkReply *reply);
     void handleErrorGps(QSerialPort::SerialPortError error);
+    
     
 
 };
