@@ -773,7 +773,7 @@ void OptionWidget::onMousePage5(int x, int y){
         if(m_make_archive.isActive(x, y)){
             INFO("m_make_archive");
             std::string opt = f.m_config.m_version_selected;
-            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/make_archive.sh " + opt;
+            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_make_archive.sh " + opt;
             call(cmd);
         }
     }
