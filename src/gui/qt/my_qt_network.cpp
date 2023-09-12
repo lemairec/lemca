@@ -48,7 +48,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
         } else if (reply->url() == m_cam2_url){
             m_cam2_connected = false;
         } else {
-            WARN("pas bien");
+            WARN("pas bien error");
         }
         return;
     } else {
