@@ -20,6 +20,9 @@ public:
     std::string m_log_file;
     std::string m_config_file;
     
+    const std::string & getHome(){
+        return m_home;
+    };
     const std::string & getDataDirectory();
     const std::string & getSourceDirectory();
     
