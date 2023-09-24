@@ -275,7 +275,6 @@ boot
 `````
 wifi potchpotch
 Lemca a update
-remote a update
 
 config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
 
@@ -283,9 +282,6 @@ Bineuse a update
 Logo companie
 Licence
 1 camera (CAM1)
-hydraulique 100 ok
-angle 30 h 100
-devers deactiver 50
 reset heure
 etiquette camera
 cache transparent camera
@@ -390,4 +386,12 @@ Digital Noise Reduction
 La plage dynamique est la différence d'intensité de lumière entre le point le plus sombre et le point le plus lumineux d'une scène donnée.
 
 Une journée nuageuse avec quelques ombres présente une plage dynamique faible.Il n'y a pas de zones très obscures ni de zones extrêmement lumineuses.Par une journée ensoleillée en revanche, avec des ombres vraiment différenciées, il pourrait y avoir une grande différence entre les zones les plus lumineuses et les zones les plus sombres. Cette différence est appelée plage dynamique étendue (WDR pour Wide Dynamic Range, également désignée par HDR, pour High Dynamic Range).
+
+
+jlcpcb
+======
+
+standart pour l'esp32
+s540 diode (hadrien 340?)
+
 

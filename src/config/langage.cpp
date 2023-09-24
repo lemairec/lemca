@@ -103,6 +103,7 @@ Langage::Langage(){
     add("FR", "OPERATING_SYSTEM", "Système d'exploitations");
     add("FR", "UPDATE_OS", "Mise à jour");
     add("FR", "UPDATE_DEPS", "Installer dépendances");
+    add("FR", "RESET_OS", "Reinitialiser");
     
     
     add("EN", "OK", "OK");
@@ -149,6 +150,7 @@ Langage::Langage(){
     add("EN", "OPERATING_SYSTEM", "Operating System");
     add("EN", "UPDATE_OS", "Update OS");
     add("EN", "UPDATE_DEPS", "Install dependances");
+    add("EN", "RESET_OS", "reset");
     
     add("NL", "OK", "OK");
     add("NL", "CANCEL", "annuleren");
@@ -190,8 +192,7 @@ Langage::Langage(){
     add("NL", "OPERATING_SYSTEM", "Besturingssysteem");
     add("NL", "UPDATE_OS", "Bijwerken");
     add("NL", "UPDATE_DEPS", "Afhankelijkheden installeren");
-
-    
+    add("NL", "RESET_OS", "Opnieuw instellen");
     //verifyAll();
 }
 

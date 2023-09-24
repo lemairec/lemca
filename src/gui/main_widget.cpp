@@ -51,6 +51,7 @@ void MainWidget::setSize(int width, int height){
     m_widthMax = m_width/2-50;
     m_heightMax = m_height/2-50;
     
+    m_init_widget.setSize(m_width, m_height);
     m_option_widget.setSize(m_width, m_height);
     for(auto p : m_widgets){
         p->setSize(m_width, m_height);
@@ -80,6 +81,7 @@ MainWidget * MainWidget::instancePtr(){
 
 void MainWidget::setPainter(QPainter * p){
     BaseWidget::setPainter(p);
+    m_init_widget.setPainter(p);
     m_option_widget.setPainter(p);
     m_option_widget.m_file_widget.setPainter(p);
     m_option_widget.m_file_widget.setPainter(p);
@@ -112,6 +114,10 @@ void MainWidget::draw_force(){
     m_painter->setBrush(m_brush_background_1);
     m_painter->drawRect(0, 0, m_width, m_height);
     
+    if(f.m_config.m_constructor == -1){
+        m_init_widget.draw();
+        return;
+    }
     drawMain();
     drawButtons();
     
@@ -232,6 +238,11 @@ void MainWidget::drawButtons(){
 int MainWidget::onMouse(int x, int y){
     Framework & f = Framework::Instance();
 
+    if(f.m_config.m_constructor == -1){
+        m_init_widget.onMouse(x, y);
+        return 0;
+    }
+    
     size_t n = m_widgets.size();
     for(size_t i = 0; i < n; ++i){
         auto p = m_widgets[n-i-1];

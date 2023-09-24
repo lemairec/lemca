@@ -109,6 +109,8 @@ public:
     
     SelectButtonGui m_version_selected;
     
+    ButtonGui m_reset_lemca;
+    
     ButtonGui m_send_images;
     
     

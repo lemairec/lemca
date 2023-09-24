@@ -552,6 +552,9 @@ void OptionWidget::setSizePage4(){
     m_update_deps.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_DEPS"), true, m_part_1_w/2);
     y+= m_y_inter;
     y+= m_y_inter;
+    m_reset_lemca.setResizeStd(m_part_2_m, y, Langage::getKey("RESET_OS"), true, m_part_1_w/2);
+    y+= m_y_inter;
+    y+= m_y_inter;
    
     m_version_selected.setResize(m_part_2_x+m_part_1_w/2, y, "Version", true, m_part_1_w/2);
     m_version_selected.clear();
@@ -595,6 +598,7 @@ void OptionWidget::drawPage4(){
     drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
+    drawButtonLabel2(m_reset_lemca);
     
     drawPart2Title(m_version_selected.m_y-m_y_inter, 0, "", true);
     if(m_select_widget.m_close){
@@ -628,6 +632,10 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_update_deps.isActive(x, y)){
         call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
+    }
+    if(m_reset_lemca.isActive(x, y)){
+        f.m_config.m_constructor = -1;
+        f.initOrLoadConfig();
     }
     if(m_send_images.isActive(x, y)){
         call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/send_images.sh");
