@@ -31,13 +31,7 @@ void Config::work(QSettings & settings, bool save){
     
     saveLoadString(settings, "langage", m_langage, save);
     saveLoadString(settings, "version_selected", m_version_selected, save);
-    
-    
-    saveLoadString(settings, "bineuse_run", m_bineuse_run, save);
-    saveLoadString(settings, "gps_run", m_gps_run, save);
-    saveLoadString(settings, "serie_run", m_serie_run, save);
-    saveLoadString(settings, "robot_inrows_run", m_robot_inrows_run, save);
-    
+
     saveLoadInt(settings, "port_remote", m_port_remote, save);
     saveLoadEnum(settings, "auto_launch", m_auto_launch, save);
     
