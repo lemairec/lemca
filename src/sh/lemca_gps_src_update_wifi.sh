@@ -5,7 +5,7 @@ branch=$1;
 echo "--- branche $branch\n"
 
 [ ! -d ~/lemca_gps_src ] && git clone https://github.com/lemairec/lemca_gps.git ~/lemca_gps_src
-cd ~/agrigpspi
+cd ~/lemca_gps
 git fetch origin
 git reset --hard
 git checkout origin/$branch
