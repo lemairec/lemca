@@ -371,7 +371,15 @@ void OptionWidget::onMousePage2(int x, int y){
         }
         if(f.m_config.m_gps){
             if(m_update_gps.isActive(x, y)){
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/agrigpspi_update_wifi.sh");
+                Config & c = f.m_config;
+                std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
+                if(f.m_config.m_code_source){
+                    std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_src_update_wifi.sh " + opt;
+                    call(cmd);
+                } else {
+                    std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
+                    call(cmd);
+                }
             }
         }
         if(f.m_config.m_serial){
