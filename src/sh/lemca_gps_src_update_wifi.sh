@@ -1,10 +1,16 @@
 #!/bin/bash
 set -e
+branch=$1;
+
+echo "--- branche $branch\n"
 
 [ ! -d ~/lemca_gps_src ] && git clone https://github.com/lemairec/lemca_gps.git ~/lemca_gps_src
 cd ~/agrigpspi
+git fetch origin
+git reset --hard
+git checkout origin/$branch
+
 mkdir -p build
-git pull
 cd build
 cmake ..
 make -j4
