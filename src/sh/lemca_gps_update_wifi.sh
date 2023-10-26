@@ -11,7 +11,7 @@ rm -rf ~/lemca_gps.tar.gz
 echo  "**** telechargement"
 echo "https://cloud.lemcavision.com/binary/lemca_gps?branch=$branch&constructeur=$constructeur&panel=$panel\n"
 
-wget -c https://cloud.lemcavision.com/binary/lemca_gps?branch=$branch\&constructeur=$constructeur\&panel=$panel -O ~/bineuse.tar.gz
+wget -c https://cloud.lemcavision.com/binary/lemca_gps?branch=$branch\&constructeur=$constructeur\&panel=$panel -O ~/lemca_gps.tar.gz
 
 echo  "**** telechargement ok"
 rm -rf lemca_gps
