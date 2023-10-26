@@ -1,6 +1,6 @@
 #!/bin/bash
 
-archive=~/lemca_gps_src/archive/bineuse
+archive=~/lemca_gps_src/archive/lemca_gps
 
 branch=$1;
 echo "--- branche $branch\n"
@@ -19,7 +19,7 @@ mkdir -p ~/lemca_gps_src/build && cd ~/lemca_gps_src/build  &&  cmake .. && make
 
 mkdir -p $archive
 
-cp ~/lemca_gps_src/build/lemca $archive
+cp ~/lemca_gps_src/build/lemca_gps $archive
 cp -r ~/lemca_gps_src/gui $archive
 cp -r ~/lemca_gps_src/sound $archive
 
@@ -33,6 +33,6 @@ git rev-parse HEAD >> $archive/version.txt
 cd ~/lemca_gps_src/archive
 tar -czvf lemca_gps.tar.gz lemca_gps
 cd ~/;
-curl --request POST "https://cloud.lemcavision.com/binary/send_lemca_gps?branch=$branch&head=$head&version=$version" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
+curl --request POST "https://cloud.lemcavision.com/binary/send_lemca_gps?branch=$branch&head=$head&version=$version" --form 'myfile=@"./lemca_gps_src/archive/lemca_gps.tar.gz"'
 
 rm -rf ~/lemca_gps_src
