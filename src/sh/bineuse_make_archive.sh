@@ -40,6 +40,6 @@ git rev-parse HEAD >> $archive/version.txt
 cd ~/bineuse_src/archive
 tar -czvf bineuse.tar.gz bineuse
 cd ~/;
-curl --request POST "https://cloud.lemcavision.com/binary/send?branch=$branch&head=$head&version=$version" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
+curl --request POST "https://cloud.lemcavision.com/binary/send_bineuse?branch=$branch&head=$head&version=$version" --form 'myfile=@"./bineuse_src/archive/bineuse.tar.gz"'
 
 rm -rf ~/bineuse_src

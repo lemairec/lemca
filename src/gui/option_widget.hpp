@@ -122,7 +122,8 @@ public:
     ButtonGui m_button_full_screen;
     ButtonGui m_clear_data;
     
-    ButtonGui m_make_archive;
+    ButtonGui m_make_archive_bineuse;
+    ButtonGui m_make_archive_gps;
     ButtonGui m_button_code_source;
     ButtonGui m_quit_full_screen;
     ButtonGui m_run_cmd;

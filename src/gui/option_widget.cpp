@@ -674,7 +674,8 @@ void OptionWidget::setSizePage5(){
     int y = m_y_begin;
     m_button_code_source.setResize(m_part_1_x2, y, m_petit_button);
     y += m_y_inter;
-    m_make_archive.setResizeStd(m_part_1_m, y, "Make archive", true, m_part_1_w/2);
+    m_make_archive_bineuse.setResizeStd(m_part_1_x+0.25*m_width3*0.44, y, "Make arch - bineuse", true, m_width3*0.22);
+    m_make_archive_gps.setResizeStd(m_part_1_x+0.75*m_width3*0.44, y, "Make arch - GPS", true, m_width3*0.22);
     
     y += m_y_inter;
     y += m_y_inter;
@@ -715,11 +716,12 @@ void OptionWidget::drawPage5(){
     drawText("Developper", 0.45*m_width, m_y_title, sizeText_bigbig, true);
     drawSeparateurH();
     
-    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Source");
+    std::string s = "Source - make archive -  " + f.m_config.m_version_selected;
+    drawPart1Title(m_y_begin-2*m_y_inter, 0, s);
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source, "code source");
-    m_make_archive.m_label = "Make archive - "+QString::fromStdString(f.m_config.m_version_selected);
     if(f.m_config.m_code_source){
-        drawButtonLabel2(m_make_archive);
+        drawButtonLabel2(m_make_archive_bineuse);
+        drawButtonLabel2(m_make_archive_gps);
     }
     
     drawPart1Title(m_button_full_screen.m_y-m_y_inter, 0, "", true);
@@ -786,10 +788,16 @@ void OptionWidget::onMousePage5(int x, int y){
         f.initOrLoadConfig();
     }
     if(f.m_config.m_code_source){
-        if(m_make_archive.isActive(x, y)){
+        if(m_make_archive_bineuse.isActive(x, y)){
             INFO("m_make_archive");
             std::string opt = f.m_config.m_version_selected;
             std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_make_archive.sh " + opt;
+            call(cmd);
+        }
+        if(m_make_archive_gps.isActive(x, y)){
+            INFO("m_make_archive");
+            std::string opt = f.m_config.m_version_selected;
+            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_make_archive.sh " + opt;
             call(cmd);
         }
     }
