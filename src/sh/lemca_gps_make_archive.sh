@@ -19,7 +19,7 @@ mkdir -p ~/lemca_gps_src/build && cd ~/lemca_gps_src/build  &&  cmake .. && make
 
 mkdir -p $archive
 
-cp ~/lemca_gps_src/build/bineuse $archive
+cp ~/lemca_gps_src/build/lemca $archive
 cp -r ~/lemca_gps_src/gui $archive
 cp -r ~/lemca_gps_src/sound $archive
 
