@@ -3,7 +3,7 @@
 #include <math.h>
 
 std::string execute2(std::string cmd){
-    std::string file = DirectoryManager::Instance().getDataDirectory() + "/tmp_cmd";
+    std::string file = DirectoryManager::instance().getDataDirectory() + "/tmp_cmd";
     std::string cmd2 = cmd + " > " + file;
     system(cmd2.c_str());
     std::ifstream infile(file);
@@ -64,19 +64,19 @@ double my_angle(double x1, double y1, double x2, double y2){
     return angle2-angle1;
 }
 
-double angleBetweenPI2(double a){
+double angleBetweenMDemiPiDemiPi(double a){
     double angle = a;
-    if(a>3.14/2){
-        angle = angle-3.14;
+    if(a>c_pi/2){
+        angle = angle-c_pi;
     }
-    if(angle>3.14/2){
-        angle = angle-3.14;
+    if(angle>c_pi/2){
+        angle = angle-c_pi;
     }
-    if(angle < -3.14/2){
-        angle = angle+3.14;
+    if(angle < -c_pi/2){
+        angle = angle+c_pi;
     }
-    if(angle < -3.14/2){
-        angle = angle+3.14;
+    if(angle < -c_pi/2){
+        angle = angle+c_pi;
     }
     return angle;
 }

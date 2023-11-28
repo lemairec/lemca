@@ -134,7 +134,7 @@ void MyQTNetwork::sendStats(){
     obj["remote"] = QString::number(f.m_config.m_remote);
     
     
-    std::string path_bineuse = DirectoryManager::Instance().getHome()+"/lemca_data/bineuse/stat.txt";
+    std::string path_bineuse = DirectoryManager::instance().getHome()+"/lemca_data/bineuse/stat.txt";
     INFO(path_bineuse);
     QString s3 = QString::fromStdString(path_bineuse);
     QFile file(s3);

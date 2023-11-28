@@ -145,7 +145,7 @@ void MainWindow::creerMenu()
 void MainWindow::openFile(){
     DEBUG("begin");
     QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Open Address Book"), QString::fromStdString(DirectoryManager::Instance().getSourceDirectory())+QString("/gps_samples"),
+                                                    tr("Open Address Book"), QString::fromStdString(DirectoryManager::instance().getSourceDirectory())+QString("/gps_samples"),
                                                     tr("Gps files (*.ubx)"));
     
     /*GpsFramework & f = GpsFramework::Instance();

@@ -362,10 +362,10 @@ void OptionWidget::onMousePage2(int x, int y){
             Config & c = f.m_config;
             std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
             if(f.m_config.m_code_source){
-                std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
+                std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
                 call(cmd);
             } else {
-                std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
+                std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
                 call(cmd);
             }
         }
@@ -374,23 +374,23 @@ void OptionWidget::onMousePage2(int x, int y){
                 Config & c = f.m_config;
                 std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
                 if(f.m_config.m_code_source){
-                    std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_src_update_wifi.sh " + opt;
+                    std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_src_update_wifi.sh " + opt;
                     call(cmd);
                 } else {
-                    std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
+                    std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
                     call(cmd);
                 }
             }
         }
         if(f.m_config.m_serial){
             if(m_serial.isActive(x, y)){
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+                call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
             }
         }
         if(f.m_config.m_robot == 1){
             if(m_update_robot.isActive(x, y)){
                 f.m_config.m_user_mode = 1;
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
+                call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/robot_inrows_update_wifi.sh");
             }
         }
         if(f.m_config.m_remote == 1){
@@ -405,7 +405,7 @@ void OptionWidget::onMousePage2(int x, int y){
         if(!m_file_widget.m_close){
             if(m_file_widget.onMouse(x, y)){
                 std::string s = "/media/lemca/"+m_file_widget.m_select_files.getValueString()+"/bineuse.tar.gz";
-                call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_update_usb.sh " + s);
+                call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_update_usb.sh " + s);
             } else {
                 call("echo fail; exit 1;");
             }
@@ -636,17 +636,17 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     
     if(m_update_lemca.isActive(x, y)){
-        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
+        call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
     if(m_update_deps.isActive(x, y)){
-        call("echo lemca | su -c \"sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
+        call("echo lemca | su -c \"sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/install_dep.sh\"");
     }
     if(m_reset_lemca.isActive(x, y)){
         f.m_config.m_constructor = -1;
         f.initOrLoadConfig();
     }
     if(m_send_images.isActive(x, y)){
-        call("sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/send_images.sh");
+        call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/send_images.sh");
     }
     
     //m_version_selected
@@ -791,13 +791,13 @@ void OptionWidget::onMousePage5(int x, int y){
         if(m_make_archive_bineuse.isActive(x, y)){
             INFO("m_make_archive");
             std::string opt = f.m_config.m_version_selected;
-            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/bineuse_make_archive.sh " + opt;
+            std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_make_archive.sh " + opt;
             call(cmd);
         }
         if(m_make_archive_gps.isActive(x, y)){
             INFO("m_make_archive");
             std::string opt = f.m_config.m_version_selected;
-            std::string cmd = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/lemca_gps_make_archive.sh " + opt;
+            std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_make_archive.sh " + opt;
             call(cmd);
         }
     }
@@ -810,7 +810,7 @@ void OptionWidget::onMousePage5(int x, int y){
         MainWindow::instancePtr()->quitFullScreen();
     }
     if(m_clear_data.isActive(x, y)){
-        DirectoryManager::Instance().clearAll();
+        DirectoryManager::instance().clearAll();
     }
     
     

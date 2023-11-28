@@ -109,7 +109,7 @@ void RemoteConsumer::run(){
         
         f.m_remote_error = "";
        
-        std::string s2 = "sh " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/ssh-key-gen.sh;";
+        std::string s2 = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/ssh-key-gen.sh;";
         char buffer[128];
         FILE * my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
@@ -129,7 +129,7 @@ void RemoteConsumer::run(){
         
         
         
-        s2 = "expect " + DirectoryManager::Instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        s2 = "expect " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");

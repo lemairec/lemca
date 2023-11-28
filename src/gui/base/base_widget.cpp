@@ -328,7 +328,7 @@ void BaseWidget::drawQTexts(const QString & s, int x, int y, SizeText size, bool
 }
 
 QPixmap * BaseWidget::loadImage(const std::string & s){
-     std::string s2 = DirectoryManager::Instance().getSourceDirectory()+s;
+     std::string s2 = DirectoryManager::instance().getSourceDirectory()+s;
      QImage image2(QString::fromStdString(s2));
     //image2.invertPixels();
     QPixmap * res  = new QPixmap(QPixmap::fromImage(image2));
@@ -336,7 +336,7 @@ QPixmap * BaseWidget::loadImage(const std::string & s){
 }
 
 QPixmap * BaseWidget::loadImageInv(const std::string & s){
-    std::string s2 = DirectoryManager::Instance().getSourceDirectory()+s;
+    std::string s2 = DirectoryManager::instance().getSourceDirectory()+s;
     QImage image2(QString::fromStdString(s2));
     if(!m_black_mode){
         image2.invertPixels();
