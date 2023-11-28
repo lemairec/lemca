@@ -110,7 +110,7 @@ bool init = false;
 void MainWidget::draw_force(){
     Framework & f = Framework::Instance();
     
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brush_background_1);
     m_painter->drawRect(0, 0, m_width, m_height);
     
@@ -140,7 +140,7 @@ void MainWidget::draw_force(){
         int x2 = y2;
         int width2 = m_width-2*y2;
         int height2 = m_height-2*y2;
-        m_painter->setPen(m_penBlack);
+        m_painter->setPen(m_pen_black);
         m_painter->setBrush(m_brushWhite);
         m_painter->drawRoundedRect(x2, y2, width2, height2, RAYON_ROUNDED, RAYON_ROUNDED);
         
@@ -193,7 +193,7 @@ void MainWidget::drawButton(ButtonGui & button, QPixmap * pixmap, const std::str
     int x = button.m_x-button.m_rayon;
     int y = button.m_y-button.m_rayon;
     int d = button.m_rayon*2;
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushDarkGray);
     m_painter->drawRoundedRect(x, y, d, d, 5, 5);
     

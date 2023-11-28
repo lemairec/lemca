@@ -19,7 +19,7 @@ void CmdWidget::setSize(int width, int height){
 };
 
 void CmdWidget::draw(){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushGray);
     m_painter->drawRect(0, 0, m_width, m_height);
     

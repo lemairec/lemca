@@ -3,21 +3,19 @@
 
 #include "component.hpp"
 
-#define RAYON_ROUNDED 15
+#define RAYON_ROUNDED 10
 
 class BaseWidget{
 public:
     QPainter * m_painter;
     
     QPen m_pen_black_inv;
-    QPen m_penBlack;
-    QPen m_penWhite;
-    QPen m_penGray;
-    QPen m_penRed;
-    QPen m_penGreen;
-    QPen m_penBlue;
-    QPen m_penBlue2;
-    QPen m_penNo;
+    QPen m_pen_black;
+    QPen m_pen_white;
+    QPen m_pen_red;
+    QPen m_pen_green;
+    QPen m_pen_no;
+    QPen m_pen_gray;
 
     QBrush m_brushNo;
     QBrush m_brushWhite;
@@ -31,16 +29,24 @@ public:
     QBrush m_brushGreenButton;
     QBrush m_brushRedButton;
     
+    QBrush m_brush_black;
+    
     QBrush m_brush_background_1;
+    QBrush m_brush_background_2;
+    QBrush m_brush_background_3;
+    
+    QBrush m_brush_button_validate;
+    QBrush m_brush_button_close;
+    QBrush m_brush_button_normal;
+    
+    QBrush m_alert_warning;
+    QBrush m_alert_error;
+    
     QBrush m_brushDarkGray;
     QBrush m_brushLightGrayDebug;
     QBrush m_brushGrayAlpha;
     
     QBrush m_brushParcelle;
-    
-    QBrush m_brushBackGround1;
-    QBrush m_brushBackGround2;
-    
     
     QPen m_penTracteurRoue;
     QBrush m_brushTracteur;
@@ -78,6 +84,7 @@ public:
     
     virtual void open();
     virtual bool isOpen();
+    virtual void loadImages();
     
     void drawButton(ButtonGui & button, int color = 0);
     void drawButtonCarre(ButtonGui & button, int color = 0);
@@ -85,7 +92,7 @@ public:
     void drawButtonCheck(ButtonGui & button, bool check);
     void drawButtonLabel2(ButtonGui & button, int color = 0);
     void drawButtonImage(ButtonGui & button, QPixmap * pixmap, double scale=1.0);
-    void drawButtonImageCarre(ButtonGui & button, QPixmap * pixmap, double scale=1.0, bool open = false);
+    void drawButtonImageCarre(ButtonGui & button, QPixmap * pixmap, double scale=1.0, bool open = false, const std::string & s = "");
     void drawButtonValidate(ButtonGui & button);
     void drawButtonCancel(ButtonGui & button);
 
@@ -98,6 +105,7 @@ public:
     void drawQTexts(const QString & text, int x, int y, SizeText = sizeText_little, bool center = false, bool white = false);
     
     void drawValueGuiKeyPad(ValueGui & value);
+    void drawValueGuiKeyPadFalse(ValueGui & value);
     void drawValueGuiKeyPad2(ValueGui & keypad);
     void drawValueGuiAndLabel(ValueGui & keypad, double value);
     bool isActiveValueGuiKeyPad(ValueGui & value, int x, int y);
@@ -109,6 +117,8 @@ public:
 
     QPixmap * loadImage(const std::string & s);
     QPixmap * loadImageInv(const std::string & s);
+    QPixmap * loadImageInv2(const std::string & s);
+    QPixmap * loadImageInv3(const std::string & s);
 };
 
 #endif

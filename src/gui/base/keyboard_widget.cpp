@@ -39,15 +39,21 @@ void KeyPadWidget::myDrawButton(ButtonGui * b, QString s){
 
 
 void KeyPadWidget::draw(){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushWhiteAlpha);
     m_painter->drawRoundedRect(m_x, m_height*0.1, m_width*0.3, m_height*0.8, RAYON_ROUNDED, RAYON_ROUNDED);
     
     drawQText(m_title, m_x+m_lg/2, 0.15*m_height, sizeText_big, true);
     
+    
+    m_painter->setPen(m_pen_no);
+    m_painter->setBrush(m_brushWhite);
+    m_painter->drawRoundedRect(m_x+m_width*0.05, m_height*0.2, m_width*0.2, m_height*0.1, 10, 10);
     QString s = m_res;
+    m_painter->setPen(m_pen_black);
     drawQText(s, m_x+m_lg/2, 0.25*m_height, sizeText_big, true);
-
+    
+    
     drawButtonLabel2(m_button1, COLOR_WHITE);
     drawButtonLabel2(m_button2, COLOR_WHITE);
     drawButtonLabel2(m_button3, COLOR_WHITE);
@@ -190,7 +196,7 @@ void KeyBoardWidget::myDrawButton(ButtonGui * b, QString s, int color){
 
 
 void KeyBoardWidget::draw(){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     //m_painter->drawRect(0, 0, m_width, m_height);
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_x, m_height*0.1, m_lg, m_height*0.8, RAYON_ROUNDED, RAYON_ROUNDED);

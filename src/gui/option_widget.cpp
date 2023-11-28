@@ -14,32 +14,9 @@
 OptionWidget::OptionWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
-    m_black_mode = false;
-    m_imgClose = loadImage("/gui/ok.png");
-    m_imgPlus = loadImage("/gui/plus.png");
-    m_imgMinus = loadImage("/gui/minus.png");
-    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
-    m_imgSatGris = loadImage("/gui/sat_gris.png");
-    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
-    m_imgVolantGris = loadImage("/gui/volant_gris.png");
-    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
-    m_imgOutilGris = loadImage("/gui/outil_gris.png");
-    m_imgOptionGris = loadImage("/gui/option_gris.png");
-    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
-    m_imgImuGris = loadImage("/gui/imu_gris.png");
-    
-    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
-    m_img_cadena = loadImageInv("/gui/cadena.png");
-    m_img_update = loadImageInv("/gui/update.png");
-    
-    m_img_check_on = loadImage("/gui/check_on.png");
-    m_img_check_off = loadImage("/gui/check_off.png");
-    
-    m_img_return = loadImageInv("/gui/return.png");
-    //m_close=false;
+    m_close=true;
     //m_page =5;
     //addSerials();
-    
 }
 
 
@@ -79,10 +56,10 @@ void OptionWidget::setSize(int width, int height){
     m_part_2_x2 = m_part_2_x+0.1*m_width3*0.44;
     m_part_2_x3 = m_part_2_x+0.8*m_width3*0.44;
     
-    int x_right = width-m_gros_button*1.2;
+    
+    int x_right = width-m_gros_button-20;
     int inter = m_gros_button*2.1;
-    int y = m_gros_button*1.2;
-    y += inter;
+    int y = m_gros_button*1.2+10;
     m_button_p1.setResize(x_right, y, m_gros_button);
     y += inter;
     m_button_p2.setResize(x_right, y, m_gros_button);
@@ -97,7 +74,7 @@ void OptionWidget::setSize(int width, int height){
     y += inter;
     m_button_p7.setResize(x_right, y, m_gros_button);
     
-    m_button_return.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
+    m_button_return.setResize(x_right, m_height-m_gros_button*1.2-10, m_gros_button);
     
     setSizePage1();
     setSizePage2();
@@ -113,17 +90,52 @@ void OptionWidget::setSize(int width, int height){
     
 }
 
+void OptionWidget::loadImages(){
+    m_black_mode = false;
+    m_imgClose = loadImage("/gui/ok.png");
+    m_imgPlus = loadImage("/gui/plus.png");
+    m_imgMinus = loadImage("/gui/minus.png");
+    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
+    m_imgSatGris = loadImage("/gui/sat_gris.png");
+    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
+    m_imgVolantGris = loadImage("/gui/volant_gris.png");
+    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
+    m_imgOutilGris = loadImage("/gui/outil_gris.png");
+    m_imgOptionGris = loadImage("/gui/option_gris.png");
+    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
+    m_imgImuGris = loadImage("/gui/imu_gris.png");
+    
+    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
+    m_img_cadena = loadImageInv("/gui/cadena.png");
+    m_img_update = loadImageInv("/gui/update.png");
+    
+    m_img_check_on = loadImage("/gui/check_on.png");
+    m_img_check_off = loadImage("/gui/check_off.png");
+    
+    m_img_return = loadImageInv("/gui/return.png");
+    //m_close=false;
+    //m_page =5;
+    //addSerials();
+}
 void OptionWidget::draw(){
     
     
+    m_painter->setPen(m_pen_no);
     m_painter->setBrush(m_brush_background_1);
     m_painter->drawRect(0 , 0, m_width, m_height);
     
-    m_painter->setPen(m_penBlack);
-    m_painter->setBrush(m_brushWhite);
-    m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
+    {
+        int h = m_height-20;
+        int w = m_gros_button*2+20;
+        
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->setPen(m_pen_no);
+        
+        m_painter->drawRoundedRect(m_width-w-10, 10, w, h, 10, 10);
+        
+    }
     
-    drawButtonOption(m_button_return, m_img_return, false, 0.3);
+    drawButtonImageCarre(m_button_return, m_img_return, 1.0, false, Langage::getKey("LOGO_RETURN"));
     
     drawButtonOption(m_button_p1, m_imgOptionBlanc, (m_page == 1), 0.3);
     if(m_page == 1){
@@ -977,7 +989,7 @@ void OptionWidget::drawButtonOption(ButtonGui & button, QPixmap * image, bool ch
 }
 
 void OptionWidget::drawPart1Title(double y, double h, const std::string & title, bool separateur){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushNo);
     //m_painter->drawRoundedRect(m_part_1_x, y+8, m_width3*0.44, h-16, 5, 5);
     drawText(title, m_part_1_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
@@ -988,7 +1000,7 @@ void OptionWidget::drawPart1Title(double y, double h, const std::string & title,
 }
 
 void OptionWidget::drawPart2Title(double y, double h, const std::string & title, bool separateur){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushNo);
     //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
     drawText(title, m_part_2_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
@@ -998,7 +1010,7 @@ void OptionWidget::drawPart2Title(double y, double h, const std::string & title,
 }
 
 void OptionWidget::drawPart2(double y, double h, bool separateur){
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushNo);
     //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
     if(separateur){

@@ -47,7 +47,7 @@ void RemoteWidget::setSize(int width, int height){
 
 void RemoteWidget::draw(){
     
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
@@ -73,7 +73,7 @@ void RemoteWidget::draw(){
                 m_painter->setPen(Qt::darkGreen);
                 drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
             
-                m_painter->setPen(m_penBlack);
+                m_painter->setPen(m_pen_black);
                 drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
 
                 drawButtonLabel2(m_button_open_connection);

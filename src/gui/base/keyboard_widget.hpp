@@ -101,11 +101,12 @@ public:
     void draw();
     int onMouse(int x, int y);
     
+    
     void setValueGuiKeyBoard(ValueGuiKeyBoard * value){
-        m_value = value;
-        m_res = QString();
-        if(value){
-            m_res = QString::fromStdString(value->m_text);
+         m_value = value;
+         m_res = QString();
+         if(value){
+             m_res = QString::fromStdString(value->m_text);
         }
     }
     

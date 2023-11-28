@@ -32,7 +32,7 @@ void SelectWidget::draw(){
     int m_open = true;
     
     if(m_open){
-        m_painter->setPen(m_penBlack);
+        m_painter->setPen(m_pen_black);
         //m_painter->drawRect(0, 0, m_width, m_height);
         m_painter->setBrush(m_brushWhite);
         if(m_draw_rect){

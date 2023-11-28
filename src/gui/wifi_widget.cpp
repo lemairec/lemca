@@ -50,7 +50,7 @@ std::string m_reseau;
 
 void WifiWidget::draw(){
     
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
@@ -80,7 +80,7 @@ void WifiWidget::draw(){
         drawText("Non connecté à internet", 0.35*m_width, 0.35*m_height, sizeText_big);
     }
 
-    m_painter->setPen(m_penBlack);
+    m_painter->setPen(m_pen_black);
     //Framework & f = Framework::Instance();
     drawText("Wifi", 0.5*m_width, 0.2*m_height, sizeText_big);
     

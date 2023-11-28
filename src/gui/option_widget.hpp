@@ -55,7 +55,7 @@ public:
     OptionWidget();
     
     void setSize(int width, int height);
-    
+    void loadImages();
     virtual void draw();
     virtual int onMouse(int x, int y);
     
@@ -66,8 +66,8 @@ public:
     
     
     void setSizePage1();
-    void onMousePage1(int x, int y);
     void drawPage1();
+    void onMousePage1(int x, int y);
     
     ButtonGui m_update_bineuse_usb;
     ButtonGui m_update_bineuse;
@@ -77,8 +77,8 @@ public:
     ButtonGui m_update_remote;
     
     void setSizePage2();
-    void onMousePage2(int x, int y);
     void drawPage2();
+    void onMousePage2(int x, int y);
     
     //page3
     ButtonGui m_button0;
@@ -115,8 +115,8 @@ public:
     
     
     void setSizePage4();
-    void onMousePage4(int x, int y);
     void drawPage4();
+    void onMousePage4(int x, int y);
     
     //page6
     ButtonGui m_button_full_screen;
@@ -148,12 +148,12 @@ public:
     ButtonGui m_button_serial;
     
     void setSizePage6();
-    void onMousePage6(int x, int y);
     void drawPage6();
+    void onMousePage6(int x, int y);
     
     void setSizePage7();
-    void onMousePage7(int x, int y);
     void drawPage7();
+    void onMousePage7(int x, int y);
     
     void call(const std::string & s);
     void call2(const std::string & s);
