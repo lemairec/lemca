@@ -26,7 +26,7 @@ public:
     QBrush m_brushBlue;
     QBrush m_brushGray;
     QBrush m_brushGreen;
-    QBrush m_brushGreenButton;
+    
     QBrush m_brushRedButton;
     
     QBrush m_brush_black;

@@ -72,7 +72,7 @@ void CmdWidget::draw(){
     m_painter->setBrush(m_brushWhite);
     m_painter->drawRoundedRect(m_width*0.05, y-h/2, m_width*0.9, h, 5, 5);
     if(good){
-        m_painter->setBrush(m_brushGreenButton);
+        m_painter->setBrush(m_brushGreen);
     } else {
         m_painter->setBrush(m_brushRedButton);
     }

@@ -29,7 +29,6 @@ BaseWidget::BaseWidget(){
     
     
     m_brushGreen = QBrush (Qt::green);
-    m_brushGreenButton= QBrush(QColor(123,180,149));
     m_brushWhite = QBrush(QColor(255,255,255));
     m_brushRedButton = QBrush(QColor(252,83,83));
     
@@ -335,6 +334,9 @@ void BaseWidget::drawQTexts(const QString & s, int x, int y, SizeText size, bool
             break;
         case sizeText_little:
             s2 = 14;
+            break;
+        case sizeText_logo:
+            s2 = 12;
             break;
     }
     QFont font = QFont("Latin", s2, 1, false);
