@@ -91,6 +91,7 @@ void WifiWidget::draw(){
         m_select_wifi.setValueString(m_reseau);
     }
     
+    m_painter->setPen(m_pen_black);
     drawText("Password", 0.25*m_width, m_password.m_y, sizeText_big);
     drawValueGuiKeyBoard(m_password);
     

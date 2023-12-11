@@ -62,7 +62,7 @@ void MainWidget::setSize(int width, int height){
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
-    int button_size = m_gros_gros_button*0.7;
+    int button_size = m_gros_gros_button*0.8;
     int inter = 0.12*m_width;
     int nb = 3;
     if(f.m_config.m_gps){
@@ -93,6 +93,7 @@ void MainWidget::setSize(int width, int height){
     x = 0.5*m_width-inter*2.5;
     m_buttonRobot.setResize(x, m_height*0.8, button_size);
     
+    x = 0.5*m_width+inter*2.5;
     m_buttonSerial.setResize(x, m_height*0.8, button_size);
     //m_buttonMenu2.setResize(120, m_height-30, button_size);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, button_size);

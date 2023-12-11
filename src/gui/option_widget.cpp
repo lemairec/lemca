@@ -224,6 +224,7 @@ int OptionWidget::onMouse(int x, int y){
         } else if(m_page == 7){
             onMousePage7(x, y);
         }
+        MainWidget::instancePtr()->setSize(m_width, m_height);
     }
     return 0;
 }
