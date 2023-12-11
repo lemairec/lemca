@@ -48,6 +48,7 @@ void MainWidget::loadImages(){
 }
 
 void MainWidget::setSize(int width, int height){
+    Framework & f = Framework::Instance();
     BaseWidget::setSize(width, height);
     
     m_widthMax = m_width/2-50;
@@ -63,16 +64,25 @@ void MainWidget::setSize(int width, int height){
     
     int button_size = m_gros_gros_button*0.7;
     int inter = 0.12*m_width;
-    int x = 0.5*m_width-inter*2.5;
+    int nb = 3;
+    if(f.m_config.m_gps){
+        nb++;
+    }
+    if(f.m_config.m_remote){
+        nb++;
+    }
+    int x = 0.5*m_width-inter*(nb*0.5-0.5);
     m_buttonBineuse.setResize(x, m_height*0.55, button_size);
     x+=inter;
-    m_buttonGps.setResize(x, m_height*0.55, button_size);
-    x+=inter;
-    m_buttonRobot.setResize(x, m_height*0.55, button_size);
-    x+=inter;
+    if(f.m_config.m_gps){
+        m_buttonGps.setResize(x, m_height*0.55, button_size);
+        x+=inter;
+    }
+    if(f.m_config.m_remote){
+        m_button_remote.setResize(x, m_height*0.55, button_size);
+        x+=inter;
+    }
     m_buttonWifi.setResize(x, m_height*0.55, button_size);
-    x+=inter;
-    m_button_remote.setResize(x, m_height*0.55, button_size);
     x+=inter;
     m_buttonOption.setResize(x, m_height*0.55, button_size);
    
@@ -80,6 +90,8 @@ void MainWidget::setSize(int width, int height){
     m_buttonExit.m_height = 1.2*button_size;
     m_buttonExit.m_width = 3*button_size;
     
+    x = 0.5*m_width-inter*2.5;
+    m_buttonRobot.setResize(x, m_height*0.8, button_size);
     
     m_buttonSerial.setResize(x, m_height*0.8, button_size);
     //m_buttonMenu2.setResize(120, m_height-30, button_size);

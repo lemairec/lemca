@@ -42,7 +42,7 @@ void OptionWidget::setSize(int width, int height){
 
     m_y_title = m_y2+m_height*0.08;
     m_y_inter = 0.08*m_height2;
-    m_y_begin = m_y_title+3*m_y_inter;
+    m_y_begin = m_y_title+4*m_y_inter;
     
     m_width3 = m_width2+m_y2+m_y2;
     m_part_1_x = m_width3*0.04;
@@ -137,36 +137,36 @@ void OptionWidget::draw(){
         
     }
     
-    drawButtonImageCarre(m_button_return, m_img_return, 1.0, false, Langage::getKey("LOGO_RETURN"));
+    drawButtonImageCarre(m_button_return, m_img_return, 1.0, false);
     
-    drawButtonOption(m_button_p1, m_imgOptionBlanc, (m_page == 1), 0.3);
+    drawButtonImageCarre(m_button_p1, m_imgOptionBlanc, 1.2, (m_page == 1));
     if(m_page == 1){
         drawPage1();
     }
     
-    drawButtonOption(m_button_p2, m_img_update, (m_page == 2), 0.4);
+    drawButtonImageCarre(m_button_p2, m_img_update, 1.4, (m_page == 2));
     if(m_page == 2){
         drawPage2();
     }
     
-    drawButtonOption(m_button_p3, m_img_cadena, (m_page == 3), 0.3);
+    drawButtonImageCarre(m_button_p3, m_img_cadena, 1.4, (m_page == 3));
     if(m_page == 3){
         drawPage3();
     }
     
     if(Framework::Instance().m_config.isTechnicien()){
-        drawButtonOption(m_button_p4, m_imgOptionBlanc, (m_page == 4), 0.3);
+        drawButtonImageCarre(m_button_p4, m_imgOptionBlanc, 1.0, (m_page == 4));
         if(m_page == 4){
             drawPage4();
         };
     }
     if(Framework::Instance().m_config.isDeveloppeur()){
-        drawButtonOption(m_button_p5, m_imgOptionBlanc, (m_page == 5), 0.3);
+        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 1.0, (m_page == 5));
         if(m_page == 5){
             drawPage5();
         };
         
-        drawButtonOption(m_button_p6, m_imgOptionBlanc, (m_page == 6), 0.3);
+        drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 1.0, (m_page == 6));
         if(m_page == 6){
             drawPage6();
         };
@@ -253,12 +253,12 @@ void OptionWidget::setSizePage1(){
 };
 
 void OptionWidget::drawPage1(){
+    m_painter->setPen(m_pen_black_inv);
     Framework & f = Framework::Instance();
     Config & config = f.m_config;
     
     
     drawText(Langage::getKey("INFOS_AV_TITLE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
     
     drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_LANGAGE"));
     drawPart1Title(m_unity.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("OPT_UNITY"));
@@ -338,11 +338,11 @@ void OptionWidget::setSizePage2(){
 
 void OptionWidget::drawPage2(){
     Framework & f = Framework::Instance();
+    m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("UPDATE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
     
     if(f.m_config.m_update_wifi){
-        drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("UPDATE_WIFI"));
+        drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*5, Langage::getKey("UPDATE_WIFI"));
         
         drawButtonLabel2(m_update_bineuse);
         if(f.m_config.m_gps){
@@ -359,7 +359,7 @@ void OptionWidget::drawPage2(){
         }
     }
     if(f.m_config.m_update_usb){
-        drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*3, Langage::getKey("UPDATE_USB"));
+        drawPart2Title(m_langage.m_y-2*m_y_inter, m_y_inter*5, Langage::getKey("UPDATE_USB"));
         
         drawButtonLabel2(m_update_bineuse_usb);
     }
@@ -435,14 +435,14 @@ void OptionWidget::onMousePage2(int x, int y){
  PAGE 3
  */
 void OptionWidget::myDrawButton(ButtonGui * b, QString s){
-    drawButtonLabel2(*b, COLOR_WHITE);
+    drawButtonLabel2(*b, COLOR_CHECK);
 }
 
 void OptionWidget::setSizePage3(){
     int inter = m_width*0.08;
-    int x = m_part_1_x2+m_part_1_w/2;
+    int x = m_part_1_x2+m_part_1_w/2-60;
     int rayon = m_gros_button;
-    int y_begin = m_height*0.4;
+    int y_begin = m_height*0.5;
     
     int y = y_begin - inter;
     m_button7.setResizeStd(x-inter, y, "7", true, 2*rayon, 2*rayon);
@@ -472,9 +472,11 @@ void OptionWidget::setSizePage3(){
 
 
 void OptionWidget::drawPage3(){
+    m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("INFOS_AV_TITLE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
     
+    int y = m_y_title+1*m_y_inter;
+    drawPart1Title(y, m_y_inter*10, "", false);
     myDrawButton(&m_button0, "0");
     myDrawButton(&m_button1, "1");
     myDrawButton(&m_button2, "2");
@@ -488,8 +490,8 @@ void OptionWidget::drawPage3(){
     
     Config & config = Framework::Instance().m_config;
     
-    //int y = m_y_title+1*m_y_inter;
-    //drawPart2Title(y, m_y_inter*3, Langage::getKey("OPT_LICENCE_TITLE"), false);
+    y = m_y_title+1*m_y_inter;
+    drawPart2Title(y, m_y_inter*10, "", false);
     
     Framework & f = Framework::Instance();
     drawText(Langage::getKey("INFOS_LIC_PANEL") , m_part_2_x2, m_panel.m_y, sizeText_medium, false);
@@ -557,10 +559,10 @@ void OptionWidget::onMousePage3(int x, int y){
 
 void OptionWidget::setSizePage4(){
     int y = m_y_begin;
-    m_button_update_wifi.setResize(m_part_1_x2, y, m_petit_button);
-    y += m_y_inter;
-    m_button_update_usb.setResize(m_part_1_x2, y, m_petit_button);
-    y += m_y_inter;
+    //m_button_update_wifi.setResize(m_part_1_x2, y, m_petit_button);
+    //y += m_y_inter;
+    //m_button_update_usb.setResize(m_part_1_x2, y, m_petit_button);
+    //y += m_y_inter;
     m_button_remote.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
     y+= m_y_inter;
@@ -589,19 +591,20 @@ void OptionWidget::setSizePage4(){
 void OptionWidget::drawPage4(){
     Framework & f = Framework::Instance();
     
+    m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("INFOS_OPTIONS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
-    drawPart1Title(m_button_update_wifi.m_y-2*m_y_inter, 0, Langage::getKey("OPTIONS"), false);
-    drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, Langage::getKey("UPDATE_WIFI_ENABLE"));
-    drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, Langage::getKey("UPDATE_USB_ENABLE"));
+    
+    drawPart1Title(m_button_remote.m_y-2*m_y_inter, 3*m_y_inter, Langage::getKey("OPTIONS"), false);
+    //drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, Langage::getKey("UPDATE_WIFI_ENABLE"));
+    //drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, Langage::getKey("UPDATE_USB_ENABLE"));
     drawButtonCheck(m_button_remote, f.m_config.m_remote, Langage::getKey("REMOTE_ENABLE"));
     
     
-    drawPart1Title(m_send_images.m_y-m_y_inter, 0, "", true);
+    drawPart1Title(m_send_images.m_y-m_y_inter, 2*m_y_inter, "", true);
     drawButtonLabel2(m_send_images);
     
     int y = m_send_images.m_y + 2*m_y_inter;
-    drawPart1Title(y-m_y_inter, 0, "", true);
+    drawPart1Title(y-m_y_inter, 2*m_y_inter, "", true);
     if(m_qt_network->m_cam1_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
@@ -617,12 +620,12 @@ void OptionWidget::drawPage4(){
     drawText("CAM2", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
     
     
-    drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("OPERATING_SYSTEM"));
+    drawPart2Title(m_y_begin-2*m_y_inter, 6*m_y_inter, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
     drawButtonLabel2(m_reset_lemca);
     
-    drawPart2Title(m_version_selected.m_y-m_y_inter, 0, "", true);
+    drawPart2Title(m_version_selected.m_y-m_y_inter, 2*m_y_inter, "", true);
     if(m_select_widget.m_close){
         m_version_selected.setValueString(f.m_config.m_version_selected);
     }
@@ -636,14 +639,14 @@ void OptionWidget::drawPage4(){
 void OptionWidget::onMousePage4(int x, int y){
     Framework & f = Framework::Instance();
     
-    if(m_button_update_wifi.isActive(x, y)){
+    /*if(m_button_update_wifi.isActive(x, y)){
         f.m_config.m_update_wifi = !f.m_config.m_update_wifi;
         f.initOrLoadConfig();
     }
     if(m_button_update_usb.isActive(x, y)){
         f.m_config.m_update_usb = !f.m_config.m_update_usb;
         f.initOrLoadConfig();
-    }
+    }*/
     if(m_button_remote.isActive(x, y)){
         f.m_config.m_remote = !f.m_config.m_remote;
         f.initOrLoadConfig();
@@ -727,29 +730,29 @@ void OptionWidget::setSizePage5(){
 
 void OptionWidget::drawPage5(){
     Framework & f = Framework::Instance();
+    m_painter->setPen(m_pen_black_inv);
     drawText("Developper", 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
     
     std::string s = "Source - make archive -  " + f.m_config.m_version_selected;
-    drawPart1Title(m_y_begin-2*m_y_inter, 0, s);
+    drawPart1Title(m_y_begin-2*m_y_inter, 4*m_y_inter, s);
     drawButtonCheck(m_button_code_source, f.m_config.m_code_source, "code source");
     if(f.m_config.m_code_source){
         drawButtonLabel2(m_make_archive_bineuse);
         drawButtonLabel2(m_make_archive_gps);
     }
     
-    drawPart1Title(m_button_full_screen.m_y-m_y_inter, 0, "", true);
+    drawPart1Title(m_button_full_screen.m_y-m_y_inter, 3*m_y_inter, "", true);
     drawButtonCheck(m_button_full_screen, f.m_config.m_fullscreen, "full screen");
     drawButtonLabel2(m_quit_full_screen);
     
     
-    drawPart1Title(m_clear_data.m_y-m_y_inter, 0, "", true);
+    drawPart1Title(m_clear_data.m_y-m_y_inter, 3*m_y_inter, "", true);
     drawButtonLabel2(m_run_cmd);
     drawButtonLabel2(m_clear_data);
     
     
     
-    drawPart2Title(m_y_begin-2*m_y_inter, 0, "Caméras");
+    drawPart2Title(m_y_begin-2*m_y_inter, 6*m_y_inter, "Caméras");
     
     int x = m_part_2_m;
     if(m_qt_network->m_cam1_connected){
@@ -772,7 +775,7 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_ping);
     
     //constructor
-    drawPart2Title(m_constructor.m_y-m_y_inter, 0, "Constructeur", true);
+    drawPart2Title(m_constructor.m_y-m_y_inter, 2*m_y_inter, "Constructeur", true);
     if(m_select_widget.m_close){
         m_constructor.setSelectedValue(f.m_config.m_constructor);
     }
@@ -885,10 +888,10 @@ void OptionWidget::setSizePage6(){
 
 void OptionWidget::drawPage6(){
     Framework & f = Framework::Instance();
+    m_painter->setPen(m_pen_black_inv);
     drawText("Robot", 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
     
-    drawPart1Title(m_y_begin-2*m_y_inter, 0, "Robot");
+    drawPart1Title(m_y_begin-2*m_y_inter, 7*m_y_inter, "Robot");
     drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot");
     
     m_port.m_value = f.m_config.m_port_remote;
@@ -898,7 +901,7 @@ void OptionWidget::drawPage6(){
     drawButtonCheck(m_auto_launch, f.m_config.m_auto_launch, "auto launch robot");
     
     
-    drawPart2Title(m_y_begin-2*m_y_inter, 0, Langage::getKey("SOFTWARE"));
+    drawPart2Title(m_y_begin-2*m_y_inter, 7*m_y_inter, Langage::getKey("SOFTWARE"));
     drawButtonCheck(m_button_gps, f.m_config.m_gps, Langage::getKey("GPS"));
     drawButtonCheck(m_button_serial, f.m_config.m_serial, Langage::getKey("SERIAL"));
     
@@ -991,28 +994,36 @@ void OptionWidget::drawButtonOption(ButtonGui & button, QPixmap * image, bool ch
 }
 
 void OptionWidget::drawPart1Title(double y, double h, const std::string & title, bool separateur){
-    m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushNo);
-    //m_painter->drawRoundedRect(m_part_1_x, y+8, m_width3*0.44, h-16, 5, 5);
-    drawText(title, m_part_1_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
-    if(separateur){
-        drawSeparateurV1(y);
+    {
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->setPen(m_pen_no);
+        
+        m_painter->drawRoundedRect(m_part_1_x, y+5, m_width3*0.44, h-15, 10, 10);
+        
     }
+    
+    m_painter->setPen(m_pen_black_inv);
+    m_painter->setBrush(m_brushNo);
+    drawText(title, m_part_1_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
     
 }
 
 void OptionWidget::drawPart2Title(double y, double h, const std::string & title, bool separateur){
-    m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushNo);
-    //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
-    drawText(title, m_part_2_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
-    if(separateur){
-        drawSeparateurV2(y);
+    {
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->setPen(m_pen_no);
+        
+        m_painter->drawRoundedRect(m_part_2_x, y+5, m_width3*0.44, h-15, 10, 10);
+        
     }
+    
+    m_painter->setPen(m_pen_black_inv);
+    m_painter->setBrush(m_brushNo);
+    drawText(title, m_part_2_x+m_part_2_w/2, y+m_y_inter*0.8, sizeText_big, true);
 }
 
 void OptionWidget::drawPart2(double y, double h, bool separateur){
-    m_painter->setPen(m_pen_black);
+    m_painter->setPen(m_pen_black_inv);
     m_painter->setBrush(m_brushNo);
     //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
     if(separateur){

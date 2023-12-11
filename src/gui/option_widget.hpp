@@ -100,8 +100,8 @@ public:
     void drawPage3();
     
     //page4
-    ButtonGui m_button_update_wifi;
-    ButtonGui m_button_update_usb;
+    //ButtonGui m_button_update_wifi;
+    //ButtonGui m_button_update_usb;
     ButtonGui m_button_remote;
     
     ButtonGui m_update_lemca;

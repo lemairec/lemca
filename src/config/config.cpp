@@ -38,6 +38,8 @@ void Config::work(QSettings & settings, bool save){
 }
 
 void Config::validate(){
+    m_update_wifi = true;
+    m_update_usb = true;
     m_wifi2 = (m_remote || m_update_wifi);
 }
 
