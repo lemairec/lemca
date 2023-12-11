@@ -91,6 +91,8 @@ void OptionWidget::setSize(int width, int height){
 }
 
 void OptionWidget::loadImages(){
+    BaseWidget::loadImages();
+    
     m_black_mode = false;
     m_imgClose = loadImage("/gui/ok.png");
     m_imgPlus = loadImage("/gui/plus.png");

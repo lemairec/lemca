@@ -63,6 +63,7 @@ public:
     void draw_force();
     
     void drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
+    void drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
     
     
     void drawButtons();
@@ -72,6 +73,7 @@ public:
 
     
     void setSize(int width, int height);
+    void loadImages();
     
     
     int onMouse(int x, int y);

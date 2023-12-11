@@ -24,25 +24,27 @@ int l_bottom = 20;
 
 MainWidget::MainWidget()
 {
-    m_black_mode = false;
-    
     m_logo_lemca = loadImage("/gui/logo/logo.png");
     m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
     m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
     m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
-    m_imgBineuse = loadImage("/gui/bineuse.png");
-    m_imgGPS = loadImage("/gui/gps.png");
-    m_imgExit = loadImage("/gui/off.png");
-    m_imgOption = loadImageInv("/gui/infos_blanc.png");
-    m_imgWifi = loadImage("/gui/wifi.png");
-    m_img_remote = loadImage("/gui/reseau.png");
-
+    
     //m_widgets.push_back(&m_satWidget);
     m_widgets.push_back(&m_remote_widget);
     m_widgets.push_back(&m_key_pad_widget);
     m_widgets.push_back(&m_option_widget);
     m_widgets.push_back(&m_wifi_widget);
     m_widgets.push_back(&m_cmd_widget);
+}
+
+void MainWidget::loadImages(){
+    BaseWidget::loadImages();
+    m_imgBineuse = loadImageInv2("/gui/bineuse.png");
+    m_imgGPS = loadImageInv2("/gui/gps.png");
+    m_imgExit = loadImageInv3("/gui/off.png");
+    m_imgOption = loadImageInv2("/gui/infos.png");
+    m_imgWifi = loadImageInv2("/gui/wifi.png");
+    m_img_remote = loadImageInv2("/gui/reseau.png");
 }
 
 void MainWidget::setSize(int width, int height){
@@ -59,17 +61,27 @@ void MainWidget::setSize(int width, int height){
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
-    int button_size = m_gros_gros_button*0.8;
-    m_buttonBineuse.setResize(m_width*0.2, m_height*0.8, button_size);
-    m_buttonGps.setResize(m_width*0.4, m_height*0.8, button_size);
-    m_buttonRobot.setResize(m_width*0.6, m_height*0.8, button_size);
-    m_buttonExit.setResize(m_width*0.8, m_height*0.8, button_size);
+    int button_size = m_gros_gros_button*0.7;
+    int inter = 0.12*m_width;
+    int x = 0.5*m_width-inter*2.5;
+    m_buttonBineuse.setResize(x, m_height*0.55, button_size);
+    x+=inter;
+    m_buttonGps.setResize(x, m_height*0.55, button_size);
+    x+=inter;
+    m_buttonRobot.setResize(x, m_height*0.55, button_size);
+    x+=inter;
+    m_buttonWifi.setResize(x, m_height*0.55, button_size);
+    x+=inter;
+    m_button_remote.setResize(x, m_height*0.55, button_size);
+    x+=inter;
+    m_buttonOption.setResize(x, m_height*0.55, button_size);
+   
+    m_buttonExit.setResize(m_width*0.5, m_height*0.8, button_size);
+    m_buttonExit.m_height = 1.2*button_size;
+    m_buttonExit.m_width = 3*button_size;
     
-    m_buttonWifi.setResize(m_width*0.8, m_height*0.2, button_size);
-    m_button_remote.setResize(m_width*0.6, m_height*0.2, button_size);
-    m_buttonOption.setResize(m_width*0.2, m_height*0.2, button_size);
     
-    m_buttonSerial.setResize(m_width*0.8, m_height*0.5, button_size);
+    m_buttonSerial.setResize(x, m_height*0.8, button_size);
     //m_buttonMenu2.setResize(120, m_height-30, button_size);
     m_buttonSendMessage.setResize(m_width-100, 0.5*m_height, button_size);
 }
@@ -111,7 +123,7 @@ void MainWidget::draw_force(){
     Framework & f = Framework::Instance();
     
     m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brush_background_1);
+    m_painter->setBrush(m_brush_background_2);
     m_painter->drawRect(0, 0, m_width, m_height);
     
     if(f.m_config.m_constructor == -1){
@@ -166,40 +178,69 @@ void MainWidget::draw_force(){
 }
 
 void MainWidget::drawMain(){
-    m_painter->setBrush(m_brush_background_1);
     Framework & f = Framework::Instance();
-    if(f.m_config.m_constructor == 1){
-        drawMyImage(*m_logo_marechalle, 0.5*m_width, 0.38*m_height, 1.2, true);
-        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.4, true);
-        
-    } else if(f.m_config.m_constructor == 2){
-        drawMyImage(*m_logo_vanhoucke, 0.5*m_width, 0.38*m_height, 1.5, true);
-        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.57*m_height, 0.3, true);
-        
-    } else if(f.m_config.m_constructor == 3){
-        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.5*m_height, 0.8, true);
-    } else {
-        drawMyImage(*m_logo_lemca, 0.5*m_width, 0.5*m_height, 0.5, true);
-    }
     
+    m_painter->setBrush(m_brushWhite);
+    m_painter->setPen(m_pen_no);
+    
+    m_painter->drawRoundedRect(0.1*m_width, 0.05*m_height, 0.8*m_width,  0.35*m_height, 10, 10);
+    
+    m_painter->setPen(m_pen_black_inv);
+    if(f.m_config.m_constructor == 1){
+        drawMyImage(*m_logo_marechalle, 0.35*m_width,  0.2*m_height, 1.3, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4, true);
+    } else if(f.m_config.m_constructor == 2){
+        drawMyImage(*m_logo_vanhoucke, 0.3*m_width, 0.2*m_height, 1.3, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4, true);
+    } else if(f.m_config.m_constructor == 3){
+        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.7, true);
+    } else {
+        drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.4, true);
+    }
     
 }
 
 void MainWidget::drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
-    double scale2 = 0.5*scale;
+    double scale2 = 0.4*scale;
     int w = pixmap->size().width()*scale2;
     int h = pixmap->size().height()*scale2;
 
-    int x = button.m_x-button.m_rayon;
-    int y = button.m_y-button.m_rayon;
-    int d = button.m_rayon*2;
-    m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushDarkGray);
-    m_painter->drawRoundedRect(x, y, d, d, 5, 5);
+    int x = button.m_x -button.m_width/2;
+    int y = button.m_y- button.m_height/2;
     
-    m_painter->drawPixmap(button.m_x-w/2, button.m_y-h/2-20, w, h, *pixmap);
-    drawText(s, button.m_x, button.m_y+50, sizeText_medium,  true);
+    int y_image = button.m_y-h/2-15;
+    m_painter->setPen(m_pen_no);
     
+    m_painter->setBrush(m_brush_background_3);
+    m_painter->drawRoundedRect(x, y, button.m_width, button.m_height, 15, 15);
+        
+    m_painter->drawPixmap(button.m_x-w/2, y_image, w, h, *pixmap);
+    if(m_black_mode){
+        m_painter->setPen(m_pen_white);
+    } else {
+        m_painter->setPen(m_pen_black);
+    }
+    drawQText(QString::fromStdString(s), button.m_x, button.m_y+40, sizeText_medium, true);
+}
+    
+void MainWidget::drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
+    double scale2 = 0.4*scale;
+    int w = pixmap->size().width()*scale2;
+    int h = pixmap->size().height()*scale2;
+
+    int x = button.m_x-button.m_width*0.5;
+    int y = button.m_y- button.m_height/2;
+    
+    int y_image = button.m_y-h/2;
+    m_painter->setPen(m_pen_no);
+    
+    m_painter->setBrush(m_alert_error);
+    m_painter->drawRoundedRect(x, y, button.m_width, button.m_height, 15, 15);
+        
+    m_painter->drawPixmap(button.m_x-button.m_width*0.35, y_image, w, h, *pixmap);
+    m_painter->setPen(m_pen_white);
+    
+    drawQText(QString::fromStdString(s), button.m_x, button.m_y+5, sizeText_medium);
 }
 
 
@@ -220,12 +261,12 @@ void MainWidget::drawButtons(){
     }
     
     if(f.m_config.m_wifi2){
-        drawButton(m_buttonWifi, m_imgWifi, Langage::getKey("HOME_WIFI"));
+        drawButton(m_buttonWifi, m_imgWifi, Langage::getKey("HOME_WIFI"), 1.2);
     }
     if(f.m_config.m_remote){
         drawButton(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
     }
-    drawButton(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
+    drawButtonOff(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
     drawButton(m_buttonOption, m_imgOption, Langage::getKey("HOME_INFOS"), 1.2);
     /*drawButtonImage(m_buttonMenu, m_imgMenu);
     drawButton(m_buttonMenu2);
