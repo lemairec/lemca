@@ -62,7 +62,7 @@ void MainWidget::setSize(int width, int height){
     m_key_pad_widget.setSize(m_width, m_height);
     m_key_board_widget.setSize(m_width, m_height);
     
-    int button_size = m_gros_gros_button*0.8;
+    int button_size = 0.05*m_width;
     int inter = 0.12*m_width;
     int nb = 3;
     if(f.m_config.m_gps){
