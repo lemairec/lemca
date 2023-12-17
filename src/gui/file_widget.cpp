@@ -20,7 +20,7 @@ void FileWidget::setSize(int width, int height){
 
 void FileWidget::draw(){
     m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushGray);
+    m_painter->setBrush(m_brush_gray);
     m_painter->drawRect(0, 0, m_width, m_height);
     m_select_widget.draw();
     /*

@@ -20,7 +20,7 @@ void CmdWidget::setSize(int width, int height){
 
 void CmdWidget::draw(){
     m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushGray);
+    m_painter->setBrush(m_brush_background_1);
     m_painter->drawRect(0, 0, m_width, m_height);
     
     
@@ -47,7 +47,7 @@ void CmdWidget::draw(){
     bool debug = f.m_config.isTechnicien() || m_debug || !good;
     
     if(debug){
-        m_painter->setBrush(m_brushWhite);
+        m_painter->setBrush(m_brush_white);
         m_painter->drawRoundedRect(m_width*0.05, m_height*0.1, m_width*0.9, m_height*0.7, 15, 15);
         
         int inter = 18;
@@ -69,12 +69,12 @@ void CmdWidget::draw(){
         h = m_height*0.02;
     }
     
-    m_painter->setBrush(m_brushWhite);
+    m_painter->setBrush(m_brush_white);
     m_painter->drawRoundedRect(m_width*0.05, y-h/2, m_width*0.9, h, 5, 5);
     if(good){
-        m_painter->setBrush(m_brushGreen);
+        m_painter->setBrush(m_brush_green);
     } else {
-        m_painter->setBrush(m_brushRedButton);
+        m_painter->setBrush(m_brush_button_fail);
     }
     m_painter->drawRoundedRect(m_width*0.05, y-h/2, perc*m_width*0.9, h, 5, 5);
     if(good){

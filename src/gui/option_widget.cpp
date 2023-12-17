@@ -107,14 +107,14 @@ void OptionWidget::loadImages(){
     m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
     m_imgImuGris = loadImage("/gui/imu_gris.png");
     
-    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png");
-    m_img_cadena = loadImageInv("/gui/cadena.png");
-    m_img_update = loadImageInv("/gui/update.png");
+    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png", true);
+    m_img_cadena = loadImageInv("/gui/cadena.png", true);
+    m_img_update = loadImageInv("/gui/update.png", true);
     
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
     
-    m_img_return = loadImageInv("/gui/return.png");
+    m_img_return = loadImageInv("/gui/return.png", true);
     //m_close=false;
     //m_page =5;
     //addSerials();
@@ -137,36 +137,36 @@ void OptionWidget::draw(){
         
     }
     
-    drawButtonImageCarre(m_button_return, m_img_return, 1.0, false);
+    drawButtonImageCarre(m_button_return, m_img_return, 1.0*0.4, false);
     
-    drawButtonImageCarre(m_button_p1, m_imgOptionBlanc, 1.2, (m_page == 1));
+    drawButtonImageCarre(m_button_p1, m_imgOptionBlanc, 1.2*0.4, (m_page == 1));
     if(m_page == 1){
         drawPage1();
     }
     
-    drawButtonImageCarre(m_button_p2, m_img_update, 1.4, (m_page == 2));
+    drawButtonImageCarre(m_button_p2, m_img_update, 1.4*0.4, (m_page == 2));
     if(m_page == 2){
         drawPage2();
     }
     
-    drawButtonImageCarre(m_button_p3, m_img_cadena, 1.4, (m_page == 3));
+    drawButtonImageCarre(m_button_p3, m_img_cadena, 1.4*0.4, (m_page == 3));
     if(m_page == 3){
         drawPage3();
     }
     
     if(Framework::Instance().m_config.isTechnicien()){
-        drawButtonImageCarre(m_button_p4, m_imgOptionBlanc, 1.0, (m_page == 4));
+        drawButtonImageCarre(m_button_p4, m_imgOptionBlanc, 1.0*0.4, (m_page == 4));
         if(m_page == 4){
             drawPage4();
         };
     }
     if(Framework::Instance().m_config.isDeveloppeur()){
-        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 1.0, (m_page == 5));
+        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 1.0*0.4, (m_page == 5));
         if(m_page == 5){
             drawPage5();
         };
         
-        drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 1.0, (m_page == 6));
+        drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 1.0*0.4, (m_page == 6));
         if(m_page == 6){
             drawPage6();
         };
@@ -1004,7 +1004,7 @@ void OptionWidget::drawPart1Title(double y, double h, const std::string & title,
     }
     
     m_painter->setPen(m_pen_black_inv);
-    m_painter->setBrush(m_brushNo);
+    m_painter->setBrush(m_brush_no);
     drawText(title, m_part_1_x+m_part_1_w/2, y+m_y_inter*0.8, sizeText_big, true);
     
 }
@@ -1019,13 +1019,13 @@ void OptionWidget::drawPart2Title(double y, double h, const std::string & title,
     }
     
     m_painter->setPen(m_pen_black_inv);
-    m_painter->setBrush(m_brushNo);
+    m_painter->setBrush(m_brush_no);
     drawText(title, m_part_2_x+m_part_2_w/2, y+m_y_inter*0.8, sizeText_big, true);
 }
 
 void OptionWidget::drawPart2(double y, double h, bool separateur){
     m_painter->setPen(m_pen_black_inv);
-    m_painter->setBrush(m_brushNo);
+    m_painter->setBrush(m_brush_no);
     //m_painter->drawRoundedRect(m_part_2_x, y+8, m_width3*0.44, h-16, 5, 5);
     if(separateur){
         drawSeparateurV2(y);

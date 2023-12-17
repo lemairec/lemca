@@ -48,7 +48,7 @@ void RemoteWidget::setSize(int width, int height){
 void RemoteWidget::draw(){
     
     m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushWhite);
+    m_painter->setBrush(m_brush_white);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
     Framework & f = Framework::Instance();
@@ -89,7 +89,7 @@ void RemoteWidget::draw(){
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
         if(!f.m_remote_error.empty()){
-            m_painter->setBrush(m_brushRedButton);
+            m_painter->setBrush(m_brush_button_fail);
             m_painter->drawRoundedRect(0.3*m_width, 0.3*m_height, 0.4*m_width, 0.15*m_height, 15, 15);
             drawText("Erreur : ", 0.5*m_width, 0.35*m_height, sizeText_big, true);
             drawText(f.m_remote_error, 0.5*m_width, 0.4*m_height, sizeText_medium, true);

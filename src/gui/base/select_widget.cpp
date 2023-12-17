@@ -34,7 +34,7 @@ void SelectWidget::draw(){
     if(m_open){
         m_painter->setPen(m_pen_black);
         //m_painter->drawRect(0, 0, m_width, m_height);
-        m_painter->setBrush(m_brushWhite);
+        m_painter->setBrush(m_brush_white);
         if(m_draw_rect){
             m_painter->drawRoundedRect(m_x, m_y, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
         }
@@ -53,8 +53,8 @@ void SelectWidget::draw(){
         }
         
         if(m_draw_button){
-            drawButtonValidate(m_ok);
-            drawButtonCancel(m_cancel);
+            drawButtonLabel2(m_ok, COLOR_VALIDATE);
+            drawButtonLabel2(m_cancel, COLOR_CANCEL);
         }
         
         if(m_pages_total>1){

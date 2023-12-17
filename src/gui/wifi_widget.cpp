@@ -51,7 +51,7 @@ std::string m_reseau;
 void WifiWidget::draw(){
     
     m_painter->setPen(m_pen_black);
-    m_painter->setBrush(m_brushWhite);
+    m_painter->setBrush(m_brush_white);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
     drawButtonImageCarre(m_button_close, m_img_return, 0.9, false);

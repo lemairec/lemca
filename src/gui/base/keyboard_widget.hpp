@@ -22,8 +22,6 @@ class KeyPadWidget : public BaseWidget {
     ButtonGui m_button_point;
     ButtonGui m_button_ok;
     
-    void myDrawButton(ButtonGui *, QString s);
-    
     ValueGui * m_value = NULL;
 public:
     void setSize(int width, int height);

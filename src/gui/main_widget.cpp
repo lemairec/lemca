@@ -39,12 +39,12 @@ MainWidget::MainWidget()
 
 void MainWidget::loadImages(){
     BaseWidget::loadImages();
-    m_imgBineuse = loadImageInv2("/gui/bineuse.png");
-    m_imgGPS = loadImageInv2("/gui/gps.png");
-    m_imgExit = loadImageInv3("/gui/off.png");
-    m_imgOption = loadImageInv2("/gui/infos.png");
-    m_imgWifi = loadImageInv2("/gui/wifi.png");
-    m_img_remote = loadImageInv2("/gui/reseau.png");
+    m_imgBineuse = loadImageInv("/gui/bineuse.png");
+    m_imgGPS = loadImageInv("/gui/gps.png");
+    m_imgExit = loadImage("/gui/off.png", true);
+    m_imgOption = loadImageInv("/gui/infos.png");
+    m_imgWifi = loadImageInv("/gui/wifi.png");
+    m_img_remote = loadImageInv("/gui/reseau.png");
 }
 
 void MainWidget::setSize(int width, int height){
@@ -166,7 +166,7 @@ void MainWidget::draw_force(){
         int width2 = m_width-2*y2;
         int height2 = m_height-2*y2;
         m_painter->setPen(m_pen_black);
-        m_painter->setBrush(m_brushWhite);
+        m_painter->setBrush(m_brush_white);
         m_painter->drawRoundedRect(x2, y2, width2, height2, RAYON_ROUNDED, RAYON_ROUNDED);
         
         drawText(Langage::getKey("LOADING"), 0.5*m_width, 0.5*m_height, sizeText_bigbig, true);
@@ -193,22 +193,22 @@ void MainWidget::draw_force(){
 void MainWidget::drawMain(){
     Framework & f = Framework::Instance();
     
-    m_painter->setBrush(m_brushWhite);
+    m_painter->setBrush(m_brush_white);
     m_painter->setPen(m_pen_no);
     
     m_painter->drawRoundedRect(0.1*m_width, 0.05*m_height, 0.8*m_width,  0.35*m_height, 10, 10);
     
     m_painter->setPen(m_pen_black_inv);
     if(f.m_config.m_constructor == 1){
-        drawMyImage(*m_logo_marechalle, 0.35*m_width,  0.2*m_height, 1.3, true);
-        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4, true);
+        drawMyImage(*m_logo_marechalle, 0.35*m_width,  0.2*m_height, 1.3*0.4, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4*0.4, true);
     } else if(f.m_config.m_constructor == 2){
-        drawMyImage(*m_logo_vanhoucke, 0.3*m_width, 0.2*m_height, 1.3, true);
-        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4, true);
+        drawMyImage(*m_logo_vanhoucke, 0.3*m_width, 0.2*m_height, 1.3*0.4, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4*0.4, true);
     } else if(f.m_config.m_constructor == 3){
-        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.7, true);
+        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.7*0.4, true);
     } else {
-        drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.4, true);
+        drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.4*0.4, true);
     }
     
 }
