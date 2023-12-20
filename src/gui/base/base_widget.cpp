@@ -14,6 +14,7 @@ void BaseWidget::setColors(){
     QColor red = QColor(0xFF374B);
     QColor orange = QColor(0xFF7818);
     QColor green = QColor(0x015A06);
+    QColor blue = QColor(0, 0, 250);
     
     if(m_black_mode){
         green = QColor(0x35B856);
@@ -22,13 +23,14 @@ void BaseWidget::setColors(){
     m_pen_no.setColor(QColor(0, 250, 0, 0));
     m_pen_black = QPen(Qt::black);
     m_pen_white = QPen(Qt::white);
-    m_pen_red = red;
+    m_pen_red = QPen(red);
+    m_pen_blue = QPen(blue);
     m_pen_green = QPen(Qt::green);
     m_pen_gray = QPen (QColor(120,120,120));
     
     m_brush_black = QBrush(Qt::black);
     m_brush_red = QBrush(red);
-    m_brush_blue = QBrush(QColor(0, 0, 250));
+    m_brush_blue = QBrush(blue);
     m_brush_orange = QBrush(orange);
     m_brush_gray = QBrush (QColor(200,200,200));
     m_brush_white = QBrush(QColor(255,255,255));
@@ -59,6 +61,12 @@ void BaseWidget::setColors(){
     QColor white = QColor(255,255,255);
     white.setAlphaF(0.9);
     m_brushWhiteAlpha =QBrush(white);
+    
+    m_brush_tracteur = QBrush(QColor(0,0,200));
+    m_brush_outil = QBrush(QColor(60,60,200));
+    m_brush_parcelle_1 = QBrush(QColor(183,166,138));
+    m_brush_parcelle_2 = QBrush(QColor(183*1.2,166*1.2,138*1.2));
+    m_brush_parcelle_green_alpha = QBrush(QColor(0, 150, 0, 100));
 }
 
 void BaseWidget::setSize(int width, int height){

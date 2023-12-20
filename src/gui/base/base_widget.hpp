@@ -13,6 +13,7 @@ public:
     QPen m_pen_black;
     QPen m_pen_white;
     QPen m_pen_red;
+    QPen m_pen_blue;
     QPen m_pen_green;
     QPen m_pen_no;
     QPen m_pen_gray;
@@ -41,6 +42,12 @@ public:
     
     QBrush m_alert_warning;
     QBrush m_alert_error;
+    
+    QBrush m_brush_tracteur;
+    QBrush m_brush_outil;
+    QBrush m_brush_parcelle_1;
+    QBrush m_brush_parcelle_2;
+    QBrush m_brush_parcelle_green_alpha;
     
     QPixmap * m_img_check_on;
     QPixmap * m_img_check_off;
