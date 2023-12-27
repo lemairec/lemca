@@ -10,6 +10,12 @@ BaseWidget::BaseWidget(){
     
 }
 
+
+void BaseWidget::loadImages(){
+    m_img_plus = loadImage("/gui/plus.png");
+    m_img_moins = loadImage("/gui/moins.png");
+}
+
 void BaseWidget::setColors(){
     QColor red = QColor(0xFF374B);
     QColor orange = QColor(0xFF7818);
@@ -69,6 +75,10 @@ void BaseWidget::setColors(){
     m_brush_parcelle_green_alpha = QBrush(QColor(0, 150, 0, 100));
 }
 
+void BaseWidget::setPainter(QPainter * p){
+    m_painter = p;
+}
+
 void BaseWidget::setSize(int width, int height){
     m_black_mode = false;//FrameworkVision::instance().m_config.m_black_mode;
     m_gros_button = 0.05*height;
@@ -81,10 +91,6 @@ void BaseWidget::setSize(int width, int height){
     loadImages();
 }
 
-void BaseWidget::loadImages(){
-    m_img_plus = loadImage("/gui/plus.png");
-    m_img_moins = loadImage("/gui/moins.png");
-}
 
 void BaseWidget::open(){
     m_close = false;

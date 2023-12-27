@@ -36,6 +36,7 @@ std::wstring string_to_w (const std::string& str);
 std::string w_to_string (const std::wstring& str);
 
 int getHexIntWithChar(char c);
+char getHex(int a);
 
 
 template<typename ... Args>

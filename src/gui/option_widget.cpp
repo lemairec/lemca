@@ -19,6 +19,35 @@ OptionWidget::OptionWidget()
     //addSerials();
 }
 
+void OptionWidget::loadImages(){
+    BaseWidget::loadImages();
+    
+    m_black_mode = false;
+    m_imgClose = loadImage("/gui/ok.png");
+    m_imgPlus = loadImage("/gui/plus.png");
+    m_imgMinus = loadImage("/gui/minus.png");
+    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
+    m_imgSatGris = loadImage("/gui/sat_gris.png");
+    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
+    m_imgVolantGris = loadImage("/gui/volant_gris.png");
+    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
+    m_imgOutilGris = loadImage("/gui/outil_gris.png");
+    m_imgOptionGris = loadImage("/gui/option_gris.png");
+    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
+    m_imgImuGris = loadImage("/gui/imu_gris.png");
+    
+    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png", true);
+    m_img_cadena = loadImageInv("/gui/cadena.png", true);
+    m_img_update = loadImageInv("/gui/update.png", true);
+    
+    m_img_check_on = loadImage("/gui/check_on.png");
+    m_img_check_off = loadImage("/gui/check_off.png");
+    
+    m_img_return = loadImageInv("/gui/return.png", true);
+    //m_close=false;
+    //m_page =5;
+    //addSerials();
+}
 
 void OptionWidget::open(){
     m_close = false;
@@ -90,35 +119,6 @@ void OptionWidget::setSize(int width, int height){
     
 }
 
-void OptionWidget::loadImages(){
-    BaseWidget::loadImages();
-    
-    m_black_mode = false;
-    m_imgClose = loadImage("/gui/ok.png");
-    m_imgPlus = loadImage("/gui/plus.png");
-    m_imgMinus = loadImage("/gui/minus.png");
-    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
-    m_imgSatGris = loadImage("/gui/sat_gris.png");
-    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
-    m_imgVolantGris = loadImage("/gui/volant_gris.png");
-    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
-    m_imgOutilGris = loadImage("/gui/outil_gris.png");
-    m_imgOptionGris = loadImage("/gui/option_gris.png");
-    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
-    m_imgImuGris = loadImage("/gui/imu_gris.png");
-    
-    m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png", true);
-    m_img_cadena = loadImageInv("/gui/cadena.png", true);
-    m_img_update = loadImageInv("/gui/update.png", true);
-    
-    m_img_check_on = loadImage("/gui/check_on.png");
-    m_img_check_off = loadImage("/gui/check_off.png");
-    
-    m_img_return = loadImageInv("/gui/return.png", true);
-    //m_close=false;
-    //m_page =5;
-    //addSerials();
-}
 void OptionWidget::draw(){
     
     
@@ -137,36 +137,36 @@ void OptionWidget::draw(){
         
     }
     
-    drawButtonImageCarre(m_button_return, m_img_return, 1.0*0.4, false);
+    drawButtonImageCarre(m_button_return, m_img_return, 0.4, false);
     
-    drawButtonImageCarre(m_button_p1, m_imgOptionBlanc, 1.2*0.4, (m_page == 1));
+    drawButtonImageCarre(m_button_p1, m_imgOptionBlanc, 0.4, (m_page == 1));
     if(m_page == 1){
         drawPage1();
     }
     
-    drawButtonImageCarre(m_button_p2, m_img_update, 1.4*0.4, (m_page == 2));
+    drawButtonImageCarre(m_button_p2, m_img_update, 0.5, (m_page == 2));
     if(m_page == 2){
         drawPage2();
     }
     
-    drawButtonImageCarre(m_button_p3, m_img_cadena, 1.4*0.4, (m_page == 3));
+    drawButtonImageCarre(m_button_p3, m_img_cadena, 0.5, (m_page == 3));
     if(m_page == 3){
         drawPage3();
     }
     
     if(Framework::Instance().m_config.isTechnicien()){
-        drawButtonImageCarre(m_button_p4, m_imgOptionBlanc, 1.0*0.4, (m_page == 4));
+        drawButtonImageCarre(m_button_p4, m_imgOptionBlanc, 0.4, (m_page == 4));
         if(m_page == 4){
             drawPage4();
         };
     }
     if(Framework::Instance().m_config.isDeveloppeur()){
-        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 1.0*0.4, (m_page == 5));
+        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 0.4, (m_page == 5));
         if(m_page == 5){
             drawPage5();
         };
         
-        drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 1.0*0.4, (m_page == 6));
+        drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 0.4, (m_page == 6));
         if(m_page == 6){
             drawPage6();
         };

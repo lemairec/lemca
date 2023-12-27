@@ -57,24 +57,19 @@ public:
     bool m_debug = false;
     bool m_is_bineuse_call = false;
     
-    void setPainter(QPainter * s);
+    void loadImages();
+    void setPainter(QPainter * p);
+    void setSize(int width, int height);
     
     void draw();
     void draw_force();
     
     void drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
     void drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
-    
-    
     void drawButtons();
     void drawMain();
     
     void call(const std::string & s);
-
-    
-    void setSize(int width, int height);
-    void loadImages();
-    
     
     int onMouse(int x, int y);
 };

@@ -55,7 +55,9 @@ public:
     OptionWidget();
     
     void setSize(int width, int height);
+    
     void loadImages();
+    
     virtual void draw();
     virtual int onMouse(int x, int y);
     

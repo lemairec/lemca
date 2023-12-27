@@ -54,10 +54,7 @@ public:
     
     QPixmap * m_img_plus;
     QPixmap * m_img_moins;
-public:
-    virtual void setPainter(QPainter * p){
-        m_painter = p;
-    }
+
 public:
     bool m_black_mode = true;
     
@@ -73,16 +70,17 @@ public:
     KeyBoardWidget * m_key_board_widget;
     BaseWidget();
     
+    virtual void loadImages();
     virtual void setColors();
-    
+    virtual void setPainter(QPainter * p);
     virtual void setSize(int width, int height);
+    
     virtual void draw() = 0;
         
     virtual int onMouse(int x, int y){return 0;};
     
     virtual void open();
     virtual bool isOpen();
-    virtual void loadImages();
     
     void drawButtonCheck(ButtonGui & button, bool check, const std::string & s);
     void drawButtonCheck(ButtonGui & button, bool check);

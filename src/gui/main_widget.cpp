@@ -24,11 +24,6 @@ int l_bottom = 20;
 
 MainWidget::MainWidget()
 {
-    m_logo_lemca = loadImage("/gui/logo/logo.png");
-    m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
-    m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
-    m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
-    
     //m_widgets.push_back(&m_satWidget);
     m_widgets.push_back(&m_remote_widget);
     m_widgets.push_back(&m_key_pad_widget);
@@ -45,6 +40,27 @@ void MainWidget::loadImages(){
     m_imgOption = loadImageInv("/gui/infos.png");
     m_imgWifi = loadImageInv("/gui/wifi.png");
     m_img_remote = loadImageInv("/gui/reseau.png");
+    
+    m_logo_lemca = loadImage("/gui/logo/logo.png");
+    m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
+    m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
+    m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
+}
+
+void MainWidget::setPainter(QPainter * p){
+    BaseWidget::setPainter(p);
+    m_init_widget.setPainter(p);
+    m_option_widget.setPainter(p);
+    m_option_widget.m_file_widget.setPainter(p);
+    m_option_widget.m_file_widget.setPainter(p);
+    m_option_widget.m_file_widget.m_select_widget.setPainter(p);
+    m_option_widget.m_select_widget.setPainter(p);
+    m_option_widget.m_keyboard_widget.setPainter(p);
+    m_wifi_widget.m_select_widget.setPainter(p);
+    for(auto p2 : m_widgets){
+        p2->setPainter(p);
+    }
+    m_key_board_widget.setPainter(p);
 }
 
 void MainWidget::setSize(int width, int height){
@@ -102,22 +118,6 @@ void MainWidget::setSize(int width, int height){
 MainWidget * MainWidget::instancePtr(){
     static MainWidget gf;
     return &gf;
-}
-
-void MainWidget::setPainter(QPainter * p){
-    BaseWidget::setPainter(p);
-    m_init_widget.setPainter(p);
-    m_option_widget.setPainter(p);
-    m_option_widget.m_file_widget.setPainter(p);
-    m_option_widget.m_file_widget.setPainter(p);
-    m_option_widget.m_file_widget.m_select_widget.setPainter(p);
-    m_option_widget.m_select_widget.setPainter(p);
-    m_option_widget.m_keyboard_widget.setPainter(p);
-    m_wifi_widget.m_select_widget.setPainter(p);
-    for(auto p2 : m_widgets){
-        p2->setPainter(p);
-    }
-    m_key_board_widget.setPainter(p);
 }
 
 int max = 10000;
