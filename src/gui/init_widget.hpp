@@ -12,6 +12,7 @@ class InitWidget : public BaseWidget {
 public:
     InitWidget();
     
+    void loadImages();
     void setSize(int width, int height);
     
     virtual void draw();

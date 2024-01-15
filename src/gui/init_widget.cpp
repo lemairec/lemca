@@ -12,7 +12,14 @@
 InitWidget::InitWidget()
 {
     m_black_mode = false;
-    m_img_return = loadImageInv("/gui/return.png");
+}
+
+void InitWidget::loadImages(){
+    BaseWidget::loadImages();
+    
+    m_img_return = loadImageInv("/gui/return.png", true);
+    m_img_check_on = loadImage("/gui/check_on.png");
+    m_img_check_off = loadImage("/gui/check_off.png");
 }
 
 void InitWidget::setSize(int width, int height){

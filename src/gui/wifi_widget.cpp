@@ -13,7 +13,14 @@ WifiWidget::WifiWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
     m_black_mode = false;
-    m_img_return = loadImageInv("/gui/return.png");
+}
+
+void WifiWidget::loadImages(){
+    BaseWidget::loadImages();
+    
+    m_img_return = loadImageInv("/gui/return.png", true);
+    m_img_check_on = loadImage("/gui/check_on.png");
+    m_img_check_off = loadImage("/gui/check_off.png");
 }
 
 void WifiWidget::setSize(int width, int height){
@@ -54,7 +61,7 @@ void WifiWidget::draw(){
     m_painter->setBrush(m_brush_white);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
-    drawButtonImageCarre(m_button_close, m_img_return, 0.9, false);
+    drawButtonImageCarre(m_button_close, m_img_return, 0.4, false);
     
     auto now = std::chrono::system_clock::now();
     int tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now-m_time_open).count();

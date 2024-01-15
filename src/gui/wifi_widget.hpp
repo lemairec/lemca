@@ -18,6 +18,7 @@ public:
     
     MyQTNetwork * m_qt_network;
     
+    void loadImages();
     void setSize(int width, int height);
     
     virtual void draw();

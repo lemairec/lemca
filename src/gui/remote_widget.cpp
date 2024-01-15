@@ -15,7 +15,12 @@ RemoteWidget::RemoteWidget()
 :m_qt_network(MyQTNetwork::Instance_ptr())
 {
     m_black_mode = false;
-    m_img_return = loadImageInv("/gui/return.png");
+}
+
+void RemoteWidget::loadImages(){
+    BaseWidget::loadImages();
+    
+    m_img_return = loadImageInv("/gui/return.png", true);
     m_img_check_on = loadImage("/gui/check_on.png");
     m_img_check_off = loadImage("/gui/check_off.png");
 }
@@ -100,7 +105,7 @@ void RemoteWidget::draw(){
 
     }
     
-    drawButtonImageCarre(m_button_close, m_img_return, 0.9, false);
+    drawButtonImageCarre(m_button_close, m_img_return, 0.4, false);
 }
 
 
