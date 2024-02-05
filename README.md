@@ -295,6 +295,7 @@ vis au panel
 
 ## camera
 
+`````
 Video
 => resolution 1024x768 // avant 1920x1024
 => h 265
@@ -343,6 +344,7 @@ disable
 
 LDC
 disable
+`````
 
 
 
