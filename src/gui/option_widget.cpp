@@ -587,6 +587,7 @@ void OptionWidget::setSizePage4(){
     m_version_selected.addValue(("prod"));
     m_version_selected.addValue(("v_23_03"));
     m_version_selected.addValue(("v_22_03"));
+    m_version_selected.addValue(("inrow"));
 };
 
 void OptionWidget::drawPage4(){
