@@ -587,7 +587,9 @@ void OptionWidget::setSizePage4(){
     m_version_selected.addValue(("prod"));
     m_version_selected.addValue(("v_23_03"));
     m_version_selected.addValue(("v_22_03"));
-    m_version_selected.addValue(("inrow"));
+    if(Framework::Instance().m_config.m_inrow){
+        m_version_selected.addValue(("inrow"));
+    }
 };
 
 void OptionWidget::drawPage4(){
@@ -875,6 +877,8 @@ void OptionWidget::setSizePage6(){
     int y = m_y_begin;
     m_button_robot.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
+    m_button_inrow.setResize(m_part_1_x2, y, m_petit_button);
+    y+= m_y_inter;
     m_port.setResizeLabel(m_part_1_x3, y, "port label");
     m_port.setResize(m_part_1_x3, y, m_gros_button);
     y+= m_y_inter;
@@ -895,6 +899,7 @@ void OptionWidget::drawPage6(){
     
     drawPart1Title(m_y_begin-2*m_y_inter, 7*m_y_inter, "Robot");
     drawButtonCheck(m_button_robot, f.m_config.m_robot, "robot");
+    drawButtonCheck(m_button_inrow, f.m_config.m_inrow, "inrow");
     
     m_port.m_value = f.m_config.m_port_remote;
     drawText("port label", m_part_1_x2,m_port.m_y, sizeText_medium);
@@ -924,6 +929,10 @@ void OptionWidget::onMousePage6(int x, int y){
     if(m_button_robot.isActive(x, y)){
         f.m_config.m_robot += 1;
         f.m_config.m_robot = f.m_config.m_robot%2;
+        f.initOrLoadConfig();
+    }
+    if(m_button_inrow.isActive(x, y)){
+        f.m_config.m_inrow = !f.m_config.m_inrow;
         f.initOrLoadConfig();
     }
     

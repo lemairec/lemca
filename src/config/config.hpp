@@ -36,6 +36,7 @@ public:
     std::string m_serie_run;
     
     std::string m_version_selected = "prod";
+    bool m_inrow = false;
     
     
     int m_port_remote = 0;

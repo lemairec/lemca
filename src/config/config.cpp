@@ -27,6 +27,7 @@ void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "fullscreen", m_fullscreen, save);
     saveLoadInt(settings, "robot", m_robot, save);
     saveLoadBool(settings, "serial", m_serial, save);
+    saveLoadBool(settings, "inrow", m_inrow, save);
     
     
     saveLoadString(settings, "langage", m_langage, save);

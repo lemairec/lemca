@@ -146,6 +146,7 @@ public:
     ValueGui m_port;
     ButtonGui m_auto_launch;
     ButtonGui m_button_robot;
+    ButtonGui m_button_inrow;
     ButtonGui m_button_gps;
     ButtonGui m_button_serial;
     
