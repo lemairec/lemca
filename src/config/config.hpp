@@ -49,7 +49,7 @@ public:
     }
     
     bool isTechnicien(){
-        return m_user_mode > 0;
+        return m_code_source || m_user_mode > 0;
     }
     
     void work(QSettings & settings, bool save);
