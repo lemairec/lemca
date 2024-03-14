@@ -270,7 +270,9 @@ boot
 => debian P0
 `````
 
-## 4. restaurer
+# nouveau panel
+
+## panel
 
 `````
 wifi potchpotch
@@ -288,10 +290,6 @@ cache transparent camera
 camera verifier poignée
 vis au panel
 `````
-
-# nouveau panel
-
-## licence
 
 ## camera
 

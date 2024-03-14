@@ -253,7 +253,7 @@ void MainWidget::drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::
     m_painter->drawPixmap(button.m_x-button.m_width*0.35, y_image, w, h, *pixmap);
     m_painter->setPen(m_pen_white);
     
-    drawQText(QString::fromStdString(s), button.m_x, button.m_y+5, sizeText_medium);
+    drawQText(QString::fromStdString(s), button.m_x-10, button.m_y+5, sizeText_medium);
 }
 
 
