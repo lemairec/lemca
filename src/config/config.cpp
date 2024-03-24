@@ -28,6 +28,8 @@ void Config::work(QSettings & settings, bool save){
     saveLoadInt(settings, "robot", m_robot, save);
     saveLoadBool(settings, "serial", m_serial, save);
     saveLoadBool(settings, "inrow", m_inrow, save);
+    saveLoadBool(settings, "log_run", m_log_run, save);
+   
     
     
     saveLoadString(settings, "langage", m_langage, save);

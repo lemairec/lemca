@@ -280,6 +280,7 @@ Lemca a update
 
 config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
 
+Numero du panel
 Bineuse a update
 Logo companie
 Licence

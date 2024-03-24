@@ -13,6 +13,7 @@
 #include "environnement.hpp"
 #include "../framework.hpp"
 #include "../config/langage.hpp"
+#include "../util/directory_manager.hpp"
 
 #define MY_WIDTH 800
 #define MY_HEIGHT 400
@@ -349,7 +350,13 @@ void MainWidget::call(const std::string & s){
     Framework & f = Framework::Instance();
     if(!f.m_is_f_call){
         f.m_is_f_call = true;
-        MainWindow::instancePtr()->call(s);
+        std::string s2 = s;
+        if(f.m_config.m_log_run){
+            std::string temp_file = DirectoryManager::instance().m_log_cmd_file;
+            s2 = s + " > " + temp_file;
+            INFO(s2);
+        }
+        MainWindow::instancePtr()->call(s2);
     } else {
         INFO("not call! " << s);
         

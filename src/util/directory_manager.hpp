@@ -18,6 +18,7 @@ public:
     ~DirectoryManager();
     
     std::string m_log_file;
+    std::string m_log_cmd_file;
     std::string m_config_file;
     
     const std::string & getHome(){

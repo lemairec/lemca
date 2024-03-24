@@ -99,6 +99,9 @@ Langage::Langage(){
     add("FR", "OPTIONS", "Options");
     add("FR", "UPDATE_WIFI_ENABLE", "Activer la mise à jour WIFI");
     add("FR", "UPDATE_USB_ENABLE", "Activer la mise à jour USB");
+    add("FR", "UPDATE_INVALID_PANEL_NUMBER", "Numéro du panel non valide");
+    add("FR", "UPDATE_CONTINUE", "Continuer");
+    add("FR", "UPDATE_CANCEL", "Annuler");
     add("FR", "REMOTE_ENABLE", "Activer l'accès à dist");
     add("FR", "OPERATING_SYSTEM", "Système d'exploitations");
     add("FR", "UPDATE_OS", "Mise à jour");
@@ -138,6 +141,10 @@ Langage::Langage(){
     add("EN", "UPDATE_SERIAL_WIFI", "Serial Update");
     add("EN", "UPDATE_USB", "Update by USB key");
     add("EN", "UPDATE_BINEUSE_USB", "Hoe update");
+    add("EN", "UPDATE_INVALID_PANEL_NUMBER", "Invalid panel number");
+    add("EN", "UPDATE_CONTINUE", "Continue");
+    add("EN", "UPDATE_CANCEL", "Cancel");
+    
     
     add("EN", "INFOS_OPTIONS", "Options");
     add("EN", "SOFTWARE", "Software activated");

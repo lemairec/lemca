@@ -65,6 +65,7 @@ DirectoryManager::DirectoryManager(){
         readFile();
     }
     m_log_file = m_data_dir+"/log.txt";
+    m_log_cmd_file = m_data_dir+"/log_cmd.txt";
     m_config_file = m_data_dir+"/lemca.ini";
     std::cout << "m_source_dir " << m_source_dir << std::endl;
     std::cout << "m_data_dir " << m_data_dir << std::endl;

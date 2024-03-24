@@ -319,6 +319,19 @@ void OptionWidget::onMousePage1(int x, int y){
  PAGE 2
  */
 
+void OptionWidget::updateBineuseWifi(){
+    Framework & f = Framework::Instance();
+    Config & c = f.m_config;
+    std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
+    if(f.m_config.m_code_source){
+        std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
+        call(cmd);
+    } else {
+        std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
+        call(cmd);
+    }
+}
+
 void OptionWidget::setSizePage2(){
     int y = m_y_begin;
     y+= m_y_inter;
@@ -334,6 +347,11 @@ void OptionWidget::setSizePage2(){
     m_update_remote.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_REMOTE"), true, m_part_1_w/2);
     y+= m_y_inter;
     
+    y = m_height*0.6;
+    m_update_warning_continue.setResizeStd(m_width*(0.45-0.2), y, Langage::getKey("UPDATE_CONTINUE"), true, m_part_1_w/2);
+    m_update_warning_cancel.setResizeStd(m_width*(0.45+0.2), y, Langage::getKey("UPDATE_CANCEL"), true, m_part_1_w/2);
+    
+    
     m_file_widget.setSize(m_width, m_height);
 };
 
@@ -341,6 +359,20 @@ void OptionWidget::drawPage2(){
     Framework & f = Framework::Instance();
     m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("UPDATE"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    
+    if(m_update_warning){
+        m_painter->setPen(m_pen_no);
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->drawRoundedRect(m_width*0.1 , m_height*0.2, m_width*0.7, m_height*0.6, 10, 10);
+        
+        m_painter->setPen(m_pen_black_inv);
+        QString s = QString::fromStdString(Langage::getKey("UPDATE_INVALID_PANEL_NUMBER"));
+        drawQTexts(s, m_width*0.45, m_height*0.4, sizeText_medium, true, false);
+        
+        drawButtonLabel2(m_update_warning_continue, COLOR_VALIDATE);
+        drawButtonLabel2(m_update_warning_cancel, COLOR_CANCEL);
+        return;
+    }
     
     if(f.m_config.m_update_wifi){
         drawPart1Title(m_langage.m_y-2*m_y_inter, m_y_inter*5, Langage::getKey("UPDATE_WIFI"));
@@ -372,34 +404,44 @@ void OptionWidget::drawPage2(){
 
 void OptionWidget::onMousePage2(int x, int y){
     Framework & f = Framework::Instance();
+    if(m_update_warning){
+        if(m_update_warning_cancel.isActive(x, y)){
+            m_update_warning = false;
+        }
+        if(m_update_warning_continue.isActive(x, y)){
+            updateBineuseWifi();
+            m_update_warning = false;
+        }
+        return;
+    }
     if(f.m_config.m_update_wifi){
         if(m_update_bineuse.isActive(x, y)){
-            Config & c = f.m_config;
-            std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
-            if(f.m_config.m_code_source){
-                std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_src_update_wifi.sh " + opt;
-                call(cmd);
+            if(f.m_config.m_panel.size() < 2){
+                m_update_warning = true;
             } else {
-                std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/bineuse_update_wifi.sh " + opt;
-                call(cmd);
+                updateBineuseWifi();
             }
         }
         if(f.m_config.m_gps){
             if(m_update_gps.isActive(x, y)){
-                Config & c = f.m_config;
-                std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
-                if(f.m_config.m_code_source){
-                    std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_src_update_wifi.sh " + opt;
-                    call(cmd);
-                } else {
-                    std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
-                    call(cmd);
+                if(f.m_config.m_panel.size() > 2){
+                    Config & c = f.m_config;
+                    std::string opt = c.m_version_selected + " " + std::to_string(c.m_constructor) + " " + c.m_panel;
+                    if(f.m_config.m_code_source){
+                        std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_src_update_wifi.sh " + opt;
+                        call(cmd);
+                    } else {
+                        std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
+                        call(cmd);
+                    }
                 }
             }
         }
         if(f.m_config.m_serial){
             if(m_serial.isActive(x, y)){
-                call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+                if(f.m_config.m_panel.size() > 2){
+                    call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+                }
             }
         }
         if(f.m_config.m_robot == 1){
@@ -569,6 +611,10 @@ void OptionWidget::setSizePage4(){
     y+= m_y_inter;
     m_send_images.setResizeStd(m_part_1_m, y, Langage::getKey("SEND_IMAGES"), true, m_part_1_w/2);
     y+= m_y_inter;
+    m_last_log.setResizeStd(m_part_1_m, y, "last run", true, m_part_1_w/2);
+    y+= m_y_inter;
+    m_log_run.setResize(m_part_1_x2, y, m_petit_button);
+    y+= m_y_inter;
     y+= m_y_inter;
     
     y = m_y_begin;
@@ -604,10 +650,12 @@ void OptionWidget::drawPage4(){
     drawButtonCheck(m_button_remote, f.m_config.m_remote, Langage::getKey("REMOTE_ENABLE"));
     
     
-    drawPart1Title(m_send_images.m_y-m_y_inter, 2*m_y_inter, "", true);
+    drawPart1Title(m_send_images.m_y-m_y_inter, 4*m_y_inter, "", true);
     drawButtonLabel2(m_send_images);
+    drawButtonCheck(m_log_run, f.m_config.m_log_run, "log run");
+    drawButtonLabel2(m_last_log);
     
-    int y = m_send_images.m_y + 2*m_y_inter;
+    int y = m_last_log.m_y + 3*m_y_inter;
     drawPart1Title(y-m_y_inter, 2*m_y_inter, "", true);
     if(m_qt_network->m_cam1_connected){
         m_painter->setPen(Qt::darkGreen);
@@ -622,6 +670,7 @@ void OptionWidget::drawPage4(){
         m_painter->setPen(Qt::red);
     }
     drawText("CAM2", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
+    
     
     
     drawPart2Title(m_y_begin-2*m_y_inter, 6*m_y_inter, Langage::getKey("OPERATING_SYSTEM"));
@@ -656,6 +705,12 @@ void OptionWidget::onMousePage4(int x, int y){
         f.initOrLoadConfig();
     }
     
+    if(m_log_run.isActive(x, y)){
+        f.m_config.m_log_run = !f.m_config.m_log_run;
+        f.initOrLoadConfig();
+    }
+    
+    
     if(m_update_lemca.isActive(x, y)){
         call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_update_wifi.sh");
     }
@@ -668,6 +723,9 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_send_images.isActive(x, y)){
         call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/send_images.sh");
+    }
+    if(m_last_log.isActive(x, y)){
+        call("cat " + DirectoryManager::instance().m_log_cmd_file);
     }
     
     //m_version_selected

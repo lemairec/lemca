@@ -17,6 +17,7 @@ public:
     int m_constructor = 0; //0 Lemca
     std::string m_panel = "";
     
+    
     bool m_fullscreen = true;
     int m_user_mode = 0;
     bool m_code_source = false;
@@ -28,7 +29,7 @@ public:
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
     bool m_control_view_only = true;
-    
+    bool m_log_run = false;
     
     std::string m_bineuse_run;
     std::string m_gps_run;

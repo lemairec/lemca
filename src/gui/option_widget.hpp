@@ -78,6 +78,12 @@ public:
     ButtonGui m_serial;
     ButtonGui m_update_remote;
     
+    bool m_update_warning = false;
+    ButtonGui m_update_warning_continue;
+    ButtonGui m_update_warning_cancel;
+    
+    void updateBineuseWifi();
+    
     void setSizePage2();
     void drawPage2();
     void onMousePage2(int x, int y);
@@ -113,7 +119,9 @@ public:
     
     ButtonGui m_reset_lemca;
     
+    ButtonGui m_log_run;
     ButtonGui m_send_images;
+    ButtonGui m_last_log;
     
     
     void setSizePage4();
