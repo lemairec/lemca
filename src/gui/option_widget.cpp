@@ -609,7 +609,8 @@ void OptionWidget::setSizePage4(){
     m_button_remote.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
     y+= m_y_inter;
-    m_send_images.setResizeStd(m_part_1_m, y, Langage::getKey("SEND_IMAGES"), true, m_part_1_w/2);
+    m_send_images.setResizeStd(m_part_1_m+m_part_1_w*0.2+10, y, Langage::getKey("SEND_IMAGES"), true, m_part_1_w*0.4);
+    m_clean_images.setResizeStd(m_part_1_m-m_part_1_w*0.2-10, y, "Clean Images", true, m_part_1_w*0.4);
     y+= m_y_inter;
     m_last_log.setResizeStd(m_part_1_m, y, "last run", true, m_part_1_w/2);
     y+= m_y_inter;
@@ -652,6 +653,7 @@ void OptionWidget::drawPage4(){
     
     drawPart1Title(m_send_images.m_y-m_y_inter, 4*m_y_inter, "", true);
     drawButtonLabel2(m_send_images);
+    drawButtonLabel2(m_clean_images);
     drawButtonCheck(m_log_run, f.m_config.m_log_run, "log run");
     drawButtonLabel2(m_last_log);
     
@@ -723,6 +725,9 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_send_images.isActive(x, y)){
         call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/send_images.sh");
+    }
+    if(m_clean_images.isActive(x, y)){
+        call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/clean_images.sh");
     }
     if(m_last_log.isActive(x, y)){
         call("cat " + DirectoryManager::instance().m_log_cmd_file);

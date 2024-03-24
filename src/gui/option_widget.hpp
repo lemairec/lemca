@@ -121,6 +121,7 @@ public:
     
     ButtonGui m_log_run;
     ButtonGui m_send_images;
+    ButtonGui m_clean_images;
     ButtonGui m_last_log;
     
     
