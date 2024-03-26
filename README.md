@@ -307,6 +307,7 @@ Video
 
 Video mode
 PAL/50hz
+2560x1920
 
 Day/Night
 CDS
