@@ -296,7 +296,7 @@ vis au panel
 
 `````
 Video
-=> resolution 1920x1024 // avant 1024x768
+=> resolution 1920x1080 // avant 1024x768
 => h 265
 => frzme rate 25
 => quality //40
