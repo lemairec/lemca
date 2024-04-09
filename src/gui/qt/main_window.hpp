@@ -11,8 +11,6 @@ public:
     MyWidget( QWidget *parent = 0 ) : QWidget( parent ) {}
 
     void paintEvent(QPaintEvent* e);
-    
-    void mouseReleaseEvent ( QMouseEvent * event );
 };
 
 class MainWindow : public QMainWindow
@@ -38,27 +36,8 @@ protected:
     void onNewPoint();
     void creerMenu();
 
-    void keyPressEvent(QKeyEvent *event){
-        if(!m_my_widget->m_main_widget->m_key_board_widget.m_close){
-            if(event->key() == Qt::Key_Backspace){
-                m_my_widget->m_main_widget->m_key_board_widget.removeLetter();
-            } else{
-                INFO("tata " << event->key());
-                m_my_widget->m_main_widget->m_key_board_widget.addLetter(event->text());
-            }
-        } else {
-            if(event->key() == Qt::Key_Escape){
-                exit(1);
-            } else if(event->key() == Qt::Key_Q){
-                exit(1);
-            }
-        }
-        
-    }
-    
-    void keyReleaseEvent(QKeyEvent *event){
-    }
-    
+    void keyPressEvent(QKeyEvent *event);
+    void mousePressEvent ( QMouseEvent * event );
 signals:
     void onValueChangeSignal();
 

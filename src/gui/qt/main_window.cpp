@@ -15,15 +15,6 @@
 #include <QFileDialog>
 #include "environnement.hpp"
 
-void MyWidget::mouseReleaseEvent ( QMouseEvent * event ){
-    if(m_main_widget){
-        int x = event->x();
-        int y = event->y();
-        
-        m_main_widget->onMouse(x, y);
-    }
-}
-
 void MyWidget::paintEvent(QPaintEvent* e)
 {
     QWidget::paintEvent(e); // effectue le comportement standard
@@ -113,6 +104,39 @@ void MainWindow::resizeEvent(QResizeEvent *event){
     m_main_widget->setSize(width, height);
     //m_gpsWidget->resizeEvent(event);
     DEBUG("end");
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    if(!m_my_widget->m_main_widget->m_key_board_widget.m_close){
+        if(event->key() == Qt::Key_Backspace){
+            m_my_widget->m_main_widget->m_key_board_widget.removeLetter();
+        } else{
+            INFO("tata " << event->key());
+            m_my_widget->m_main_widget->m_key_board_widget.addLetter(event->text());
+        }
+    } else {
+        if(event->key() == Qt::Key_Escape){
+            exit(1);
+        } else if(event->key() == Qt::Key_Q){
+            exit(1);
+        }
+    }
+}
+
+void MainWindow::mousePressEvent ( QMouseEvent * event ){
+    int x = event->x();
+    int y = event->y();
+    
+    INFO("mousePressEvent " << x << " " << y);
+    if(m_my_widget){
+        if(m_my_widget->m_main_widget){
+            m_my_widget->m_main_widget->onMouse(x, y);
+        }else {
+            INFO("not m_main_widget")
+        }
+    } else {
+        INFO("m_my_widget")
+    }
 }
 
 void MainWindow::onNewPoint(){
