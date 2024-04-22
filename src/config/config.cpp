@@ -9,6 +9,7 @@ Config::Config(){
     m_bineuse_run = "~/bineuse/bineuse";
     m_gps_run = "~/lemca_gps/lemca_gps";
     m_serie_run = "~/serie/build/serie";
+    m_excavator_run = "~/excavator/build/excavator";
     m_robot_inrows_run = "~/inrows/build/inrows";
 }
 
@@ -27,6 +28,7 @@ void Config::work(QSettings & settings, bool save){
     saveLoadBool(settings, "fullscreen", m_fullscreen, save);
     saveLoadInt(settings, "robot", m_robot, save);
     saveLoadBool(settings, "serial", m_serial, save);
+    saveLoadBool(settings, "excavator", m_excavator, save);
     saveLoadBool(settings, "inrow", m_inrow, save);
     saveLoadBool(settings, "log_run", m_log_run, save);
    

@@ -85,6 +85,9 @@ void MainWidget::setSize(int width, int height){
     if(f.m_config.m_gps){
         nb++;
     }
+    if(f.m_config.m_excavator){
+        nb++;
+    }
     if(f.m_config.m_remote){
         nb++;
     }
@@ -93,6 +96,10 @@ void MainWidget::setSize(int width, int height){
     x+=inter;
     if(f.m_config.m_gps){
         m_buttonGps.setResize(x, m_height*0.55, button_size);
+        x+=inter;
+    }
+    if(f.m_config.m_excavator){
+        m_buttonExcavator.setResize(x, m_height*0.55, button_size);
         x+=inter;
     }
     if(f.m_config.m_remote){
@@ -267,6 +274,9 @@ void MainWidget::drawButtons(){
     if(f.m_config.m_gps){
         drawButton(m_buttonGps, m_imgGPS, Langage::getKey("HOME_GPS"));
     }
+    if(f.m_config.m_excavator){
+        drawButton(m_buttonExcavator, m_imgGPS, Langage::getKey("HOME_EXCAVATOR"));
+    }
     if(f.m_config.m_robot){
         drawButton(m_buttonRobot, m_imgGPS, "Robot");
     }
@@ -316,6 +326,10 @@ int MainWidget::onMouse(int x, int y){
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
             call(f.m_config.m_gps_run);
+        }
+    } else if(m_buttonExcavator.isActive(x, y)){
+        if(Framework::Instance().m_config.m_excavator){
+            call(f.m_config.m_excavator_run);
         }
     } else if(m_buttonRobot.isActive(x, y)){
         if(Framework::Instance().m_config.m_robot == 1){

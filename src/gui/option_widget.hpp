@@ -74,6 +74,7 @@ public:
     ButtonGui m_update_bineuse_usb;
     ButtonGui m_update_bineuse;
     ButtonGui m_update_gps;
+    ButtonGui m_update_excavator;
     ButtonGui m_update_robot;
     ButtonGui m_serial;
     ButtonGui m_update_remote;
@@ -157,6 +158,7 @@ public:
     ButtonGui m_button_robot;
     ButtonGui m_button_inrow;
     ButtonGui m_button_gps;
+    ButtonGui m_button_excavator;
     ButtonGui m_button_serial;
     
     void setSizePage6();

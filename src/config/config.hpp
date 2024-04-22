@@ -28,6 +28,7 @@ public:
     bool m_gps = false;
     int m_robot = 0; //1INROWS //2GPS
     bool m_serial = false;
+    bool m_excavator = false;
     bool m_control_view_only = true;
     bool m_log_run = false;
     
@@ -35,6 +36,7 @@ public:
     std::string m_gps_run;
     std::string m_robot_inrows_run;
     std::string m_serie_run;
+    std::string m_excavator_run;
     
     std::string m_version_selected = "prod";
     bool m_inrow = false;

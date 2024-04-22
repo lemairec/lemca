@@ -381,6 +381,9 @@ void OptionWidget::drawPage2(){
         if(f.m_config.m_gps){
             drawButtonLabel2(m_update_gps);
         }
+        if(f.m_config.m_excavator){
+            drawButtonLabel2(m_update_excavator);
+        }
         if(f.m_config.m_serial){
             drawButtonLabel2(m_serial);
         }
@@ -434,6 +437,13 @@ void OptionWidget::onMousePage2(int x, int y){
                         std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/lemca_gps_update_wifi.sh " + opt;
                         call(cmd);
                     }
+                }
+            }
+        }
+        if(f.m_config.m_excavator){
+            if(m_update_excavator.isActive(x, y)){
+                if(f.m_config.m_panel.size() > 2){
+                    call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/excavator_update_wifi.sh");
                 }
             }
         }
@@ -950,6 +960,8 @@ void OptionWidget::setSizePage6(){
     y = m_y_begin;
     m_button_gps.setResize(m_part_2_x2, y, m_petit_button);
     y += m_y_inter;
+    m_button_excavator.setResize(m_part_2_x2, y, m_petit_button);
+    y += m_y_inter;
     m_button_serial.setResize(m_part_2_x2, y, m_petit_button);
     y += m_y_inter;
     
@@ -973,6 +985,7 @@ void OptionWidget::drawPage6(){
     
     drawPart2Title(m_y_begin-2*m_y_inter, 7*m_y_inter, Langage::getKey("SOFTWARE"));
     drawButtonCheck(m_button_gps, f.m_config.m_gps, Langage::getKey("GPS"));
+    drawButtonCheck(m_button_excavator, f.m_config.m_excavator, Langage::getKey("EXCAVATOR"));
     drawButtonCheck(m_button_serial, f.m_config.m_serial, Langage::getKey("SERIAL"));
     
 }
@@ -1001,6 +1014,10 @@ void OptionWidget::onMousePage6(int x, int y){
     
     if(m_button_gps.isActive(x, y)){
         f.m_config.m_gps = !f.m_config.m_gps;
+        f.initOrLoadConfig();
+    }
+    if(m_button_excavator.isActive(x, y)){
+        f.m_config.m_excavator = !f.m_config.m_excavator;
         f.initOrLoadConfig();
     }
     if(m_button_serial.isActive(x, y)){
