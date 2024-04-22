@@ -344,6 +344,8 @@ void OptionWidget::setSizePage2(){
     y+= m_y_inter;
     m_update_robot.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_ROBOT"), true, m_part_1_w/2);
     y+= m_y_inter;
+    m_update_excavator.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_EXCAVATOR"), true, m_part_1_w/2);
+    y+= m_y_inter;
     m_update_remote.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_REMOTE"), true, m_part_1_w/2);
     y+= m_y_inter;
     
