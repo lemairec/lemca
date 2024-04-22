@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-[ ! -d ~/serie ] && git clone https://github.com/lemairec/excavator.git ~/serie
-cd ~/excavator
+[ ! -d ~/lemca_excavator ] && git clone https://github.com/lemairec/lemca_excavator.git ~/lemca_excavator
+cd ~/lemca_excavator
 mkdir -p build
 git pull
 cd build
