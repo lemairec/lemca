@@ -802,6 +802,8 @@ void OptionWidget::setSizePage5(){
     m_constructor.addValue(("1. Marechalle"));
     m_constructor.addValue(("2. Vanhouke"));
     m_constructor.addValue(("3. Binnove"));
+    m_constructor.addValue(("4. Agronomic"));
+    m_constructor.addValue(("5. Agrivaux"));
     
 }
 

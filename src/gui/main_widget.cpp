@@ -46,6 +46,8 @@ void MainWidget::loadImages(){
     m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
     m_logo_vanhoucke = loadImage("/gui/logo/logo_vanhoucke.png");
     m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
+    m_logo_agronomic = loadImage("/gui/logo/logo_agronomic.png");
+    m_logo_agrivaux = loadImage("/gui/logo/logo_agrivaux.png");
 }
 
 void MainWidget::setPainter(QPainter * p){
@@ -208,15 +210,20 @@ void MainWidget::drawMain(){
     
     m_painter->setPen(m_pen_black_inv);
     if(f.m_config.m_constructor == 1){
-        drawMyImage(*m_logo_marechalle, 0.35*m_width,  0.2*m_height, 1.3*0.4, true);
-        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4*0.4, true);
+        drawMyImage(*m_logo_marechalle, 0.35*m_width,  0.2*m_height, 0.5, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.15, true);
     } else if(f.m_config.m_constructor == 2){
-        drawMyImage(*m_logo_vanhoucke, 0.3*m_width, 0.2*m_height, 1.3*0.4, true);
-        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.4*0.4, true);
+        drawMyImage(*m_logo_vanhoucke, 0.3*m_width, 0.2*m_height, 0.5, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.15, true);
     } else if(f.m_config.m_constructor == 3){
-        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.7*0.4, true);
+        drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.3, true);
+    } else if(f.m_config.m_constructor == 4){
+        drawMyImage(*m_logo_agronomic, 0.35*m_width,  0.2*m_height, 1.3*0.4, true);
+        drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.15, true);
+    } else if(f.m_config.m_constructor == 5){
+        drawMyImage(*m_logo_agrivaux, 0.5*m_width,  0.2*m_height, 0.07, true);
     } else {
-        drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.4*0.4, true);
+        drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.15, true);
     }
     
 }

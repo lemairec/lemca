@@ -89,12 +89,16 @@ int InitWidget::onMouse(int x, int y){
             Framework & f = Framework::Instance();
             if(m_code_constructeur.m_text == "000000"){
                 f.m_config.m_constructor = 0;
-            } else if(m_code_constructeur.m_text == "BIN273"){
-                f.m_config.m_constructor = 3;
             } else if(m_code_constructeur.m_text == "MAR452"){
                 f.m_config.m_constructor = 1;
             } else if(m_code_constructeur.m_text == "VAN613"){
                 f.m_config.m_constructor = 2;
+            } else if(m_code_constructeur.m_text == "BIN273"){
+                f.m_config.m_constructor = 3;
+            } else if(m_code_constructeur.m_text == "AGR296"){
+                f.m_config.m_constructor = 4;
+            } else if(m_code_constructeur.m_text == "AGR528"){
+                f.m_config.m_constructor = 5;
             }
             f.initOrLoadConfig();
         }
