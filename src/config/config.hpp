@@ -48,7 +48,7 @@ public:
     Config();
     
     bool isDeveloppeur(){
-        return m_user_mode > 1;
+        return m_code_source || m_user_mode > 1;
     }
     
     bool isTechnicien(){
