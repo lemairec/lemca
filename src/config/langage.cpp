@@ -169,7 +169,7 @@ Langage::Langage(){
     add("NL", "HOME_INFOS", "Info");
     add("NL", "HOME_REMOTE", "Remote");
     add("NL", "HOME_WIFI", "Wifi");
-    add("NL", "HOME_OFF", "Uitroeien");
+    add("NL", "HOME_OFF", "Uitschakelen");
     add("NL", "INFOS_AV_TITLE", "Geavanceerd menu (info)");
     add("NL", "INFOS_LIC_PANEL", "Paneel :");
     add("NL", "OPT_LANGAGE", "Taal");
@@ -178,16 +178,16 @@ Langage::Langage(){
     add("NL", "DE", "Deutsch");
     add("NL", "NL", "Nederlands");
     add("NL", "OPT_UNITY", "Eenheid");
-    add("NL", "METRIQUE", "Metriek");
+    add("NL", "METRIQUE", "Metrisch");
     add("NL", "VERSION", "Versie");
     add("NL", "SEND_IMAGES", "Stuur foto's");
     add("NL", "UPDATE", "Bijwerken");
     add("NL", "UPDATE_WIFI", "Bijwerken via WIFI");
-    add("NL", "UPDATE_BINEUSE_WIFI", "Weeder-update");
+    add("NL", "UPDATE_BINEUSE_WIFI", "Software-update");
     add("NL", "UPDATE_GPS_WIFI", "GPS-update");
     add("NL", "UPDATE_SERIAL_WIFI", "Serie-update");
     add("NL", "UPDATE_USB", "Bijwerken via USB-sleutel");
-    add("NL", "UPDATE_BINEUSE_USB", "Weeder-update");
+    add("NL", "UPDATE_BINEUSE_USB", "Software-update");
     add("NL", "INFOS_OPTIONS", "Opties");
     add("NL", "SOFTWARE", "Software geactiveerd");
     add("NL", "GPS", "GPS");
