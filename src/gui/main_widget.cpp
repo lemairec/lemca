@@ -218,7 +218,7 @@ void MainWidget::drawMain(){
     } else if(f.m_config.m_constructor == 3){
         drawMyImage(*m_logo_binnove, 0.5*m_width, 0.2*m_height, 0.3, true);
     } else if(f.m_config.m_constructor == 4){
-        drawMyImage(*m_logo_agronomic, 0.35*m_width,  0.2*m_height, 1.3*0.4, true);
+        drawMyImage(*m_logo_agronomic, 0.35*m_width,  0.2*m_height, 0.3, true);
         drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.15, true);
     } else if(f.m_config.m_constructor == 5){
         drawMyImage(*m_logo_agrivaux, 0.5*m_width,  0.2*m_height, 0.07, true);
