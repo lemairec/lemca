@@ -446,6 +446,8 @@ void OptionWidget::onMousePage2(int x, int y){
             if(m_update_excavator.isActive(x, y)){
                 if(f.m_config.m_panel.size() > 2){
                     call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/excavator_update_wifi.sh");
+                } else {
+                    m_update_warning = true;
                 }
             }
         }
@@ -453,6 +455,8 @@ void OptionWidget::onMousePage2(int x, int y){
             if(m_serial.isActive(x, y)){
                 if(f.m_config.m_panel.size() > 2){
                     call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/serie_update_wifi.sh");
+                } else {
+                    m_update_warning = true;
                 }
             }
         }
