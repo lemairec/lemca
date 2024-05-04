@@ -775,7 +775,7 @@ void OptionWidget::setSizePage5(){
 };
 
 void OptionWidget::drawPage5(){
-    Framework & f = Framework::Instance();
+    //Framework & f = Framework::Instance();
     
     m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("CAMERAS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);

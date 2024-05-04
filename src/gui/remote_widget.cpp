@@ -71,7 +71,7 @@ void RemoteWidget::draw(){
         int x = m_width*0.08;
         int y = m_height*0.8-inter;
         for(size_t i = 0; i < f.m_cmd_remote_buffer.size(); ++i){
-            std::string s = f.m_cmd_remote_buffer[f.m_cmd_buffer.size()-i-1];
+            std::string s = f.m_cmd_remote_buffer[f.m_cmd_remote_buffer.size()-i-1];
             drawText(s, x, y);
             y-= inter;
             if(y<m_height*0.1){
