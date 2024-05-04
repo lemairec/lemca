@@ -130,6 +130,12 @@ public:
     void drawPage4();
     void onMousePage4(int x, int y);
     
+    //cameras
+    void setSizePage5();
+    void drawPage5();
+    void onMousePage5(int x, int y);
+    
+    
     //page6
     ButtonGui m_button_full_screen;
     ButtonGui m_clear_data;
@@ -148,9 +154,9 @@ public:
     
     SelectButtonGui m_constructor;
     
-    void setSizePage5();
-    void onMousePage5(int x, int y);
-    void drawPage5();
+    void setSizePage6();
+    void onMousePage6(int x, int y);
+    void drawPage6();
     
    
     ValueGui m_port;
@@ -160,10 +166,6 @@ public:
     ButtonGui m_button_gps;
     ButtonGui m_button_excavator;
     ButtonGui m_button_serial;
-    
-    void setSizePage6();
-    void drawPage6();
-    void onMousePage6(int x, int y);
     
     void setSizePage7();
     void drawPage7();

@@ -171,10 +171,10 @@ void OptionWidget::draw(){
             drawPage6();
         };
         
-        /*drawButtonOption(m_button_p7, m_imgOptionBlanc, (m_page == 7), 0.3);
+        drawButtonImageCarre(m_button_p7, m_imgOptionBlanc, 0.4, (m_page == 7));
         if(m_page == 7){
             drawPage7();
-        };*/
+        };
     }
     
     if(!m_select_widget.m_close){
@@ -206,7 +206,7 @@ int OptionWidget::onMouse(int x, int y){
         }
     } else if(m_button_p7.isActive(x,y)){
         if(Framework::Instance().m_config.isDeveloppeur()){
-            //m_page = 7;
+            m_page = 7;
         }
     } else {
         if(m_page == 1){
@@ -765,11 +765,32 @@ void OptionWidget::onMousePage4(int x, int y){
     }
 }
 
+
 /**
- PAGE 5
+ PAGE 5 //cameras
  */
 
 void OptionWidget::setSizePage5(){
+    
+};
+
+void OptionWidget::drawPage5(){
+    Framework & f = Framework::Instance();
+    
+    m_painter->setPen(m_pen_black_inv);
+    drawText(Langage::getKey("CAMERAS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
+    
+}
+
+void OptionWidget::onMousePage5(int x, int y){
+}
+
+
+/**
+ PAGE 6
+ */
+
+void OptionWidget::setSizePage6(){
     
     int y = m_y_begin;
     m_button_code_source.setResize(m_part_1_x2, y, m_petit_button);
@@ -813,7 +834,7 @@ void OptionWidget::setSizePage5(){
 
 
 
-void OptionWidget::drawPage5(){
+void OptionWidget::drawPage6(){
     Framework & f = Framework::Instance();
     m_painter->setPen(m_pen_black_inv);
     drawText("Developper", 0.45*m_width, m_y_title, sizeText_bigbig, true);
@@ -867,7 +888,7 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_constructor.m_buttonOpen);
 }
 
-void OptionWidget::onMousePage5(int x, int y){
+void OptionWidget::onMousePage6(int x, int y){
     KeyBoardWidget & key_board_widget = MainWidget::instancePtr()->m_key_board_widget;
     //Framework & f = Framework::Instance();
     if(!key_board_widget.m_close){
@@ -951,10 +972,10 @@ void OptionWidget::onMousePage5(int x, int y){
 
 
 /**
- PAGE 6
+ PAGE 7
  */
 
-void OptionWidget::setSizePage6(){
+void OptionWidget::setSizePage7(){
     int y = m_y_begin;
     m_button_robot.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
@@ -975,7 +996,7 @@ void OptionWidget::setSizePage6(){
     
 };
 
-void OptionWidget::drawPage6(){
+void OptionWidget::drawPage7(){
     Framework & f = Framework::Instance();
     m_painter->setPen(m_pen_black_inv);
     drawText("Robot", 0.45*m_width, m_y_title, sizeText_bigbig, true);
@@ -998,7 +1019,7 @@ void OptionWidget::drawPage6(){
     
 }
 
-void OptionWidget::onMousePage6(int x, int y){
+void OptionWidget::onMousePage7(int x, int y){
     Framework & f = Framework::Instance();
     if(onMouseKeyPad2(m_port, x, y, 1)){
         f.m_config.m_port_remote = m_port.m_value;
@@ -1032,23 +1053,6 @@ void OptionWidget::onMousePage6(int x, int y){
         f.m_config.m_serial = !f.m_config.m_serial;
         f.initOrLoadConfig();
     }
-}
-
-
-/**
- PAGE 7
- */
-
-void OptionWidget::setSizePage7(){
-    
-};
-
-void OptionWidget::drawPage7(){
-    drawText("Not used", 0.45*m_width, m_y_title, sizeText_bigbig, true);
-    drawSeparateurH();
-}
-
-void OptionWidget::onMousePage7(int x, int y){
 }
 
 #include <cstdio>
