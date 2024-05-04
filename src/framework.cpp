@@ -145,10 +145,9 @@ void RemoteConsumer::run(){
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
             std::string buffer2(buffer);
-            if(buffer2.find("connection_ok")){
+            if(buffer2 == "connection_ok"){
                 f.m_remote_connection_ok = 1;
             }
-            error2 = buffer;
             f.mutex.lock();
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
