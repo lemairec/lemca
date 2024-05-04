@@ -76,7 +76,6 @@ void RemoteConsumer::run(){
     while(true){
         MyQTNetwork *q = MyQTNetwork::Instance_ptr();
         q->test();
-        std::string s;
         int port = 5900;
         std::string name = "lemca";
         bool view_only = true;
@@ -99,13 +98,6 @@ void RemoteConsumer::run(){
             INFO("port");
         }
         
-        s = s + " x11vnc ";
-        if(view_only){
-            s = s + "-viewonly ";
-        }
-        s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
-        s += " 2>&1";
-        INFO(s);
         
         f.m_remote_error = "";
        
@@ -127,7 +119,7 @@ void RemoteConsumer::run(){
         
         
         
-        s2 = "expect " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
+        s2 = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
@@ -158,6 +150,15 @@ void RemoteConsumer::run(){
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
+        
+        std::string s;
+        s = s + " x11vnc ";
+        if(view_only){
+            s = s + "-viewonly ";
+        }
+        s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
+        s += " 2>&1";
+        INFO(s);
         
         my_pipe = popen(s.c_str(), "r");
         if (!my_pipe) {
