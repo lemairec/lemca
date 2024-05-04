@@ -24,5 +24,6 @@ void CamerasModules::refresCam1(){
 }
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
+    INFO("la----");
     m_cam1.push_back(data);
 }

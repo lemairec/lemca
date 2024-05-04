@@ -52,6 +52,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     } else {
         std::string s = reply->readAll().toStdString();
         std::string url = reply->url().toString().toUtf8().constData();
+        INFO(url);
         if(reply->url() == m_host_url){
             m_is_connected = true;
         } else if (reply->url() == m_cam1_url){
@@ -60,7 +61,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
             m_cam2_connected = true;
         } else {
             Framework::Instance().m_cameras_module.handleReply(url, s);
-            WARN("pas bien");
+           
         }
     }
 };
