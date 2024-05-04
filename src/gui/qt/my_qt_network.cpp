@@ -52,7 +52,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     } else {
         std::string s = reply->readAll().toStdString();
         std::string url = reply->url().toString().toUtf8().constData();
-        INFO(url);
+        INFO(url << " " << s);
         if(reply->url() == m_host_url){
             m_is_connected = true;
         } else if (reply->url() == m_cam1_url){
@@ -90,7 +90,7 @@ void MyQTNetwork::testSlot(){
 }
 
 void MyQTNetwork::testCamera(){
-    {
+    /*{
         QNetworkRequest request;
 
         QString url = m_cam1_url;
@@ -111,7 +111,7 @@ void MyQTNetwork::testCamera(){
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
-    }
+    }*/
 }
 
 void MyQTNetwork::callUrl(const std::string & url_){
