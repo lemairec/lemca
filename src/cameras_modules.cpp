@@ -26,5 +26,12 @@ void CamerasModules::refresCam1(){
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
     INFO("la----");
-    m_cam1.push_back(data);
+    
+    QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
+    for(auto s3 : list1){
+        if(s3.size()>5){
+            m_cam1.push_back(s3.toUtf8().constData());
+        }
+    }
+    
 }
