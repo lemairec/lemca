@@ -138,7 +138,7 @@ void RemoteConsumer::run(){
         
         
         f.m_remote_connection_ok = 0;
-        s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
+        s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"_"+f.m_config.m_panel+"\";";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             f.m_cmd_remote_buffer.push_back("error pipe 2");
