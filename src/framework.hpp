@@ -55,13 +55,13 @@ public:
     std::string m_command_to_execute;
     std::string m_command_result;
     std::string m_command_to_execute2;
-    std::string m_command_result2;
     bool m_command_to_execute2_end;
     QWaitCondition bufferNotEmpty;
     bool m_is_f_call = false;
     
     bool m_cmd_interrupt = false;
     std::vector<std::string> m_cmd_buffer;
+    std::vector<std::string> m_cmd_remote_buffer;
     bool m_cmd_end = false;
     bool m_cmd_abort = false;
     

@@ -121,9 +121,7 @@ void RemoteConsumer::run(){
             INFO("result1 " <<buffer);
             error0 = buffer;
             f.mutex.lock();
-            f.m_command_result2 += buffer;
-            
-            f.m_cmd_buffer.push_back(buffer);
+            f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
         
@@ -140,9 +138,7 @@ void RemoteConsumer::run(){
             INFO("result1 " <<buffer);
             error1 = buffer;
             f.mutex.lock();
-            f.m_command_result2 += buffer;
-            
-            f.m_cmd_buffer.push_back(buffer);
+            f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
         
@@ -159,9 +155,7 @@ void RemoteConsumer::run(){
             INFO("result " <<buffer);
             error2 = buffer;
             f.mutex.lock();
-            f.m_command_result2 += buffer;
-            
-            f.m_cmd_buffer.push_back(buffer);
+            f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
         
@@ -176,9 +170,7 @@ void RemoteConsumer::run(){
             INFO("result " <<buffer);
             error3 = buffer;
             f.mutex.lock();
-            f.m_command_result2 += buffer;
-            
-            f.m_cmd_buffer.push_back(buffer);
+            f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
         f.m_remote_error = "0 " + error0;

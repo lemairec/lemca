@@ -30,6 +30,9 @@ public:
     
     ButtonGui m_button_open_connection;
     ButtonGui m_button_open_wifi;
+    ButtonGui m_button_detail;
+    
+    bool m_detail = false;
     
     ButtonGui m_control_panel;
     

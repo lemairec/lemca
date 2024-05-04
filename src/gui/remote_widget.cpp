@@ -41,8 +41,10 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     y+=inter;
     m_button_open_connection.setResizeStd(0.5*m_width, y, "Ouvrir la connection", true, width/4);
+    y+=inter;
     m_button_open_wifi.setResizeStd(0.7*m_width, 0.35*m_height, "Paramétrer le Wifi", true, width/4);
     y+=inter;
+    m_button_detail.setResizeStd(0.5*m_width, y, "Detail", true, width/4);
     
     int x_right = width-m_gros_button*1.2;
     m_button_close.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
@@ -57,6 +59,27 @@ void RemoteWidget::draw(){
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
     Framework & f = Framework::Instance();
+    
+    drawButtonLabel2(m_button_detail);
+    
+    if(m_detail){
+        m_painter->setPen(m_pen_black);
+        m_painter->setBrush(m_brush_white);
+        m_painter->drawRoundedRect(m_width*0.05, m_height*0.1, m_width*0.8, m_height*0.7, 15, 15);
+        
+        int inter = 18;
+        int x = m_width*0.08;
+        int y = m_height*0.8-inter;
+        for(size_t i = 0; i < f.m_cmd_remote_buffer.size(); ++i){
+            std::string s = f.m_cmd_remote_buffer[f.m_cmd_buffer.size()-i-1];
+            drawText(s, x, y);
+            y-= inter;
+            if(y<m_height*0.1){
+                break;
+            }
+        }
+        return;
+    }
     
     if(f.m_session == 0){
         auto now = std::chrono::system_clock::now();
@@ -142,6 +165,9 @@ int RemoteWidget::onMouse(int x, int y){
         }
     }
     
+    if(m_button_detail.isActive(x, y)){
+        m_detail = !m_detail;
+    }
     if(m_button_close.isActive(x, y)){
         m_close = true;
     }
