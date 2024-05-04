@@ -20,7 +20,7 @@ void CamerasModules::refresCam1(){
     m_cam1.clear();
     MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
     
-    m_url_cam1_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin &action=getconnect&stream=all";
+    m_url_cam1_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
     m_qt_network->callUrl(m_url_cam1_1);
 }
 
