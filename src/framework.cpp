@@ -108,7 +108,10 @@ void RemoteConsumer::run(){
             INFO("error3");
         }
         std::string error0 = "";
-        INFO("launch");
+        f.m_cmd_remote_buffer.push_back("");
+        f.m_cmd_remote_buffer.push_back("launch 1");
+        f.m_cmd_remote_buffer.push_back("---");
+        
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result1 " <<buffer);
             error0 = buffer;
@@ -116,13 +119,14 @@ void RemoteConsumer::run(){
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
+        f.m_cmd_remote_buffer.push_back("---");
         
         
         
         s2 = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/remote_update.sh;";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
-            INFO("error3");
+            f.m_cmd_remote_buffer.push_back("error pipe 1");
         }
         std::string error1 = "";
         while (fgets(buffer, 128, my_pipe) != nullptr) {
@@ -137,7 +141,7 @@ void RemoteConsumer::run(){
         s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
-            INFO("error3");
+            f.m_cmd_remote_buffer.push_back("error pipe 2");
         }
         std::string error2 = "";
         f.m_cmd_remote_buffer.push_back("");
@@ -145,19 +149,17 @@ void RemoteConsumer::run(){
         f.m_cmd_remote_buffer.push_back(s2);
         f.m_cmd_remote_buffer.push_back("---");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
-            INFO("result " << buffer);
             std::string buffer2(buffer);
-            if(buffer2 == "connection_ok"){
+            if(buffer2.find("connection_ok") == 0){
                 f.m_remote_connection_ok = 1;
                 f.m_cmd_remote_buffer.push_back("conn ok");
             }
             f.mutex.lock();
-            f.m_cmd_remote_buffer.push_back("'"+buffer2+"'");
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        f.m_remote_connection_ok = -1;
-       
+        f.m_cmd_remote_buffer.push_back("---");
+        
         if(f.m_remote_connection_ok == 1){
             std::string s;
             s = s + " x11vnc ";
@@ -182,10 +184,6 @@ void RemoteConsumer::run(){
                 f.m_cmd_remote_buffer.push_back(buffer);
                 f.mutex.unlock();
             }
-            f.m_remote_error = "0 " + error0;
-            f.m_remote_error += "1 " + error1;
-            f.m_remote_error += "\n2 " + error2;
-            f.m_remote_error += "\n3 " + error3;
             INFO("error" << f.m_remote_error);
             
         }
