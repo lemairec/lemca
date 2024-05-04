@@ -41,8 +41,6 @@ std::string m_name;
 void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     if (reply->error()) {
         std::string error = reply->errorString().toUtf8().constData();
-        std::string url = reply->url().toString().toUtf8().constData();
-        INFO("error" << url);
         if(reply->url() == m_host_url){
             m_is_connected = false;
         } else if (reply->url() == m_cam1_url){
@@ -54,7 +52,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     } else {
         std::string s = reply->readAll().toStdString();
         std::string url = reply->url().toString().toUtf8().constData();
-        INFO(url << " " << s);
+        INFO(url);
         if(reply->url() == m_host_url){
             m_is_connected = true;
         } else if (reply->url() == m_cam1_url){
@@ -92,7 +90,7 @@ void MyQTNetwork::testSlot(){
 }
 
 void MyQTNetwork::testCamera(){
-    /*{
+    {
         QNetworkRequest request;
 
         QString url = m_cam1_url;
@@ -113,7 +111,7 @@ void MyQTNetwork::testCamera(){
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
-    }*/
+    }
 }
 
 void MyQTNetwork::callUrl(const std::string & url_){
@@ -126,8 +124,6 @@ void MyQTNetwork::callUrl(const std::string & url_){
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
-        INFO("li---");
-        
     }
 }
 
