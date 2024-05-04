@@ -61,12 +61,13 @@ public:
     
     bool m_cmd_interrupt = false;
     std::vector<std::string> m_cmd_buffer;
-    std::vector<std::string> m_cmd_remote_buffer;
     bool m_cmd_end = false;
     bool m_cmd_abort = false;
     
     int m_cmd_return = 0;
     
+    std::vector<std::string> m_cmd_remote_buffer;
+    bool m_remote_connection_ok = false;
     std::string m_remote_error = "";
     
     

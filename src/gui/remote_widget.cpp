@@ -81,6 +81,19 @@ void RemoteWidget::draw(){
         return;
     }
     
+    if(m_qt_network->m_is_connected){
+        m_painter->setPen(Qt::darkGreen);
+        drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+    } else {
+        m_painter->setPen(Qt::red);
+        drawText("Non connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
+        
+        drawButtonLabel2(m_button_open_wifi);
+    }
+    
+    m_painter->setPen(m_pen_black);
+    
+    
     if(f.m_session == 0){
         auto now = std::chrono::system_clock::now();
         int tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now-m_time_open).count();
@@ -89,32 +102,25 @@ void RemoteWidget::draw(){
         //Framework & f = Framework::Instance();
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-        if(tick_ms < 5000){
-            int last_s = tick_ms/1000;
-            if(last_s != m_last_s){
-                m_qt_network->test();
-                m_last_s = last_s;
-            }
-            drawQText("Recherche des connexions     " + QString::number((tick_ms/1000)+1) + "/5", 0.25*m_width, 0.35*m_height, sizeText_big, false);
-        } else {
-            if(m_qt_network->m_is_connected){
-                m_painter->setPen(Qt::darkGreen);
-                drawText("Connecté à internet", 0.25*m_width, 0.35*m_height, sizeText_big);
             
-                m_painter->setPen(m_pen_black);
-                drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
+            
+        m_painter->setPen(m_pen_black);
+        drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
 
-                drawButtonLabel2(m_button_open_connection);
-            } else {
-                m_painter->setPen(Qt::red);
-                drawText("Non connecté à internet", 0.2*m_width, 0.35*m_height, sizeText_big);
-                
-                drawButtonLabel2(m_button_open_wifi);
-            }
-            
-        }
+        drawButtonLabel2(m_button_open_connection);
+        
     } else {
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
+        
+        if(f.m_remote_connection_ok){
+            m_painter->setPen(Qt::darkGreen);
+            drawText("Connecté au serveur", 0.25*m_width, 0.4*m_height, sizeText_big);
+        } else {
+            m_painter->setPen(Qt::red);
+            drawText("Non connecté au serveur", 0.25*m_width, 0.4*m_height, sizeText_big);
+        }
+        m_painter->setPen(m_pen_black);
+        
         
         if(!f.m_remote_error.empty()){
             m_painter->setBrush(m_brush_button_fail);

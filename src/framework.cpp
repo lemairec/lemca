@@ -135,7 +135,7 @@ void RemoteConsumer::run(){
         }
         
         
-        
+        f.m_remote_connection_ok = false;
         s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
@@ -145,40 +145,47 @@ void RemoteConsumer::run(){
         INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
             INFO("result " <<buffer);
+            std::string buffer2(buffer);
+            if(buffer2.find("connection_ok")){
+                f.m_remote_connection_ok = true;
+            }
             error2 = buffer;
             f.mutex.lock();
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
         
-        std::string s;
-        s = s + " x11vnc ";
-        if(view_only){
-            s = s + "-viewonly ";
+        if(f.m_remote_connection_ok){
+            std::string s;
+            s = s + " x11vnc ";
+            if(view_only){
+                s = s + "-viewonly ";
+            }
+            s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
+            s += " 2>&1";
+            INFO(s);
+            
+            my_pipe = popen(s.c_str(), "r");
+            if (!my_pipe) {
+                INFO("error3");
+            }
+            
+            std::string error3 = "";
+            INFO("launch");
+            while (fgets(buffer, 128, my_pipe) != nullptr) {
+                INFO("result " <<buffer);
+                error3 = buffer;
+                f.mutex.lock();
+                f.m_cmd_remote_buffer.push_back(buffer);
+                f.mutex.unlock();
+            }
+            f.m_remote_error = "0 " + error0;
+            f.m_remote_error += "1 " + error1;
+            f.m_remote_error += "\n2 " + error2;
+            f.m_remote_error += "\n3 " + error3;
+            INFO("error" << f.m_remote_error);
+            
         }
-        s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
-        s += " 2>&1";
-        INFO(s);
-        
-        my_pipe = popen(s.c_str(), "r");
-        if (!my_pipe) {
-            INFO("error3");
-        }
-        
-        std::string error3 = "";
-        INFO("launch");
-        while (fgets(buffer, 128, my_pipe) != nullptr) {
-            INFO("result " <<buffer);
-            error3 = buffer;
-            f.mutex.lock();
-            f.m_cmd_remote_buffer.push_back(buffer);
-            f.mutex.unlock();
-        }
-        f.m_remote_error = "0 " + error0;
-        f.m_remote_error += "1 " + error1;
-        f.m_remote_error += "\n2 " + error2;
-        f.m_remote_error += "\n3 " + error3;
-        INFO("error" << f.m_remote_error);
         mySleep(5000);
     }
    
