@@ -18,10 +18,13 @@ public:
     ~CamerasModules();
 
     std::string m_url_cam1_1;
+    std::string m_url_cam2_1;
     std::vector<std::string> m_cam1;
+    std::vector<std::string> m_cam2;
     
     
     void refresCam1();
+    void refresCam2();
     
     void handleReply(const std::string & url, const std::string &data);
 };

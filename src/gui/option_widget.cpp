@@ -803,6 +803,17 @@ void OptionWidget::drawPage5(){
                 break;
             }
         }
+        
+        x = m_width*0.48;
+        y = m_height*0.8-inter;
+        for(size_t i = 0; i < f.m_cameras_module.m_cam2.size(); ++i){
+            std::string s = f.m_cameras_module.m_cam2[f.m_cameras_module.m_cam2.size()-i-1];
+            drawText(s, x, y);
+            y-= inter;
+            if(y<m_height*0.1){
+                break;
+            }
+        }
     }
 }
 
@@ -810,6 +821,9 @@ void OptionWidget::onMousePage5(int x, int y){
     Framework & f = Framework::Instance();
     if(m_refresh_cam1.isActive(x, y)){
         f.m_cameras_module.refresCam1();
+    }
+    if(m_refresh_cam2.isActive(x, y)){
+        f.m_cameras_module.refresCam2();
     }
 }
 
