@@ -67,7 +67,7 @@ public:
     int m_cmd_return = 0;
     
     std::vector<std::string> m_cmd_remote_buffer;
-    bool m_remote_connection_ok = false;
+    int m_remote_connection_ok = 0;
     std::string m_remote_error = "";
     
     

@@ -125,9 +125,7 @@ void RemoteConsumer::run(){
             INFO("error3");
         }
         std::string error1 = "";
-        INFO("launch");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
-            INFO("result1 " <<buffer);
             error1 = buffer;
             f.mutex.lock();
             f.m_cmd_remote_buffer.push_back(buffer);
@@ -135,8 +133,9 @@ void RemoteConsumer::run(){
         }
         
         
-        f.m_remote_connection_ok = false;
+        f.m_remote_connection_ok = 0;
         s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
+        f.m_cmd_remote_buffer.push_back(s2);
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
@@ -147,15 +146,16 @@ void RemoteConsumer::run(){
             INFO("result " <<buffer);
             std::string buffer2(buffer);
             if(buffer2.find("connection_ok")){
-                f.m_remote_connection_ok = true;
+                f.m_remote_connection_ok = 1;
             }
             error2 = buffer;
             f.mutex.lock();
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
-        
-        if(f.m_remote_connection_ok){
+        f.m_remote_connection_ok = -1;
+       
+        if(f.m_remote_connection_ok == 1){
             std::string s;
             s = s + " x11vnc ";
             if(view_only){

@@ -112,12 +112,15 @@ void RemoteWidget::draw(){
     } else {
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-        if(f.m_remote_connection_ok){
+        if(f.m_remote_connection_ok == 1){
             m_painter->setPen(Qt::darkGreen);
             drawText("Connecté au serveur", 0.25*m_width, 0.4*m_height, sizeText_big);
-        } else {
+        } else if(f.m_remote_connection_ok == -1){
             m_painter->setPen(Qt::red);
             drawText("Non connecté au serveur", 0.25*m_width, 0.4*m_height, sizeText_big);
+        } else {
+            m_painter->setPen(m_pen_black);
+            drawText("connection au serveur...", 0.25*m_width, 0.4*m_height, sizeText_big);
         }
         m_painter->setPen(m_pen_black);
         
