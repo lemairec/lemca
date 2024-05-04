@@ -135,20 +135,24 @@ void RemoteConsumer::run(){
         
         f.m_remote_connection_ok = 0;
         s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"\";";
-        f.m_cmd_remote_buffer.push_back(s2);
         my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
             INFO("error3");
         }
         std::string error2 = "";
-        INFO("launch");
+        f.m_cmd_remote_buffer.push_back("");
+        f.m_cmd_remote_buffer.push_back("launch");
+        f.m_cmd_remote_buffer.push_back(s2);
+        f.m_cmd_remote_buffer.push_back("---");
         while (fgets(buffer, 128, my_pipe) != nullptr) {
-            INFO("result " <<buffer);
+            INFO("result " << buffer);
             std::string buffer2(buffer);
             if(buffer2 == "connection_ok"){
                 f.m_remote_connection_ok = 1;
+                f.m_cmd_remote_buffer.push_back("conn ok");
             }
             f.mutex.lock();
+            f.m_cmd_remote_buffer.push_back("'"+buffer2+"'");
             f.m_cmd_remote_buffer.push_back(buffer);
             f.mutex.unlock();
         }
