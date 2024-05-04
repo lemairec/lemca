@@ -41,6 +41,8 @@ std::string m_name;
 void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
     if (reply->error()) {
         std::string error = reply->errorString().toUtf8().constData();
+        std::string url = reply->url().toString().toUtf8().constData();
+        INFO("error" << url);
         if(reply->url() == m_host_url){
             m_is_connected = false;
         } else if (reply->url() == m_cam1_url){
