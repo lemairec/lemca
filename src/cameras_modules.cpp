@@ -16,6 +16,7 @@ CamerasModules::~CamerasModules(){
 }
 
 void CamerasModules::refresCam1(){
+    INFO("li----");
     m_cam1.clear();
     MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
     

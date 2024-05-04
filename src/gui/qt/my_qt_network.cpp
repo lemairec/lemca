@@ -124,6 +124,8 @@ void MyQTNetwork::callUrl(const std::string & url_){
         networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
 
         manager->get(networkRequest);
+        INFO("li---");
+        
     }
 }
 
