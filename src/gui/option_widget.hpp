@@ -131,6 +131,10 @@ public:
     void onMousePage4(int x, int y);
     
     //cameras
+    
+    ButtonGui m_refresh_cam1;
+    ButtonGui m_refresh_cam2;
+    
     void setSizePage5();
     void drawPage5();
     void onMousePage5(int x, int y);

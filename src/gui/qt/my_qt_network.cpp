@@ -47,12 +47,11 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
             m_cam1_connected = false;
         } else if (reply->url() == m_cam2_url){
             m_cam2_connected = false;
-        } else {
-            WARN("pas bien error");
         }
         return;
     } else {
         std::string s = reply->readAll().toStdString();
+        std::string url = reply->url().toString().toUtf8().constData();
         if(reply->url() == m_host_url){
             m_is_connected = true;
         } else if (reply->url() == m_cam1_url){
@@ -60,6 +59,7 @@ void MyQTNetwork::handleNetwork(QNetworkReply *reply) {
         } else if (reply->url() == m_cam2_url){
             m_cam2_connected = true;
         } else {
+            Framework::Instance().m_cameras_module.handleReply(url, s);
             WARN("pas bien");
         }
     }
@@ -112,6 +112,20 @@ void MyQTNetwork::testCamera(){
         manager->get(networkRequest);
     }
 }
+
+void MyQTNetwork::callUrl(const std::string & url_){
+    {
+        QNetworkRequest request;
+
+        QString url = QString::fromStdString(url_);
+        QUrl serviceUrl = QUrl(url);
+        QNetworkRequest networkRequest(serviceUrl);
+        networkRequest.setHeader(QNetworkRequest::ServerHeader, "application/json");
+
+        manager->get(networkRequest);
+    }
+}
+
 
 void MyQTNetwork::handlePilot(){
     if(m_test_camera){

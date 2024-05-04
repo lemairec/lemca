@@ -95,10 +95,6 @@ void RemoteWidget::draw(){
     
     
     if(f.m_session == 0){
-        auto now = std::chrono::system_clock::now();
-        int tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now-m_time_open).count();
-        
-        
         //Framework & f = Framework::Instance();
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         

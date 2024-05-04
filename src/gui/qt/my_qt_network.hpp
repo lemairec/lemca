@@ -33,6 +33,8 @@ public:
     bool m_test_camera = false;
     void testCamera();
     
+    void callUrl(const std::string & url);
+    
     QString m_cam1_url;
     bool m_cam1_connected = false;
     QString m_cam2_url;

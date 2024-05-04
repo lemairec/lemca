@@ -4,7 +4,7 @@ project(lemca)
 # The version number.
 set (PROJECT_VERSION_MAJOR 24)
 set (PROJECT_VERSION_MINOR 01)
-set (PROJECT_VERSION_PATCH 05)
+set (PROJECT_VERSION_PATCH 06)
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/src/environnement.hpp.in"

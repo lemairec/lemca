@@ -9,6 +9,7 @@
 #include <math.h>
 #include "util/log.hpp"
 #include "util/stat.hpp"
+#include "cameras_modules.hpp"
 #include <QWaitCondition>
 #include <QMutex>
 
@@ -33,6 +34,8 @@ public:
     static Framework & Instance();
     ~Framework();
     void initOrLoadConfig();
+    
+    CamerasModules m_cameras_module;
 
     std::string m_messages_errors;
     void addError(std::string s);
