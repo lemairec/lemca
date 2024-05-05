@@ -62,6 +62,10 @@ void CamerasModules::setCam(int i){
     //dnr
     s = "cgi-bin/control/camwdr.cgi?id=admin&passwd=admin&action=setdnr&dnrstatus=enable";
     m_qt_network->callUrl(begin+s);
+    
+    //daynight
+    s = "cgi-bin/control/camdaynight.cgi?id=admin&passwd=admin&action=setdaynight&mode=day&irlink=disable";
+    m_qt_network->callUrl(begin+s);
 }
 
 void CamerasModules::setCam1(){
