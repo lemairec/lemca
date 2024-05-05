@@ -821,8 +821,10 @@ void OptionWidget::onMousePage5(int x, int y){
     Framework & f = Framework::Instance();
     if(m_refresh_cam1.isActive(x, y)){
         f.m_cameras_module.refresCam1();
+        f.m_cameras_module.refresCam2();
     }
     if(m_refresh_cam2.isActive(x, y)){
+        f.m_cameras_module.refresCam1();
         f.m_cameras_module.refresCam2();
     }
 }
