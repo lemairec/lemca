@@ -97,16 +97,13 @@ void CamerasModules::setPhareCam(int i){
 
 void CamerasModules::setPhareCam1(){
     m_cam1.clear();
-    setCam(1);
-    
-    //refresCams();
+    setPhareCam(1);
 }
 
 void CamerasModules::setPhareCam2(){
     m_cam1.clear();
-    setCam(1);
-    
-    //refresCams();
+
+    setPhareCam(2);
 }
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){

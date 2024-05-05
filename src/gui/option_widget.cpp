@@ -892,7 +892,7 @@ void OptionWidget::drawPage5(){
     
     if(f.m_config.isDeveloppeur()){
         drawButtonLabel2(m_set_phare_cam1);
-        drawButtonLabel2(m_set_phare_cam1);
+        drawButtonLabel2(m_set_phare_cam2);
     }
     {
         
