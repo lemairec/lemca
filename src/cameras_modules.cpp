@@ -29,6 +29,11 @@ void CamerasModules::refresCams(){
     m_qt_network->callUrl(m_url_cam1_1);
     m_qt_network->callUrl(m_url_cam1_2);
     m_qt_network->callUrl(m_url_cam1_3);
+    
+    m_cam2.clear();
+    m_qt_network->callUrl(m_url_cam2_1);
+    m_qt_network->callUrl(m_url_cam2_2);
+    m_qt_network->callUrl(m_url_cam2_3);
 }
 
 void CamerasModules::setCam1(){
