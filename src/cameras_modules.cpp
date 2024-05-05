@@ -71,9 +71,40 @@ void CamerasModules::setCam1(){
     //refresCams();
 }
 
+
+
 void CamerasModules::setCam2(){
     m_cam2.clear();
     setCam(2);
+    
+    //refresCams();
+}
+
+void CamerasModules::setPhareCam(int i){
+    MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+    
+    std::string begin = "";
+    if(i == 1){
+        begin = "http://192.168.1.30/";
+    } else {
+        begin = "http://192.168.1.31/";
+    }
+    
+    //daynight
+    std::string s = "cgi-bin/control/camdaynight.cgi?id=admin&passwd=admin&action=setdaynight&mode=night&irlink=enable";
+    m_qt_network->callUrl(begin+s);
+}
+
+void CamerasModules::setPhareCam1(){
+    m_cam1.clear();
+    setCam(1);
+    
+    //refresCams();
+}
+
+void CamerasModules::setPhareCam2(){
+    m_cam1.clear();
+    setCam(1);
     
     //refresCams();
 }

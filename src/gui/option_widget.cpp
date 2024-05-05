@@ -779,6 +779,12 @@ void OptionWidget::setSizePage5(){
     y+= 0.1*m_height;
     m_set_cam2.setResizeStd(x, y, "set cam2", true, m_part_1_w/2);
     
+    y+= 0.1*m_height;
+    y+= 0.1*m_height;
+    m_set_phare_cam1.setResizeStd(x, y, "phare cam1", true, m_part_1_w/2);
+    y+= 0.1*m_height;
+    m_set_phare_cam2.setResizeStd(x, y, "phare cam2", true, m_part_1_w/2);
+    
     
 };
 
@@ -883,6 +889,11 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_set_cam1);
     drawButtonLabel2(m_set_cam2);
     
+    
+    if(f.m_config.isDeveloppeur()){
+        drawButtonLabel2(m_set_phare_cam1);
+        drawButtonLabel2(m_set_phare_cam1);
+    }
     {
         
         
@@ -954,6 +965,15 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_set_cam2.isActive(x, y)){
         f.m_cameras_module.setCam2();
+    }
+    
+    if(f.m_config.isDeveloppeur()){
+        if(m_set_phare_cam1.isActive(x, y)){
+            f.m_cameras_module.setPhareCam1();
+        }
+        if(m_set_phare_cam2.isActive(x, y)){
+            f.m_cameras_module.setPhareCam2();
+        }
     }
 }
 

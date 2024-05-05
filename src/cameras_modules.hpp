@@ -33,6 +33,10 @@ public:
     void setCam1();
     void setCam2();
     
+    void setPhareCam(int i);
+    void setPhareCam1();
+    void setPhareCam2();
+    
     void handleReply(const std::string & url, const std::string &data);
 };
 
