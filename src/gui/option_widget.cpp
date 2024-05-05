@@ -772,9 +772,12 @@ void OptionWidget::onMousePage4(int x, int y){
 
 void OptionWidget::setSizePage5(){
     int y = m_y_begin;
-    m_refresh_cam1.setResizeStd(m_part_1_m, y, "cam1", true, m_part_1_w/2);
-    
-    m_refresh_cam2.setResizeStd(m_part_2_m, y, "cam2", true, m_part_1_w/2);
+    int x = 0.42*m_width;
+    m_refresh_cams.setResizeStd(x, y, "refresh", true, m_part_1_w/2);
+    y+= 0.1*m_height;
+    m_set_cam1.setResizeStd(x, y, "set cam1", true, m_part_1_w/2);
+    y+= 0.1*m_height;
+    m_set_cam2.setResizeStd(x, y, "set cam2", true, m_part_1_w/2);
     
     
 };
@@ -876,8 +879,9 @@ void OptionWidget::drawPage5(){
     m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("CAMERAS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     
-    drawButtonLabel2(m_refresh_cam1);
-    drawButtonLabel2(m_refresh_cam2);
+    drawButtonLabel2(m_refresh_cams);
+    drawButtonLabel2(m_set_cam1);
+    drawButtonLabel2(m_set_cam2);
     
     {
         
@@ -942,13 +946,14 @@ void OptionWidget::drawPage5(){
 
 void OptionWidget::onMousePage5(int x, int y){
     Framework & f = Framework::Instance();
-    if(m_refresh_cam1.isActive(x, y)){
-        f.m_cameras_module.refresCam1();
-        f.m_cameras_module.refresCam2();
+    if(m_refresh_cams.isActive(x, y)){
+        f.m_cameras_module.refresCams();
     }
-    if(m_refresh_cam2.isActive(x, y)){
-        f.m_cameras_module.refresCam1();
-        f.m_cameras_module.refresCam2();
+    if(m_set_cam1.isActive(x, y)){
+        f.m_cameras_module.setCam1();
+    }
+    if(m_set_cam2.isActive(x, y)){
+        f.m_cameras_module.setCam2();
     }
 }
 

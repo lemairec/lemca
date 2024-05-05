@@ -27,8 +27,9 @@ public:
     std::vector<std::string> m_cam2;
     
     
-    void refresCam1();
-    void refresCam2();
+    void refresCams();
+    void setCam1();
+    void setCam2();
     
     void handleReply(const std::string & url, const std::string &data);
 };
