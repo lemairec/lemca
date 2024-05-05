@@ -794,7 +794,6 @@ void OptionWidget::drawPage5(){
         m_painter->setBrush(m_brush_white);
         m_painter->setPen(m_pen_no);
         
-        f.m_cameras_module.m_cam1.push_back("toto");
         int inter = 18;
         int x =  m_part_1_x + 20;
         int y = m_height*0.85;
@@ -822,7 +821,6 @@ void OptionWidget::drawPage5(){
         
         m_painter->setBrush(m_brush_white);
         m_painter->setPen(m_pen_no);
-        f.m_cameras_module.m_cam2.push_back("toto");
         x = m_part_2_x + 20;
         y = m_height*0.85;
         
