@@ -28,6 +28,8 @@ public:
     
     
     void refresCams();
+    
+    void setCam(int i);
     void setCam1();
     void setCam2();
     

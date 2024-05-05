@@ -36,30 +36,46 @@ void CamerasModules::refresCams(){
     m_qt_network->callUrl(m_url_cam2_3);
 }
 
-void CamerasModules::setCam1(){
-    m_cam1.clear();
+void CamerasModules::setCam(int i){
     MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
     
+    std::string begin = "";
+    if(i == 1){
+        begin = "http://192.168.1.30/";
+    } else {
+        begin = "http://192.168.1.31/";
+    }
     
-    std::string s = "http://192.168.1.30/cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&capture1.size=1280x720";
-    m_qt_network->callUrl(s);
+    std::string s = "cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&capture1.size=1280x720";
+    m_qt_network->callUrl(begin + s);
     
     //stream1
-    s = "http://192.168.1.30/cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder1.enable=enable&encoder1.codec=h265&encoder1.framerate=25&encoder1.quality=4048&encoder1.keyframe=25&encoder1.ratectrl=cbr";
-    m_qt_network->callUrl(s);
+    s = "cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder1.enable=enable&encoder1.codec=h265&encoder1.framerate=25&encoder1.quality=4048&encoder1.keyframe=25&encoder1.ratectrl=cbr";
+    m_qt_network->callUrl(begin+s);
     //stream2
-    s = "http://192.168.1.30/cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder2.enable=disable";
-    m_qt_network->callUrl(s);
+    s = "cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder2.enable=disable";
+    m_qt_network->callUrl(begin+s);
     //stream3
-    s = "http://192.168.1.30/cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder3.enable=disable";
-    m_qt_network->callUrl(s);
+    s = "cgi-bin/control/videoset.cgi?id=admin&passwd=admin&action=setvideo&encoder3.enable=disable";
+    m_qt_network->callUrl(begin+s);
     
     //dnr
-    s = "http://192.168.1.30/cgi-bin/control/camwdr.cgi?id=admin&passwd=admin&action=setdnr&dnrstatus=enable";
-    m_qt_network->callUrl(s);
+    s = "cgi-bin/control/camwdr.cgi?id=admin&passwd=admin&action=setdnr&dnrstatus=enable";
+    m_qt_network->callUrl(begin+s);
+}
+
+void CamerasModules::setCam1(){
+    m_cam1.clear();
+    setCam(1);
+    
+    refresCams();
 }
 
 void CamerasModules::setCam2(){
+    m_cam2.clear();
+    setCam(2);
+    
+    refresCams();
 }
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
