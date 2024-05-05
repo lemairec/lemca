@@ -10,11 +10,11 @@
 #include <sstream>
 #include <iomanip>
 CamerasModules::CamerasModules(){
+    m_url_cam1_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
+    m_url_cam2_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
 }
 
 CamerasModules::~CamerasModules(){
-    m_url_cam1_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
-    m_url_cam2_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
 }
 
 void CamerasModules::refresCam1(){
