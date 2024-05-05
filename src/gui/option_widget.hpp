@@ -134,7 +134,8 @@ public:
     
     ButtonGui m_refresh_cam1;
     ButtonGui m_refresh_cam2;
-    
+    void printCamText(const std::string & s, double x, double y);
+        
     void setSizePage5();
     void drawPage5();
     void onMousePage5(int x, int y);

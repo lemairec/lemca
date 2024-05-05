@@ -779,6 +779,19 @@ void OptionWidget::setSizePage5(){
     
 };
 
+void OptionWidget::printCamText(const std::string & s, double x, double y){
+    if(s.find("dnrstatus") == 0){
+        if(s == "dnrstatus = enable"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else {
+        m_painter->setPen(m_pen_black);
+    }
+    drawText(s, x, y);
+}
+
 void OptionWidget::drawPage5(){
     Framework & f = Framework::Instance();
     
@@ -803,7 +816,7 @@ void OptionWidget::drawPage5(){
         m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam1.size(); ++i){
             std::string s = f.m_cameras_module.m_cam1[f.m_cameras_module.m_cam1.size()-i-1];
-            drawText(s, x, y);
+            printCamText(s, x, y);
             y-= inter;
             if(y<m_height*0.05){
                 drawText("...", x, y);
@@ -829,7 +842,7 @@ void OptionWidget::drawPage5(){
         m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam2.size(); ++i){
             std::string s = f.m_cameras_module.m_cam2[f.m_cameras_module.m_cam2.size()-i-1];
-            drawText(s, x, y);
+            printCamText(s, x, y);
             y-= inter;
             if(y<m_height*0.05){
                 drawText("...", x, y);
