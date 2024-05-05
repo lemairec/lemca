@@ -57,6 +57,8 @@ void CamerasModules::setCam1(){
     //dnr
     s = "http://192.168.1.30/cgi-bin/control/camwdr.cgi?id=admin&passwd=admin&action=setdnr&dnrstatus=enable";
     m_qt_network->callUrl(s);
+    
+    refresCams();
 }
 
 void CamerasModules::setCam2(){
