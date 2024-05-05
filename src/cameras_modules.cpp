@@ -68,14 +68,14 @@ void CamerasModules::setCam1(){
     m_cam1.clear();
     setCam(1);
     
-    refresCams();
+    //refresCams();
 }
 
 void CamerasModules::setCam2(){
     m_cam2.clear();
     setCam(2);
     
-    refresCams();
+    //refresCams();
 }
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
