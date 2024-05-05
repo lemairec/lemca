@@ -792,6 +792,48 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    } else if(s.find("steram1.size") == 0){
+        if(s == "steram1.size = 1280x720"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("bright") == 0){
+        if(s == "bright = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("contrast") == 0){
+        if(s == "contrast = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("saturation") == 0){
+        if(s == "saturation = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("sharp") == 0){
+        if(s == "sharp = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("hue") == 0){
+        if(s == "hue = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("dnrvalue") == 0){
+        if(s == "dnrvalue = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else {
         m_painter->setPen(m_pen_black);
     }
