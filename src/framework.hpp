@@ -72,7 +72,7 @@ public:
     std::vector<std::string> m_cmd_remote_buffer;
     int m_remote_connection_ok = 0;
     std::string m_remote_error = "";
-    
+    int m_remote_nbr_error = 0;
     
     void abortCurrentRun();
 

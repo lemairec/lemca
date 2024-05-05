@@ -98,7 +98,7 @@ void RemoteWidget::draw(){
         //Framework & f = Framework::Instance();
         drawText("Connexion à distance", 0.5*m_width, 0.2*m_height, sizeText_big, true);
         
-            
+        
             
         m_painter->setPen(m_pen_black);
         drawButtonCheck(m_control_panel, !f.m_config.m_control_view_only, "autoriser le controle du panel");
@@ -120,15 +120,22 @@ void RemoteWidget::draw(){
         }
         m_painter->setPen(m_pen_black);
         
-        
-        if(!f.m_remote_error.empty()){
-            m_painter->setBrush(m_brush_button_fail);
-            m_painter->drawRoundedRect(0.3*m_width, 0.3*m_height, 0.4*m_width, 0.15*m_height, 15, 15);
-            drawText("Erreur : ", 0.5*m_width, 0.35*m_height, sizeText_big, true);
-            drawText(f.m_remote_error, 0.5*m_width, 0.4*m_height, sizeText_medium, true);
+        if(f.m_config.m_control_view_only){
+            drawText("controle du panel desactivé", 0.25*m_width, 0.45*m_height, sizeText_big);
+        } else {
+            drawText("controle du panel activé", 0.25*m_width, 0.45*m_height, sizeText_big);
         }
         
-        drawText("numero de session : ", 0.5*m_width, 0.55*m_height, sizeText_big, true);
+        if(f.m_remote_nbr_error != 0){
+            m_painter->setBrush(m_brush_button_fail);
+            std::string s = strprintf("Erreurs : %i", f.m_remote_nbr_error);
+            drawText(s, 0.25*m_width, 0.5*m_height, sizeText_big);
+        }
+        if(!f.m_remote_error.empty()){
+            drawText(f.m_remote_error, 0.5*m_width, 0.55*m_height, sizeText_medium, true);
+        }
+        
+        drawText("numero de session : ", 0.5*m_width, 0.7*m_height, sizeText_big, true);
         drawText(f.m_session_str, 0.5*m_width, 0.6*m_height, sizeText_big, true);
 
     }
