@@ -789,31 +789,65 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_refresh_cam2);
     
     {
-        m_painter->setPen(m_pen_black);
-        m_painter->setBrush(m_brush_white);
         
+        
+        m_painter->setBrush(m_brush_white);
+        m_painter->setPen(m_pen_no);
+        
+        f.m_cameras_module.m_cam1.push_back("toto");
         int inter = 18;
-        int x = m_width*0.08;
-        int y = m_height*0.8-inter;
+        int x =  m_part_1_x + 20;
+        int y = m_height*0.85;
+        
+        m_painter->drawRoundedRect(m_part_1_x, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
+        
+        m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam1.size(); ++i){
             std::string s = f.m_cameras_module.m_cam1[f.m_cameras_module.m_cam1.size()-i-1];
             drawText(s, x, y);
             y-= inter;
-            if(y<m_height*0.1){
+            if(y<m_height*0.05){
+                drawText("...", x, y);
                 break;
             }
         }
         
-        x = m_width*0.48;
-        y = m_height*0.8-inter;
+        y = m_height*0.9;
+        if(m_qt_network->m_cam1_connected){
+            m_painter->setPen(Qt::darkGreen);
+        } else {
+            m_painter->setPen(Qt::red);
+        }
+        drawText("CAM1", m_part_1_x+m_part_1_w*0.3, y, sizeText_medium, true);
+        
+        m_painter->setBrush(m_brush_white);
+        m_painter->setPen(m_pen_no);
+        f.m_cameras_module.m_cam2.push_back("toto");
+        x = m_part_2_x + 20;
+        y = m_height*0.85;
+        
+        m_painter->drawRoundedRect(m_part_2_x, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
+        
+        m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam2.size(); ++i){
             std::string s = f.m_cameras_module.m_cam2[f.m_cameras_module.m_cam2.size()-i-1];
             drawText(s, x, y);
             y-= inter;
-            if(y<m_height*0.1){
+            if(y<m_height*0.05){
+                drawText("...", x, y);
                 break;
             }
         }
+        
+        y = m_height*0.9;
+        if(m_qt_network->m_cam2_connected){
+            m_painter->setPen(Qt::darkGreen);
+        } else {
+            m_painter->setPen(Qt::red);
+        }
+        drawText("CAM2", m_part_2_x+m_part_2_w*0.3, y, sizeText_medium, true);
+        
+        
     }
 }
 
