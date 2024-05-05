@@ -786,6 +786,12 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    } else if(s.find("daynightmode") == 0){
+        if(s == "daynightmode = day"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else {
         m_painter->setPen(m_pen_black);
     }
