@@ -834,6 +834,36 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    } else if(s.find("wbmode") == 0){
+        if(s == "wbmode = auto"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("userred") == 0){
+        if(s == "userred = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("userblue") == 0){
+        if(s == "userblue = 50"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("wdrstatus") == 0){
+        if(s == "wdrstatus = disable"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("shutmode") == 0){
+        if(s == "shutmode = auto"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else {
         m_painter->setPen(m_pen_black);
     }
