@@ -11,7 +11,7 @@
 #include <iomanip>
 CamerasModules::CamerasModules(){
     m_url_cam1_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
-    m_url_cam2_1 = "http://192.168.1.30/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
+    m_url_cam2_1 = "http://192.168.1.31/cgi-bin/control/connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all";
 }
 
 CamerasModules::~CamerasModules(){
@@ -30,7 +30,6 @@ void CamerasModules::refresCam2(){
 }
 
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
-    INFO("la----");
     if(url == m_url_cam1_1){
         QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
         for(auto s3 : list1){
