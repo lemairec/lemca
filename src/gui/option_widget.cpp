@@ -807,6 +807,12 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    }  else if(s.find("stream1.codec") == 0){
+        if(s == "stream1.codec = h.265"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else if(s.find("bright") == 0){
         if(s == "bright = 50"){
             m_painter->setPen(m_pen_green);
