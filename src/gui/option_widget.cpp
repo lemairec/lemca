@@ -159,13 +159,13 @@ void OptionWidget::draw(){
         if(m_page == 4){
             drawPage4();
         };
-    }
-    if(Framework::Instance().m_config.isDeveloppeur()){
+        
         drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 0.4, (m_page == 5));
         if(m_page == 5){
             drawPage5();
         };
-        
+    }
+    if(Framework::Instance().m_config.isDeveloppeur()){
         drawButtonImageCarre(m_button_p6, m_imgOptionBlanc, 0.4, (m_page == 6));
         if(m_page == 6){
             drawPage6();
@@ -197,7 +197,7 @@ int OptionWidget::onMouse(int x, int y){
             m_page = 4;
         }
     } else if(m_button_p5.isActive(x,y)){
-        if(Framework::Instance().m_config.isDeveloppeur()){
+        if(Framework::Instance().m_config.isTechnicien()){
             m_page = 5;
         }
     } else if(m_button_p6.isActive(x,y)){
