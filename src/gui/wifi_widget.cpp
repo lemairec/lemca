@@ -26,9 +26,9 @@ void WifiWidget::loadImages(){
 void WifiWidget::setSize(int width, int height){
     BaseWidget::setSize(width, height);
     
-    m_y2 = m_height*0.04;
+    m_y2 = 10;
     m_x2 = m_y2;
-    m_width2 = m_width-2*m_y2-m_gros_button*2.4;
+    m_width2 = m_width-2*m_y2-10-m_gros_button*2.4;
     m_height2 = m_height-2*m_y2;
 
     m_select_widget.setSize(width, height);
@@ -48,8 +48,8 @@ void WifiWidget::setSize(int width, int height){
     y+=inter;
     
     
-    int x_right = width-m_gros_button*1.2;
-    m_button_close.setResize(x_right, m_height-m_gros_button*1.2, m_gros_button);
+    int x_right = width-m_gros_button-20;
+    m_button_close.setResize(x_right, m_height-m_gros_button*1.2-10, m_gros_button);
 };
 
 
@@ -57,7 +57,21 @@ std::string m_reseau;
 
 void WifiWidget::draw(){
     
-    m_painter->setPen(m_pen_black);
+    m_painter->setPen(m_pen_no);
+    m_painter->setBrush(m_brush_background_1);
+    m_painter->drawRect(0 , 0, m_width, m_height);
+    
+    {
+        int h = m_height-20;
+        int w = m_gros_button*2+20;
+        
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->setPen(m_pen_no);
+        
+        m_painter->drawRoundedRect(m_width-w-10, 10, w, h, 10, 10);
+        
+    }
+    
     m_painter->setBrush(m_brush_white);
     m_painter->drawRoundedRect(m_x2, m_y2, m_width2, m_height2, RAYON_ROUNDED, RAYON_ROUNDED);
     
@@ -68,6 +82,7 @@ void WifiWidget::draw(){
     
     
     if(tick_ms < 4000){
+        m_painter->setPen(m_pen_black);
         drawQText("Recherche des reseaux wifis     " + QString::number((tick_ms/1000)+1) + "/4", 0.25*m_width, 0.35*m_height, sizeText_big, false);
 
         return;
