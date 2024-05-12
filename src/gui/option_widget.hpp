@@ -11,16 +11,9 @@ class OptionWidget : public BaseWidget {
     QPixmap * m_imgPlus;
     QPixmap * m_imgMinus;
     
-    QPixmap * m_imgSatBlanc;
-    QPixmap * m_imgSatGris;
-    QPixmap * m_imgVolantBlanc;
-    QPixmap * m_imgVolantGris;
-    QPixmap * m_imgOutilBlanc;
-    QPixmap * m_imgOutilGris;
+    QPixmap * m_img_camera;
     QPixmap * m_imgOptionBlanc;
     QPixmap * m_imgOptionGris;
-    QPixmap * m_imgImuBlanc;
-    QPixmap * m_imgImuGris;
     QPixmap * m_img_return;
     QPixmap * m_img_cadena;
     QPixmap * m_img_update;

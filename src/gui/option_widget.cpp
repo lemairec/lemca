@@ -26,15 +26,8 @@ void OptionWidget::loadImages(){
     m_imgClose = loadImage("/gui/ok.png");
     m_imgPlus = loadImage("/gui/plus.png");
     m_imgMinus = loadImage("/gui/minus.png");
-    m_imgSatBlanc = loadImage("/gui/sat_blanc.png");
-    m_imgSatGris = loadImage("/gui/sat_gris.png");
-    m_imgVolantBlanc = loadImage("/gui/volant_blanc.png");
-    m_imgVolantGris = loadImage("/gui/volant_gris.png");
-    m_imgOutilBlanc = loadImage("/gui/outil_blanc.png");
-    m_imgOutilGris = loadImage("/gui/outil_gris.png");
+    m_img_camera = loadImage("/gui/camera.png");
     m_imgOptionGris = loadImage("/gui/option_gris.png");
-    m_imgImuBlanc = loadImage("/gui/imu_blanc.png");
-    m_imgImuGris = loadImage("/gui/imu_gris.png");
     
     m_imgOptionBlanc = loadImageInv("/gui/option_blanc.png", true);
     m_img_cadena = loadImageInv("/gui/cadena.png", true);
@@ -160,7 +153,7 @@ void OptionWidget::draw(){
             drawPage4();
         };
         
-        drawButtonImageCarre(m_button_p5, m_imgOptionBlanc, 0.4, (m_page == 5));
+        drawButtonImageCarre(m_button_p5, m_img_camera, 0.4, (m_page == 5));
         if(m_page == 5){
             drawPage5();
         };
@@ -772,7 +765,7 @@ void OptionWidget::onMousePage4(int x, int y){
 
 void OptionWidget::setSizePage5(){
     int y = m_y_begin;
-    int x = 0.42*m_width;
+    int x = 0.45*m_width;
     m_refresh_cams.setResizeStd(x, y, "refresh", true, m_part_1_w/2);
     y+= 0.1*m_height;
     m_set_cam1.setResizeStd(x, y, "set cam1", true, m_part_1_w/2);
@@ -910,7 +903,7 @@ void OptionWidget::drawPage5(){
         int x =  m_part_1_x + 20;
         int y = m_height*0.85;
         
-        m_painter->drawRoundedRect(m_part_1_x, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
+        m_painter->drawRoundedRect(x-20, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
         
         m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam1.size(); ++i){
@@ -929,14 +922,14 @@ void OptionWidget::drawPage5(){
         } else {
             m_painter->setPen(Qt::red);
         }
-        drawText("CAM1", m_part_1_x+m_part_1_w*0.3, y, sizeText_medium, true);
+        drawText("CAM1", x+m_width*0.15, y, sizeText_medium, true);
         
         m_painter->setBrush(m_brush_white);
         m_painter->setPen(m_pen_no);
-        x = m_part_2_x + 20;
+        x = m_width*0.58;
         y = m_height*0.85;
         
-        m_painter->drawRoundedRect(m_part_2_x, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
+        m_painter->drawRoundedRect(x-20, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
         
         m_painter->setPen(m_pen_black);
         for(size_t i = 0; i < f.m_cameras_module.m_cam2.size(); ++i){
@@ -955,7 +948,7 @@ void OptionWidget::drawPage5(){
         } else {
             m_painter->setPen(Qt::red);
         }
-        drawText("CAM2", m_part_2_x+m_part_2_w*0.3, y, sizeText_medium, true);
+        drawText("CAM2", x+m_width*0.15, y, sizeText_medium, true);
         
         
     }
