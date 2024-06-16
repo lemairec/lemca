@@ -46,6 +46,23 @@ void OptionWidget::open(){
     m_close = false;
     m_file_widget.m_close = true;
     m_qt_network->m_test_camera = true;
+    
+    std::string file = DirectoryManager::instance().getDataDirectory()+"du.txt";
+   
+    std::string cmd = "cd ~/lemca_data; du -hs > "+file;
+    system(cmd.c_str());
+    
+    std::string line;
+    std::ifstream myfile (file);
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            m_data_size = "data size : " + line;
+        }
+    }
+    myfile.close();
+
 }
 
 
@@ -113,8 +130,6 @@ void OptionWidget::setSize(int width, int height){
 }
 
 void OptionWidget::draw(){
-    
-    
     m_painter->setPen(m_pen_no);
     m_painter->setBrush(m_brush_background_1);
     m_painter->drawRect(0 , 0, m_width, m_height);
@@ -272,6 +287,8 @@ void OptionWidget::drawPage1(){
     drawPart2Title(m_langage.m_y-2*m_y_inter, y, Langage::getKey("VERSION"));
     y+= m_y_inter;
     drawText(ProjectVersion, m_part_2_m, y, sizeText_medium, true);
+    y+= m_y_inter;
+    drawText(m_data_size, m_part_2_m, y, sizeText_medium, true);
     y+= m_y_inter;
     drawText(f.m_config.m_version_selected, m_part_2_m, y, sizeText_medium, true);
     

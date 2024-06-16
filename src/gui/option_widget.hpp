@@ -64,6 +64,8 @@ public:
     void drawPage1();
     void onMousePage1(int x, int y);
     
+    std::string m_data_size = "";
+    
     ButtonGui m_update_bineuse_usb;
     ButtonGui m_update_bineuse;
     ButtonGui m_update_gps;
