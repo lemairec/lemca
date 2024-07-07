@@ -102,7 +102,7 @@ void RemoteConsumer::run(){
         
         f.m_remote_error = "";
         f.m_remote_connection_ok = 0;
-        std::string s2 = "ssh -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"_"+f.m_config.m_panel+"\";";
+        std::string s2 = "ssh -o NumberOfPasswordPrompts=0 -o StrictHostKeyChecking=no 5chmlLEM1cale26@remote.lemcavision.com \"sh new_connection.sh "+name+"_"+f.m_config.m_panel+"\";";
         char buffer[128];
         FILE * my_pipe = popen(s2.c_str(), "r");
         if (!my_pipe) {
