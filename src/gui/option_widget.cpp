@@ -251,6 +251,8 @@ void OptionWidget::setSizePage1(){
     m_langage.addValue(Langage::getKey("EN"));
     m_langage.addValue(Langage::getKey("DE"));
     m_langage.addValue(Langage::getKey("NL"));
+    m_langage.addValue(Langage::getKey("IT"));
+    m_langage.addValue(Langage::getKey("ES"));
     
     y+= m_y_inter;
     y+= m_y_inter;
@@ -311,6 +313,12 @@ void OptionWidget::onMousePage1(int x, int y){
                 f.initOrLoadConfig();
             } else if(s == Langage::getKey("NL")){
                 config.m_langage = "NL";
+                f.initOrLoadConfig();
+            } else if(s == Langage::getKey("IT")){
+                config.m_langage = "IT";
+                f.initOrLoadConfig();
+            } else if(s == Langage::getKey("ES")){
+                config.m_langage = "ES";
                 f.initOrLoadConfig();
             }
             MainWidget::instancePtr()->setSize(m_width, m_height);

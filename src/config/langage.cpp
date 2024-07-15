@@ -1,4 +1,5 @@
 #include "langage.hpp"
+#include "../util/log.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -34,6 +35,18 @@ const std::string & Langage::getKey(const std::string & ref){
             return i->second;
         }
     }
+    if(l.m_l == MyLangage_es){
+        auto i = l.m_es.find(ref);
+        if(i != l.m_es.end()){
+            return i->second;
+        }
+    }
+    if(l.m_l == MyLangage_it){
+        auto i = l.m_it.find(ref);
+        if(i != l.m_it.end()){
+            return i->second;
+        }
+    }
     l.m_fr["ref"] = "$" + ref;
     return l.m_fr["ref"];
 }
@@ -51,8 +64,12 @@ void Langage::setLangage(const std::string & s){
         l.m_l = MyLangage_en;
     } else if(s == "DE"){
         l.m_l = MyLangage_de;
-    }else if(s == "NL"){
+    } else if(s == "NL"){
         l.m_l = MyLangage_nl;
+    } else if(s == "ES"){
+        l.m_l = MyLangage_es;
+    } else if(s == "IT"){
+        l.m_l = MyLangage_it;
     }
 }
 
@@ -79,6 +96,8 @@ Langage::Langage(){
     add("FR", "FR", "Francais");
     add("FR", "DE", "Allemand");
     add("FR", "NL", "Néerlandais");
+    add("FR", "IT", "Italien");
+    add("FR", "ES", "Espagnol");
     add("FR", "OPT_UNITY", "Unité");
     add("FR", "METRIQUE", "Métrique");
     add("FR", "VERSION", "Version");
@@ -314,6 +333,10 @@ void Langage::add(std::string langage, std::string key, std::string trad){
         m_de[key] = trad;
     } else if(langage == "NL"){
         m_nl[key] = trad;
+    } else if(langage == "ES"){
+        m_es[key] = trad;
+    } else if(langage == "IT"){
+        m_it[key] = trad;
     }
     for(auto e : m_all){
         if(e == key){
@@ -323,14 +346,30 @@ void Langage::add(std::string langage, std::string key, std::string trad){
     m_all.push_back(key);
 }
 
+std::string ReplaceAll(std::string str, const std::string& from, const std::string& to) {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
+    }
+    return str;
+}
+
+
 void Langage::VerifyLangage(std::string lg, std::ofstream & myfile2){
-    auto & dico_trad = m_nl;
+    auto & dico_trad = m_fr;
     if(lg == "EN"){
         dico_trad = m_en;
+    } else if(lg == "FR"){
+        dico_trad = m_fr;
     } else if(lg == "DE"){
         dico_trad = m_de;
     } else if(lg == "NL"){
         dico_trad = m_nl;
+    } else if(lg == "ES"){
+        dico_trad = m_es;
+    } else if(lg == "IT"){
+        dico_trad = m_it;
     }
     
     for(auto s : m_all){
@@ -338,18 +377,21 @@ void Langage::VerifyLangage(std::string lg, std::ofstream & myfile2){
         std::string s2 = s;
         auto i = dico_trad.find(s2);
         
-        if(i != dico_trad.end()){
+        if(i != dico_trad.end() && i->second != "*****"){
             trad = i->second;
-            myfile2 << "add(\"" << lg << "\", \"" << s << "\", \"" << trad << "\");\n";
+            std::string res = ReplaceAll(trad, "\n", "\\n");
+            myfile2 << "add(\"" << lg << "\", \"" << s << "\", \"" << res << "\");\n";
         } else {
             std::string trad_fr = "*****";
-            std::string s2_fr = s;
             auto i_fr = m_fr.find(s2);
             if(i_fr != m_fr.end()){
-                trad_fr = i_fr->second;
+                trad_fr =  ReplaceAll(i_fr->second, "\n", "\\n");
+            } else {
+                std::cout << s2 << " " << lg << " " << m_fr.size() << std::endl;
             }
             
             myfile2 << "add(\"" << lg << "\", \"" << s << "\", \"" << trad << "\");//" << trad_fr << "\n";
+            std::cout << "add(\"" << lg << "\", \"" << s << "\", \"" << trad_fr << "\");// " << trad_fr  << "\n";
         }
     }
 }
@@ -387,6 +429,14 @@ void Langage::verifyAll(){
     myfile2 << "\n";
     myfile2 << "\n";
     VerifyLangage("NL", myfile2);
+    
+    myfile2 << "\n";
+    myfile2 << "\n";
+    VerifyLangage("IT", myfile2);
+    
+    myfile2 << "\n";
+    myfile2 << "\n";
+    VerifyLangage("ES", myfile2);
     
     
     myfile2.close();

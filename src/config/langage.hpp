@@ -12,6 +12,8 @@ enum MyLangage {
     MyLangage_en = 1,
     MyLangage_de = 2,
     MyLangage_nl = 3,
+    MyLangage_it = 4,
+    MyLangage_es = 5,
 };
 
 class Langage  {
@@ -19,6 +21,8 @@ class Langage  {
     std::unordered_map<std::string,std::string> m_en;
     std::unordered_map<std::string,std::string> m_de;
     std::unordered_map<std::string,std::string> m_nl;
+    std::unordered_map<std::string,std::string> m_it;
+    std::unordered_map<std::string,std::string> m_es;
     std::vector<std::string> m_all;
     
     Langage();
