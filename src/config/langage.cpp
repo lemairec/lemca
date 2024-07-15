@@ -200,6 +200,108 @@ Langage::Langage(){
     add("NL", "UPDATE_OS", "Bijwerken");
     add("NL", "UPDATE_DEPS", "Afhankelijkheden installeren");
     add("NL", "RESET_OS", "Opnieuw instellen");
+
+    add("IT", "OK", "OK");
+    add("IT", "CANCEL", "Cancella");
+    add("IT", "FAIL", "Errore");
+    add("IT", "LOADING", "Caricamento ...");
+  
+    add("IT", "HOME_BINEUSE", "sarchiatrici");
+    add("IT", "HOME_GPS", "GPS");
+    add("IT", "HOME_SERIAL", "Serial");
+    add("IT", "HOME_INFOS", "Infos");
+    add("IT", "HOME_REMOTE", "Accesso remoto");
+    add("IT", "HOME_WIFI", "Wifi");
+    add("IT", "HOME_OFF", "Spegnere");
+    add("IT", "INFOS_AV_TITLE", "Menu avanzato (infos)");
+    add("IT", "INFOS_LIC_PANEL", "panel : ");
+  
+    add("IT", "OPT_LANGAGE", "Lingua");
+    add("IT", "EN", "Inglese");
+    add("IT", "FR", "Francese");
+    add("IT", "DE", "Tedesco");
+    add("IT", "NL", "Olandese");
+    add("IT", "IT", "Italiano");
+    add("IT", "ES", "Spagnolo");  
+    add("IT", "OPT_UNITY", "Unità");
+    add("IT", "METRIQUE", "Metrico");
+    add("IT", "VERSION", "Versione");
+    add("IT", "SEND_IMAGES", "Invia immagini");
+  
+    add("IT", "UPDATE", "Aggiornamento");
+    add("IT", "UPDATE_WIFI", "Aggiornamento tramite WIFI");
+    add("IT", "UPDATE_BINEUSE_WIFI", "Aggiornamento sulle sarchiatrici");
+    add("IT", "UPDATE_GPS_WIFI", "Aggiornamento GPS");
+    add("IT", "UPDATE_SERIAL_WIFI", "Aggiornamento della serie");
+    add("IT", "UPDATE_USB", "Aggiornamento tramite chiave USB");
+    add("IT", "UPDATE_BINEUSE_USB", "Aggiornamento sulle sarchiatrici");
+  
+    add("IT", "INFOS_OPTIONS", "Opzioni");
+    add("IT", "SOFTWARE", "Software attivato");
+    add("IT", "GPS", "GPS");
+    add("IT", "SERIAL", "Serial");
+    add("IT", "OPTIONS", "Opzioni");
+    add("IT", "UPDATE_WIFI_ENABLE", "Attivare l'aggiornamento WIFI");
+    add("IT", "UPDATE_USB_ENABLE", "Abilita l'aggiornamento USB");
+    add("IT", "UPDATE_INVALID_PANEL_NUMBER", "Numero di pannello non valido");
+    add("IT", "UPDATE_CONTINUE", "Continua");
+    add("IT", "UPDATE_CANCEL", "Cancella");
+    add("IT", "REMOTE_ENABLE", "Abilitare l'accesso remoto");
+    add("IT", "OPERATING_SYSTEM", "Sistema di coltivazione");
+    add("IT", "UPDATE_OS", "Aggiornamento");
+    add("IT", "UPDATE_DEPS", "Installare le dipendenze");
+    add("IT", "RESET_OS", "Reset");
+
+    add("ES", "OK", "OK");
+    add("ES", "CANCEL", "Cancelar");
+    add("ES", "FAIL", "Error");
+    add("ES", "LOADING", "Cargando ...");
+
+    add("ES", "HOME_BINEUSE", "Binadora");
+    add("ES", "HOME_GPS", "GPS");
+    add("ES", "HOME_SERIAL", "Serie");
+    add("ES", "HOME_INFOS", "Infos");
+    add("ES", "HOME_REMOTE", "Acceso a distancia");
+    add("ES", "HOME_WIFI", "Wifi");
+    add("ES", "HOME_OFF", "Desconectar");
+    add("ES", "INFOS_AV_TITLE", "Menú avanzado (infos)");
+    add("ES", "INFOS_LIC_PANEL", "panel : ");
+  
+    add("ES", "OPT_LANGAGE", "Idioma");
+    add("ES", "EN", "Inglés");
+    add("ES", "FR", "Francés");
+    add("ES", "DE", "Alemán");
+    add("ES", "NL", "Holandés");
+    add("ES", "IT", "Italiano");
+    add("ES", "ES", "Español");
+    add("ES", "OPT_UNITY", "Unidad");
+    add("ES", "METRIQUE", "Métrica");
+    add("ES", "VERSION", "Versión");
+    add("ES", "SEND_IMAGES", "Enviar imágenes");
+  
+    add("ES", "UPDATE", "Actualización");
+    add("ES", "UPDATE_WIFI", "Actualización por WIFI");
+    add("ES", "UPDATE_BINEUSE_WIFI", "Actualización de la binadora");
+    add("ES", "UPDATE_GPS_WIFI", "Actualización del GPS");
+    add("ES", "UPDATE_SERIAL_WIFI", "Actualización de la serie");
+    add("ES", "UPDATE_USB", "Actualización mediante llave USB");
+    add("ES", "UPDATE_BINEUSE_USB", "Actualización de la binadora");
+
+    add("ES", "INFOS_OPTIONS", "Opciones");
+    add("ES", "SOFTWARE", "Software activado");
+    add("ES", "GPS", "GPS");
+    add("ES", "SERIAL", "Serie");
+    add("ES", "OPTIONS", "Opciones");
+    add("ES", "UPDATE_WIFI_ENABLE", "Activar actualización WIFI");
+    add("ES", "UPDATE_USB_ENABLE", "Activar actualización USB");
+    add("ES", "UPDATE_INVALID_PANEL_NUMBER", "Número de panel no válido");
+    add("ES", "UPDATE_CONTINUE", "Continúe en");
+    add("ES", "UPDATE_CANCEL", "Cancelar");
+    add("ES", "REMOTE_ENABLE", "Activar el acceso remoto");
+    add("ES", "OPERATING_SYSTEM", "Sistema agrícola");
+    add("ES", "UPDATE_OS", "Actualización");
+    add("ES", "UPDATE_DEPS", "Instalar dependencias");
+    add("ES", "RESET_OS", "Restablecer");
     //verifyAll();
 }
 
