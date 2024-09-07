@@ -10,7 +10,7 @@ Config::Config(){
     m_gps_run = "~/lemca_gps/lemca_gps";
     m_serie_run = "~/serie/build/serie";
     m_excavator_run = "~/lemca_excavator/build/lemca_excavator";
-    m_robot_inrows_run = "~/inrows/build/inrows";
+    m_robot_inrows_run = "~/robot/build/robot";
 }
 
 
