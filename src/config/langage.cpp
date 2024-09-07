@@ -84,7 +84,7 @@ Langage::Langage(){
     add("FR", "HOME_GPS", "GPS");
     add("FR", "HOME_SERIAL", "Série");
     add("FR", "HOME_INFOS", "Infos");
-    add("FR", "HOME_REMOTE", "Accès à dist");
+    add("FR", "HOME_REMOTE", "Accès à\ndistance");
     add("FR", "HOME_WIFI", "Wifi");
     add("FR", "HOME_OFF", "Eteindre");
 
@@ -229,7 +229,7 @@ Langage::Langage(){
     add("IT", "HOME_GPS", "GPS");
     add("IT", "HOME_SERIAL", "Serial");
     add("IT", "HOME_INFOS", "Infos");
-    add("IT", "HOME_REMOTE", "Accesso remoto");
+    add("IT", "HOME_REMOTE", "Accesso\nremoto");
     add("IT", "HOME_WIFI", "Wifi");
     add("IT", "HOME_OFF", "Spegnere");
     add("IT", "INFOS_AV_TITLE", "Menu avanzato (infos)");
@@ -280,7 +280,7 @@ Langage::Langage(){
     add("ES", "HOME_GPS", "GPS");
     add("ES", "HOME_SERIAL", "Serie");
     add("ES", "HOME_INFOS", "Infos");
-    add("ES", "HOME_REMOTE", "Acceso a distancia");
+    add("ES", "HOME_REMOTE", "Acceso a\ndistancia");
     add("ES", "HOME_WIFI", "Wifi");
     add("ES", "HOME_OFF", "Desconectar");
     add("ES", "INFOS_AV_TITLE", "Menú avanzado (infos)");

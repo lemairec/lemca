@@ -353,18 +353,18 @@ void OptionWidget::updateBineuseWifi(){
 void OptionWidget::setSizePage2(){
     int y = m_y_begin;
     y+= m_y_inter;
-    m_update_bineuse.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_BINEUSE_WIFI"), true, m_part_1_w/2);
-    m_update_bineuse_usb.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_BINEUSE_USB"), true, m_part_1_w/2);
+    m_update_bineuse.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_BINEUSE_WIFI"), true, m_part_1_w*0.7);
+    m_update_bineuse_usb.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_BINEUSE_USB"), true, m_part_1_w*0.7);
     y+= m_y_inter;
-    m_update_gps.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_GPS_WIFI"), true, m_part_1_w/2);
+    m_update_gps.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_GPS_WIFI"), true, m_part_1_w*0.7);
     y+= m_y_inter;
-    m_serial.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_SERIAL_WIFI"), true, m_part_1_w/2);
+    m_serial.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_SERIAL_WIFI"), true, m_part_1_w*0.7);
     y+= m_y_inter;
-    m_update_robot.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_ROBOT"), true, m_part_1_w/2);
+    m_update_robot.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_ROBOT"), true, m_part_1_w*0.7);
     y+= m_y_inter;
-    m_update_excavator.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_EXCAVATOR"), true, m_part_1_w/2);
+    m_update_excavator.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_EXCAVATOR"), true, m_part_1_w*0.7);
     y+= m_y_inter;
-    m_update_remote.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_REMOTE"), true, m_part_1_w/2);
+    m_update_remote.setResizeStd(m_part_1_m, y, Langage::getKey("UPDATE_REMOTE"), true, m_part_1_w*0.7);
     y+= m_y_inter;
     
     y = m_height*0.6;

@@ -248,7 +248,30 @@ void MainWidget::drawButton(ButtonGui & button, QPixmap * pixmap, const std::str
     } else {
         m_painter->setPen(m_pen_black);
     }
-    drawQText(QString::fromStdString(s), button.m_x, button.m_y+40, sizeText_medium, true);
+    drawQText(QString::fromStdString(s), button.m_x, button.m_y+30, sizeText_medium, true);
+}
+
+void MainWidget::drawButtonMultiLines(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
+    double scale2 = 0.4*scale;
+    int w = pixmap->size().width()*scale2;
+    int h = pixmap->size().height()*scale2;
+
+    int x = button.m_x -button.m_width/2;
+    int y = button.m_y- button.m_height/2;
+    
+    int y_image = button.m_y-h/2-15;
+    m_painter->setPen(m_pen_no);
+    
+    m_painter->setBrush(m_brush_background_3);
+    m_painter->drawRoundedRect(x, y, button.m_width, button.m_height, 15, 15);
+        
+    m_painter->drawPixmap(button.m_x-w/2, y_image, w, h, *pixmap);
+    if(m_black_mode){
+        m_painter->setPen(m_pen_white);
+    } else {
+        m_painter->setPen(m_pen_black);
+    }
+    drawQTexts(QString::fromStdString(s), button.m_x, button.m_y+30, sizeText_medium, true);
 }
     
 void MainWidget::drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale){
@@ -295,7 +318,7 @@ void MainWidget::drawButtons(){
         drawButton(m_buttonWifi, m_imgWifi, Langage::getKey("HOME_WIFI"), 1.2);
     }
     if(f.m_config.m_remote){
-        drawButton(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
+        drawButtonMultiLines(m_button_remote, m_img_remote, Langage::getKey("HOME_REMOTE"));
     }
     drawButtonOff(m_buttonExit, m_imgExit, Langage::getKey("HOME_OFF"), 0.8);
     drawButton(m_buttonOption, m_imgOption, Langage::getKey("HOME_INFOS"), 1.2);

@@ -68,6 +68,7 @@ public:
     void draw_force();
     
     void drawButton(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
+    void drawButtonMultiLines(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
     void drawButtonOff(ButtonGui & button, QPixmap * pixmap, const std::string & s, double scale = 1.0);
     void drawButtons();
     void drawMain();
