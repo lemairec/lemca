@@ -275,7 +275,7 @@ boot
 ## panel
 
 `````
-wifi potchpotch
+wifi Lemca/12345678
 Lemca a update
 
 config reseau a refaire Manuel (ip fixe + 8.8.8.8 dns) 192.168.1.2
