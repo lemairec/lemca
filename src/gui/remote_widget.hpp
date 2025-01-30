@@ -29,6 +29,7 @@ public:
     virtual void open();
     
     ButtonGui m_button_open_connection;
+    ButtonGui m_button_close_connection;
     ButtonGui m_button_open_wifi;
     ButtonGui m_button_detail;
     

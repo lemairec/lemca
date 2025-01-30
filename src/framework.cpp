@@ -74,6 +74,7 @@ RemoteConsumer::~RemoteConsumer()
 void RemoteConsumer::run(){
     Framework & f = Framework::Instance();
     f.m_remote_nbr_error = 0;
+    f.m_cmd_remote_buffer.push_back("*******");
     while(true){
         MyQTNetwork *q = MyQTNetwork::Instance_ptr();
         q->test();
@@ -132,7 +133,7 @@ void RemoteConsumer::run(){
             if(view_only){
                 s = s + "-viewonly ";
             }
-            s = s + "-forever -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
+            s = s + "-forever -ssh -ncache 10 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
             s += " 2>&1";
             
             f.m_cmd_remote_buffer.push_back("=====");

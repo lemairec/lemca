@@ -41,6 +41,7 @@ void RemoteWidget::setSize(int width, int height){
     y+=inter;
     y+=inter;
     m_button_open_connection.setResizeStd(0.5*m_width, y, "Ouvrir la connection", true, width/4);
+    m_button_close_connection.setResizeStd(0.5*m_width, y, "Fermer la connection", true, width/4);
     y+=inter;
     m_button_open_wifi.setResizeStd(0.7*m_width, 0.35*m_height, "Paramétrer le Wifi", true, width/4);
     y+=inter;
@@ -128,16 +129,17 @@ void RemoteWidget::draw(){
         
         if(f.m_remote_nbr_error != 0){
             m_painter->setBrush(m_brush_button_fail);
-            std::string s = strprintf("Erreurs : %i", f.m_remote_nbr_error);
+            std::string s = strprintf("Nb erreurs : %i", f.m_remote_nbr_error);
             drawText(s, 0.25*m_width, 0.5*m_height, sizeText_big);
         }
         if(!f.m_remote_error.empty()){
             drawText(f.m_remote_error, 0.5*m_width, 0.55*m_height, sizeText_medium, true);
         }
         
-        drawText("numero de session : ", 0.5*m_width, 0.7*m_height, sizeText_big, true);
-        drawText(f.m_session_str, 0.5*m_width, 0.6*m_height, sizeText_big, true);
+        drawText("numéro de session : ", 0.5*m_width, 0.6*m_height, sizeText_big, true);
+        drawText(f.m_session_str, 0.5*m_width, 0.65*m_height, sizeText_big, true);
 
+        drawButtonLabel2(m_button_close_connection);
     }
     
     drawButtonImageCarre(m_button_close, m_img_return, 0.4, false);
@@ -163,6 +165,7 @@ int RemoteWidget::onMouse(int x, int y){
             if(f.m_session == 0){
                 srand (time (NULL));
                 int my_rand = rand();
+                INFO(my_rand << " " << my_rand % 4);
                 f.m_session = my_rand % 4 + 1;
             }
             RemoteConsumer & consumer = RemoteConsumer::instance();
@@ -174,6 +177,12 @@ int RemoteWidget::onMouse(int x, int y){
         if(m_button_open_wifi.isActive(x, y)){
             MainWidget::instancePtr()->m_wifi_widget.open();
             m_close = true;
+        }
+    } else {
+        if(m_button_close_connection.isActive(x, y)){
+            RemoteConsumer & consumer = RemoteConsumer::instance();
+            consumer.terminate();
+            f.m_session = 0;
         }
     }
     

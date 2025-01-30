@@ -30,7 +30,9 @@ MyQTNetwork::MyQTNetwork(){
     m_timerPilot.start(1000); //1s
 }
 void MyQTNetwork::initOrLoad(Config & config){
-    //m_host_url = "http://localhost:4000";
+    if(!config.m_panel.empty()){
+        m_host_url = "https://cloud.lemcavision.com/ping?panel="+QString::fromStdString(config.m_panel);
+    }
 };
 
 void MyQTNetwork::closeAll(){
