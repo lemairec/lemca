@@ -670,6 +670,7 @@ void OptionWidget::setSizePage4(){
     m_version_selected.clear();
     m_version_selected.addValue(("test"));
     m_version_selected.addValue(("prod"));
+    m_version_selected.addValue(("v_24_03"));
     m_version_selected.addValue(("v_23_03"));
     m_version_selected.addValue(("v_22_03"));
     if(Framework::Instance().m_config.m_inrow){
