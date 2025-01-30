@@ -636,12 +636,15 @@ void OptionWidget::onMousePage3(int x, int y){
 
 void OptionWidget::setSizePage4(){
     int y = m_y_begin;
+    y-= m_y_inter;
     //m_button_update_wifi.setResize(m_part_1_x2, y, m_petit_button);
     //y += m_y_inter;
     //m_button_update_usb.setResize(m_part_1_x2, y, m_petit_button);
     //y += m_y_inter;
     m_button_remote.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
+    m_button_gps.setResize(m_part_1_x2, y, m_petit_button);
+    y += m_y_inter;
     y+= m_y_inter;
     m_send_images.setResizeStd(m_part_1_m+m_part_1_w*0.2+10, y, Langage::getKey("SEND_IMAGES"), true, m_part_1_w*0.4);
     m_clean_images.setResizeStd(m_part_1_m-m_part_1_w*0.2-10, y, "Clean Images", true, m_part_1_w*0.4);
@@ -653,6 +656,7 @@ void OptionWidget::setSizePage4(){
     y+= m_y_inter;
     
     y = m_y_begin;
+    y-= m_y_inter;
     m_update_lemca.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_OS"), true, m_part_1_w/2);
     y+= m_y_inter;
     m_update_deps.setResizeStd(m_part_2_m, y, Langage::getKey("UPDATE_DEPS"), true, m_part_1_w/2);
@@ -679,11 +683,12 @@ void OptionWidget::drawPage4(){
     m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("INFOS_OPTIONS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     
-    drawPart1Title(m_button_remote.m_y-2*m_y_inter, 3*m_y_inter, Langage::getKey("OPTIONS"), false);
+    drawPart1Title(m_button_remote.m_y-2*m_y_inter, 4*m_y_inter, Langage::getKey("OPTIONS"), false);
     //drawButtonCheck(m_button_update_wifi, f.m_config.m_update_wifi, Langage::getKey("UPDATE_WIFI_ENABLE"));
     //drawButtonCheck(m_button_update_usb, f.m_config.m_update_usb, Langage::getKey("UPDATE_USB_ENABLE"));
     drawButtonCheck(m_button_remote, f.m_config.m_remote, Langage::getKey("REMOTE_ENABLE"));
-    
+    drawButtonCheck(m_button_gps, f.m_config.m_gps, Langage::getKey("GPS"));
+   
     
     drawPart1Title(m_send_images.m_y-m_y_inter, 4*m_y_inter, "", true);
     drawButtonLabel2(m_send_images);
@@ -765,6 +770,11 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_last_log.isActive(x, y)){
         call("cat " + DirectoryManager::instance().m_log_cmd_file);
+    }
+    
+    if(m_button_gps.isActive(x, y)){
+        f.m_config.m_gps = !f.m_config.m_gps;
+        f.initOrLoadConfig();
     }
     
     //m_version_selected
@@ -1203,8 +1213,6 @@ void OptionWidget::setSizePage7(){
     m_auto_launch.setResize(m_part_1_x2, y, m_petit_button);
     
     y = m_y_begin;
-    m_button_gps.setResize(m_part_2_x2, y, m_petit_button);
-    y += m_y_inter;
     m_button_excavator.setResize(m_part_2_x2, y, m_petit_button);
     y += m_y_inter;
     m_button_serial.setResize(m_part_2_x2, y, m_petit_button);
@@ -1229,7 +1237,6 @@ void OptionWidget::drawPage7(){
     
     
     drawPart2Title(m_y_begin-2*m_y_inter, 7*m_y_inter, Langage::getKey("SOFTWARE"));
-    drawButtonCheck(m_button_gps, f.m_config.m_gps, Langage::getKey("GPS"));
     drawButtonCheck(m_button_excavator, f.m_config.m_excavator, Langage::getKey("EXCAVATOR"));
     drawButtonCheck(m_button_serial, f.m_config.m_serial, Langage::getKey("SERIAL"));
     
@@ -1257,10 +1264,6 @@ void OptionWidget::onMousePage7(int x, int y){
         f.initOrLoadConfig();
     }
     
-    if(m_button_gps.isActive(x, y)){
-        f.m_config.m_gps = !f.m_config.m_gps;
-        f.initOrLoadConfig();
-    }
     if(m_button_excavator.isActive(x, y)){
         f.m_config.m_excavator = !f.m_config.m_excavator;
         f.initOrLoadConfig();
