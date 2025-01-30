@@ -359,7 +359,7 @@ int MainWidget::onMouse(int x, int y){
             cmd = cmd + " -l "+ f.m_config.m_langage;
             cmd = cmd + " -c "+ std::to_string(f.m_config.m_constructor);
             cmd = cmd + " -p "+ f.m_config.m_panel;
-            call(cmd)
+            call(cmd);
         }
     } else if(m_buttonExcavator.isActive(x, y)){
         if(Framework::Instance().m_config.m_excavator){
