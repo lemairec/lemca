@@ -355,7 +355,11 @@ int MainWidget::onMouse(int x, int y){
         call(cmd);
     } else if(m_buttonGps.isActive(x, y)){
         if(Framework::Instance().m_config.m_gps){
-            call(f.m_config.m_gps_run);
+            std::string cmd = f.m_config.m_bineuse_run;
+            cmd = cmd + " -l "+ f.m_config.m_langage;
+            cmd = cmd + " -c "+ std::to_string(f.m_config.m_constructor);
+            cmd = cmd + " -p "+ f.m_config.m_panel;
+            call(cmd)
         }
     } else if(m_buttonExcavator.isActive(x, y)){
         if(Framework::Instance().m_config.m_excavator){
