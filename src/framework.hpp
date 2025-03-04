@@ -3,26 +3,13 @@
 
 #include "gui/qt/my_qt_serial_port.hpp"
 #include "config/config.hpp"
+#include "remote_consumer.hpp"
 #include <chrono>
-#include <QThread>
 #include <time.h>
 #include <math.h>
 #include "util/log.hpp"
 #include "util/stat.hpp"
 #include "cameras_modules.hpp"
-
-class IGpsObserver {
-public:
-    virtual void onNewPoint() = 0;
-};
-
-class Categorie {
-public:
-    std::string m_begin;
-    int m_count = 0;
-    bool m_enable = true;
-    std::string m_last = "";
-};
 
 class Framework {
     Framework();
@@ -72,21 +59,6 @@ public:
     
     void abortCurrentRun();
 
-};
-
-class RemoteConsumer : public QThread
-{
-    bool m_stop = false;
-    Q_OBJECT
-
-    RemoteConsumer(QObject *parent = NULL) : QThread(parent)
-    {
-    }
-public:
-    static RemoteConsumer & instance();
-    ~RemoteConsumer();
-
-    void run() override;
 };
 
 #endif // GPS_FRAMEWORK_H

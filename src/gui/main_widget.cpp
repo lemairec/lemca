@@ -189,8 +189,8 @@ void MainWidget::draw_force(){
     if(!init){
         init = true;
         if(f.m_config.m_port_remote != 0){
-            RemoteConsumer & consumer = RemoteConsumer::instance();
-            consumer.start();
+            //RemoteConsumer & consumer = RemoteConsumer::instance();
+            //consumer.start();
         }
         if(f.m_config.m_auto_launch == AutoLaunch_Robot){
             if(f.m_config.m_robot == 1){
