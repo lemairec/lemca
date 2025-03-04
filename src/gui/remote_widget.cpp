@@ -165,8 +165,9 @@ int RemoteWidget::onMouse(int x, int y){
             if(f.m_session == 0){
                 srand (time (NULL));
                 int my_rand = rand();
-                INFO(my_rand << " " << my_rand % 4);
-                f.m_session = my_rand % 4 + 1;
+                int num = my_rand % 4 + 1;
+                INFO("rand " << my_rand << " " << num);
+                f.m_session = num;
             }
             RemoteConsumer & consumer = RemoteConsumer::instance();
             consumer.start();
