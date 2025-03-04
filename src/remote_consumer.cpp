@@ -88,7 +88,7 @@ void RemoteConsumer::run(){
             if(view_only){
                 s = s + "-viewonly ";
             }
-            s = s + "-forever -ncache 10 -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
+            s = s + "-ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
             s += " 2>&1";
             
             f.m_cmd_remote_buffer.push_back("=====");
