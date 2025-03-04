@@ -102,7 +102,6 @@ void MyQTSerialPorts::writePilotSerialDAndWait(std::vector<unsigned char> & l){
     DEBUG("end");
 }
 
-#include <QThread>
 int i = 0;
 void MyQTSerialPorts::rechercheAuto(){
     setRecherche();

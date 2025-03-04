@@ -10,8 +10,6 @@
 #include "util/log.hpp"
 #include "util/stat.hpp"
 #include "cameras_modules.hpp"
-#include <QWaitCondition>
-#include <QMutex>
 
 class IGpsObserver {
 public:
@@ -53,13 +51,11 @@ private:
 private:
 
 public:
-    QMutex mutex;
     FILE * m_pipe = NULL;
     std::string m_command_to_execute;
     std::string m_command_result;
     std::string m_command_to_execute2;
     bool m_command_to_execute2_end;
-    QWaitCondition bufferNotEmpty;
     bool m_is_f_call = false;
     
     bool m_cmd_interrupt = false;

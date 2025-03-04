@@ -88,7 +88,6 @@ void Logger::add(ILogger* logger)
 
 void Logger::removeLogger()
 {
-   QMutexLocker l(&m_mutex);
    m_logger = NULL;
 }
 
@@ -156,7 +155,6 @@ void Logger::log(Level level, std::string method, int line, std::ostringstream &
    }
 
    if(m_logger != NULL && level >= m_logger->m_levelMin){
-      QMutexLocker l(&m_mutex);
       m_logger->log(level, res);
    }
 };

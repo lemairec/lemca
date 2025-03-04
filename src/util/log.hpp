@@ -107,8 +107,6 @@ private:
     LogCout m_logCout;
     ILogger * m_logger;
     
-    QMutex m_mutex;
-    
     void initLogger(ILogger & logger);
     void calculLevelMin();
     

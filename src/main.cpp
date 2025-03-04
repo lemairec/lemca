@@ -16,9 +16,7 @@ int main(int argc, char *argv[])
     DEBUG("fin init");
     m->show();
     DEBUG("exec");
-    //INFO(QThread::currentThreadId());
-    //GpsThread * gpsThread = new GpsThread(framework);
-    //gpsThread->start();
+    
     return app.exec();
 }
 

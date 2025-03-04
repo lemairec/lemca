@@ -120,9 +120,7 @@ void RemoteConsumer::run(){
                 f.m_remote_connection_ok = 1;
                 f.m_cmd_remote_buffer.push_back("conn ok");
             }
-            f.mutex.lock();
             f.m_cmd_remote_buffer.push_back(buffer);
-            f.mutex.unlock();
         }
         f.m_cmd_remote_buffer.push_back("---");
         f.m_cmd_remote_buffer.push_back("");
@@ -149,9 +147,7 @@ void RemoteConsumer::run(){
             std::string error3 = "";
             while (fgets(buffer, 128, my_pipe) != nullptr) {
                 error3 = buffer;
-                f.mutex.lock();
                 f.m_cmd_remote_buffer.push_back(buffer);
-                f.mutex.unlock();
             }
             f.m_cmd_remote_buffer.push_back("---");
             f.m_cmd_remote_buffer.push_back("");
@@ -172,9 +168,7 @@ void RemoteConsumer::run(){
             while (fgets(buffer, 128, my_pipe) != nullptr) {
                 INFO("result1 " <<buffer);
                 error0 = buffer;
-                f.mutex.lock();
                 f.m_cmd_remote_buffer.push_back(buffer);
-                f.mutex.unlock();
             }
             f.m_cmd_remote_buffer.push_back("---");
             f.m_cmd_remote_buffer.push_back("");
@@ -191,9 +185,7 @@ void RemoteConsumer::run(){
             std::string error1 = "";
             while (fgets(buffer, 128, my_pipe) != nullptr) {
                 error1 = buffer;
-                f.mutex.lock();
                 f.m_cmd_remote_buffer.push_back(buffer);
-                f.mutex.unlock();
             }
             f.m_cmd_remote_buffer.push_back("---");
             f.m_cmd_remote_buffer.push_back("");

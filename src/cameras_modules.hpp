@@ -4,13 +4,10 @@
 #include "gui/qt/my_qt_serial_port.hpp"
 #include "config/config.hpp"
 #include <chrono>
-#include <QThread>
 #include <time.h>
 #include <math.h>
 #include "util/log.hpp"
 #include "util/stat.hpp"
-#include <QWaitCondition>
-#include <QMutex>
 
 class CamerasModules {
 public:
