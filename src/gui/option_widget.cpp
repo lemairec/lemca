@@ -715,7 +715,7 @@ void OptionWidget::drawPage4(){
     
     
     
-    drawPart2Title(m_y_begin-2*m_y_inter, 6*m_y_inter, Langage::getKey("OPERATING_SYSTEM"));
+    drawPart2Title(m_y_begin-3*m_y_inter, 6*m_y_inter, Langage::getKey("OPERATING_SYSTEM"));
     drawButtonLabel2(m_update_lemca);
     drawButtonLabel2(m_update_deps);
     drawButtonLabel2(m_reset_lemca);
