@@ -544,6 +544,8 @@ void OptionWidget::setSizePage3(){
     y+= m_y_inter;
     m_panel.setResize(m_part_2_x+m_part_2_w*0.6, y, m_height2*0.35);
     y+= m_y_inter;
+    y+= m_y_inter;
+    y+= m_y_inter;
 }
 
 
@@ -676,9 +678,30 @@ void OptionWidget::setSizePage4(){
     if(Framework::Instance().m_config.m_inrow){
         m_version_selected.addValue(("inrow"));
     }
+    
+    y+= m_y_inter;
+    y+= m_y_inter;
+    m_delete_all.setResizeStd(m_part_2_m, y, Langage::getKey("DELETE_ALL"), true, m_part_1_w*0.7);
+    y = m_height*0.6;
+    m_delete_all_continue.setResizeStd(m_width*(0.45-0.2), y, Langage::getKey("UPDATE_CONTINUE"), true, m_part_1_w/2);
+    m_delete_all_cancel.setResizeStd(m_width*(0.45+0.2), y, Langage::getKey("UPDATE_CANCEL"), true, m_part_1_w/2);
+    
 };
 
 void OptionWidget::drawPage4(){
+    if(m_delete_all_b){
+        m_painter->setPen(m_pen_no);
+        m_painter->setBrush(m_brush_background_2);
+        m_painter->drawRoundedRect(m_width*0.1 , m_height*0.2, m_width*0.7, m_height*0.6, 10, 10);
+        
+        m_painter->setPen(m_pen_black_inv);
+        QString s = QString::fromStdString(Langage::getKey("DELETE_ALL_MESSAGE"));
+        drawQTexts(s, m_width*0.45, m_height*0.4, sizeText_medium, true, false);
+        
+        drawButtonLabel2(m_delete_all_continue, COLOR_VALIDATE);
+        drawButtonLabel2(m_delete_all_cancel, COLOR_CANCEL);
+        return;
+    }
     Framework & f = Framework::Instance();
     
     m_painter->setPen(m_pen_black_inv);
@@ -726,7 +749,8 @@ void OptionWidget::drawPage4(){
     }
     drawButtonLabel2(m_version_selected.m_buttonOpen);
     
-    
+    drawPart2Title(m_delete_all.m_y-m_y_inter, 2*m_y_inter, "", true);
+    drawButtonLabel2(m_delete_all);
     
     
 }
@@ -791,6 +815,20 @@ void OptionWidget::onMousePage4(int x, int y){
     if(m_version_selected.m_buttonOpen.isActive(x, y)){
         m_select_widget.open();
         m_select_widget.setValueGuiKeyPad(&m_version_selected);
+    }
+    
+    if(m_delete_all_b){
+        if(m_delete_all_cancel.isActive(x, y)){
+            m_delete_all_b = false;
+        }
+        if(m_delete_all_continue.isActive(x, y)){
+            call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/delete_all.sh");
+            m_delete_all_b = false;
+        }
+        return;
+    }
+    if(m_delete_all.isActive(x, y)){
+        m_delete_all_b = true;
     }
 }
 

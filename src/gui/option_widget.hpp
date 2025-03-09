@@ -97,6 +97,11 @@ public:
     ButtonGui m_button9;
     
     ValueGuiKeyBoard m_panel;
+    
+    bool m_delete_all_b = false;
+    ButtonGui m_delete_all;
+    ButtonGui m_delete_all_continue;
+    ButtonGui m_delete_all_cancel;
     void myDrawButton(ButtonGui * b, QString s);
     
     void setSizePage3();
