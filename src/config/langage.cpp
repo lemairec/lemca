@@ -111,6 +111,10 @@ Langage::Langage(){
     add("FR", "UPDATE_USB", "Mise à jour par Clef USB");
     add("FR", "UPDATE_BINEUSE_USB", "Mise à jour de Bineuse");
     
+    add("FR", "DELETE_ALL", "Tout supprimer");
+    add("FR", "DELETE_ALL_MESSAGE", "Etes-vous sûr de bien vouloir tout supprimer ?");
+    
+    
     add("FR", "INFOS_OPTIONS", "Options");
     add("FR", "SOFTWARE", "Logiciel activé");
     add("FR", "GPS", "GPS");
@@ -357,7 +361,7 @@ std::string ReplaceAll(std::string str, const std::string& from, const std::stri
 
 
 void Langage::VerifyLangage(std::string lg, std::ofstream & myfile2){
-    auto & dico_trad = m_fr;
+    auto dico_trad = this->m_fr;
     if(lg == "EN"){
         dico_trad = m_en;
     } else if(lg == "FR"){
