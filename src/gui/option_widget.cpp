@@ -756,6 +756,17 @@ void OptionWidget::drawPage4(){
 }
 
 void OptionWidget::onMousePage4(int x, int y){
+    if(m_delete_all_b){
+        if(m_delete_all_cancel.isActive(x, y)){
+            m_delete_all_b = false;
+        }
+        if(m_delete_all_continue.isActive(x, y)){
+            call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/delete_all.sh");
+            m_delete_all_b = false;
+        }
+        return;
+    }
+    
     Framework & f = Framework::Instance();
     
     /*if(m_button_update_wifi.isActive(x, y)){
@@ -817,16 +828,6 @@ void OptionWidget::onMousePage4(int x, int y){
         m_select_widget.setValueGuiKeyPad(&m_version_selected);
     }
     
-    if(m_delete_all_b){
-        if(m_delete_all_cancel.isActive(x, y)){
-            m_delete_all_b = false;
-        }
-        if(m_delete_all_continue.isActive(x, y)){
-            call("sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/delete_all.sh");
-            m_delete_all_b = false;
-        }
-        return;
-    }
     if(m_delete_all.isActive(x, y)){
         m_delete_all_b = true;
     }

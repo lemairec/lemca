@@ -224,6 +224,7 @@ void MainWindow::call(const std::string & s){
     Framework & f = Framework::Instance();
     
     f.m_cmd_buffer.clear();
+    f.m_cmd_buffer.push_back("MainWindow::call");
     f.m_cmd_buffer.push_back(s);
     f.m_cmd_end = false;
     f.m_cmd_abort = false;
