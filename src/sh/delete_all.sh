@@ -14,7 +14,7 @@ rm -f ~/lemca_data/lemca/log.txt
 echo  "**** clean bineuse"
 rm -rf ~/lemca_data/bineuse/image_save_auto
 rm -f ~/lemca_data/bineuse/log.txt
-rm -f ~/lemca_data/bineuse/log
+rm -rf ~/lemca_data/bineuse/log
 rm -f ~/lemca_data/bineuse/image_save
 rm -f ~/lemca_data/bineuse/plant
 
