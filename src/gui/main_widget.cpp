@@ -48,6 +48,7 @@ void MainWidget::loadImages(){
     m_logo_binnove = loadImage("/gui/logo/logo_binnove.png");
     m_logo_agronomic = loadImage("/gui/logo/logo_agronomic.png");
     m_logo_agrivaux = loadImage("/gui/logo/logo_agrivaux.png");
+    m_logo_oliver = loadImage("/gui/logo/logo_oliver.png");
 }
 
 void MainWidget::setPainter(QPainter * p){
@@ -222,6 +223,8 @@ void MainWidget::drawMain(){
         drawMyImage(*m_logo_lemca, 0.75*m_width, 0.2*m_height, 0.15, true);
     } else if(f.m_config.m_constructor == 5){
         drawMyImage(*m_logo_agrivaux, 0.5*m_width,  0.2*m_height, 0.07, true);
+    } else if(f.m_config.m_constructor == 7){
+        drawMyImage(*m_logo_oliver, 0.5*m_width,  0.2*m_height, 1.1, true);
     } else {
         drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.15, true);
     }

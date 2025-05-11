@@ -36,6 +36,7 @@ public:
     QPixmap * m_logo_binnove;
     QPixmap * m_logo_agronomic;
     QPixmap * m_logo_agrivaux;
+    QPixmap * m_logo_oliver;
     
     
     QPixmap * m_imgBineuse;
