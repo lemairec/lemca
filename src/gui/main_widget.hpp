@@ -37,6 +37,7 @@ public:
     QPixmap * m_logo_agronomic;
     QPixmap * m_logo_agrivaux;
     QPixmap * m_logo_oliver;
+    QPixmap * m_logo_laforge;
     
     
     QPixmap * m_imgBineuse;
