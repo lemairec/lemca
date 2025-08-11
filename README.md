@@ -285,6 +285,7 @@ Logo companie
 Bineuse a update
 Licence
 1 camera (CAM1)
+Port GPS
 reset heure
 etiquette camera
 cache transparent camera
