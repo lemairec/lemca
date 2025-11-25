@@ -47,6 +47,12 @@ const std::string & Langage::getKey(const std::string & ref){
             return i->second;
         }
     }
+    if(l.m_l == MyLangage_ru){
+        auto i = l.m_ru.find(ref);
+        if(i != l.m_ru.end()){
+            return i->second;
+        }
+    }
     l.m_fr["ref"] = "$" + ref;
     return l.m_fr["ref"];
 }
@@ -70,6 +76,8 @@ void Langage::setLangage(const std::string & s){
         l.m_l = MyLangage_es;
     } else if(s == "IT"){
         l.m_l = MyLangage_it;
+    } else if(s == "RU"){
+        l.m_l = MyLangage_ru;
     }
 }
 
@@ -79,7 +87,6 @@ Langage::Langage(){
     add("FR", "CANCEL", "Annuler");
     add("FR", "FAIL", "Erreur");
     add("FR", "LOADING", "Chargement ...");
-    
     add("FR", "HOME_BINEUSE", "Bineuse");
     add("FR", "HOME_GPS", "GPS");
     add("FR", "HOME_SERIAL", "Série");
@@ -87,10 +94,8 @@ Langage::Langage(){
     add("FR", "HOME_REMOTE", "Accès à\ndistance");
     add("FR", "HOME_WIFI", "Wifi");
     add("FR", "HOME_OFF", "Eteindre");
-
     add("FR", "INFOS_AV_TITLE", "Menu avancé (infos)");
     add("FR", "INFOS_LIC_PANEL", "panel : ");
-    
     add("FR", "OPT_LANGAGE", "Langue");
     add("FR", "EN", "Anglais");
     add("FR", "FR", "Francais");
@@ -102,7 +107,6 @@ Langage::Langage(){
     add("FR", "METRIQUE", "Métrique");
     add("FR", "VERSION", "Version");
     add("FR", "SEND_IMAGES", "Envoyer les images");
-    
     add("FR", "UPDATE", "Mise à jour");
     add("FR", "UPDATE_WIFI", "Mise à jour par WIFI");
     add("FR", "UPDATE_BINEUSE_WIFI", "Mise à jour de Bineuse");
@@ -110,11 +114,8 @@ Langage::Langage(){
     add("FR", "UPDATE_SERIAL_WIFI", "Mise à jour de Serie");
     add("FR", "UPDATE_USB", "Mise à jour par Clef USB");
     add("FR", "UPDATE_BINEUSE_USB", "Mise à jour de Bineuse");
-    
     add("FR", "DELETE_ALL", "Tout supprimer");
     add("FR", "DELETE_ALL_MESSAGE", "Etes-vous sûr de bien vouloir tout supprimer ?");
-    
-    
     add("FR", "INFOS_OPTIONS", "Options");
     add("FR", "SOFTWARE", "Logiciel activé");
     add("FR", "GPS", "GPS");
@@ -136,7 +137,6 @@ Langage::Langage(){
     add("EN", "CANCEL", "Cancel");
     add("EN", "FAIL", "Error");
     add("EN", "LOADING", "Loading ...");
-    
     add("EN", "HOME_BINEUSE", "Hoe");
     add("EN", "HOME_GPS", "GPS");
     add("EN", "HOME_SERIAL", "Serial");
@@ -144,7 +144,6 @@ Langage::Langage(){
     add("EN", "HOME_REMOTE", "Remote");
     add("EN", "HOME_WIFI", "Wifi");
     add("EN", "HOME_OFF", "Off");
-
     add("EN", "INFOS_AV_TITLE", "Advanced menu (infos)");
     add("EN", "INFOS_LIC_PANEL", "panel : ");
     add("EN", "OPT_LANGAGE", "Language");
@@ -156,7 +155,6 @@ Langage::Langage(){
     add("EN", "METRIQUE", "Metric");
     add("EN", "VERSION", "Version");
     add("EN", "SEND_IMAGES", "Send pictures");
-    
     add("EN", "UPDATE", "Update");
     add("EN", "UPDATE_WIFI", "Update by WIFI");
     add("EN", "UPDATE_BINEUSE_WIFI", "Hoe update");
@@ -167,8 +165,6 @@ Langage::Langage(){
     add("EN", "UPDATE_INVALID_PANEL_NUMBER", "Invalid panel number");
     add("EN", "UPDATE_CONTINUE", "Continue");
     add("EN", "UPDATE_CANCEL", "Cancel");
-    
-    
     add("EN", "INFOS_OPTIONS", "Options");
     add("EN", "SOFTWARE", "Software activated");
     add("EN", "GPS", "GPS");
@@ -228,7 +224,6 @@ Langage::Langage(){
     add("IT", "CANCEL", "Cancella");
     add("IT", "FAIL", "Errore");
     add("IT", "LOADING", "Caricamento ...");
-  
     add("IT", "HOME_BINEUSE", "sarchiatrici");
     add("IT", "HOME_GPS", "GPS");
     add("IT", "HOME_SERIAL", "Serial");
@@ -238,7 +233,6 @@ Langage::Langage(){
     add("IT", "HOME_OFF", "Spegnere");
     add("IT", "INFOS_AV_TITLE", "Menu avanzato (infos)");
     add("IT", "INFOS_LIC_PANEL", "panel : ");
-  
     add("IT", "OPT_LANGAGE", "Lingua");
     add("IT", "EN", "Inglese");
     add("IT", "FR", "Francese");
@@ -250,7 +244,6 @@ Langage::Langage(){
     add("IT", "METRIQUE", "Metrico");
     add("IT", "VERSION", "Versione");
     add("IT", "SEND_IMAGES", "Invia immagini");
-  
     add("IT", "UPDATE", "Aggiornamento");
     add("IT", "UPDATE_WIFI", "Aggiornamento tramite WIFI");
     add("IT", "UPDATE_BINEUSE_WIFI", "Aggiornamento sulle sarchiatrici");
@@ -258,7 +251,6 @@ Langage::Langage(){
     add("IT", "UPDATE_SERIAL_WIFI", "Aggiornamento della serie");
     add("IT", "UPDATE_USB", "Aggiornamento tramite chiave USB");
     add("IT", "UPDATE_BINEUSE_USB", "Aggiornamento sulle sarchiatrici");
-  
     add("IT", "INFOS_OPTIONS", "Opzioni");
     add("IT", "SOFTWARE", "Software attivato");
     add("IT", "GPS", "GPS");
@@ -279,7 +271,6 @@ Langage::Langage(){
     add("ES", "CANCEL", "Cancelar");
     add("ES", "FAIL", "Error");
     add("ES", "LOADING", "Cargando ...");
-
     add("ES", "HOME_BINEUSE", "Binadora");
     add("ES", "HOME_GPS", "GPS");
     add("ES", "HOME_SERIAL", "Serie");
@@ -289,7 +280,6 @@ Langage::Langage(){
     add("ES", "HOME_OFF", "Desconectar");
     add("ES", "INFOS_AV_TITLE", "Menú avanzado (infos)");
     add("ES", "INFOS_LIC_PANEL", "panel : ");
-  
     add("ES", "OPT_LANGAGE", "Idioma");
     add("ES", "EN", "Inglés");
     add("ES", "FR", "Francés");
@@ -301,7 +291,6 @@ Langage::Langage(){
     add("ES", "METRIQUE", "Métrica");
     add("ES", "VERSION", "Versión");
     add("ES", "SEND_IMAGES", "Enviar imágenes");
-  
     add("ES", "UPDATE", "Actualización");
     add("ES", "UPDATE_WIFI", "Actualización por WIFI");
     add("ES", "UPDATE_BINEUSE_WIFI", "Actualización de la binadora");
@@ -309,7 +298,6 @@ Langage::Langage(){
     add("ES", "UPDATE_SERIAL_WIFI", "Actualización de la serie");
     add("ES", "UPDATE_USB", "Actualización mediante llave USB");
     add("ES", "UPDATE_BINEUSE_USB", "Actualización de la binadora");
-
     add("ES", "INFOS_OPTIONS", "Opciones");
     add("ES", "SOFTWARE", "Software activado");
     add("ES", "GPS", "GPS");
@@ -325,6 +313,57 @@ Langage::Langage(){
     add("ES", "UPDATE_OS", "Actualización");
     add("ES", "UPDATE_DEPS", "Instalar dependencias");
     add("ES", "RESET_OS", "Restablecer");
+    
+    
+    add("RU", "OK", "OK");
+    add("RU", "CANCEL", "отменить");
+    add("RU", "FAIL", "ошибка");
+    add("RU", "LOADING", "загрузка ...");
+    add("RU", "HOME_BINEUSE", "Hoe");
+    add("RU", "HOME_GPS", "GPS");
+    add("RU", "HOME_SERIAL", "серия");
+    add("RU", "HOME_INFOS", "информации");
+    add("RU", "HOME_REMOTE", "удаленного доступа");
+    add("RU", "HOME_WIFI", "вай-фай");
+    add("RU", "HOME_OFF", "Выключить");
+    add("RU", "INFOS_AV_TITLE", "Расширенное меню (информации)");
+    add("RU", "INFOS_LIC_PANEL", "группа : ");
+    add("RU", "OPT_LANGAGE", "язык");
+    add("RU", "EN", "English");
+    add("RU", "FR", "Francais");
+    add("RU", "DE", "German");
+    add("RU", "NL", "Dutch");
+    add("RU", "IT", "Italian");
+    add("RU", "ES", "Spanish");
+    add("RU", "RU", "Russian");
+    add("RU", "OPT_UNITY", "единство");
+    add("RU", "METRIQUE", "метрический");
+    add("RU", "VERSION", "версия");
+    add("RU", "SEND_IMAGES", "отправлять изображения");
+    add("RU", "UPDATE", "обновление");
+    add("RU", "UPDATE_WIFI", "Обновление через WIFI");
+    add("RU", "UPDATE_BINEUSE_WIFI", "Обновление Бишезе");
+    add("RU", "UPDATE_GPS_WIFI", "Обновление GPS");
+    add("RU", "UPDATE_SERIAL_WIFI", "Обновление серии");
+    add("RU", "UPDATE_USB", "Обновленный ключом USB");
+    add("RU", "UPDATE_BINEUSE_USB", "Обновление Бишезе");
+    add("RU", "DELETE_ALL", "удалить все");
+    add("RU", "DELETE_ALL_MESSAGE", "Вы уверены, что хотите все удалить?");
+    add("RU", "INFOS_OPTIONS", "варианты");
+    add("RU", "SOFTWARE", "Программное обеспечение включено");
+    add("RU", "GPS", "GPS");
+    add("RU", "SERIAL", "серия");
+    add("RU", "OPTIONS", "варианты");
+    add("RU", "UPDATE_WIFI_ENABLE", "Включите обновление WIFI");
+    add("RU", "UPDATE_USB_ENABLE", "Включить USB обновление");
+    add("RU", "UPDATE_INVALID_PANEL_NUMBER", "Неверный номер панели");
+    add("RU", "UPDATE_CONTINUE", "продолжать");
+    add("RU", "UPDATE_CANCEL", "отменить");
+    add("RU", "REMOTE_ENABLE", "Разрешить удаленный доступ");
+    add("RU", "OPERATING_SYSTEM", "Операционная система");
+    add("RU", "UPDATE_OS", "обновление");
+    add("RU", "UPDATE_DEPS", "Установить зависимости");
+    add("RU", "RESET_OS", "Сброс");
     //verifyAll();
 }
 
@@ -341,6 +380,8 @@ void Langage::add(std::string langage, std::string key, std::string trad){
         m_es[key] = trad;
     } else if(langage == "IT"){
         m_it[key] = trad;
+    } else if(langage == "RU"){
+        m_ru[key] = trad;
     }
     for(auto e : m_all){
         if(e == key){
@@ -374,6 +415,8 @@ void Langage::VerifyLangage(std::string lg, std::ofstream & myfile2){
         dico_trad = m_es;
     } else if(lg == "IT"){
         dico_trad = m_it;
+    } else if(lg == "RU"){
+        dico_trad = m_ru;
     }
     
     for(auto s : m_all){
@@ -441,6 +484,10 @@ void Langage::verifyAll(){
     myfile2 << "\n";
     myfile2 << "\n";
     VerifyLangage("ES", myfile2);
+    
+    myfile2 << "\n";
+    myfile2 << "\n";
+    VerifyLangage("RU", myfile2);
     
     
     myfile2.close();
