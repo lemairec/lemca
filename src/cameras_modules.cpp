@@ -42,6 +42,19 @@ void CamerasModules::refresCams(){
         m_qt_network->callUrl("http://192.168.1.31/rest/imageSharpness");
         m_qt_network->callUrl("http://192.168.1.31/rest/imageDefog");
         m_qt_network->callUrl("http://192.168.1.31/rest/imageShading");
+        
+        m_qt_network->callUrl("http://192.168.1.30/rest/streamCommon");
+        m_qt_network->callUrl("http://192.168.1.30/rest/streamH264");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageExposure");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageBacklight");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageColor");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageSensorMode");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageOrientation");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageGamma");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageWdr");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageSharpness");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageDefog");
+        m_qt_network->callUrl("http://192.168.1.30/rest/imageShading");
     } else {
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
         m_qt_network->callUrl(m_url_cam1_1);
