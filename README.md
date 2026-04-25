@@ -361,6 +361,8 @@ lspci
 ulimit -c unlimited
 bineuse/bineuse -l FR -c 0
 gdb bineuse/bineuse core
+
+bt where...
 ````
 
 ## idee
