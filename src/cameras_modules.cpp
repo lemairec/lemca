@@ -147,6 +147,8 @@ void CamerasModules::handleReply(const std::string & url, const std::string &dat
             }
         }
     } else {
+        
+        m_cam2.push_back(url);
         QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
         for(auto s3 : list1){
             if(s3.size()>5){
