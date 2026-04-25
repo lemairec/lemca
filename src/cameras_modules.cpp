@@ -147,8 +147,6 @@ void CamerasModules::handleReply(const std::string & url, const std::string &dat
             }
         }
     } else {
-        std::string url = "http://192.168.1.31/rest/streamCommon";
-
         std::vector<std::string> parts;
         std::stringstream ss(url);
         std::string item;
