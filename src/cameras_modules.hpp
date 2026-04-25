@@ -23,6 +23,11 @@ public:
     std::vector<std::string> m_cam1;
     std::vector<std::string> m_cam2;
     
+    std::vector<std::string> m_words;
+    int m_i_work;
+    void work();
+    
+    
     bool m_new_cam = false;
     
     void refresCams();

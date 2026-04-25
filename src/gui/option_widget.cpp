@@ -1049,6 +1049,7 @@ void OptionWidget::drawPage5(){
         
         
     }
+    f.m_cameras_module.work();
 }
 
 void OptionWidget::onMousePage5(int x, int y){

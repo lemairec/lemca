@@ -18,9 +18,45 @@ CamerasModules::CamerasModules(){
     m_url_cam2_2 = "http://192.168.1.31/cgi-bin/control/serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo3";
     m_url_cam2_3 = "http://192.168.1.31/cgi-bin/control/camwdr.cgi?id=admin&passwd=admin&action=getdnr&stream=all";
     
+    m_words = {
+        "streamCommon",
+        "streamH264",
+        "imageExposure",
+        "imageBacklight",
+        "imageColor",
+        "imageSensorMode",
+        "imageOrientation",
+        "imageGamma",
+        "imageWdr",
+        "imageSharpness",
+        "imageDefog",
+        "imageShading"
+    };
+    
 }
 
 CamerasModules::~CamerasModules(){
+}
+
+void CamerasModules::work(){
+    if(m_new_cam){
+        if(m_i_work < 20){
+            size_t i = m_i_work/2 - 1;
+            if(i > 0 && i < m_words.size()){
+                std::string path = "";
+                if(m_i_work%2 == 0){
+                    path = "http://192.168.1.31/rest/" + m_words[i];
+                } else {
+                    path = "http://192.168.1.30/rest/" + m_words[i];
+                }
+                
+                MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+                INFO(path);
+                m_qt_network->callUrl(path);
+            }
+            m_i_work++;
+        }
+    }
 }
 
 void CamerasModules::refresCams(){
@@ -28,33 +64,7 @@ void CamerasModules::refresCams(){
     m_cam2.clear();
     
     if(m_new_cam){
-        MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
-        INFO("http://192.168.1.31/rest/streamCommon");
-        m_qt_network->callUrl("http://192.168.1.31/rest/streamCommon");
-        m_qt_network->callUrl("http://192.168.1.31/rest/streamH264");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageExposure");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageBacklight");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageColor");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageSensorMode");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageOrientation");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageGamma");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageWdr");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageSharpness");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageDefog");
-        m_qt_network->callUrl("http://192.168.1.31/rest/imageShading");
-        
-        m_qt_network->callUrl("http://192.168.1.30/rest/streamCommon");
-        m_qt_network->callUrl("http://192.168.1.30/rest/streamH264");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageExposure");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageBacklight");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageColor");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageSensorMode");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageOrientation");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageGamma");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageWdr");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageSharpness");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageDefog");
-        m_qt_network->callUrl("http://192.168.1.30/rest/imageShading");
+        m_i_work = 0;
     } else {
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
         m_qt_network->callUrl(m_url_cam1_1);
