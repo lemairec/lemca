@@ -42,7 +42,7 @@ void CamerasModules::work(){
     if(m_new_cam){
         if(m_i_work < 20){
             size_t i = m_i_work/2;
-            if(i > 0 && i < m_words.size()){
+            if(i >= 0 && i < m_words.size()){
                 std::string path = "";
                 if(m_i_work%2 == 0){
                     path = "http://192.168.1.31/rest/" + m_words[i];
