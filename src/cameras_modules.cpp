@@ -25,15 +25,21 @@ CamerasModules::~CamerasModules(){
 
 void CamerasModules::refresCams(){
     m_cam1.clear();
-    MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
-    m_qt_network->callUrl(m_url_cam1_1);
-    m_qt_network->callUrl(m_url_cam1_2);
-    m_qt_network->callUrl(m_url_cam1_3);
-    
     m_cam2.clear();
-    m_qt_network->callUrl(m_url_cam2_1);
-    m_qt_network->callUrl(m_url_cam2_2);
-    m_qt_network->callUrl(m_url_cam2_3);
+    
+    if(m_new_cam){
+        MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+        m_qt_network->callUrl("http://192.168.1.31/rest/streamCommon");
+    } else {
+        MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+        m_qt_network->callUrl(m_url_cam1_1);
+        m_qt_network->callUrl(m_url_cam1_2);
+        m_qt_network->callUrl(m_url_cam1_3);
+        
+        m_qt_network->callUrl(m_url_cam2_1);
+        m_qt_network->callUrl(m_url_cam2_2);
+        m_qt_network->callUrl(m_url_cam2_3);
+    }
 }
 
 void CamerasModules::setCam(int i){

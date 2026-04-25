@@ -852,6 +852,8 @@ void OptionWidget::setSizePage5(){
     m_set_cam2.setResizeStd(x, y, "set cam2", true, m_part_1_w/2);
     
     y+= 0.1*m_height;
+    m_new_cam.setResize(x, y, m_petit_button);
+    
     y+= 0.1*m_height;
     m_set_phare_cam1.setResizeStd(x, y, "phare cam1", true, m_part_1_w/2);
     y+= 0.1*m_height;
@@ -969,6 +971,8 @@ void OptionWidget::drawPage5(){
     
     
     if(f.m_config.isDeveloppeur()){
+        drawButtonCheck(m_new_cam, f.m_cameras_module.m_new_cam, Langage::getKey("NEW_CAM"));
+        
         drawButtonLabel2(m_set_phare_cam1);
         drawButtonLabel2(m_set_phare_cam2);
     }
@@ -1051,6 +1055,9 @@ void OptionWidget::onMousePage5(int x, int y){
         }
         if(m_set_phare_cam2.isActive(x, y)){
             f.m_cameras_module.setPhareCam2();
+        }
+        if(m_new_cam.isActive(x, y)){
+            f.m_cameras_module.m_new_cam = !f.m_cameras_module.m_new_cam;
         }
     }
 }

@@ -23,6 +23,7 @@ public:
     std::vector<std::string> m_cam1;
     std::vector<std::string> m_cam2;
     
+    bool m_new_cam = false;
     
     void refresCams();
     
