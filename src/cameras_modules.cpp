@@ -29,6 +29,7 @@ void CamerasModules::refresCams(){
     
     if(m_new_cam){
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+        INFO("http://192.168.1.31/rest/streamCommon");
         m_qt_network->callUrl("http://192.168.1.31/rest/streamCommon");
     } else {
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
@@ -121,6 +122,13 @@ void CamerasModules::handleReply(const std::string & url, const std::string &dat
             }
         }
     } else if(url == m_url_cam2_1 || url == m_url_cam2_2 || url == m_url_cam2_3){
+        QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
+        for(auto s3 : list1){
+            if(s3.size()>5){
+                m_cam2.push_back(s3.toUtf8().constData());
+            }
+        }
+    } else {
         QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
         for(auto s3 : list1){
             if(s3.size()>5){
