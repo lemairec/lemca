@@ -147,12 +147,35 @@ void CamerasModules::handleReply(const std::string & url, const std::string &dat
             }
         }
     } else {
+        std::string url = "http://192.168.1.31/rest/streamCommon";
+
+        std::vector<std::string> parts;
+        std::stringstream ss(url);
+        std::string item;
+
+        while (std::getline(ss, item, '/')) {
+            if (!item.empty()) // équivalent de SkipEmptyParts
+                parts.push_back(item);
+        }
+
+        std::string ip = parts[1];           // "192.168.1.31"
+        std::string lastPart = parts.back(); // "streamCommon"
         
-        m_cam2.push_back(url);
-        QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
-        for(auto s3 : list1){
-            if(s3.size()>5){
-                m_cam2.push_back(nettoie(s3));
+        if(ip == "192.168.1.30"){
+            m_cam1.push_back("---- " + lastPart);
+            QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
+            for(auto s3 : list1){
+                if(s3.size()>5){
+                    m_cam1.push_back(nettoie(s3));
+                }
+            }
+        } else {
+            m_cam2.push_back("---- " + lastPart);
+            QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
+            for(auto s3 : list1){
+                if(s3.size()>5){
+                    m_cam2.push_back(nettoie(s3));
+                }
             }
         }
     }

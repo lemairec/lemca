@@ -3,9 +3,11 @@
 #include "main_widget.hpp"
 #include "environnement.hpp"
 #include "qt/main_window.hpp"
+#include "../util/util.hpp"
 #include "../util/directory_manager.hpp"
 #include "../config/langage.hpp"
 #include "../framework.hpp"
+#include <math.h>
 
 #include <QFileDialog>
 
@@ -843,7 +845,7 @@ void OptionWidget::onMousePage4(int x, int y){
  */
 
 void OptionWidget::setSizePage5(){
-    int y = m_y_begin;
+    int y = m_y_begin-0.2*m_height;
     int x = 0.45*m_width;
     m_refresh_cams.setResizeStd(x, y, "refresh", true, m_part_1_w/2);
     y+= 0.1*m_height;
@@ -858,6 +860,8 @@ void OptionWidget::setSizePage5(){
     m_set_phare_cam1.setResizeStd(x, y, "phare cam1", true, m_part_1_w/2);
     y+= 0.1*m_height;
     m_set_phare_cam2.setResizeStd(x, y, "phare cam2", true, m_part_1_w/2);
+    y+= 0.1*m_height;
+    m_page_btn.setResizeStd(x, y, "page", true, m_part_1_w/2);
     
     
 };
@@ -965,6 +969,8 @@ void OptionWidget::drawPage5(){
     m_painter->setPen(m_pen_black_inv);
     drawText(Langage::getKey("CAMERAS"), 0.45*m_width, m_y_title, sizeText_bigbig, true);
     
+    
+    
     drawButtonLabel2(m_refresh_cams);
     drawButtonLabel2(m_set_cam1);
     drawButtonLabel2(m_set_cam2);
@@ -975,6 +981,12 @@ void OptionWidget::drawPage5(){
         
         drawButtonLabel2(m_set_phare_cam1);
         drawButtonLabel2(m_set_phare_cam2);
+        
+        drawButtonLabel2(m_page_btn);
+        
+        m_painter->setPen(m_pen_black_inv);
+        std::string s = strprintf("p %i", m_page_cam);
+        drawText(s, m_page_btn.m_x, m_page_btn.m_y+0.1*m_height, sizeText_medium, true);
     }
     {
         
@@ -989,7 +1001,7 @@ void OptionWidget::drawPage5(){
         m_painter->drawRoundedRect(x-20, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
         
         m_painter->setPen(m_pen_black);
-        for(size_t i = 0; i < f.m_cameras_module.m_cam1.size(); ++i){
+        for(size_t i = 0 + m_page_cam*30; i < std::min((int)f.m_cameras_module.m_cam1.size(), (m_page_cam+1)*30); ++i){
             std::string s = f.m_cameras_module.m_cam1[f.m_cameras_module.m_cam1.size()-i-1];
             printCamText(s, x, y);
             y-= inter;
@@ -1006,6 +1018,8 @@ void OptionWidget::drawPage5(){
             m_painter->setPen(Qt::red);
         }
         drawText("CAM1", x+m_width*0.15, y, sizeText_medium, true);
+        
+        
         
         m_painter->setBrush(m_brush_white);
         m_painter->setPen(m_pen_no);
@@ -1058,6 +1072,12 @@ void OptionWidget::onMousePage5(int x, int y){
         }
         if(m_new_cam.isActive(x, y)){
             f.m_cameras_module.m_new_cam = !f.m_cameras_module.m_new_cam;
+        }
+        if(m_page_btn.isActive(x, y)){
+            m_page_cam++;
+            if(m_page_cam > 2){
+                m_page_cam = 0;
+            }
         }
     }
 }

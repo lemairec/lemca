@@ -136,6 +136,8 @@ public:
     ButtonGui m_set_cam1;
     ButtonGui m_set_cam2;
     ButtonGui m_new_cam;
+    ButtonGui m_page_btn;
+    int m_page_cam = 0;
     
     ButtonGui m_set_phare_cam1;
     ButtonGui m_set_phare_cam2;
