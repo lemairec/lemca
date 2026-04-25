@@ -1029,8 +1029,8 @@ void OptionWidget::drawPage5(){
         m_painter->drawRoundedRect(x-20, m_height*0.05, m_width*0.3, m_height*0.9, 10, 10);
         
         m_painter->setPen(m_pen_black);
-        for(size_t i = 0 + m_page_cam*30; i < std::min((int)f.m_cameras_module.m_cam1.size(), (m_page_cam+1)*30); ++i){
-            std::string s = f.m_cameras_module.m_cam1[f.m_cameras_module.m_cam1.size()-i-1];
+        for(size_t i = 0 + m_page_cam*30; i < std::min((int)f.m_cameras_module.m_cam2.size(), (m_page_cam+1)*30); ++i){
+            std::string s = f.m_cameras_module.m_cam2[f.m_cameras_module.m_cam2.size()-i-1];
             printCamText(s, x, y);
             y-= inter;
             if(y<m_height*0.05){
