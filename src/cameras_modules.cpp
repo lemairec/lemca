@@ -31,6 +31,17 @@ void CamerasModules::refresCams(){
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
         INFO("http://192.168.1.31/rest/streamCommon");
         m_qt_network->callUrl("http://192.168.1.31/rest/streamCommon");
+        m_qt_network->callUrl("http://192.168.1.31/rest/streamH264");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageExposure");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageBacklight");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageColor");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageSensorMode");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageOrientation");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageGamma");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageWdr");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageSharpness");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageDefog");
+        m_qt_network->callUrl("http://192.168.1.31/rest/imageShading");
     } else {
         MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
         m_qt_network->callUrl(m_url_cam1_1);
@@ -113,6 +124,13 @@ void CamerasModules::setPhareCam2(){
     setPhareCam(2);
 }
 
+std::string nettoie(QString src){
+    src = src.trimmed();
+    src.remove('"');
+    src.remove(',');
+    return src.toUtf8().constData();
+}
+
 void CamerasModules::handleReply(const std::string & url, const std::string &data){
     if(url == m_url_cam1_1 || url == m_url_cam1_2 || url == m_url_cam1_3){
         QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
@@ -132,7 +150,7 @@ void CamerasModules::handleReply(const std::string & url, const std::string &dat
         QStringList list1 = QString::fromStdString(data).split(QLatin1Char('\n'));
         for(auto s3 : list1){
             if(s3.size()>5){
-                m_cam2.push_back(s3.toUtf8().constData());
+                m_cam2.push_back(nettoie(s3));
             }
         }
     }
