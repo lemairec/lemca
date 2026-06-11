@@ -34,10 +34,10 @@ CamerasModules::CamerasModules(){
     };
     
     m_words_old = {
-        "serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo1",
         "connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all",
         "camwdr.cgi?id=admin&passwd=admin&action=getdnr&stream=all",
-        "serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo3"
+        "serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo3",
+        "serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo1"
         
     };
     

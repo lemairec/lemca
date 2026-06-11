@@ -970,6 +970,12 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    } else if(s.find("encoder1.quality") == 0){
+        if(s == "encoder1.quality = 4096"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else {
         m_painter->setPen(m_pen_black);
     }
