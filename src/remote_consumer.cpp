@@ -91,7 +91,7 @@ void RemoteConsumer::run(){
             if(view_only){
                 s = s + "-viewonly ";
             }
-            s = s + "-solid -ncache 10 -ncache_cr -threads -speeds modem -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
+            s = s + "-threads -speeds modem -ssh 5chmlLEM1cale26@remote.lemcavision.com:"+std::to_string(port);
             s += " 2>&1";
             
             f.m_cmd_remote_buffer.push_back("=====");
