@@ -958,6 +958,18 @@ void OptionWidget::printCamText(const std::string & s, double x, double y){
         } else {
             m_painter->setPen(m_pen_red);
         }
+    } else if(s.find("encoder3.enable") == 0){
+        if(s == "encoder3.enable = disable"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
+    } else if(s.find("encoder2.enable") == 0){
+        if(s == "encoder2.enable = disable"){
+            m_painter->setPen(m_pen_green);
+        } else {
+            m_painter->setPen(m_pen_red);
+        }
     } else {
         m_painter->setPen(m_pen_black);
     }
