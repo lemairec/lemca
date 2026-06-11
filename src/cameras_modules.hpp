@@ -24,6 +24,7 @@ public:
     std::vector<std::string> m_cam2;
     
     std::vector<std::string> m_words;
+    std::vector<std::string> m_words_old;
     int m_i_work;
     void work();
     

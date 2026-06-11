@@ -33,6 +33,12 @@ CamerasModules::CamerasModules(){
         "imageShading"
     };
     
+    m_words_old = {
+        "connectinfo.cgi?id=admin&passwd=admin&action=getconnect&stream=all",
+        "serverinfo3.cgi?id=admin&passwd=admin&action=getsysinfo1",
+        "camwdr.cgi?id=admin&passwd=admin&action=getdnr&stream=all"
+    };
+    
 }
 
 CamerasModules::~CamerasModules(){
@@ -56,6 +62,23 @@ void CamerasModules::work(){
             }
             m_i_work++;
         }
+    } else {
+        if(m_i_work < 20){
+            size_t i = m_i_work/2;
+            if(i >= 0 && i < m_words.size()){
+                std::string path = "";
+                if(m_i_work%2 == 0){
+                    path = "http://192.168.1.30/cgi-bin/control/" + m_words[i];
+                } else {
+                    path = "http://192.168.1.31/cgi-bin/control/" + m_words[i];
+                }
+                
+                MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
+                INFO(path);
+                m_qt_network->callUrl(path);
+            }
+            m_i_work++;
+        }
     }
 }
 
@@ -66,14 +89,7 @@ void CamerasModules::refresCams(){
     if(m_new_cam){
         m_i_work = 0;
     } else {
-        MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
-        m_qt_network->callUrl(m_url_cam1_1);
-        m_qt_network->callUrl(m_url_cam1_2);
-        m_qt_network->callUrl(m_url_cam1_3);
-        
-        m_qt_network->callUrl(m_url_cam2_1);
-        m_qt_network->callUrl(m_url_cam2_2);
-        m_qt_network->callUrl(m_url_cam2_3);
+        m_i_work = 0;
     }
 }
 
