@@ -65,12 +65,12 @@ void CamerasModules::work(){
     } else {
         if(m_i_work < 20){
             size_t i = m_i_work/2;
-            if(i >= 0 && i < m_words.size()){
+            if(i >= 0 && i < m_words_old.size()){
                 std::string path = "";
                 if(m_i_work%2 == 0){
-                    path = "http://192.168.1.30/cgi-bin/control/" + m_words[i];
+                    path = "http://192.168.1.30/cgi-bin/control/" + m_words_old[i];
                 } else {
-                    path = "http://192.168.1.31/cgi-bin/control/" + m_words[i];
+                    path = "http://192.168.1.31/cgi-bin/control/" + m_words_old[i];
                 }
                 
                 MyQTNetwork * m_qt_network = MyQTNetwork::Instance_ptr();
