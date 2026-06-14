@@ -79,6 +79,7 @@ public:
     ButtonGui m_update_warning_cancel;
     
     void updateBineuseWifi();
+    void diagReseau();
     
     void setSizePage2();
     void drawPage2();
@@ -124,6 +125,7 @@ public:
     ButtonGui m_send_images;
     ButtonGui m_clean_images;
     ButtonGui m_last_log;
+    ButtonGui m_diag_reseau;
     
     
     void setSizePage4();

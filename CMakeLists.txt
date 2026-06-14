@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 project(lemca)
 
 # The version number.
 set (PROJECT_VERSION_MAJOR 26)
 set (PROJECT_VERSION_MINOR 01)
-set (PROJECT_VERSION_PATCH 01)
+set (PROJECT_VERSION_PATCH 02)
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/src/environnement.hpp.in"
@@ -27,8 +27,6 @@ if(UNIX)
     #ADD_DEFINITIONS(-g -Wall)
 endif()
 
-find_package(Boost REQUIRED COMPONENTS system)
-include_directories( ${Boost_INCLUDE_DIR}   )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 

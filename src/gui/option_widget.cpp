@@ -356,6 +356,13 @@ void OptionWidget::updateBineuseWifi(){
     }
 }
 
+void OptionWidget::diagReseau(){
+    Framework & f = Framework::Instance();
+    Config & c = f.m_config;
+    std::string cmd = "sh " + DirectoryManager::instance().getSourceDirectory() + "/src/sh/diag_reseau.sh";
+    call(cmd);
+}
+
 void OptionWidget::setSizePage2(){
     int y = m_y_begin;
     y+= m_y_inter;
@@ -662,6 +669,8 @@ void OptionWidget::setSizePage4(){
     m_log_run.setResize(m_part_1_x2, y, m_petit_button);
     y+= m_y_inter;
     y+= m_y_inter;
+    y+= m_y_inter;
+    m_diag_reseau.setResizeStd(m_part_1_m, y, "diag reseau", true, m_part_1_w/2);
     
     y = m_y_begin;
     y-= m_y_inter;
@@ -728,7 +737,7 @@ void OptionWidget::drawPage4(){
     drawButtonLabel2(m_last_log);
     
     int y = m_last_log.m_y + 3*m_y_inter;
-    drawPart1Title(y-m_y_inter, 2*m_y_inter, "", true);
+    drawPart1Title(y-m_y_inter, 3*m_y_inter, "", true);
     if(m_qt_network->m_cam1_connected){
         m_painter->setPen(Qt::darkGreen);
     } else {
@@ -742,6 +751,7 @@ void OptionWidget::drawPage4(){
         m_painter->setPen(Qt::red);
     }
     drawText("CAM2", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
+    drawButtonLabel2(m_diag_reseau);
     
     
     
@@ -813,6 +823,9 @@ void OptionWidget::onMousePage4(int x, int y){
     }
     if(m_last_log.isActive(x, y)){
         call("cat " + DirectoryManager::instance().m_log_cmd_file);
+    }
+    if(m_diag_reseau.isActive(x, y)){
+        diagReseau();
     }
     
     if(m_button_gps.isActive(x, y)){
