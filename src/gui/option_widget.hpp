@@ -125,7 +125,6 @@ public:
     ButtonGui m_send_images;
     ButtonGui m_clean_images;
     ButtonGui m_last_log;
-    ButtonGui m_diag_reseau;
     
     
     void setSizePage4();
@@ -137,6 +136,7 @@ public:
     ButtonGui m_refresh_cams;
     ButtonGui m_set_cam1;
     ButtonGui m_set_cam2;
+    ButtonGui m_diag_reseau;
     ButtonGui m_new_cam;
     ButtonGui m_page_btn;
     int m_page_cam = 0;

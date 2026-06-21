@@ -670,7 +670,6 @@ void OptionWidget::setSizePage4(){
     y+= m_y_inter;
     y+= m_y_inter;
     y+= m_y_inter;
-    m_diag_reseau.setResizeStd(m_part_1_m, y, "diag reseau", true, m_part_1_w/2);
     
     y = m_y_begin;
     y-= m_y_inter;
@@ -751,7 +750,6 @@ void OptionWidget::drawPage4(){
         m_painter->setPen(Qt::red);
     }
     drawText("CAM2", m_part_1_x+m_part_1_w*0.6, y, sizeText_medium, true);
-    drawButtonLabel2(m_diag_reseau);
     
     
     
@@ -824,9 +822,6 @@ void OptionWidget::onMousePage4(int x, int y){
     if(m_last_log.isActive(x, y)){
         call("cat " + DirectoryManager::instance().m_log_cmd_file);
     }
-    if(m_diag_reseau.isActive(x, y)){
-        diagReseau();
-    }
     
     if(m_button_gps.isActive(x, y)){
         f.m_config.m_gps = !f.m_config.m_gps;
@@ -868,6 +863,9 @@ void OptionWidget::setSizePage5(){
     m_set_cam2.setResizeStd(x, y, "set cam2", true, m_part_1_w/2);
     
     y+= 0.1*m_height;
+    m_diag_reseau.setResizeStd(x, y, "diag reseau", true, m_part_1_w/2);
+    y+= 0.1*m_height;
+    
     m_new_cam.setResize(x, y, m_petit_button);
     
     y+= 0.1*m_height;
@@ -1006,6 +1004,7 @@ void OptionWidget::drawPage5(){
     drawButtonLabel2(m_refresh_cams);
     drawButtonLabel2(m_set_cam1);
     drawButtonLabel2(m_set_cam2);
+    drawButtonLabel2(m_diag_reseau);
     
     
     if(f.m_config.isDeveloppeur()){
@@ -1094,6 +1093,9 @@ void OptionWidget::onMousePage5(int x, int y){
     }
     if(m_set_cam2.isActive(x, y)){
         f.m_cameras_module.setCam2();
+    }
+    if(m_diag_reseau.isActive(x, y)){
+        diagReseau();
     }
     
     if(f.m_config.isDeveloppeur()){
