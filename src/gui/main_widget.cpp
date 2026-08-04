@@ -41,6 +41,7 @@ void MainWidget::loadImages(){
     m_imgOption = loadImageInv("/gui/infos.png");
     m_imgWifi = loadImageInv("/gui/wifi.png");
     m_img_remote = loadImageInv("/gui/reseau.png");
+    m_img_arpentage = loadImageInv("/gui/arpentage.png");
     
     m_logo_lemca = loadImage("/gui/logo/logo.png");
     m_logo_marechalle = loadImage("/gui/logo/logo_marechalle.png");
@@ -314,7 +315,7 @@ void MainWidget::drawButtons(){
         drawButton(m_buttonGps, m_imgGPS, Langage::getKey("HOME_GPS"));
     }
     if(f.m_config.m_excavator){
-        drawButton(m_buttonExcavator, m_imgGPS, Langage::getKey("HOME_EXCAVATOR"));
+        drawButton(m_buttonExcavator, m_img_arpentage, Langage::getKey("ARPENTAGE"));
     }
     if(f.m_config.m_robot){
         drawButton(m_buttonRobot, m_imgGPS, "Robot");

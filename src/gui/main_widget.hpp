@@ -47,6 +47,8 @@ public:
     QPixmap * m_imgOption;
     QPixmap * m_imgWifi;
     QPixmap * m_img_remote;
+    QPixmap * m_img_arpentage;
+    
     
     
     ButtonGui m_buttonBineuse;
