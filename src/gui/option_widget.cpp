@@ -1163,6 +1163,7 @@ void OptionWidget::setSizePage6(){
     m_constructor.addValue(("5. Agrivaux"));
     m_constructor.addValue(("6. Laforge"));
     m_constructor.addValue(("7. Oliver"));
+    m_constructor.addValue(("8. Feelcrop"));
 }
 
 

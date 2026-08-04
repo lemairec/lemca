@@ -38,6 +38,7 @@ public:
     QPixmap * m_logo_agrivaux;
     QPixmap * m_logo_oliver;
     QPixmap * m_logo_laforge;
+    QPixmap * m_logo_feel_crop;
     
     
     QPixmap * m_imgBineuse;

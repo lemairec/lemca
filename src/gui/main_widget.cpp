@@ -50,6 +50,7 @@ void MainWidget::loadImages(){
     m_logo_agrivaux = loadImage("/gui/logo/logo_agrivaux.png");
     m_logo_oliver = loadImage("/gui/logo/logo_oliver.png");
     m_logo_laforge = loadImage("/gui/logo/logo_laforge.jpg");
+    m_logo_feel_crop = loadImage("/gui/logo/logo_feel_crop.png");
 }
 
 void MainWidget::setPainter(QPainter * p){
@@ -228,6 +229,8 @@ void MainWidget::drawMain(){
         drawMyImage(*m_logo_laforge, 0.5*m_width,  0.2*m_height, 0.7, true);
     } else if(f.m_config.m_constructor == 7){
         drawMyImage(*m_logo_oliver, 0.5*m_width,  0.2*m_height, 1.1, true);
+    } else if(f.m_config.m_constructor == 8){
+        drawMyImage(*m_logo_feel_crop, 0.5*m_width,  0.2*m_height, 0.85, true);
     } else {
         drawMyImage(*m_logo_lemca, 0.5*m_width,  0.2*m_height, 0.15, true);
     }

@@ -97,8 +97,10 @@ int InitWidget::onMouse(int x, int y){
                 f.m_config.m_constructor = 3;
             } else if(m_code_constructeur.m_text == "AGR296"){
                 f.m_config.m_constructor = 4;
-            } else if(m_code_constructeur.m_text == "AGR528"){
+            } else if(m_code_constructeur.m_text == "AGR528"){ //agrivaux
                 f.m_config.m_constructor = 5;
+            } else if(m_code_constructeur.m_text == "FEE876"){ //FEELCROP
+                f.m_config.m_constructor = 8;
             }
             f.initOrLoadConfig();
         }
