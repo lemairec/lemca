@@ -13,8 +13,8 @@ cat /sys/class/net/enp1s0/statistics/rx_crc_errors
 cat /sys/class/net/enp1s0/statistics/rx_errors
 
 
-echo ""
-echo ""
+echo "***"
+echo "***"
 echo "connexion 2 : "
 echo "carrier (good value 1) : "
 cat /sys/class/net/enp2s0/carrier
