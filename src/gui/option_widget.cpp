@@ -693,6 +693,9 @@ void OptionWidget::setSizePage4(){
     if(Framework::Instance().m_config.m_inrow){
         m_version_selected.addValue(("inrow"));
     }
+    if(Framework::Instance().m_config.m_code_source){
+        m_version_selected.addValue(("ia"));
+    }
     
     y+= m_y_inter;
     y+= m_y_inter;
