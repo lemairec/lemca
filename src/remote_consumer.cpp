@@ -45,6 +45,9 @@ void RemoteConsumer::run(){
             } else if(f.m_config.m_constructor == 7){
                 port = 5920 + f.m_session;
                 name = "oliver_"+std::to_string(f.m_session);
+            } else if(f.m_config.m_constructor == 8){
+                port = 5930 + f.m_session;
+                name = "feelcrop_"+std::to_string(f.m_session);
             } else {
                 port = 5900 + f.m_session;
                 name = "lemca_"+std::to_string(f.m_session);
